@@ -126,7 +126,7 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-  background: #106eea;
+  background: #F78B09;
   height: 40px;
   font-size: 14px;
   transition: all 0.5s;
@@ -171,7 +171,7 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #106eea;
+  background: #fff;
   transition: all 0.5s;
   z-index: 997;
   height: 86px;
@@ -193,7 +193,7 @@ h6 {
 }
 
 #header .logo a {
-  color: #fff;
+  color: #222222;
 }
 
 #header .logo a span {
@@ -263,7 +263,7 @@ h6 {
   height: 2px;
   bottom: -6px;
   left: 0;
-  background-color: #106eea;
+  background-color: #F78B09;
   visibility: hidden;
   width: 0px;
   transition: all 0.3s ease-in-out 0s;
