@@ -167,6 +167,7 @@
                           <label for="inputFirstName">Zona PUCP</label>
                           <input class="form-control" id="inputFirstName" type="text">
                         </div>
+						
                         <div class="col-md-6">
                           <label for="map-container-google-2">Ubicacion</label>
                           <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 200px">
@@ -193,9 +194,15 @@
                     <!-- Form Row-->
 
                     <!-- Save changes button-->
-                    <button class="btn btn-primary" type="button">Guardar</button>
-                    <!--<a class="btn btn-primary" href="#" role="button">Link</a>-->
-                    <button class="btn btn-primary"  href="#Usuario_Inicio.html" role="button">Cancelar</button>
+					
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<button class="btn btn-primary" type="button">Guardar</button>
+						<button class="btn btn-primary"  href="#Usuario_Inicio.html" role="button">Cancelar</button>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+							<label class="form-check-label" for="flexSwitchCheckDefault">Activar publicación anónima</label>
+						</div>
+                    </div>
                   </form>
                 </div>
               </div>
