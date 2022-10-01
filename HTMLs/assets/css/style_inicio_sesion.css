@@ -1258,3 +1258,11 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+.container-login100 {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: 170% 20%;
+  background-size: 115%;
+  padding: 20px;
+}
