@@ -5,13 +5,14 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Incidencias PUCP - SEGURIDAD</title>
+    <title>Perfil de Usuarios</title>
 	<meta content="" name="description">
   <meta content="" name="keywords">
   
   <!-- Favicons -->
   <link href="assets/img/telepucp.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -27,7 +28,7 @@
     <script src="https://kit.fontawesome.com/600382161a.js" crossorigin="anonymous"></script>
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style_seguridad.css" rel="stylesheet">
+    <link href="assets/css/style_administrador.css" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: BizLand - v3.9.0
@@ -53,8 +54,8 @@
 
         <div class="d-md-flex align-items-center">
             <div>
-                <h1 class="name" style="margin-top: 25px">Julio Flores
-                    <br><h6>Seguridad</h6></br>
+                <h1 class="name" style="margin-top: 25px">Juan Perez
+                    <br><h6>Administrador</h6></br>
                 </h1>
             </div>
         </div>
@@ -65,12 +66,16 @@
 
 
             <ul>
-                <li><div class="container-fluid">
+                
+                <li><a class="nav-link scrollto active" href="Admin_ListaUsers.html">Lista de usuarios</a></li>
+                <li><a class="nav-link scrollto" href="Admin_perfil.html">Perfil</a></li>
+				<li><a class="nav-link scrollto" href="Admin_AddUser.html">Añadir usuario</a></li>
+				<li><div class="container-fluid">
                     <form class="d-flex input-group w-auto">
                         <input
                                 type="search"
                                 class="form-control rounded"
-                                placeholder="Buscar Incidencia"
+                                placeholder="Buscar incidencia"
                                 aria-label="Search"
                                 aria-describedby="search-addon"
                         />
@@ -79,9 +84,7 @@
       </span>
                     </form>
                 </div></li>
-                <li><a class="nav-link  " href="Usuario_Inicio.html">Inicio</a></li>
-                <li><a class="nav-link scrollto" href="Seguridad_perfil.html">Perfil</a></li>
-                <li><a class="nav-link scrollto" href="#services">Cerrar Sesión</a></li>
+                <li><a class="nav-link scrollto" href="home.html">Cerrar sesión</a></li>
             </ul>
 
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -103,8 +106,8 @@
 						<div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
 
 						  <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile" class="rounded-circle">
-						  <h2>Julio Flores</h2>
-						  <h5>Personal de seguridad</h5>
+						  <h2>Rosa Montoya</h2>
+						  <h5>Usuario Pucp</h5>
 						  
 						</div>
 					  </div>
@@ -124,10 +127,6 @@
 					  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
 					</li>
 
-					<li class="nav-item">
-					  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar contraseña</button>
-					</li>
-
 				  </ul>
 				  <div class="tab-content pt-2">
 
@@ -137,12 +136,12 @@
 
 					  <div class="row">
 						<div class="col-lg-3 col-md-4 label ">Nombre completo</div>
-						<div class="col-lg-9 col-md-8">Julio Manuel Flores Richelli</div>
+						<div class="col-lg-9 col-md-8">Rosa Manuel Montoya Richelli</div>
 					  </div>
 					  
 					  <div class="row">
 						<div class="col-lg-3 col-md-4 label ">Cargo</div>
-						<div class="col-lg-9 col-md-8">Seguridad</div>
+						<div class="col-lg-9 col-md-8">Usuario Pucp</div>
 					  </div>
 
 					  <div class="row">
@@ -168,7 +167,7 @@
 
 					  <div class="row">
 						<div class="col-lg-3 col-md-4 label">Correo</div>
-						<div class="col-lg-9 col-md-8">ajulioflores@pucp.edu.pe</div>
+						<div class="col-lg-9 col-md-8">arosam@pucp.edu.pe</div>
 					  </div>
 
 					</div>
@@ -191,7 +190,7 @@
 						<div class="row mb-3">
 						  <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre Completo</label>
 						  <div class="col-md-8 col-lg-9">
-							<input name="fullName" type="text" class="form-control" id="fullName" value="Julio Manuel Flores Richelli" disabled>
+							<input name="fullName" type="text" class="form-control" id="fullName" value="Rosa Manuel Montoya Richelli" disabled>
 						  </div>
 						</div>
 						
@@ -199,7 +198,7 @@
 						<div class="row mb-3">
 						  <label for="Email" class="col-md-4 col-lg-3 col-form-label">Correo</label>
 						  <div class="col-md-8 col-lg-9">
-							<input name="email" type="email" class="form-control" id="Email" value="ajulioflores@pucp.edu.pe" disabled>
+							<input name="email" type="email" class="form-control" id="Email" value="arosam@pucp.edu.pe" disabled>
 						  </div>
 						</div>
 
@@ -278,33 +277,7 @@
 
 					<div class="tab-pane fade pt-3" id="profile-change-password">
 					  <!-- Change Password Form -->
-					  <form>
-
-						<div class="row mb-3">
-						  <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña actual</label>
-						  <div class="col-md-8 col-lg-9">
-							<input name="password" type="password" class="form-control" id="currentPassword">
-						  </div>
-						</div>
-
-						<div class="row mb-3">
-						  <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
-						  <div class="col-md-8 col-lg-9">
-							<input name="newpassword" type="password" class="form-control" id="newPassword">
-						  </div>
-						</div>
-
-						<div class="row mb-3">
-						  <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar nueva contraseña</label>
-						  <div class="col-md-8 col-lg-9">
-							<input name="renewpassword" type="password" class="form-control" id="renewPassword">
-						  </div>
-						</div>
-
-						<div class="text-center">
-						  <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
-						</div>
-					  </form><!-- End Change Password Form -->
+					  <!-- End Change Password Form -->
 
 					</div>
 

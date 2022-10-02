@@ -126,7 +126,7 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-  background: #F78B09;
+  background: crimson;
   height: 40px;
   font-size: 14px;
   transition: all 0.5s;
@@ -263,7 +263,7 @@ h6 {
   height: 2px;
   bottom: -6px;
   left: 0;
-  background-color: #F78B09;
+  background-color: crimson;
   visibility: hidden;
   width: 0px;
   transition: all 0.3s ease-in-out 0s;
@@ -280,7 +280,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #F78B09;
+  color: crimson;
 }
 
 .navbar .dropdown ul {

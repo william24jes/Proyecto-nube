@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Registrarse</title>
+  <title>Olvidar Contraseña</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/telepucp.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -27,7 +27,7 @@
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style_registro.css" rel="stylesheet">
+  <link href="assets/css/style_inicio_sesion.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
@@ -40,7 +40,7 @@
 <body>
 
   <main>
-    <div  class="container-login100" style="background-image:url(assets/img/fondo_registro.png);">
+    <div  class="container-login100" style="background-image:url(assets/img/fondo_contrasena.png);">
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-end">
@@ -58,8 +58,8 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Regístrate</h5>
-                    <p class="text-center small">Ingresa tu correo y código PUCP</p>
+                    <h5 class="card-title text-center pb-0 fs-4">¿Olvidaste tu contraseña?</h5>
+                    <p class="text-left small">Ingresa el correo de tu cuenta para que puedas reestablecer tu contraseña</p>
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
@@ -73,25 +73,13 @@
                       </div>
                     </div>
                     
-                    <div class="col-12">
-                        <label for="yourCode" class="form-label">Código PUCP</label>
-                        <input type="number" name="code" class="form-control" id="yourCode" required>
-                        <div class="invalid-feedback">Ingresa tu código!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Contraseña</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Ingresa tu contraseña!</div>
+                    <div class="col-6">
+                      <button class="btn btn-primary w-100" type="submit">Recibir correo</button>
                     </div>
 					
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Registrarse</button>
+					<div class="col-6">
+                      <button class="btn btn-secondary w-100" type="submit">Cancelar</button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="Iniciar_sesion.html">Inicia sesión aquí.</a></p>
-                    </div>
-                  </form>
 
                 </div>
               </div>
