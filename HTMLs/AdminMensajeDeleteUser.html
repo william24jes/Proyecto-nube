@@ -6,6 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -13,11 +14,10 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <script src="https://kit.fontawesome.com/600382161a.js" crossorigin="anonymous"></script>
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style_administrador.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -44,8 +44,7 @@
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="nav-link scrollto active " href="2.%20Lista%20de%20usuarios.html">Lista de usuarios</a></li>
-        <li><a class="nav-link scrollto " href="1. Perfil.html">Perfil</a></li>
-
+        <li><a class="nav-link scrollto " href="1.%20Admin_Perfil.html">Perfil</a></li>
         <li><a class="nav-link scrollto" href="4.%20Añadir%20usuario.html">Añadir usuario</a></li>
         <li><div class="container-fluid">
           <form class="d-flex input-group w-auto">
@@ -69,172 +68,229 @@
 </header><!-- End Header -->
 
 <main id="main">
-
-
-  <!-- ======= Frequently Asked Questions Section ======= -->
   <section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
       <div class="container" style="text-align: center;background-color: gold;height: auto;width: auto">
         <h5>Se eliminó al usuario de codigo 20131289</h5>
       </div>
-      <div class="row">
-        <h4 style="text-align: left">Lista de usuarios:</h4>
-        <div  class="col-md-3 col-sm-3 col-3">
+      <h2 style="text-align: left">Lista de usuarios:</h2>
 
-          <br>
+      <div class="table-responsive">
+        <table style="margin-left:5%" class="table table-hover">
+          <thead>
 
-          <p style="text-align: center;">Código</p>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Móvil</th>
+            <th>Email</th>
+            <th>Tipo de usuario</th>
+            <th>Edición de usuario</th>
 
-        </div>
 
-        <div class=" col-md-5 col-sm-5 col-5">
-          <h6></h6>
-          <br>
-          <h6 style="text-align: center;">Apellidos, nombre</h6>
-        </div>
-
-        <div  class="col-md-4 col-sm-4 col-4">
-          <u style="align: center"></u>
-        </div>
-
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td>20131289</td>
+            <td>Edgar</td>
+            <td>Bustamante Flores</td>
+            <td>999999999</td>
+            <td>20131289@pucp.edu.pe</td>
+            <td>Usuario PUCP</td>
+            <td><div>
+              <a href="3.%20Editar%20Usuario.html"><u style="color: blue">Editar</u></a>
+              <a href="6.%20Mensaje%20de%20usuario%20eliminado.html" data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="color: blue">Eliminar</u></a>
+            </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <hr style="width:85%;margin:auto;">
-
-      <div class="row">
-        <div  class="col-md-3 col-sm-3 col-3">
-          <p style="text-align: center;">20131289</p>
-
-        </div>
-
-        <div class=" col-md-5 col-sm-5 col-5" >
-          <h6 style="text-align: center;">Bustamante Flores, Edgar</h6>
-        </div>
-
-        <div  class="col-md-4 col-sm-4 col-4">
-          <a href="3.%20Editar%20Usuario.html"><u style="align: center;color: blue">Editar</u></a>
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="align: center;color: blue">Eliminar</u></a>        </div>
-
-      </div>
-      <hr style="width:85%;margin:auto;">
-
-      <div class="row">
-        <div  class="col-md-3 col-sm-3 col-3">
-          <p style="text-align: center;">20131289</p>
-
-        </div>
-
-        <div class=" col-md-5 col-sm-5 col-5" >
-          <h6 style="text-align: center;">Bustamante Flores, Edgar</h6>
-        </div>
-
-        <div  class="col-md-4 col-sm-4 col-4">
-          <a href="3.%20Editar%20Usuario.html"><u style="align: center;color: blue">Editar</u></a>
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="align: center;color: blue">Eliminar</u></a>        </div>
-
-      </div>
-      <hr style="width:85%;margin:auto;">
-
-      <div class="row">
-        <div  class="col-md-3 col-sm-3 col-3">
-          <p style="text-align: center;">20131289</p>
-
-        </div>
-
-        <div class=" col-md-5 col-sm-5 col-5" >
-          <h6 style="text-align: center;">Bustamante Flores, Edgar</h6>
-        </div>
-
-        <div  class="col-md-4 col-sm-4 col-4">
-          <a href="3.%20Editar%20Usuario.html"><u style="align: center;color: blue">Editar</u></a>
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="align: center;color: blue">Eliminar</u></a>        </div>
-
-      </div>
-      <hr style="width:85%;margin:auto;">
-
-      <div class="row">
-        <div  class="col-md-3 col-sm-3 col-3">
-          <p style="text-align: center;">20131289</p>
-
-        </div>
-
-        <div class=" col-md-5 col-sm-5 col-5" >
-          <h6 style="text-align: center;">Bustamante Flores, Edgar</h6>
-        </div>
-
-        <div  class="col-md-4 col-sm-4 col-4">
-          <a href="3.%20Editar%20Usuario.html"><u style="align: center;color: blue">Editar</u></a>
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="align: center;color: blue">Eliminar</u></a>        </div>
-
-
-      </div>
-      <hr style="width:85%;margin:auto;">
-
-      <div class="row">
-        <div  class="col-md-3 col-sm-3 col-3">
-          <p style="text-align: center;">20131289</p>
-
-        </div>
-
-        <div class=" col-md-5 col-sm-5 col-5" >
-          <h6 style="text-align: center;"> Bustamante Flores, Edgar</h6>
-        </div>
-
-        <div  class="col-md-4 col-sm-4 col-4">
-          <a href="3.%20Editar%20Usuario.html"><u style="align: center;color: blue">Editar</u></a>
-          <a data-bs-toggle="modal" data-bs-target="#exampleModal"><u style="align: center;color: blue">Eliminar</u></a>        </div>
-      <hr style="width:85%;margin:auto;">
 
 
 
-
-      </div>
-      <hr style="width:85%;margin:auto;">
-
-      <div style="text-align: center; margin-top: 8px">
-
-        <nav aria-label="Page navigation example" style="margin-top: 20px;">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
-
-      </div>
-
+      <nav aria-label="Page navigation example" style="margin-top: 20px;">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
 
 
     </div>
-    <!-- BOTON MODAL -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            ¿Está seguro de eliminar al usuario?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-            <a href="6.%20Mensaje%20de%20usuario%20eliminado.html"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sí</button></a>
-          </div>
+
+  </section>
+  <!-- BOTON MODAL -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="color: yellow;text-shadow: -1px -1px 1px #000, 1px 1px 1px #000, -1px 1px 1px #000, 1px -1px 1px #000;" class="modal-title" id="exampleModalLabel">¡ADVERTENCIA!</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5>¿Está seguro de eliminar al usuario?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <a href="6.%20Mensaje%20de%20usuario%20eliminado.html"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sí</button></a>
         </div>
       </div>
     </div>
-    <!-- FIN BOTON MODAL -->
-
-  </section><!-- End Frequently Asked Questions Section -->
-
-
-
+  </div>
+  <!-- FIN BOTON MODAL -->
 </main><!-- End #main -->
 
 
@@ -243,6 +299,7 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="assets/vendor/aos/aos.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
