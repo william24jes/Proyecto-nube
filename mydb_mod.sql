@@ -160,7 +160,7 @@ DROP TABLE IF EXISTS `zonapucp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `zonapucp` (
-  `idzonaPucp` int NOT NULL,
+  `idzonaPucp` int NOT NULL AUTO_INCREMENT,
   `nombreZona` varchar(100) NOT NULL,
   PRIMARY KEY (`idzonaPucp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
