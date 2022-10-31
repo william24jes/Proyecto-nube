@@ -73,8 +73,8 @@
 
                     <ul>
 
-                        <li><a class="nav-link scrollto active" href="AdminListaUsers.jsp">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto" href="AdminPerfil.jsp">Perfil</a></li>
+                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminListaUsersServlet">Lista de usuarios</a></li>
+                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/perfil">Perfil</a></li>
                         <li><div class="container-fluid">
                             <form class="d-flex input-group w-auto">
                                 <input
@@ -106,7 +106,7 @@
                     <div class="container-fluid">
                         <div class="container"><h4 class="hero">Usuarios guardados:</h4>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a class="btn btn-danger" href="AdminAddUser.jsp" role="button">Añadir nuevo usuario</a>
+                                <a class="btn btn-danger" href="<%=request.getContextPath()%>/add_user" role="button">Añadir nuevo usuario</a>
 
                             </div></div>
 
@@ -121,6 +121,7 @@
                                     <th scope="col">Correo</th>
                                     <th scope="col">DNI</th>
                                     <th scope="col">Categoría</th>
+                                    <th scope="col">Rol</th>
                                     <th scope="col">...</th>
                                 </tr>
                             </thead>
@@ -138,6 +139,7 @@
                                     <td><%=usuario.getCorreoPucp()%></td>
                                     <td><%=usuario.getDni()%></td>
                                     <td><%=usuario.getCategorias()%></td>
+                                    <td><%=usuario.getRol()%></td>
                                     <td><a href="AdminEditUser.jsp"><u style="align-content: center;color: blue">Ver más</u></a></td>
                                 </tr>
                                 <%

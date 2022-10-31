@@ -9,6 +9,7 @@ public class Usuarios {
     private String codigoPucp;
     private String correoPucp;
     private String categorias;
+    private String rol;
 
     public int getIdUsuarios() {
         return idUsuarios;
@@ -72,5 +73,13 @@ public class Usuarios {
 
     public void setCategorias(String categorias) {
         this.categorias = categorias;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

@@ -17,7 +17,7 @@ public class DaoUsuario {
         String url = "jdbc:mysql://localhost:3306/mydb";
         ArrayList<Usuario> lista = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(url, "root", "123456");
+            Connection connection = DriverManager.getConnection(url, "root", "root");
             String sql = "SELECT * FROM usuarios";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);

@@ -56,8 +56,8 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link active " href="AdminListaUsers.jsp">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto " href="AdminPerfil.jsp">Perfil</a></li>
+                        <li><a class="nav-link active " href="<%=request.getContextPath()%>/AdminListaUsersServlet">Lista de usuarios</a></li>
+                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/perfil">Perfil</a></li>
                         <li><div class="container-fluid">
                             <form class="d-flex input-group w-auto">
                                 <input
@@ -87,33 +87,33 @@
                 <div class="container">
                     <div class="container-fluid">
                         <h4 class="hero">Completar datos del nuevo usuario:</h4>
-                        <form class="row g-3">
+                        <form method="post" action="<%=request.getContextPath()%>/add_user" class="row g-3">
                             <div class="col-md-4">
-                                <label for="validationDefault01" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" id="validationDefault01" required>
+                                <label for="Nombres" class="form-label">Nombres</label>
+                                <input type="text" class="form-control" id="Nombres" placeholder="Nombres" name="Nombres" required>
                             </div>
                             <div class="col-md-4">
-                                <label for="validationDefault02" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="validationDefault02" required>
+                                <label for="Apellidos" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" id="Apellidos" placeholder="Apellidos" name="Apellidos" required>
                             </div>
                             <div class="col-md-4">
-                                <label for="validationDefaultUsername" class="form-label">Correo PUCP</label>
+                                <label for="Correo PUCP" class="form-label">Correo PUCP</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                    <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
+                                    <input type="text" class="form-control" id="Correo PUCP" placeholder="Correo PUCP" name="Correo PUCP" aria-describedby="inputGroupPrepend2" required>
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <label for="validationDefault05" class="form-label">DNI</label>
-                                <input type="number" class="form-control" id="validationDefault05" required>
+                                <label for="DNI" class="form-label">DNI</label>
+                                <input type="number" class="form-control" id="DNI" placeholder="DNI" name="DNI" required>
                             </div>
                             <div class="col-md-2">
-                                <label for="validationDefault05" class="form-label">Celular</label>
-                                <input type="number" class="form-control" id="validationDefault05" required>
+                                <label for="Celular" class="form-label">Celular</label>
+                                <input type="number" class="form-control" id="Celular" placeholder="Celular" name="Celular" required>
                             </div>
                             <div class="col-md-4">
-                                <label for="validationDefault04" class="form-label">Categoría</label>
-                                <select class="form-select" id="validationDefault04" required>
+                                <label for="Categoría" class="form-label">Categoría</label>
+                                <select class="form-select" id="Categoría" placeholder="Categoría" name="Categoría" required>
                                     <option selected disabled value="">Seleccione una opción...</option>
                                     <option>Alumno</option>
                                     <option>Administrativo</option>
@@ -124,16 +124,25 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="validationDefault04" class="form-label">Rol</label>
-                                <select class="form-select" id="validationDefault04" required>
+                                <label for="Rol" class="form-label">Rol</label>
+                                <select class="form-select" id="Rol" placeholder="Rol" name="Rol" required>
                                     <option selected disabled value="">Seleccione una opción...</option>
                                     <option>Usuario Pucp</option>
                                     <option>Seguridad</option>
                                 </select>
                             </div>
 
-                            <div class="d-grid gap-2 col-3 mx-auto">
-                                <button class="btn btn-danger" type="submit">Registrar nuevo usuario</button>
+                            <div class="col-md-2">
+                                <label for="Codigo" class="form-label">Código</label>
+                                <input type="number" class="form-control" id="Codigo" placeholder="Codigo" name="Codigo" required>
+                            </div>
+
+                            <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 ">
+                                <button class="btn btn-danger" style="width: fit-content" type="submit">Registrar nuevo usuario</button>
+                            </div>
+
+                            <div class="d-grid gap-2 col-3 col-lg-4 col-xl-3">
+                                <a href="<%=request.getContextPath()%>/AdminListaUsersServlet" ><button  class="btn btn-danger" type="submit">Regresar</button></a>
                             </div>
 
                         </form>

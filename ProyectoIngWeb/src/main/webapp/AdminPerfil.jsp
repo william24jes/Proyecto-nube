@@ -58,8 +58,8 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="AdminListaUsers.jsp">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto active" href="AdminPerfil.jsp">Perfil</a></li>
+                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminListaUsersServlet">Lista de usuarios</a></li>
+                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/perfil">Perfil</a></li>
                         <li><div class="container-fluid">
                             <form class="d-flex input-group w-auto">
                                 <input

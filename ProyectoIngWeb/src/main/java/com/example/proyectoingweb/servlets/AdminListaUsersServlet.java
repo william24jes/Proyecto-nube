@@ -9,7 +9,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "AdminListaUsersServlet", value = "/AdminListaUsersServlet")
+@WebServlet(name = "AdminListaUsersServlet", urlPatterns = "/AdminListaUsersServlet")
 public class AdminListaUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
