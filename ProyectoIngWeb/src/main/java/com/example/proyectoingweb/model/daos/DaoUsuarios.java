@@ -1,0 +1,45 @@
+package com.example.proyectoingweb.model.daos;
+
+import com.example.proyectoingweb.model.beans.Usuarios;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+public class DaoUsuarios {
+
+    public ArrayList<Usuarios> obtenerlistaUsuarios(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+        try{
+            Connection connection = DriverManager.getConnection(url,"root","root");
+            String sql = "SELECT * FROM mydb.usuarios";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while(rs.next()){
+                Usuarios usuarios = new Usuarios();
+                usuarios.setIdUsuarios(rs.getInt(1));
+                usuarios.setNombres(rs.getString((2)));
+                usuarios.setApellidos(rs.getString(3));
+                usuarios.setDni(rs.getString(4));
+                usuarios.setCelular(rs.getString(5));
+                usuarios.setCodigoPucp(rs.getString(6));
+                usuarios.setCorreoPucp(rs.getString(7));
+                usuarios.setCategorias(rs.getString(8));
+                listaUsuarios.add(usuarios);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+
+    }
+
+}
