@@ -97,4 +97,48 @@ public class DaoUsuarios {
 
     }
 
+    public ArrayList<Usuarios> buscar(String nombreuser){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String sql = "SELECT * FROM mydb.usuarios WHERE nombres =? ";
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+        try(Connection connection = DriverManager.getConnection(url,"root","root");
+            PreparedStatement pstmt = connection.prepareStatement(sql)){
+
+            pstmt.setString(1,nombreuser);
+
+
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                while(rs.next()){
+                    Usuarios usuarios = new Usuarios();
+                    usuarios.setIdUsuarios(rs.getInt(1));
+                    usuarios.setNombres(rs.getString(2));
+                    usuarios.setApellidos(rs.getString(3));
+                    usuarios.setDni(rs.getString(4));
+                    usuarios.setCelular(rs.getString(5));
+                    usuarios.setCodigoPucp(rs.getString(6));
+                    usuarios.setCorreoPucp(rs.getString(7));
+                    usuarios.setCategorias(rs.getString(8));
+                    usuarios.setRol(rs.getString(9));
+                    listaUsuarios.add(usuarios);
+
+                }
+
+            }
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+
+    }
+
 }

@@ -101,6 +101,16 @@ public class AdminServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath()+"/AdminListaUsersServlet");
                 break;
+            case "buscar":
+                String searchText = request.getParameter("searchText");
+
+                ArrayList<Usuarios> lista = daoUsuarios.buscar(searchText);
+                request.setAttribute("lista", lista);
+
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
+                requestDispatcher.forward(request, response);
+                break;
             /*case "actualizar":
                 String jobId1 = request.getParameter("jobId");
                 String jobTitle1 = request.getParameter("jobTitle");

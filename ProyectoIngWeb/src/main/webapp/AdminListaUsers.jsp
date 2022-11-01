@@ -76,17 +76,19 @@
                         <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet?action=listar">Lista de usuarios</a></li>
                         <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
                         <li><div class="container-fluid">
-                            <form class="d-flex input-group w-auto">
+                            <form class="d-flex input-group w-auto" method="post" action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
                                 <input
-                                        type="search"
+                                        type="text"
+                                        name="searchText"
                                         class="form-control rounded"
+                                        id="floatingInput"
                                         placeholder="Buscar usuario"
-                                        aria-label="Search"
-                                        aria-describedby="search-addon"
+
+
                                 />
                                 <span class="input-group-text border-0" id="search-addon">
-        <i class="fas fa-search"></i>
-      </span>
+                                    <i class="fas fa-search"></i>
+                                </span>
                             </form>
                         </div></li>
                         <li><a class="nav-link scrollto" href="home.html">Cerrar sesión</a></li>
