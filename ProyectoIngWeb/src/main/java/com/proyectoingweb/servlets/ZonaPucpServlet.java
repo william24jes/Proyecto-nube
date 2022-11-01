@@ -1,7 +1,7 @@
-package com.example.proyectoingweb.servlets;
+package com.proyectoingweb.servlets;
 
-import com.example.proyectoingweb.model.beans.ZonaPucp;
-import com.example.proyectoingweb.model.daos.DaoZonaPucp;
+import com.proyectoingweb.model.beans.ZonaPucp;
+import com.proyectoingweb.model.daos.DaoZonaPucp;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

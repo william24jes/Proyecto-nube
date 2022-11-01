@@ -12,8 +12,6 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="description">
-        <meta content="" name="keywords">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
         <link href="assets/vendor/aos/aos.css" rel="stylesheet">
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +26,6 @@
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     </head>
 
@@ -45,20 +42,16 @@
         <!-- ======= Header ======= -->
         <header style="background-color: white" id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center justify-content-between">
-
                 <div class="d-md-flex align-items-center">
                     <div>
                         <h1 class="name" style="margin-top: 25px">Juan Perez
-                            <br><h6>Administrador</h6></br>
+                            <br><h6>Administrador</h6>
                         </h1>
                     </div>
                 </div>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
-
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminServlet?action=listar">Lista de usuarios</a></li>
+                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminServlet">Lista de usuarios</a></li>
                         <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
                         <li><div class="container-fluid">
                             <form class="d-flex input-group w-auto">
@@ -76,10 +69,11 @@
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar -->
-
+                </nav>
+                <!-- .navbar -->
             </div>
-        </header><!-- End Header -->
+        </header>
+        <!-- End Header -->
 
         <main id="main" data-aos="fade-up">
 
@@ -127,43 +121,30 @@
                                                     <h5 class="card-title">Detalles del Perfil</h5>
 
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label ">Nombre completo</div>
-                                                        <div class="col-lg-9 col-md-8">Juan Manuel Perez Richelli</div>
+                                                        <div class="col-lg-3 col-md-4 label ">Nombres</div>
+                                                        <div class="col-lg-9 col-md-8">Juan Manuel</div>
                                                     </div>
-
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label ">Cargo</div>
+                                                        <div class="col-lg-3 col-md-4 label">Apellidos</div>
+                                                        <div class="col-lg-9 col-md-8">Perez Richelli</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label ">Rol</div>
                                                         <div class="col-lg-9 col-md-8">Administrador</div>
                                                     </div>
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Edad</div>
-                                                        <div class="col-lg-9 col-md-8">22 años</div>
-                                                    </div>
-
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Pais</div>
-                                                        <div class="col-lg-9 col-md-8">Perú</div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Dirección</div>
-                                                        <div class="col-lg-9 col-md-8">Av Las Nuevas Lomas, Lima</div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Telefono</div>
-                                                        <div class="col-lg-9 col-md-8">986-126-855</div>
-                                                    </div>
-
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Correo</div>
                                                         <div class="col-lg-9 col-md-8">ajuanperez@pucp.edu.pe</div>
                                                     </div>
-
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label ">DNI</div>
+                                                        <div class="col-lg-9 col-md-8">72214982</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Celular</div>
+                                                        <div class="col-lg-9 col-md-8">986-126-855</div>
+                                                    </div>
                                                 </div>
-
                                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                                     <!-- Profile Edit Form -->
@@ -171,7 +152,7 @@
                                                         <div class="row mb-3">
                                                             <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <img src="assets/img/perfiles/perfil1.svg" height="150" width="150"  alt="Profile">
+                                                                <img id="profileImage" src="assets/img/perfiles/perfil1.svg" height="150" width="150"  alt="Profile">
                                                                 <div class="pt-2">
                                                                     <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                                                                     <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -296,7 +277,6 @@
                                                             <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
                                                         </div>
                                                     </form><!-- End Change Password Form -->
-
                                                 </div>
 
                                             </div><!-- End Bordered Tabs -->
@@ -307,21 +287,13 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-8">
-
-
-
-                        </div>
                     </div>
                 </div>
             </section>
 
         </main><!-- End #main -->
 
-
         <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -335,10 +307,6 @@
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
-
-    </body>
-
-
 
     </body>
 

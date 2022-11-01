@@ -27,71 +27,50 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: BizLand - v3.9.0
-        * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
     </head>
 
     <body>
 
-
-
         <!-- ======= Header ======= -->
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center justify-content-between">
-
-                <h1 class="logo"><a href="home.html">Incidencias PUCP<span>.</span></a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
-
-
-
+                <h1 class="logo" style="color: #ffffff">Incidencias PUCP</h1>
             </div>
-        </header><!-- End Header -->
+        </header>
 
         <!-- ======= Hero Section ======= -->
         <section id="hero" class="d-flex align-items-center">
             <div class="container" data-aos="zoom-out" data-aos-delay="100">
                 <div class="row d-flex align-items-center">
-                    <div class="col-lg-2 text-lg-right text-center">
+                    <div class="col-lg-2 col-md-3 col-sm-3">
                         <img src="assets/img/telepucp.png" width="100%" alt="logo">
                     </div>
                 </div>
-                <h1>Registra tu primera</br><span> incidencia</span></h1>
-                <h2>...y ayudemos a nuestra comunidad PUCP a mantener todo en orden</h2>
+                <h1>Registra tu primera<br><span>incidencia</span></h1>
+                <h2>y ayudemos a nuestra comunidad PUCP a mantener todo en orden</h2>
                 <div class="d-flex">
                     <a href="Inicio_IniciarSesion.html" class="btn-get-started scrollto">Inicia sesión</a>
-                    <a href="Inicio_Registrarse.html" class="glightbox btn-watch-video"><span>Regístrate</span></a>
+                    <a href="Inicio_Registrarse.html" class="btn-watch-video">Regístrate</a>
                 </div>
             </div>
 
-        </section><!-- End Hero -->
-
-        <main id="main">
-
-        </main><!-- End #main -->
+        </section>
+        <!-- End Hero -->
 
         <!-- ======= Footer ======= -->
         <footer id="footer">
             <div class="container py-4">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>Incidencias PUCP</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>Incidencias PUCP</span></strong>. Todos los derechos reservados
                 </div>
                 <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Desarrollado por TELEPUCP
                 </div>
             </div>
-        </footer><!-- End Footer -->
+        </footer>
+        <!-- End Footer -->
 
         <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>

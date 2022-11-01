@@ -1,12 +1,12 @@
-<%@ page import="com.example.proyectoingweb.model.beans.Usuarios" %>
+<%@ page import="com.proyectoingweb.model.beans.Usuario" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.proyectoingweb.servlets.AdminServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ArrayList<Usuarios> listaUsuarios = (ArrayList<Usuarios>) request.getAttribute("lista");
+    ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) request.getAttribute("lista");
 %>
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -36,16 +36,9 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style_administrador.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: BizLand - v3.9.0
-        * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
     </head>
 
     <body>
-
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
@@ -65,107 +58,96 @@
                         </h1>
                     </div>
                 </div>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
                 <nav id="navbar" class="navbar">
-
-
                     <ul>
-
-                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet?action=listar">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
-                        <li><div class="container-fluid">
-                            <form class="d-flex input-group w-auto" method="post" action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
-                                <input
-                                        type="text"
-                                        name="searchText"
-                                        class="form-control rounded"
-                                        id="floatingInput"
-                                        placeholder="Buscar usuario"
-
-
-                                />
-                                <span class="input-group-text border-0" id="search-addon">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </form>
-                        </div></li>
-                        <li><a class="nav-link scrollto" href="home.html">Cerrar sesión</a></li>
+                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet">Lista
+                            de usuarios</a></li>
+                        <li><a class="nav-link scrollto"
+                               href="<%=request.getContextPath()%>/AdminServlet?action=perfil">Perfil</a></li>
+                        <li>
+                            <div class="container-fluid">
+                                <form method="post" class="d-flex input-group w-auto"
+                                      action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
+                                    <input type="text" name="searchText" class="form-control rounded"
+                                           placeholder="Buscar usuario"
+                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"/>
+                                    <span class="input-group-text border-0" id="search-addon"><i
+                                            class="fas fa-search"></i></span>
+                                </form>
+                            </div>
+                        </li>
+                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>">Cerrar sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar -->
-
+                </nav>
+                <!-- .navbar -->
             </div>
-
-        </header><!-- End Header -->
+        </header>
+        <!-- End Header -->
 
         <main id="main" data-aos="fade-up">
-
-            <section class="section profile">
+            <section class="section profile" style="padding-top: 30px">
                 <div class="container">
                     <div class="container-fluid">
                         <div class="container"><h4 class="hero">Usuarios guardados:</h4>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a class="btn btn-danger" href="<%=request.getContextPath()%>/AdminServlet?action=crear" role="button">Añadir nuevo usuario</a>
-
-                            </div></div>
-
+                                <a class="btn btn-danger" href="<%=request.getContextPath()%>/AdminServlet?action=crear"
+                                   role="button">Añadir nuevo usuario</a>
+                            </div>
+                        </div>
                         <br>
                         <table class="table table-striped table-hover">
                             <thead>
-                                <tr>
-                                    <th scope="col">N°</th>
-                                    <th scope="col">Código</th>
-                                    <th scope="col">Apellido</th>
-                                    <th scope="col">Nombre</th>
+                                <tr style="align-content: center">
+                                    <th>N°</th>
+                                    <th>Código</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
                                     <th scope="col">Correo</th>
                                     <th scope="col">DNI</th>
-                                    <th scope="col">Categoría</th>
                                     <th scope="col">Rol</th>
-                                    <th scope="col">...</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <%
                                     int i = 1;
-                                    for (Usuarios usuario : listaUsuarios) {
+                                    for (Usuario usuario : listaUsuarios) {
                                 %>
                                 <tr>
-                                    <th scope="row"><%=i%></th>
-                                    <td><%=usuario.getCodigoPucp()%></td>
-                                    <td><%=usuario.getApellidos()%></td>
-                                    <td><%=usuario.getNombres()%></td>
-                                    <td><%=usuario.getCorreoPucp()%></td>
-                                    <td><%=usuario.getDni()%></td>
-                                    <td><%=usuario.getCategorias()%></td>
-                                    <td><%=usuario.getRol()%></td>
+                                    <td scope="row"><%=i%>
+                                    </td>
+                                    <td><%=usuario.getCodigoPucp()%>
+                                    </td>
+                                    <td><%=usuario.getNombres()%>
+                                    </td>
+                                    <td><%=usuario.getApellidos()%>
+                                    </td>
+                                    <td><%=usuario.getCorreoPucp()%>
+                                    </td>
+                                    <td><%=usuario.getDni()%>
+                                    </td>
+                                    <td><%=usuario.getRol()%>
+                                    </td>
                                     <td>
-                                        <a type="button" class="btn btn-primary"
-                                           href="<%=request.getContextPath()%>/AdminEditUser.jsp"> <!-- /JobServlet?action=editar&id=< % =job.getJobId()%> -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                                 class="bi bi-pencil" viewBox="0 0 16 16">
-                                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
-                                            </svg>
-                                        </a>
+                                        <a href="<%=request.getContextPath()%>/AdminServlet?action=editar&id=<%=usuario.getIdUsuario()%>"><u
+                                                style="align-content: center;color: blue">Ver más</u></a>
+                                    </td>
+                                    <td>
                                         <a type="button" class="btn btn-danger"
                                            onclick="return confirm('¿Estas seguro(a) que deseas borrar?')"
-                                           href="<%=request.getContextPath()%>/AdminServlet?action=borrar&codigoPucp=<%=usuario.getCodigoPucp()%>">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                        <a href="AdminEditUser.jsp"><u style="align-content: center;color: blue">Ver más</u></a>
+                                           href="<%=request.getContextPath()%>/AdminServlet?action=borrar&id=<%=usuario.getIdUsuario()%>">
+                                            <i class="bi bi-trash"></i></a>
+
                                     </td>
                                 </tr>
                                 <%
                                         i++;
                                     }
-
                                 %>
-
-
-
 
                             </tbody>
                         </table>
@@ -185,10 +167,7 @@
 
         </main><!-- End #main -->
 
-
         <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>

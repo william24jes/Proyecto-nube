@@ -12,22 +12,21 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="description">
-        <meta content="" name="keywords">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+              rel="stylesheet">
         <link href="assets/vendor/aos/aos.css" rel="stylesheet">
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
         <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
         <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
         <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+              rel="stylesheet">
         <script src="https://kit.fontawesome.com/600382161a.js" crossorigin="anonymous"></script>
         <link href="assets/css/style_administrador.css" rel="stylesheet">
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <title>Añadir usuario / Incidencias PUCP</title>
 
@@ -56,22 +55,26 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link active " href="<%=request.getContextPath()%>/AdminServlet?action=listar">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
-                        <li><div class="container-fluid">
-                            <form class="d-flex input-group w-auto">
-                                <input
-                                        type="search"
-                                        class="form-control rounded"
-                                        placeholder="Buscar usuario"
-                                        aria-label="Search"
-                                        aria-describedby="search-addon"
-                                />
-                                <span class="input-group-text border-0" id="search-addon">
+                        <li><a class="nav-link active " href="<%=request.getContextPath()%>/AdminServlet">Lista de
+                            usuarios</a></li>
+                        <li><a class="nav-link scrollto "
+                               href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
+                        <li>
+                            <div class="container-fluid">
+                                <form class="d-flex input-group w-auto">
+                                    <input
+                                            type="search"
+                                            class="form-control rounded"
+                                            placeholder="Buscar usuario"
+                                            aria-label="Search"
+                                            aria-describedby="search-addon"
+                                    />
+                                    <span class="input-group-text border-0" id="search-addon">
         <i class="fas fa-search"></i>
       </span>
-                            </form>
-                        </div></li>
+                                </form>
+                            </div>
+                        </li>
                         <li><a class="nav-link scrollto" href="#services">Cerrar sesión</a></li>
                     </ul>
 
@@ -87,63 +90,66 @@
                 <div class="container">
                     <div class="container-fluid">
                         <h4 class="hero">Completar datos del nuevo usuario:</h4>
-                        <form method="post" action="<%=request.getContextPath()%>/AdminServlet?action=guardar" class="row g-3">
-                            <div class="col-md-4">
+                        <form method="post" action="<%=request.getContextPath()%>/AdminServlet?action=guardar"
+                              class="row g-3">
+                            <div class="col-lg-4">
                                 <label for="Nombres" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" id="Nombres" placeholder="Nombres" name="Nombres" required>
+                                <input type="text" class="form-control" id="Nombres" placeholder="Nombres"
+                                       name="Nombres">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-lg-4">
                                 <label for="Apellidos" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="Apellidos" placeholder="Apellidos" name="Apellidos" required>
+                                <input type="text" class="form-control" id="Apellidos" placeholder="Apellidos"
+                                       name="Apellidos">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-lg-4">
                                 <label for="Correo PUCP" class="form-label">Correo PUCP</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                    <input type="text" class="form-control" id="Correo PUCP" placeholder="Correo PUCP" name="Correo PUCP" aria-describedby="inputGroupPrepend2" required>
+                                    <input type="email" class="form-control" id="Correo PUCP" placeholder="Correo PUCP"
+                                           name="Correo PUCP" aria-describedby="inputGroupPrepend2">
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <label for="DNI" class="form-label">DNI</label>
-                                <input type="number" class="form-control" id="DNI" placeholder="DNI" name="DNI" required>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="Celular" class="form-label">Celular</label>
-                                <input type="number" class="form-control" id="Celular" placeholder="Celular" name="Celular" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="Categoría" class="form-label">Categoría</label>
-                                <select class="form-select" id="Categoría" placeholder="Categoría" name="Categoría" required>
-                                    <option selected disabled value="">Seleccione una opción...</option>
-                                    <option>Alumno</option>
-                                    <option>Administrativo</option>
-                                    <option>Jefe de práctica</option>
-                                    <option>Profesor</option>
-                                    <option>Egresado</option>
-                                    <option>Seguridad</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="Rol" class="form-label">Rol</label>
-                                <select class="form-select" id="Rol" placeholder="Rol" name="Rol" required>
-                                    <option selected disabled value="">Seleccione una opción...</option>
-                                    <option>Usuario Pucp</option>
-                                    <option>Seguridad</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-2">
+                            <div class="col-lg-2">
                                 <label for="Codigo" class="form-label">Código</label>
-                                <input type="number" class="form-control" id="Codigo" placeholder="Codigo" name="Codigo" required>
+                                <input type="text" class="form-control" id="Codigo" placeholder="Codigo" name="Codigo">
+                            </div>
+                            <div class="col-lg-2">
+                                <label for="DNI" class="form-label">DNI</label>
+                                <input type="text" class="form-control" id="DNI" placeholder="DNI" name="DNI">
+                            </div>
+                            <div class="col-lg-2">
+                                <label for="Celular" class="form-label">Celular</label>
+                                <input type="text" class="form-control" id="Celular" placeholder="Celular"
+                                       name="Celular">
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="Categoría" class="form-label">Categoría</label>
+                                <select class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
+                                    <option selected>Seleccione una opción</option>
+                                    <option value="Alumno">Alumno</option>
+                                    <option value="Administrativo">Administrativo</option>
+                                    <option value="Jefe de practica">Jefe de práctica</option>
+                                    <option value="Profesor">Profesor</option>
+                                    <option value="Egresado">Egresado</option>
+                                </select>
                             </div>
 
-                            <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 ">
-                                <button class="btn btn-danger" style="width: fit-content" type="submit">Registrar nuevo usuario</button>
+                            <div class="col-lg-3">
+                                <label for="Rol" class="form-label">Rol</label>
+                                <select class="form-select" id="Rol" placeholder="Rol" name="Rol">
+                                    <option selected>Seleccione una opción</option>
+                                    <option value="Usuario PUCP">Usuario PUCP</option>
+                                    <option value="Seguridad">Seguridad</option>
+                                </select>
                             </div>
 
-                            <div class="d-grid gap-2 col-3 col-lg-4 col-xl-3">
-                                <a href="<%=request.getContextPath()%>/AdminListaUsersServlet" ><button  class="btn btn-danger" type="submit">Regresar</button></a>
+                            <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 mx-auto">
+                                <button class="btn btn-danger" type="submit">Registrar</button>
+                            </div>
+
+                            <div class="d-grid gap-2 col-3 col-lg-4 col-xl-3 mx-auto">
+                                <a class="btn btn-danger" href="<%=request.getContextPath()%>/AdminServlet">Regresar</a>
                             </div>
 
                         </form>
@@ -151,13 +157,9 @@
                 </div>
             </section>
 
-
         </main><!-- End #main -->
 
-
-
         <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -171,8 +173,5 @@
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
-
-
     </body>
-
 </html>

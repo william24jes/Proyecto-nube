@@ -1,4 +1,4 @@
-package com.example.proyectoingweb.servlets;
+package com.proyectoingweb.servlets;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -6,11 +6,11 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "ServletSeguridadInicio", value = "/SeguridadInicio")
-public class ServletSeguridadInicio extends HttpServlet {
+@WebServlet(name = "ServletHome", urlPatterns ={"/"})
+public class ServletHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request,response);
     }
 

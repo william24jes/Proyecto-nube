@@ -1,22 +1,22 @@
-package com.example.proyectoingweb.model.beans;
+package com.proyectoingweb.model.beans;
 
-public class Usuarios {
-    private int idUsuarios;
+public class Usuario {
+    private int idUsuario;
     private String nombres;
     private String apellidos;
     private String dni;
     private String celular;
     private String codigoPucp;
     private String correoPucp;
-    private String categorias;
+    private String categoria;
     private String rol;
 
-    public int getIdUsuarios() {
-        return idUsuarios;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdUsuarios(int idUsuarios) {
-        this.idUsuarios = idUsuarios;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombres() {
@@ -67,12 +67,12 @@ public class Usuarios {
         this.correoPucp = correoPucp;
     }
 
-    public String getCategorias() {
-        return categorias;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategorias(String categorias) {
-        this.categorias = categorias;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getRol() {

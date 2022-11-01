@@ -1,4 +1,4 @@
-package com.example.proyectoingweb.servlets;
+package com.proyectoingweb.servlets;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -6,11 +6,11 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "ServletHome", urlPatterns ={"/index"})
-public class ServletHome extends HttpServlet {
+@WebServlet(name = "ServletUsuarioEditarPerfil", value = "/EditarPerfil")
+public class ServletUsuarioEditarPerfil extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("UsuarioEditarPerfil.jsp");
         requestDispatcher.forward(request,response);
     }
 

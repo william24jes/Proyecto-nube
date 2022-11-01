@@ -1,7 +1,7 @@
-package com.example.proyectoingweb.servlets;
+package com.proyectoingweb.servlets;
 
-import com.example.proyectoingweb.model.beans.Usuarios;
-import com.example.proyectoingweb.model.daos.DaoUsuarios;
+import com.proyectoingweb.model.beans.Usuario;
+import com.proyectoingweb.model.daos.DaoUsuarios;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -15,7 +15,7 @@ public class UsuariosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         DaoUsuarios daoUsuarios = new DaoUsuarios();
-        ArrayList<Usuarios> listaUsuarios = daoUsuarios.obtenerlistaUsuarios();
+        ArrayList<Usuario> listaUsuarios = daoUsuarios.obtenerlistaUsuarios();
 
         request.setAttribute("lista", listaUsuarios);
 

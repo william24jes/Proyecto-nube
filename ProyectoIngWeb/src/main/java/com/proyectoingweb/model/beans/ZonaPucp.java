@@ -1,4 +1,4 @@
-package com.example.proyectoingweb.model.beans;
+package com.proyectoingweb.model.beans;
 
 public class ZonaPucp {
 

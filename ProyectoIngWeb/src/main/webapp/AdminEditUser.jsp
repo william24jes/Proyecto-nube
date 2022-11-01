@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.proyectoingweb.model.beans.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: willi
   Date: 25/10/2022
@@ -6,14 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  Usuario usuario = (Usuario) request.getAttribute("usuarioEditar");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="description">
-    <meta content="" name="keywords">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +29,6 @@
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <title>Editar usuario / Incidencias PUCP</title>
 
@@ -51,13 +52,11 @@
             </h1>
           </div>
         </div>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
         <nav id="navbar" class="navbar">
           <ul>
-            <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminListaUsersServlet">Lista de usuarios</a></li>
-            <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/perfil">Perfil</a></li>
+            <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet">Lista de usuarios</a></li>
+            <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminServlet?action=perfil">Perfil</a></li>
             <li><div class="container-fluid">
               <form class="d-flex input-group w-auto">
                 <input
@@ -74,8 +73,8 @@
           </ul>
 
           <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
+        </nav>
+        <!-- .navbar -->
       </div>
     </header><!-- End Header -->
 
@@ -90,20 +89,16 @@
                 <div class="col-xl-4">
                   <div class="card mb-4 mb-xl-0">
                     <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
-
                       <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile" class="rounded-circle">
-                      <h2>Rosa Montoya</h2>
-                      <h5>Usuario Pucp</h5>
-
+                      <h2><%=usuario.getNombres()%></h2>
+                      <h5><%=usuario.getRol()%></h5>
                     </div>
-
                   </div>
-
                 </div>
-
                 <div class="col-xl-8">
                   <div class="card mb-4">
                     <div class="card-body pt-3">
+
                       <!-- Bordered Tabs -->
                       <ul class="nav nav-tabs nav-tabs-bordered">
 
@@ -115,8 +110,6 @@
                           <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
                         </li>
 
-
-
                       </ul>
 
                       <div class="tab-content pt-2">
@@ -126,51 +119,52 @@
                           <h5 class="card-title">Detalles del Perfil</h5>
 
                           <div class="row">
-                            <div class="col-lg-3 col-md-4 label ">Nombre completo</div>
-                            <div class="col-lg-9 col-md-8">Rosa Manuel Montoya Richelli</div>
+                            <div class="col-lg-3 col-md-4 label ">ID Usuario</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getIdUsuario()%></div>
                           </div>
 
                           <div class="row">
-                            <div class="col-lg-3 col-md-4 label ">Cargo</div>
-                            <div class="col-lg-9 col-md-8">Usuario Pucp</div>
+                            <div class="col-lg-3 col-md-4 label ">Código</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getCodigoPucp()%></div>
                           </div>
-
                           <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Edad</div>
-                            <div class="col-lg-9 col-md-8">22 años</div>
+                            <div class="col-lg-3 col-md-4 label ">Nombres</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getNombres()%></div>
                           </div>
-
-
                           <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Pais</div>
-                            <div class="col-lg-9 col-md-8">Perú</div>
+                            <div class="col-lg-3 col-md-4 label ">Apellidos</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getApellidos()%></div>
                           </div>
-
-                          <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Dirección</div>
-                            <div class="col-lg-9 col-md-8">Av Las Nuevas Lomas, Lima</div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Telefono</div>
-                            <div class="col-lg-9 col-md-8">986-126-855</div>
-                          </div>
-
                           <div class="row">
                             <div class="col-lg-3 col-md-4 label">Correo</div>
-                            <div class="col-lg-9 col-md-8">arosam@pucp.edu.pe</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getCorreoPucp()%></div>
                           </div>
-
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">DNI</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getDni()%></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Celular</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getCelular()%></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Categoría</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getCategoria()%></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Rol</div>
+                            <div class="col-lg-9 col-md-8"><%=usuario.getRol()%></div>
+                          </div>
                         </div>
 
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                           <!-- Profile Edit Form -->
-                          <form>
+                          <form method="post" action="<%=request.getContextPath()%>/AdminServlet?action=actualizar">
                             <div class="row mb-3">
                               <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
                               <div class="col-md-8 col-lg-9">
-                                <img src="assets/img/perfiles/perfil1.svg" height="150" width="150"  alt="Profile">
+                                <img id="profileImage" src="assets/img/perfiles/perfil1.svg" height="150" width="150" alt="Profile">
                                 <div class="pt-2">
                                   <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                                   <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -178,56 +172,86 @@
                               </div>
                             </div>
 
-                            <div class="row mb-3">
-                              <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre Completo</label>
-                              <div class="col-md-8 col-lg-9">
-                                <input name="fullName" type="text" class="form-control" id="fullName" value="Rosa Manuel Montoya Richelli" disabled>
-                              </div>
-                            </div>
-
+                            <input name="ID Usuario" type="hidden" class="form-control" id="ID Usuario" value="<%=usuario.getIdUsuario()%>">
 
                             <div class="row mb-3">
-                              <label for="Email" class="col-md-4 col-lg-3 col-form-label">Correo</label>
+                              <label for="Codigo" class="col-md-4 col-lg-3 col-form-label">Código</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="email" type="email" class="form-control" id="Email" value="arosam@pucp.edu.pe" disabled>
-                              </div>
-                            </div>
-
-
-                            <div class="row mb-3">
-                              <label for="Country" class="col-md-4 col-lg-3 col-form-label">Pais</label>
-                              <div class="col-md-8 col-lg-9">
-                                <input name="country" type="text" class="form-control" id="Country" value="Perú">
+                                <input name="Codigo" type="text" class="form-control" id="Codigo" value="<%=usuario.getCodigoPucp()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
-                              <label for="Address" class="col-md-4 col-lg-3 col-form-label">Direcion</label>
+                              <label for="Nombres" class="col-md-4 col-lg-3 col-form-label">Nombres</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="address" type="text" class="form-control" id="Address" value="Av Las Nuevas Lomas, Lima">
+                                <input name="Nombres" type="text" class="form-control" id="Nombres" value="<%=usuario.getNombres()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
-                              <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
+                              <label for="Apellidos" class="col-md-4 col-lg-3 col-form-label">Nombres</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="phone" type="text" class="form-control" id="Phone" value="986-126-855">
+                                <input name="Apellidos" type="text" class="form-control" id="Apellidos" value="<%=usuario.getApellidos()%>">
                               </div>
                             </div>
 
+                            <div class="row mb-3">
+                              <label for="Correo" class="col-md-4 col-lg-3 col-form-label">Correo</label>
+                              <div class="col-md-8 col-lg-9">
+                                <input name="Correo PUCP" type="text" class="form-control" id="Correo" value="<%=usuario.getCorreoPucp()%>">
+                              </div>
+                            </div>
 
+                            <div class="row mb-3">
+                              <label for="DNI" class="col-md-4 col-lg-3 col-form-label">DNI</label>
+                              <div class="col-md-8 col-lg-9">
+                                <input name="DNI" type="text" class="form-control" id="DNI" value="<%=usuario.getDni()%>">
+                              </div>
+                            </div>
+
+                            <div class="row mb-3">
+                              <label for="Celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
+                              <div class="col-md-8 col-lg-9">
+                                <input name="Celular" type="text" class="form-control" id="Celular" value="<%=usuario.getCelular()%>">
+                              </div>
+                            </div>
+
+                            <div class="row mb-3">
+                              <label for="Rol" class="col-md-4 col-lg-3 col-form-label">Rol</label>
+                              <div class="col-md-8 col-lg-9">
+                                <select class="form-select" id="Rol" placeholder="Rol" name="Rol">
+                                  <option selected value="<%=usuario.getRol()%>">Seleccione una opción</option>
+                                  <option value="Usuario PUCP">Usuario PUCP</option>
+                                  <option value="Seguridad">Seguridad</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="row mb-3">
+                              <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
+                              <div class="col-md-8 col-lg-9">
+                                <select class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
+                                  <option selected value="<%=usuario.getCategoria()%>">Seleccione una opción</option>
+                                  <option value="Alumno">Alumno</option>
+                                  <option value="Administrativo">Administrativo</option>
+                                  <option value="Jefe de practica">Jefe de práctica</option>
+                                  <option value="Profesor">Profesor</option>
+                                  <option value="Egresado">Egresado</option>
+                                </select>
+                              </div>
+                            </div>
 
                             <div class="text-center">
-                              <button href= "Admin_perfil.html" type="submit" class="btn btn-primary">Guardar</button>
+                              <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
-                          </form><!-- End Profile Edit Form -->
-
+                          </form>
+                          <!-- End Profile Edit Form -->
                         </div>
 
                         <div class="tab-pane fade pt-3" id="profile-settings">
 
                           <!-- Settings Form -->
-                          <form>
+                          <!--<form>
 
                             <div class="row mb-3">
                               <label for="fullName" class="col-md-4 col-lg-3 col-form-label"> Permitir Notificaciones</label>
@@ -258,52 +282,36 @@
                                 </div>
                               </div>
                             </div>
-
                             <div class="text-center">
                               <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
-                          </form><!-- End settings Form -->
-
+                          </form>-->
+                          <!-- End settings Form -->
                         </div>
-
                         <div class="tab-pane fade pt-3" id="profile-change-password">
-                          <!-- Change Password Form -->
-                          <!-- End Change Password Form -->
-
                         </div>
-
-                      </div><!-- End Bordered Tabs -->
-
+                      </div>
+                      <!-- End Bordered Tabs -->
                     </div>
-
                   </div>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <!--<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                       Eliminar usuario
-                    </button>
-
+                    </button>-->
+                    <a href="<%=request.getContextPath()%>/AdminServlet?action=borrar&id=<%=usuario.getIdUsuario()%>" class="btn btn-danger" type="button">Eliminar usuario</a>
 
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-xl-8">
-
-
-
-            </div>
           </div>
         </div>
       </section>
 
-
     </main><!-- End #main -->
 
-
-
     <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
