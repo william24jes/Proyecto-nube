@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Create schema hr
+--
+DROP DATABASE IF EXISTS `mydb`;
+CREATE DATABASE  IF NOT EXISTS `mydb`;
+USE `mydb`;
+
+
+--
 -- Table structure for table `comentarios`
 --
 
