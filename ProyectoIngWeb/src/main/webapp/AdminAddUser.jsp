@@ -56,8 +56,8 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link active " href="<%=request.getContextPath()%>/AdminListaUsersServlet">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/perfil">Perfil</a></li>
+                        <li><a class="nav-link active " href="<%=request.getContextPath()%>/AdminServlet?action=listar">Lista de usuarios</a></li>
+                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
                         <li><div class="container-fluid">
                             <form class="d-flex input-group w-auto">
                                 <input
@@ -87,7 +87,7 @@
                 <div class="container">
                     <div class="container-fluid">
                         <h4 class="hero">Completar datos del nuevo usuario:</h4>
-                        <form method="post" action="<%=request.getContextPath()%>/add_user" class="row g-3">
+                        <form method="post" action="<%=request.getContextPath()%>/AdminServlet?action=guardar" class="row g-3">
                             <div class="col-md-4">
                                 <label for="Nombres" class="form-label">Nombres</label>
                                 <input type="text" class="form-control" id="Nombres" placeholder="Nombres" name="Nombres" required>
@@ -120,6 +120,7 @@
                                     <option>Jefe de práctica</option>
                                     <option>Profesor</option>
                                     <option>Egresado</option>
+                                    <option>Seguridad</option>
                                 </select>
                             </div>
 

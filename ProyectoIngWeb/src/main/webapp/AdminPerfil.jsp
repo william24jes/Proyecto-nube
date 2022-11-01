@@ -58,8 +58,8 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminListaUsersServlet">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/perfil">Perfil</a></li>
+                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminServlet?action=listar">Lista de usuarios</a></li>
+                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
                         <li><div class="container-fluid">
                             <form class="d-flex input-group w-auto">
                                 <input

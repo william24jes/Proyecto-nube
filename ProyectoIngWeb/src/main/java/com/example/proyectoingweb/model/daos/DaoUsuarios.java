@@ -51,7 +51,7 @@ public class DaoUsuarios {
         }
 
         String url = "jdbc:mysql://localhost:3306/mydb";
-        String sql = "INSERT INTO usuarios (idUsuarios, nombres, apellidos, dni, celular, codigoPucp, correoPucp, categorias, rol) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios (idUsuario, nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol) VALUES (?,?,?,?,?,?,?,?,?)";
         try(Connection connection = DriverManager.getConnection(url,"root","root");
             PreparedStatement pstmt=connection.prepareStatement(sql))
             {
@@ -67,6 +67,28 @@ public class DaoUsuarios {
             pstmt.setString(9,usuarios.getRol());
 
 
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void borrarUsuario(String codigoPucp){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String sql = "DELETE from usuarios WHERE codigoPucp=?";
+        try(Connection connection = DriverManager.getConnection(url,"root","root");
+            PreparedStatement pstmt=connection.prepareStatement(sql))
+        {
+
+            pstmt.setString(1,codigoPucp);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
