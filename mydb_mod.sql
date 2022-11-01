@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.30
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,13 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Create schema hr
---
-DROP DATABASE IF EXISTS `mydb`;
-CREATE DATABASE  IF NOT EXISTS `mydb`;
-USE `mydb`;
 
 --
 -- Table structure for table `comentarios`
@@ -163,7 +156,7 @@ CREATE TABLE `zonapucp` (
   `idzonaPucp` int NOT NULL AUTO_INCREMENT,
   `nombreZona` varchar(100) NOT NULL,
   PRIMARY KEY (`idzonaPucp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,6 +165,7 @@ CREATE TABLE `zonapucp` (
 
 LOCK TABLES `zonapucp` WRITE;
 /*!40000 ALTER TABLE `zonapucp` DISABLE KEYS */;
+INSERT INTO `zonapucp` VALUES (1,'338 Café Gourmet (PUCP)'),(2,'Alianza Francesa'),(3,'Anfiteatro Armando Zolezzi'),(4,'Anfiteatro José Dammert Bellido - Facultad de Derecho'),(5,'Asociación de egresados y graduados'),(6,'Auditorio de Ciencias Sociales (Gustavo Gutiérrez Merino)'),(7,'Auditorio de Derecho'),(8,'Auditorio de Física'),(9,'Auditorio de Humanidades'),(10,'Auditorio de la Biblioteca Central (Tercer piso)'),(11,'Auditorio de la Facultad de Arte y Diseño'),(12,'Auditorio de la Facultad de Ciencias e Ingeniería'),(13,'Auditorio de la Facultad de Educación'),(14,'Auditorio Juan Pablo II'),(15,'Aula H411 informática (DTI) - Aula informática'),(16,'Aula H412 informática (DTI) - Aula informática'),(17,'Aula H413 informática (DTI) - Aula informática'),(18,'Aula L103 Auditorio N° 1 de Estudios Generales Letras');
 /*!40000 ALTER TABLE `zonapucp` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -184,4 +178,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-31 17:37:56
+-- Dump completed on 2022-10-31 19:09:52
