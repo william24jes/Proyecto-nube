@@ -203,13 +203,13 @@
                                 <div class="row">
                                     <div class="col-sm-1">
                                         <br>
-                                        <a class="nav-link  " href="Seguridad_inicio.html">  <button type="button" class="btn btn-primary btn-sm">Aceptar</button>  </a>
+                                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=inicioSeguridad">  <button type="button" class="btn btn-primary btn-sm">Aceptar</button>  </a>
 
                                     </div>
 									
 									<div class="col-sm-1">
 										<br>
-										<a class="nav-link  " href="Seguridad_inicio.html">  <button type="button" class="btn btn-primary btn-sm">Descargar</button>  </a>
+										<a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=inicioSeguridad">  <button type="button" class="btn btn-primary btn-sm">Descargar</button>  </a>
 									</div>
                                     
 									<div class="col-sm-1">
