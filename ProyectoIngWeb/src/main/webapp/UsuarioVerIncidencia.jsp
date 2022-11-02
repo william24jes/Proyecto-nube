@@ -124,7 +124,7 @@
                                                 <i class="fas fa-exclamation-triangle"> 10</i>
                                             </a></div>
                                         </h4>
-                                        <button type="button" class="btn btn-primary btn-sm">Atendido</button>
+                                        <button type="button" class="btn btn-primary btn-sm disabled">En proceso</button>
 
 
                                     </div>
