@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Incidencia / Incidencias PUCP</title>
+    <title>Registrar incidencia / Incidencias PUCP</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -63,22 +64,20 @@
 
 
           <ul>
-            <li>
-              <div class="container-fluid">
-                <form class="d-flex input-group w-auto">
-                  <input
-                          type="search"
-                          class="form-control rounded"
-                          placeholder="Buscar Incidencia"
-                          aria-label="Search"
-                          aria-describedby="search-addon"
-                  />
-                  <span class="input-group-text border-0" id="search-addon">
+            <li><div class="container-fluid">
+              <form class="d-flex input-group w-auto">
+                <input
+                        type="search"
+                        class="form-control rounded"
+                        placeholder="Buscar Incidencia"
+                        aria-label="Search"
+                        aria-describedby="search-addon"
+                />
+                <span class="input-group-text border-0" id="search-addon">
         <i class="fas fa-search"></i>
       </span>
-                </form>
-              </div>
-            </li>
+              </form>
+            </div></li>
             <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=inicioUsuario">Inicio</a></li>
             <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
             <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis Incidencias</a></li>
@@ -90,152 +89,145 @@
         </nav><!-- .navbar -->
 
       </div>
-    </header><!-- End Header -->
+    </header>
 
     <main id="main" data-aos="fade-up">
 
+      <!-- ======= Breadcrumbs Section ======= -->
+      <!-- Breadcrumbs Section -->
 
       <!-- ======= Portfolio Details Section ======= -->
       <section id="portfolio-details" class="portfolio-details">
         <div class="container">
           <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Mis Incidencias</h1>
-            </div>
+            <div class="container-xl px-4 mt-4">
 
-            <div class="container">
+              <!-- Account page navigation-->
+              <hr class="mt-7 mb-7">
+              <div class="row">
 
-              <div class="col-lg-12 mx-auto">
-                <!-- Dropdown Card Example -->
-                <div class="card shadow mb-4 ">
-                  <!-- Card Header - Dropdown -->
-                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <img src="assets/img/profile_upload.png" height="70px"/>
-                    <br>
-                    <div></div>
-                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Pérdida de carnet
-                      universitario #ayuda
-                      #cachimbo #2022-2
-                      <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                        Einstein </h6><h6>Registrado hoy</h6></div>
-                      <div><a href="#" class="btn btn-warning btn-circle">
-                        <i class="fas fa-exclamation-triangle"> 10</i>
-                      </a></div>
-                    </h4>
-                    <button type="button" class="btn btn-primary btn-sm">Atendido</button>
-
-
-                  </div>
-
-
-                  <!-- Card Body -->
-
-                  <div class="card-body">
-                    <div><h4>Descripción:</h4></div>
-                    Dropdown menus can be placed in the card header in order to extend the functionality
-                    of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
-                    icon in the card header can be clicked on in order to toggle a dropdown menu.
-                    <div><br><h4>Zona PUCP:</h4></div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem corporis
-                    doloribus error ex facere itaque iusto neque nobis non optio quaerat quam quas, quisquam
-                    ut vero voluptate voluptatibus!
-                    <div><br><h4>Ubicación: </h4></div>
-                    <button type="button" class="btn btn-primary btn-lg"
-                            style="background-color: red;border:red">Ver en el mapa
-                    </button>
-                    <div><br><h4>Fotos:</h4></div>
-                    <div class="col-12">
-                      <br>
-                      <div class="row">
-                        <div class="col-auto">
-                          <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo"
-                               class="img-fluid d-block mx-auto"
-                               style="height: 200px;border-radius: 1em">
+                <div class="col-xl-11">
+                  <!-- Account details card-->
+                  <div class="card mb-4">
+                    <div class="card-header fw-bold"> Registrar Incidencia</div>
+                    <div class="card-body">
+                      <form>
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                          <label  for="inputUsername">Nombre de la Incidencia: </label>
+                          <input class="form-control " id="inputUsername" type="text" >
                         </div>
-                        <div class="col-auto">
-                          <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
-                               class="img-fluid d-block mx-auto"
-                               style="height: 200px;border-radius: 1em"></div>
-                      </div>
-                      <br>
+
+                        <div class="form-group mb-3">
+                          <label for="exampleFormControlTextarea1">Descripción:</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+
+                        <!-- Form Row-->
+
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                          <!-- Form Group (organization name)-->
+
+                          <div class="col-md-6">
+                            <label  for="inputGroupSelect01">Nivel de Urgencia </label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Opciones</label>
+                              </div>
+                              <select class="z-depth-1-half map-container" style="width: 350px" id="inputGroupSelect01">
+                                <option selected>Elige... </option>
+                                <option value="1">Leve</option>
+                                <option value="2">Moderado</option>
+                                <option value="3">Crítico</option>
+                              </select>
+                            </div>
+
+                          </div>
+
+                          <div class="col-md-6">
+                            <label  for="inputGroupSelect01">Tipo de Incidencia</label>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
+                              </div>
+                              <select class="z-depth-1-half map-container" style="width: 350px" id="inputGroupSelect02">
+                                <option selected>Elige... </option>
+                                <option value="1">Reporte de robo</option>
+                                <option value="2">Obejtos perdidos</option>
+                                <option value="3">Infrestructura en mal estado</option>
+                                <option value="4">Ambulancia PUCP</option>
+                                <option value="5">Accidente</option>
+                                <option value="6">Otros</option>
+                              </select>
+                            </div>
+
+                          </div>
+
+                          <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                              <label for="inputFirstName">Zona PUCP</label>
+                              <input class="form-control" id="inputFirstName" type="text">
+                            </div>
+
+                            <div class="col-md-6">
+                              <label for="map-container-google-2">Ubicacion</label>
+                              <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 200px">
+                                <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                                        style="border:0" allowfullscreen></iframe>
+                              </div>
+                            </div>
+                            <!-- Form Group (last name)-->
+
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="customFile">Subir fotos de la incidencia: </label>
+                            <input type="file" class="form-control"style="width: 350px" id="customFile" />
+                          </div>
 
 
+                          <!-- Form Group (location)-->
+
+                        </div>
+                        <!-- Form Group (email address)-->
+
+
+                        <!-- Form Row-->
+
+                        <!-- Save changes button-->
+
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                          <a class="nav-link  " href="Usuario_MisIncidencias.html">
+                            <button class="btn btn-primary" type="button">Guardar</button>
+                          </a>
+                          <a class="nav-link  " href="Usuario_Inicio.html">
+                            <button class="btn btn-primary"  type="button" >Cancelar</button>
+                          </a>
+
+                          <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Activar publicación anónima</label>
+                          </div>
+                        </div>
+                      </form>
                     </div>
-                    <div><br><h4>Tipo de incidencia: </h4></div>
-                    <div>
-                      <a href="#" class="btn btn-primary btn-lg disabled" role="button"
-                         aria-disabled="true">Objetos Perdidos</a>
-                    </div>
-
-
-
-                    <div><br><h4>Nivel de urgencia: </h4></div>
-                    <div>
-                      <a href="#" class="btn btn-primary btn-lg disabled" role="button"
-                         aria-disabled="true">Leve</a>
-                    </div>
-
-                    <div><br><h5>Comentario de Seguridad: </h5>Lorem ipsum dolor sit amet, consectetur
-                      adipisicing elit. Ab accusantium alias amet
-                      dolore doloremque ea, et exercitationem impedit itaque iure maxime neque nobis odit
-                      praesentium ratione rem sit vitae voluptates! Lorem ipsum dolor sit amet,
-                      consectetur
-                      adipisicing elit. Impedit iste nesciunt nulla perspiciatis, quaerat rem
-                      reprehenderit
-                      saepe! Accusantium consectetur, delectus deserunt eum hic nihil provident quos sunt
-                      tempore tenetur veniam?
-                    </div>
-
-                    <div style="text-align: right"><br><h5>Comentario de Frank Einstein: </h5>Lorem ipsum dolor
-                      sit amet, consectetur adipisicing elit. Ab accusantium alias amet
-                      dolore doloremque ea, et exercitationem impedit itaque iure maxime neque nobis odit
-                      praesentium ratione rem sit vitae voluptates! Lorem ipsum dolor sit amet,
-                      consectetur
-                      adipisicing elit. Impedit iste nesciunt nulla perspiciatis, quaerat rem
-                      reprehenderit
-                      saepe! Accusantium consectetur, delectus deserunt eum hic nihil provident quos sunt
-                      tempore tenetur veniam?
-                    </div>
-
-
-                    <div><br><h5>Comentario de Seguridad: </h5>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium alias amet
-                      dolore doloremque ea, et exercitationem impedit itaque iure maxime neque nobis odit
-                      praesentium ratione rem sit vitae voluptates! Lorem ipsum dolor sit amet,
-                      consectetur
-                      adipisicing elit.
-                    </div>
-                    <div class="row">
-                      <div class="col-auto">
-                        <br>
-                        <div><button type="button" class="btn btn-primary btn-lg">Aceptar</button></div>
-
-                      </div>
-                      <div class="col-auto">
-                        <br>
-                        <div><button type="button" class="btn btn-primary btn-lg">Reabrir (4)</button></div>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
               </div>
             </div>
+
 
           </div>
 
 
         </div>
       </section><!-- End Portfolio Details Section -->
+
     </main>
 
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -251,4 +243,3 @@
   </body>
 
 </html>
-

@@ -35,6 +35,10 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(request,response);
                 break;
+            case "verIncidencia":
+                requestDispatcher = request.getRequestDispatcher("UsuarioVerIncidencia.jsp");
+                requestDispatcher.forward(request, response);
+                break;
         }
     }
 

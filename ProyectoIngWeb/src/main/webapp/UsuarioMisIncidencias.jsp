@@ -116,13 +116,15 @@
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <img src="assets/img/profile_upload.png" height="70px"/>
                     <br>
-                    <div></div>
-                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Pérdida de carnet
+                    <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia"><h4
+                            class="m-0 font-weight-bold text-primary" style="width:75%">Pérdida de
+                      carnet
                       universitario #ayuda
-                      #cachimbo #2022-2
-                      <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                        Einstein </h6><h6>Registrado hoy</h6></div>
+                      #cachimbo #2022-2</a>
+                    <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
+                      Einstein </h6><h6>Registrado hoy</h6></div>
                     </h4>
+
                     <h6 style="color:red">Leve</h6>
                     <button type="button" class="btn btn-primary btn-xs"
                             style="background-color: yellow;border:yellow;color:black">12 <img
