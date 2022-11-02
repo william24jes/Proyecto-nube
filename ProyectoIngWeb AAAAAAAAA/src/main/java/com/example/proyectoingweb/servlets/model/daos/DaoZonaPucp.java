@@ -14,7 +14,7 @@ public class DaoZonaPucp {
         try {
             String url = "jdbc:mysql://localhost:3306/mydb";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, "root", password);
+            Connection connection = DriverManager.getConnection(url, "root", "root");
             Statement stmt = connection.createStatement();
             String sql = "select * from mydb.zonapucp";
             ResultSet rs = stmt.executeQuery(sql);

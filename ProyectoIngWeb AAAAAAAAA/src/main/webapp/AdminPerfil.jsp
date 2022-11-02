@@ -72,7 +72,7 @@
                                 <span class="input-group-text border-0" id="search-addon"><i class="fas fa-search"></i></span>
                             </form></div>
                         </li>
-                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/ServletAdminPerfil">Cerrar Sesión</a></li>
+                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>">Cerrar Sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>

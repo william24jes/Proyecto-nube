@@ -78,6 +78,14 @@ public class AdminServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/AdminServlet");
                 break;
+
+            case "page":
+
+                request.setAttribute("lista", daoUsuarios.paginarUsuarios());
+                requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
+                requestDispatcher.forward(request, response);
+
+                break;
         }
     }
 
