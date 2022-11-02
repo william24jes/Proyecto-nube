@@ -144,7 +144,7 @@
                             </div>
 
                             <div class="d-grid gap-2 col-3 col-lg-4 col-xl-3 mx-auto">
-                                <a class="btn btn-danger" href="<%=request.getContextPath()%>/AdminServlet">Regresar</a>
+                                <a class="btn btn-secondary" href="<%=request.getContextPath()%>/AdminServlet">Regresar</a>
                             </div>
 
                         </form>
