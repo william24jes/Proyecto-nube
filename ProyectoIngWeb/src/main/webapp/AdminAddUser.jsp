@@ -29,7 +29,6 @@
         <link href="assets/img/favicon.png" rel="icon">
 
         <title>Añadir usuario / Incidencias PUCP</title>
-
     </head>
 
     <body>
@@ -39,19 +38,17 @@
 
         </section>
 
-        <!-- ======= Header <h6>Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></h6>======= -->
+        <!-- ======= Header ======= -->
         <header style="background-color:white " id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="d-md-flex align-items-center">
                     <div>
                         <h1 class="name" style="margin-top: 25px">Juan Perez
-                            <br><h6>Administrador</h6></br>
+                            <br><h6>Administrador</h6><br>
                         </h1>
                     </div>
                 </div>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
                 <nav id="navbar" class="navbar">
                     <ul>
@@ -61,21 +58,19 @@
                                href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
                         <li>
                             <div class="container-fluid">
-                                <form class="d-flex input-group w-auto">
-                                    <input
-                                            type="search"
-                                            class="form-control rounded"
-                                            placeholder="Buscar usuario"
-                                            aria-label="Search"
-                                            aria-describedby="search-addon"
-                                    />
-                                    <span class="input-group-text border-0" id="search-addon">
-        <i class="fas fa-search"></i>
-      </span>
+                                <form method="post" class="d-flex input-group w-auto"
+                                      action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
+                                    <input type="text"
+                                           name="searchText"
+                                           class="form-control rounded"
+                                           placeholder="Buscar usuario"
+                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"/>
+                                    <span class="input-group-text border-0" id="search-addon"><i
+                                            class="fas fa-search"></i></span>
                                 </form>
                             </div>
                         </li>
-                        <li><a class="nav-link scrollto" href="#services">Cerrar sesión</a></li>
+                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>">Cerrar sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>

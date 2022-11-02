@@ -83,7 +83,6 @@ public class DaoUsuarios {
         }
 
         return usuario;
-
     }
 
     public void guardarUsuario(Usuario usuario){
@@ -115,7 +114,6 @@ public class DaoUsuarios {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void actualizarUsuario(Usuario usuario){
@@ -159,7 +157,7 @@ public class DaoUsuarios {
         }
 
         String url = "jdbc:mysql://localhost:3306/mydb";
-        String sql = "DELETE from usuarios WHERE idUsuario=?";
+        String sql = "DELETE from usuarios WHERE idUsuario = ?";
 
         try(Connection connection = DriverManager.getConnection(url,"root","root");
             PreparedStatement pstmt=connection.prepareStatement(sql))

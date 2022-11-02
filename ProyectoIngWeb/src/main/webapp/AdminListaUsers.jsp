@@ -54,7 +54,7 @@
                 <div class="d-md-flex align-items-center">
                     <div>
                         <h1 class="name" style="margin-top: 25px">Juan Perez
-                            <br><h6>Administrador</h6></br>
+                            <br><h6>Administrador</h6><br>
                         </h1>
                     </div>
                 </div>
@@ -69,7 +69,9 @@
                             <div class="container-fluid">
                                 <form method="post" class="d-flex input-group w-auto"
                                       action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
-                                    <input type="text" name="searchText" class="form-control rounded"
+                                    <input type="text"
+                                           name="searchText"
+                                           class="form-control rounded"
                                            placeholder="Buscar usuario"
                                            id="floatingInput" aria-label="Search" aria-describedby="search-addon"/>
                                     <span class="input-group-text border-0" id="search-addon"><i

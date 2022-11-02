@@ -41,14 +41,14 @@
 
     </section>
 
-    <!-- ======= Header <h6>Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></h6>======= -->
+    <!-- ======= Header ======= -->
     <header style="background-color:white " id="header" class="d-flex align-items-center">
       <div class="container d-flex align-items-center justify-content-between">
 
         <div class="d-md-flex align-items-center">
           <div>
             <h1 class="name" style="margin-top: 25px">Juan Perez
-              <br><h6>Administrador</h6></br>
+              <br><h6>Administrador</h6><br>
             </h1>
           </div>
         </div>
@@ -57,19 +57,21 @@
           <ul>
             <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet">Lista de usuarios</a></li>
             <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminServlet?action=perfil">Perfil</a></li>
-            <li><div class="container-fluid">
-              <form class="d-flex input-group w-auto">
-                <input
-                        type="search"
-                        class="form-control rounded"
-                        placeholder="Buscar usuario"
-                        aria-label="Search"
-                        aria-describedby="search-addon"
-                />
-                <span class="input-group-text border-0" id="search-addon"><i class="fas fa-search"></i></span>
-              </form></div>
+            <li>
+              <div class="container-fluid">
+                <form method="post" class="d-flex input-group w-auto"
+                      action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
+                  <input type="text"
+                         name="searchText"
+                         class="form-control rounded"
+                         placeholder="Buscar usuario"
+                         id="floatingInput" aria-label="Search" aria-describedby="search-addon"/>
+                  <span class="input-group-text border-0" id="search-addon"><i
+                          class="fas fa-search"></i></span>
+                </form>
+              </div>
             </li>
-            <li><a class="nav-link scrollto" href="home.html">Cerrar sesión</a></li>
+            <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>">Cerrar sesión</a></li>
           </ul>
 
           <i class="bi bi-list mobile-nav-toggle"></i>
@@ -113,9 +115,7 @@
                       </ul>
 
                       <div class="tab-content pt-2">
-
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
-
                           <h5 class="card-title">Detalles del Perfil</h5>
 
                           <div class="row">
