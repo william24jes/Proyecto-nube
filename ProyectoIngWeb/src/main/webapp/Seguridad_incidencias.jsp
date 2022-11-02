@@ -216,12 +216,17 @@
                                     
 									<div class="col-sm-1">
 									<br>
-									<select class="form-select" >
-									  <option selected>pdf</option>
-									  <option value="1">txt</option>
-									  <option value="2">xls</option>
-									  
-									</select>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger">
+                                                <i class="bi bi-filetype-pdf"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-success">
+                                                <i class="bi bi-filetype-xls"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="bi bi-filetype-txt"></i>
+                                            </button>
+                                        </div>
 								  </div>
 									
 								</div>
