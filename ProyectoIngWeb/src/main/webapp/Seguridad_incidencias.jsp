@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+=======
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+>>>>>>> b6539590dc32ba308c139bc3003f4576385e0c5d
 <!DOCTYPE html>
 <html lang="en">
 
