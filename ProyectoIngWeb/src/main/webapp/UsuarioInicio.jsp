@@ -113,7 +113,7 @@
                   <!-- Card Header - Dropdown -->
                   <div
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo xd</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo 1</h6>
                     <button type="button" class="btn btn-primary btn-xs" style="background-color: yellow;border:yellow"><img src="assets/img/exclamation-triangle.svg"></button>
 
                   </div>
@@ -147,7 +147,7 @@
                   <!-- Card Header - Dropdown -->
                   <div
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo xd</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo 2</h6>
                     <a href="#" class="btn btn-warning btn-circle">
                       <i class="fas fa-exclamation-triangle"></i>
                     </a>
@@ -186,7 +186,7 @@
                   <!-- Card Header - Dropdown -->
                   <div
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo xd</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo 3</h6>
 
                     <a href="#" class="btn btn-warning btn-circle">
                       <i class="fas fa-exclamation-triangle"></i>
@@ -225,7 +225,7 @@
                   <!-- Card Header - Dropdown -->
                   <div
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo xd</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo 4</h6>
                     <a href="#" class="btn btn-warning btn-circle">
                       <i class="fas fa-exclamation-triangle"></i>
                     </a>
@@ -254,7 +254,7 @@
                   <!-- Card Header - Dropdown -->
                   <div
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo xdxxdxd</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo 5</h6>
                     <button type="button" class="btn btn-primary btn-xs" style="background-color: yellow;border:yellow"><img src="assets/img/exclamation-triangle.svg"></button>
 
                   </div>
