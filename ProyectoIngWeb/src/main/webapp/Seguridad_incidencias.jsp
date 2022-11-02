@@ -1,5 +1,5 @@
 
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,9 +81,9 @@
       </span>
                     </form>
                 </div></li>
-                <li><a class="nav-link  " href="Seguridad_inicio.html">Inicio</a></li>
-                <li><a class="nav-link scrollto" href="Seguridad_perfil.html">Perfil</a></li>
-                <li><a class="nav-link scrollto" href="home.html">Cerrar sesión</a></li>
+                <li><a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=inicioSeguridad">Inicio</a></li>
+                <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/SeguridadInicio?action=perfil">Perfil</a></li>
+                <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/SeguridadInicio?action=cerrarSesion">Cerrar sesión</a></li>
             </ul>
 
             <i class="bi bi-list mobile-nav-toggle"></i>
