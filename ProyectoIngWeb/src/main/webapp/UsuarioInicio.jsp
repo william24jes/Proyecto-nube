@@ -114,8 +114,9 @@
                   <div
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo 1</h6>
-                    <button type="button" class="btn btn-primary btn-xs" style="background-color: yellow;border:yellow"><img src="assets/img/exclamation-triangle.svg"></button>
-
+                    <a href="#" class="btn btn-warning btn-circle">
+                      <i class="bi bi-exclamation-triangle"></i>
+                    </a>
                   </div>
                   <!-- Card Body -->
                   <div class="card-body">
@@ -200,16 +201,22 @@
                     <div class="col-12">
                       <br>
                       <div class="row">
-                        <div class="col-4">
-                          <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em">
+                        <div class="row">
+                          <div class="col-auto">
+                            <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em">
+                          </div>
+                          <div class="col-auto">
+                            <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em"></div>
+                          <div class="col-auto">
+                            <img src="assets/img/vista_area_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em"></div>
                         </div>
-                        <div class="col-4">
-                          <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
-                        <div class="col-4">
-                          <img src="assets/img/vista_area_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
+
                       </div>
 
                     </div>
@@ -255,8 +262,9 @@
                   <div
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary"> Incidencia: Robo 5</h6>
-                    <button type="button" class="btn btn-primary btn-xs" style="background-color: yellow;border:yellow"><img src="assets/img/exclamation-triangle.svg"></button>
-
+                    <a href="#" class="btn btn-warning btn-circle">
+                      <i class="bi bi-exclamation-triangle"></i>
+                    </a>
                   </div>
                   <!-- Card Body -->
                   <div class="card-body">
@@ -266,16 +274,22 @@
                     <div class="col-12">
                       <br>
                       <div class="row">
-                        <div class="col-4">
-                          <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em">
+                        <div class="row">
+                          <div class="col-auto">
+                            <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em">
+                          </div>
+                          <div class="col-auto">
+                            <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em"></div>
+                          <div class="col-auto">
+                            <img src="assets/img/vista_area_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em"></div>
                         </div>
-                        <div class="col-4">
-                          <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
-                        <div class="col-4">
-                          <img src="assets/img/vista_area_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
+
                       </div>
 
                     </div>
@@ -308,16 +322,22 @@
                     <div class="col-12">
                       <br>
                       <div class="row">
-                        <div class="col-4">
-                          <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em">
+                        <div class="row">
+                          <div class="col-auto">
+                            <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em">
+                          </div>
+                          <div class="col-auto">
+                            <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em"></div>
+                          <div class="col-auto">
+                            <img src="assets/img/vista_area_pucp.jpg" alt="logo"
+                                 class="img-fluid d-block mx-auto"
+                                 style="height: 80px;border-radius: 1em"></div>
                         </div>
-                        <div class="col-4">
-                          <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
-                        <div class="col-4">
-                          <img src="assets/img/vista_area_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
+
                       </div>
 
                     </div>
