@@ -118,7 +118,7 @@
 
                         <!-- Dropdown Card Example -->
 
-                        <a class="nav-link  " href="Seguridad_incidencias.html">
+                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -147,7 +147,7 @@
                     <div class="col-lg-10 mx-auto">
 
                         <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="Seguridad_incidencias.html">
+                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -176,7 +176,7 @@
                     <div class="col-lg-10 mx-auto">
 
                         <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="Seguridad_incidencias.html">
+                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -203,7 +203,7 @@
                     <div class="col-lg-10 mx-auto">
 
                         <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="Seguridad_incidencias.html">
+                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -231,7 +231,7 @@
                     <div class="col-lg-10 mx-auto">
 
                         <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="Seguridad_incidencias.html">
+                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles"">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">

@@ -28,6 +28,10 @@ public class ServletSeguridadInicio extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
                 requestDispatcher.forward(request,response);
                 break;
+            case "detalles":
+                requestDispatcher = request.getRequestDispatcher("Seguridad_incidencias.jsp");
+                requestDispatcher.forward(request,response);
+                break;
 
             case "cerrarSesion":
                 requestDispatcher = request.getRequestDispatcher("index.jsp");
