@@ -188,7 +188,11 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Dump completed on 2022-11-08 17:39:00
+=======
+-- Dump completed on 2022-10-31 19:09:52
+>>>>>>> parent of 9ae4f43 (usuarios con contraseña DB)
 =======
 -- Dump completed on 2022-10-31 19:09:52
 >>>>>>> parent of 9ae4f43 (usuarios con contraseña DB)
