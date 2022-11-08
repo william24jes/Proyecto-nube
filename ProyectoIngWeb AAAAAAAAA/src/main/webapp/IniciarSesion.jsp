@@ -62,26 +62,26 @@
                       <p class="text-center small">Ingresa tu correo, código PUCP y contraseña</p>
                     </div>
 
-                    <form method="post" action="<%=request.getContextPath()%>/ServletIniciarSesion?post=validar" class="row g-3 needs-validation" novalidate>
+                    <form class="row g-3 needs-validation" novalidate>
 
                       <div class="col-12">
-                        <label for="correo" class="form-label">Correo</label>
+                        <label for="yourUsername" class="form-label">Correo</label>
                         <div class="input-group has-validation">
                           <span class="input-group-text" id="inputGroupPrepend">@</span>
-                          <input type="text" name="correo" class="form-control" id="correo" required>
+                          <input type="text" name="username" class="form-control" id="yourUsername" required>
                           <div class="invalid-feedback">Ingresa tu usuario.</div>
                         </div>
                       </div>
 
                       <div class="col-12">
-                        <label for="codigo" class="form-label">Código PUCP</label>
-                        <input type="text" name="codigo" class="form-control" id="codigo" required>
+                        <label for="yourCode" class="form-label">Código PUCP</label>
+                        <input type="text" name="code" class="form-control" id="yourCode" required>
                         <div class="invalid-feedback">Ingresa tu código!</div>
                       </div>
 
                       <div class="col-12">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" name="password" class="form-control" id="password" required>
+                        <label for="yourPassword" class="form-label">Contraseña</label>
+                        <input type="password" name="password" class="form-control" id="yourPassword" required>
                         <div class="invalid-feedback">Ingresa tu contraseña!</div>
                         <p class="small mb-0"><a href="<%=request.getContextPath()%>/ServletIniciarSesion?action=olvidoContraseña">¿Olvidaste tu contraseña?</a></p>
                       </div>
@@ -93,8 +93,8 @@
                         </div>
                       </div>
                       <div class="col-12">
-                        <a class="nav-link  " >
-                          <button type="submit" class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
+                        <a class="nav-link  " href="<%=request.getContextPath()%>/ServletIniciarSesion?action=inicioUsuario">
+                          <button type="button" class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
                         </a>
 
                       </div>
