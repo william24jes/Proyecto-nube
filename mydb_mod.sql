@@ -66,11 +66,11 @@ CREATE TABLE `incidencias` (
   `descripcion` varchar(200) NOT NULL,
   `idzonaPucp` int NOT NULL,
   `tipo` varchar(100) NOT NULL,
-  `ubicacion` varchar(200) NOT NULL,
-  `foto` blob NOT NULL,
+  `ubicacion` varchar(200) DEFAULT NULL,
+  `foto` blob,
   `destacado` int NOT NULL,
   `fechaHora` datetime NOT NULL,
-  `anonimo` bit(1) NOT NULL,
+  `anonimo` tinyint(1) NOT NULL,
   `urgencia` varchar(20) NOT NULL,
   `estadoIncidencia` varchar(30) NOT NULL,
   `numEstrellas` int DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `incidencias` (
   CONSTRAINT `fk_incidencias_usuarios1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`),
   CONSTRAINT `fk_incidencias_usuarios2` FOREIGN KEY (`idSeguridad`) REFERENCES `usuarios` (`idUsuario`),
   CONSTRAINT `fk_incidencias_zonaPucp1` FOREIGN KEY (`idzonaPucp`) REFERENCES `zonapucp` (`idzonaPucp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +90,7 @@ CREATE TABLE `incidencias` (
 
 LOCK TABLES `incidencias` WRITE;
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
+INSERT INTO `incidencias` VALUES (1,5,9,'1era incidencia','jejeje',2,'Robo',NULL,NULL,0,'2022-11-08 00:00:00',0,'Leve','Registrado',NULL);
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,4 +186,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-08 17:13:53
+-- Dump completed on 2022-11-08 17:39:00

@@ -61,7 +61,8 @@ public class ServletIniciarSesion extends HttpServlet {
                         requestDispatcher.forward(request,response);
                         break;
                     case "Seguridad":
-                        requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
+                        request.setAttribute("correo", correo);
+                        requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
                         requestDispatcher.forward(request,response);
                         break;
                     default:
