@@ -89,39 +89,39 @@
                               class="row g-3">
                             <div class="col-lg-4">
                                 <label for="Nombres" class="form-label">Nombres</label>
-                                <input required type="text" class="form-control" id="Nombres" placeholder="Nombres"
+                                <input type="text" class="form-control" id="Nombres" placeholder="Nombres"
                                        name="Nombres">
                             </div>
                             <div class="col-lg-4">
                                 <label for="Apellidos" class="form-label">Apellidos</label>
-                                <input required type="text" class="form-control" id="Apellidos" placeholder="Apellidos"
+                                <input type="text" class="form-control" id="Apellidos" placeholder="Apellidos"
                                        name="Apellidos">
                             </div>
                             <div class="col-lg-4">
                                 <label for="Correo PUCP" class="form-label">Correo PUCP</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                    <input required type="email" class="form-control" id="Correo PUCP" placeholder="Correo PUCP"
+                                    <input type="email" class="form-control" id="Correo PUCP" placeholder="Correo PUCP"
                                            name="Correo PUCP" aria-describedby="inputGroupPrepend2">
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <label for="Codigo" class="form-label">Código</label>
-                                <input required type="text" class="form-control" id="Codigo" placeholder="Codigo" name="Codigo">
+                                <input type="text" class="form-control" id="Codigo" placeholder="Codigo" name="Codigo">
                             </div>
                             <div class="col-lg-2">
                                 <label for="DNI" class="form-label">DNI</label>
-                                <input required type="text" class="form-control" id="DNI" placeholder="DNI" name="DNI">
+                                <input type="text" class="form-control" id="DNI" placeholder="DNI" name="DNI">
                             </div>
                             <div class="col-lg-2">
                                 <label for="Celular" class="form-label">Celular</label>
-                                <input required type="text" class="form-control" id="Celular" placeholder="Celular"
+                                <input type="text" class="form-control" id="Celular" placeholder="Celular"
                                        name="Celular">
                             </div>
                             <div class="col-lg-3">
                                 <label for="Categoría" class="form-label">Categoría</label>
-                                <select required class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
-                                    <option value="">Seleccione una opción</option>
+                                <select class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
+                                    <option selected>Seleccione una opción</option>
                                     <option value="Alumno">Alumno</option>
                                     <option value="Administrativo">Administrativo</option>
                                     <option value="Jefe de practica">Jefe de práctica</option>
@@ -132,8 +132,8 @@
 
                             <div class="col-lg-3">
                                 <label for="Rol" class="form-label">Rol</label>
-                                <select required class="form-select" id="Rol" placeholder="Rol" name="Rol">
-                                    <option value="">Seleccione una opción</option>
+                                <select class="form-select" id="Rol" placeholder="Rol" name="Rol">
+                                    <option selected>Seleccione una opción</option>
                                     <option value="Usuario PUCP">Usuario PUCP</option>
                                     <option value="Seguridad">Seguridad</option>
                                 </select>

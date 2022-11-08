@@ -85,6 +85,42 @@ public class DaoUsuarios {
         return usuarios;
     }
 
+    public String obtenerRol(String codigo, String passw, String correo){
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String sql = "SELECT * FROM usuarios WHERE codigoPucp = ? and contrasena = ? and correoPucp = ?";
+        Usuarios usuarios = null;
+
+        try(Connection conn = DriverManager.getConnection(url, "root", "root");
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, codigo);
+            pstmt.setString(2, passw);
+            pstmt.setString(3, correo);
+
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    usuarios = new Usuarios();
+                    usuarios.setRol(rs.getString(9));
+                }
+            }
+            if(usuarios == null){
+                return "default";
+            }
+            return usuarios.getRol();
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+    }
+
     public void guardarUsuario(Usuarios usuarios){
 
         try{

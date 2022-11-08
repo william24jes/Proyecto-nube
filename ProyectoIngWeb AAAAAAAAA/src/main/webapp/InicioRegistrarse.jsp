@@ -80,12 +80,6 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="yourPassword" class="form-label">Contraseña</label>
-                                                <input type="password" name="password" class="form-control" id="yourPassword" required>
-                                                <div class="invalid-feedback">Ingresa tu contraseña!</div>
-                                            </div>
-
-                                            <div class="col-12">
                                                 <a class="nav-link  " href="<%=request.getContextPath()%>/ServletCorreoConfirmaRegistro?action=confirmaRegistro">
                                                     <button type = "button" class="btn btn-primary w-100" type="submit">Registrarse</button>
                                                 </a>
