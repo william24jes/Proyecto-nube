@@ -79,7 +79,7 @@
       </span>
               </form>
             </div></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=inicioUsuario">Inicio</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a></li>
             <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
             <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis Incidencias</a></li>
             <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar Incidencia</a></li>

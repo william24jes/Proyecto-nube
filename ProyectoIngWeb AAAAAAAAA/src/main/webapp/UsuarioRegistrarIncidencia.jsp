@@ -1,4 +1,7 @@
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.ZonaPucp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaZonasPUCP" scope="request" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.ZonaPucp>"/>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,16 +83,11 @@
                                 </form>
                             </div>
                         </li>
-                        <li><a class="nav-link"
-                               href="<%=request.getContextPath()%>/Inicio?action=inicioUsuario">Inicio</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a>
-                        </li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis
-                            Incidencias</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar
-                            Incidencia</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar
-                            sesión</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis Incidencias</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar Incidencia</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -119,17 +117,17 @@
                                     <div class="card mb-4">
                                         <div class="card-header fw-bold"> Registrar Incidencia</div>
                                         <div class="card-body">
-                                            <form>
+                                            <form  method="post" action="<%=request.getContextPath()%>/ServletUsuarioInicio?action=guardar" >
                                                 <!-- Form Group (username)-->
                                                 <div class="mb-3">
                                                     <label for="inputUsername">Nombre de la Incidencia: </label>
-                                                    <input class="form-control " id="inputUsername" type="text">
+                                                    <input class="form-control " id="inputUsername" type="text" name="nombre">
                                                 </div>
 
                                                 <div class="form-group mb-3">
                                                     <label for="exampleFormControlTextarea1">Descripción:</label>
                                                     <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                              rows="3"></textarea>
+                                                              rows="3" name ="descripcion"></textarea>
                                                 </div>
 
                                                 <!-- Form Row-->
@@ -137,7 +135,7 @@
                                                     <label class="col-sm-2 col-form-label"><h5>Tipo de incidencia </h5>
                                                     </label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example">
+                                                        <select class="form-select" aria-label="Default select example" name="tipo">
                                                             <option selected>Seleccione...</option>
                                                             <option value="1">Reporte de robos</option>
                                                             <option value="2">Objetos perdidos</option>
@@ -152,7 +150,7 @@
                                                     <label class="col-sm-2 col-form-label"><h5>Nivel de Urgencia </h5>
                                                     </label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example">
+                                                        <select class="form-select" aria-label="Default select example" name="nivel">
                                                             <option selected>Seleccione...</option>
                                                             <option value="1">Leve</option>
                                                             <option value="2">Moderado</option>
@@ -166,45 +164,9 @@
                                                     <div class="col-sm-4">
                                                         <select class="form-select" aria-label="Default select example">
                                                             <option selected>Seleccione...</option>
-                                                            <option value="1"> Café Gourmet (PUCP)</option>
-                                                            <option value="2">Alianza Francesa</option>
-                                                            <option value="3">Anfiteatro Armando Zolezzi</option>
-                                                            <option value="4">Anfiteatro José Dammert Bellido - Facultad
-                                                                de Derecho
-                                                            </option>
-                                                            <option value="5">Asociación de egresados y graduados
-                                                            </option>
-                                                            <option value="6">Auditorio de Ciencias Sociales (Gustavo
-                                                                Gutiérrez Merino)
-                                                            </option>
-                                                            <option value="7">Auditorio de Derecho</option>
-                                                            <option value="8">Auditorio de Física</option>
-                                                            <option value="9">Auditorio de Humanidades</option>
-                                                            <option value="10">Auditorio de la Biblioteca Central
-                                                                (Tercer piso)
-                                                            </option>
-                                                            <option value="11">Auditorio de la Facultad de Arte y
-                                                                Diseño
-                                                            </option>
-                                                            <option value="12">Auditorio de la Facultad de Ciencias e
-                                                                Ingeniería
-                                                            </option>
-                                                            <option value="13">Auditorio de la Facultad de Educación
-                                                            </option>
-                                                            <option value="14">Auditorio Juan Pablo II</option>
-                                                            <option value="15">Aula H411 informática (DTI) - Aula
-                                                                informática
-                                                            </option>
-                                                            <option value="16">Aula H412 informática (DTI) - Aula
-                                                                informática
-                                                            </option>
-                                                            <option value="17">Aula H413 informática (DTI) - Aula
-                                                                informática
-                                                            </option>
-                                                            <option value="18">Aula L103 Auditorio N° 1 de Estudios
-                                                                Generales Letras
-                                                            </option>
-
+                                                            <% for (ZonaPucp zonas : listaZonasPUCP) { %>
+                                                            <option value="<%=zonas.getIdZonaPucp()%>"name="zona"> <%=zonas.getNombreZona()%></option>
+                                                            <% } %>
 
                                                         </select>
                                                     </div>
@@ -249,7 +211,7 @@
 
                                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                             <a class="nav-link  ">
-                                                <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias" type="button">Guardar
+                                                <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias" type="submit">Guardar
                                                 </a>
                                                 <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=inicioUsuario" type="button">Cancelar
                                                 </a>

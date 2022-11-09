@@ -82,11 +82,12 @@
                 </form>
               </div>
             </li>
-            <li><a class="nav-link  " href="Usuario_Inicio.html">Inicio</a></li>
-            <li><a class="nav-link scrollto" href="Usuario_Perfil.html">Perfil</a></li>
-            <li><a class="nav-link scrollto" href="Usuario_MisIncidencias.html">Mis Incidencias</a></li>
-            <li><a class="nav-link scrollto" href="Usuario_RegistrarIncidencia.html">Registrar Incidencia</a></li>
-            <li><a class="nav-link scrollto" href="home.html">Cerrar sesión</a></li>
+            </li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis Incidencias</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar Incidencia</a></li>
+            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar sesión</a></li>
           </ul>
 
           <i class="bi bi-list mobile-nav-toggle"></i>

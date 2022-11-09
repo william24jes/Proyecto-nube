@@ -19,7 +19,7 @@ public class DaoUsuarios {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.usuarios ORDER BY codigoPucp LIMIT 0,15";
 
-        try(Connection connection = DriverManager.getConnection(url,"root","root");
+        try(Connection connection = DriverManager.getConnection(url,"root","123456");
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
@@ -56,7 +56,7 @@ public class DaoUsuarios {
         String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
         Usuarios usuarios = null;
 
-        try(Connection conn = DriverManager.getConnection(url, "root", "root");
+        try(Connection conn = DriverManager.getConnection(url, "root", "123456");
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, idUsuario);
@@ -97,7 +97,7 @@ public class DaoUsuarios {
         String sql = "SELECT * FROM usuarios WHERE codigoPucp = ? and contrasena = ? and correoPucp = ?";
         Usuarios usuarios = null;
 
-        try(Connection conn = DriverManager.getConnection(url, "root", "root");
+        try(Connection conn = DriverManager.getConnection(url, "root", "123456");
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, codigo);
@@ -132,7 +132,7 @@ public class DaoUsuarios {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "INSERT INTO usuarios (nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol, contrasena) VALUES (?,?,?,?,?,?,?,?,?)";
 
-        try(Connection connection = DriverManager.getConnection(url,"root","root");
+        try(Connection connection = DriverManager.getConnection(url,"root","123456");
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1,usuarios.getNombres());
@@ -163,7 +163,7 @@ public class DaoUsuarios {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "UPDATE usuarios SET nombres = ?, apellidos = ?, dni = ?, celular = ?, codigoPucp = ?, correoPucp = ?, categoria = ?, rol = ? WHERE idUsuario = ?";
 
-        try(Connection connection = DriverManager.getConnection(url,"root","root");
+        try(Connection connection = DriverManager.getConnection(url,"root","123456");
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1,usuarios.getNombres());
@@ -195,7 +195,7 @@ public class DaoUsuarios {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "DELETE from usuarios WHERE idUsuario = ?";
 
-        try(Connection connection = DriverManager.getConnection(url,"root","root");
+        try(Connection connection = DriverManager.getConnection(url,"root","123456");
             PreparedStatement pstmt=connection.prepareStatement(sql))
         {
 
@@ -220,7 +220,7 @@ public class DaoUsuarios {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.usuarios WHERE lower(nombres) like ? or lower(apellidos) like ? or dni like ? or codigoPucp like ?";
 
-        try(Connection conn = DriverManager.getConnection(url, "root", "root");
+        try(Connection conn = DriverManager.getConnection(url, "root", "123456");
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%"+nombreuser+"%");
@@ -267,7 +267,7 @@ public class DaoUsuarios {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.usuarios ORDER BY codigoPucp LIMIT 15,50";
 
-        try(Connection connection = DriverManager.getConnection(url,"root","root");
+        try(Connection connection = DriverManager.getConnection(url,"root","123456");
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
@@ -291,5 +291,6 @@ public class DaoUsuarios {
         }
         return listaUsuarios;
     }
+
 
 }
