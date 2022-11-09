@@ -1,6 +1,7 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.ZonaPucp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaZonasPUCP" scope="request" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.ZonaPucp>"/>
+<jsp:useBean id="listaZonasPUCP" scope="request"
+             type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.ZonaPucp>"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,11 +84,16 @@
                                 </form>
                             </div>
                         </li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis Incidencias</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar Incidencia</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar sesión</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a>
+                        </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a>
+                        </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis
+                            Incidencias</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar
+                            Incidencia</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar
+                            sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -117,17 +123,19 @@
                                     <div class="card mb-4">
                                         <div class="card-header fw-bold"> Registrar Incidencia</div>
                                         <div class="card-body">
-                                            <form  method="post" action="<%=request.getContextPath()%>/ServletUsuarioInicio?action=guardar" >
+                                            <form method="post"
+                                                  action="<%=request.getContextPath()%>/Inicio?action=guardar">
                                                 <!-- Form Group (username)-->
                                                 <div class="mb-3">
                                                     <label for="inputUsername">Nombre de la Incidencia: </label>
-                                                    <input class="form-control " id="inputUsername" type="text" name="nombre">
+                                                    <input class="form-control " id="inputUsername" type="text"
+                                                           name="nombre">
                                                 </div>
 
                                                 <div class="form-group mb-3">
                                                     <label for="exampleFormControlTextarea1">Descripción:</label>
                                                     <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                              rows="3" name ="descripcion"></textarea>
+                                                              rows="3" name="descripcion"></textarea>
                                                 </div>
 
                                                 <!-- Form Row-->
@@ -135,7 +143,8 @@
                                                     <label class="col-sm-2 col-form-label"><h5>Tipo de incidencia </h5>
                                                     </label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example" name="tipo">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                                name="tipo">
                                                             <option selected>Seleccione...</option>
                                                             <option value="1">Reporte de robos</option>
                                                             <option value="2">Objetos perdidos</option>
@@ -150,7 +159,8 @@
                                                     <label class="col-sm-2 col-form-label"><h5>Nivel de Urgencia </h5>
                                                     </label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example" name="nivel">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                                name="nivel">
                                                             <option selected>Seleccione...</option>
                                                             <option value="1">Leve</option>
                                                             <option value="2">Moderado</option>
@@ -165,7 +175,9 @@
                                                         <select class="form-select" aria-label="Default select example">
                                                             <option selected>Seleccione...</option>
                                                             <% for (ZonaPucp zonas : listaZonasPUCP) { %>
-                                                            <option value="<%=zonas.getIdZonaPucp()%>"name="zona"> <%=zonas.getNombreZona()%></option>
+                                                            <option value="<%=zonas.getIdZonaPucp()%>"
+                                                                    name="zona"><%=zonas.getNombreZona()%>
+                                                            </option>
                                                             <% } %>
 
                                                         </select>
@@ -197,11 +209,7 @@
                                                     <input type="file" class="form-control" style="width: 350px"
                                                            id="customFile"/>
                                                 </div>
-
-
-                                                <!-- Form Group (location)-->
-
-                                        </div>
+                                            <!-- Form Group (location)-->
                                         <!-- Form Group (email address)-->
 
 
@@ -211,9 +219,10 @@
 
                                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                             <a class="nav-link  ">
-                                                <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias" type="submit">Guardar
+                                                <a type="submit" class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Guardar
                                                 </a>
-                                                <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=inicioUsuario" type="button">Cancelar
+                                                <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio"
+                                                   type="button">Cancelar
                                                 </a>
                                             </a>
 

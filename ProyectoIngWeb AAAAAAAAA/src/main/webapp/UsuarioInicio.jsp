@@ -118,7 +118,7 @@
                   <div
 
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <a href = "<%=request.getContextPath()%>/Inicio?action=verIncidencia"><h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%></h6></a>
+                    <a href = "<%=request.getContextPath()%>/Inicio?action=verIncidencia" disabled=""><h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%></h6></a>
                     <a href="#" class="btn btn-warning btn-circle">
                       <i class="fas fa-exclamation-triangle"></i>
                     </a>
@@ -126,7 +126,7 @@
                   </div>
                   <!-- Card Body -->
                   <div class="card-body">
-                    <%=incidencias.getNombre()%>
+                    <%=incidencias.getDescripcion()%>
                     <div class="col-12">
                       <br>
                       <div class="row">

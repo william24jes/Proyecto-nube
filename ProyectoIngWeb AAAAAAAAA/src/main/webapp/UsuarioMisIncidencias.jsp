@@ -125,7 +125,7 @@
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <img src="assets/img/profile_upload.png" height="70px"/>
                                         <br>
-                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia">
+                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidenciasDestacadas.getIdIncidencia()%>">
                                             <h4 class="m-0 font-weight-bold text-primary"
                                                 style="width:75%"><%=incidenciasDestacadas.getNombre()%>
                                         </a>
@@ -161,8 +161,7 @@
                                                          style="height: 80px;border-radius: 1em"></div>
 
                                                 <div><br>
-                                                    <button type="button" class="btn btn-primary btn-lg disabled">En
-                                                        proceso
+                                                    <button type="button" class="btn btn-primary btn-lg disabled"><%=incidenciasDestacadas.getEstadoIncidencia()%>
                                                     </button>
                                                 </div>
                                             </div>

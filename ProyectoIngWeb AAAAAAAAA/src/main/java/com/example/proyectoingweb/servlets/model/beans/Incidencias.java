@@ -18,6 +18,15 @@ public class Incidencias {
     private int numEstrellas;
 
     private String nombreUsuarioQueDestaco;
+    private String nombreZonaPucp;
+
+    public String getNombreZonaPucp() {
+        return nombreZonaPucp;
+    }
+
+    public void setNombreZonaPucp(String nombreZonaPucp) {
+        this.nombreZonaPucp = nombreZonaPucp;
+    }
 
     public String getNombreUsuarioQueDestaco() {
         return nombreUsuarioQueDestaco;

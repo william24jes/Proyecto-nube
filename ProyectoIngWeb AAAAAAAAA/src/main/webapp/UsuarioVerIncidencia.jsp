@@ -1,4 +1,7 @@
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="incidencia_send_jsp" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
+
 <html lang="en">
 
     <head>
@@ -114,16 +117,13 @@
                                         <img src="assets/img/profile_upload.png" height="70px"/>
                                         <br>
                                         <div></div>
-                                        <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Pérdida de carnet
-                                            universitario #ayuda
-                                            #cachimbo #2022-2
-                                            <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                                                Einstein </h6><h6>Registrado hoy</h6></div>
+                                        <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=incidencia_send_jsp.getNombre()%>
+                                            <div style="color:darkgray;display: flex;flex-direction: column"><h6><%=incidencia_send_jsp.getNombreUsuarioQueDestaco()%></h6><h6>Registrado <%=incidencia_send_jsp.getDatetime()%></h6></div>
                                             <div><a href="#" class="btn btn-warning btn-circle">
                                                 <i class="fas fa-exclamation-triangle"> 10</i>
                                             </a></div>
                                         </h4>
-                                        <button type="button" class="btn btn-primary btn-sm disabled">En proceso</button>
+                                        <button type="button" class="btn btn-primary btn-sm disabled"><%=incidencia_send_jsp.getEstadoIncidencia()%></button>
 
 
                                     </div>
@@ -133,13 +133,9 @@
 
                                     <div class="card-body">
                                         <div><h4>Descripción:</h4></div>
-                                        Dropdown menus can be placed in the card header in order to extend the functionality
-                                        of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
-                                        icon in the card header can be clicked on in order to toggle a dropdown menu.
+                                        <%=incidencia_send_jsp.getDescripcion()%>
                                         <div><br><h4>Zona PUCP:</h4></div>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem corporis
-                                        doloribus error ex facere itaque iusto neque nobis non optio quaerat quam quas, quisquam
-                                        ut vero voluptate voluptatibus!
+                                        <%=incidencia_send_jsp.getNombreZonaPucp()%>
                                         <div><br><h4>Ubicación: </h4></div>
                                         <button type="button" class="btn btn-primary btn-lg"
                                                 style="background-color: red;border:red">Ver en el mapa
@@ -165,7 +161,7 @@
                                         <div><br><h4>Tipo de incidencia: </h4></div>
                                         <div>
                                             <a href="#" class="btn btn-primary btn-lg disabled" role="button"
-                                               aria-disabled="true">Objetos Perdidos</a>
+                                               aria-disabled="true"><%=incidencia_send_jsp.getTipo()%></a>
                                         </div>
 
 
@@ -173,7 +169,7 @@
                                         <div><br><h4>Nivel de urgencia: </h4></div>
                                         <div>
                                             <a href="#" class="btn btn-primary btn-lg disabled" role="button"
-                                               aria-disabled="true">Leve</a>
+                                               aria-disabled="true"><%=incidencia_send_jsp.getEstadoIncidencia()%></a>
                                         </div>
 
                                         <div><br><h5>Comentario de Seguridad: </h5>Lorem ipsum dolor sit amet, consectetur
@@ -209,12 +205,12 @@
                                         <div class="row">
                                             <div class="col-auto">
                                                 <br>
-                                                <div><button type="button" class="btn btn-primary btn-lg">Aceptar</button></div>
+                                                <div><button type="button" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias" >Aceptar</button></div>
 
                                             </div>
                                             <div class="col-auto">
                                                 <br>
-                                                <div><button type="button" class="btn btn-primary btn-lg">Reabrir (4)</button></div>
+                                                <div><button type="button" class="btn btn-primary btn-lg"  href="<%=request.getContextPath()%>/Inicio">Reabrir (4)</button></div>
                                             </div>
                                         </div>
 

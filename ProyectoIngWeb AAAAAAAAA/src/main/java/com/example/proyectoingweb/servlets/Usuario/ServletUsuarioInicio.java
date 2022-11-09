@@ -17,6 +17,8 @@ public class ServletUsuarioInicio extends HttpServlet {
         action = (action == null) ? "listar" : action;
         RequestDispatcher requestDispatcher;
         DaoIncidencias daoIncidencias = new DaoIncidencias();
+        String idIncidencia;
+        Incidencias incidencia;
 
         switch (action) {
             case "listar":
@@ -43,9 +45,19 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "verIncidencia":
-                requestDispatcher = request.getRequestDispatcher("UsuarioVerIncidencia.jsp");
-                requestDispatcher.forward(request, response);
+
+                idIncidencia = request.getParameter("id");
+                incidencia = daoIncidencias.buscarPorId(idIncidencia);
+
+                if (incidencia != null) { //abro el form para editar
+                    request.setAttribute("incidencia_send_jsp", incidencia);
+                    requestDispatcher = request.getRequestDispatcher("UsuarioVerIncidencia.jsp");
+                    requestDispatcher.forward(request, response);
+                } else { //id no encontrado
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=listar");
+                }
                 break;
+
         }
     }
 
@@ -69,13 +81,12 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencias.setDestacado(1);
                 incidencias.setTipo(tipo);
                 incidencias.setUrgencia(nivel);
-                incidencias.setIdZonaPucp(Integer.parseInt(zona));
+                incidencias.setIdZonaPucp(2);
                 Date date = new Date();
                 incidencias.setDatetime(date.toString());
-                daoIncidencias.guardarIncidencias(incidencias);
                 incidencias.setAnonimo(0);
                 incidencias.setEstadoIncidencia("No registrado");
-
+                daoIncidencias.guardarIncidencias(incidencias);
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;
         }

@@ -105,7 +105,7 @@ public class DaoIncidencias {
         }
 
         String url = "jdbc:mysql://localhost:3306/mydb";
-        String sql = "INSERT INTO incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO mydb.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try(Connection connection = DriverManager.getConnection(url,"root","123456");
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -135,7 +135,7 @@ public class DaoIncidencias {
         }
 
         String url = "jdbc:mysql://localhost:3306/mydb";
-        String sql = "SELECT * FROM mydb.zonapucp;";
+        String sql = "SELECT * FROM mydb.zonapucp";
 
         try (Connection connection = DriverManager.getConnection(url, "root", "123456");
              Statement stmt = connection.createStatement();
@@ -152,5 +152,42 @@ public class DaoIncidencias {
             throw new RuntimeException(e);
         }
         return listaZonaPUCP;
+    }
+    public Incidencias buscarPorId(String IDincidencias){
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Incidencias incidencias = null;
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario`,zonapucp.nombreZona FROM mydb.incidencias incidencias , mydb.usuarios users,mydb.zonapucp where incidencias.idIncidencia = ? and  incidencias.idUsuario = users.idUsuario and incidencias.idzonaPucp = zonapucp.idzonaPucp";
+
+        try(Connection connection = DriverManager.getConnection(url,"root","123456");
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, IDincidencias);
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    incidencias = new Incidencias();
+
+                    incidencias.setNombre(rs.getString(4));
+                    incidencias.setDescripcion(rs.getString(5));
+                    incidencias.setIdZonaPucp(rs.getInt(6));
+                    incidencias.setTipo(rs.getString(7));
+                    incidencias.setDatetime(rs.getString(11));
+                    incidencias.setUrgencia(rs.getString(13));
+                    incidencias.setEstadoIncidencia(rs.getString(14));
+                    incidencias.setNombreUsuarioQueDestaco(rs.getString(16));
+                    incidencias.setNombreZonaPucp(rs.getString(17));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return incidencias;
     }
 }
