@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoZonaPucp {
-    private String password = "root";
+    private String pass = "root";
 
     public ArrayList<ZonaPucp> obtenerListaZonaPucp(){
         ArrayList<ZonaPucp> listaZonaPucp = new ArrayList<>();
@@ -14,7 +14,7 @@ public class DaoZonaPucp {
         try {
             String url = "jdbc:mysql://localhost:3306/mydb";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, "root", "123456");
+            Connection connection = DriverManager.getConnection(url, "root", pass);
             Statement stmt = connection.createStatement();
             String sql = "select * from mydb.zonapucp";
             ResultSet rs = stmt.executeQuery(sql);

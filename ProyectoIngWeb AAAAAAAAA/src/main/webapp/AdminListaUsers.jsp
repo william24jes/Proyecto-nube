@@ -102,7 +102,7 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr style="align-content: center">
-                                    <th>N°</th>
+                                    <th>ID</th>
                                     <th>Código</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
@@ -115,11 +115,10 @@
                             </thead>
                             <tbody>
                                 <%
-                                    int i = 1;
                                     for (Usuarios usuarios : listaUsuarios) {
                                 %>
                                 <tr>
-                                    <td scope="row"><%=i%>
+                                    <td scope="row"><%=usuarios.getIdUsuarios()%>
                                     </td>
                                     <td><%=usuarios.getCodigoPucp()%>
                                     </td>
@@ -152,7 +151,6 @@
                                     </td>
                                 </tr>
                                 <%
-                                        i++;
                                     }
                                 %>
 

@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoIncidencias {
+    private String pass ="root";
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
 
@@ -20,7 +21,7 @@ public class DaoIncidencias {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.incidencias";
 
-        try (Connection connection = DriverManager.getConnection(url, "root", "123456");
+        try (Connection connection = DriverManager.getConnection(url, "root", pass);
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -63,7 +64,7 @@ public class DaoIncidencias {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario` FROM mydb.incidencias incidencias , mydb.usuarios users where incidencias.destacado = 1 and  incidencias.idUsuario = users.idUsuario;\n";
 
-        try (Connection connection = DriverManager.getConnection(url, "root", "123456");
+        try (Connection connection = DriverManager.getConnection(url, "root", pass);
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -107,7 +108,7 @@ public class DaoIncidencias {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "INSERT INTO mydb.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-        try(Connection connection = DriverManager.getConnection(url,"root","123456");
+        try(Connection connection = DriverManager.getConnection(url,"root",pass);
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1,String.valueOf(incidencias.getIdUsuario()));
@@ -137,7 +138,7 @@ public class DaoIncidencias {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.zonapucp";
 
-        try (Connection connection = DriverManager.getConnection(url, "root", "123456");
+        try (Connection connection = DriverManager.getConnection(url, "root", pass);
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -165,7 +166,7 @@ public class DaoIncidencias {
         String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario`,zonapucp.nombreZona FROM mydb.incidencias incidencias , mydb.usuarios users,mydb.zonapucp where incidencias.idIncidencia = ? and  incidencias.idUsuario = users.idUsuario and incidencias.idzonaPucp = zonapucp.idzonaPucp";
 
-        try(Connection connection = DriverManager.getConnection(url,"root","123456");
+        try(Connection connection = DriverManager.getConnection(url,"root",pass);
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, IDincidencias);

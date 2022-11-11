@@ -176,50 +176,50 @@
                             <div class="row mb-3">
                               <label for="Codigo" class="col-md-4 col-lg-3 col-form-label">Código</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="Codigo" type="text" class="form-control" id="Codigo" value="<%=usuarios.getCodigoPucp()%>">
+                                <input minlength="8" maxlength="8" required name="Codigo" type="number" class="form-control" id="Codigo" value="<%=usuarios.getCodigoPucp()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
                               <label for="Nombres" class="col-md-4 col-lg-3 col-form-label">Nombres</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="Nombres" type="text" class="form-control" id="Nombres" value="<%=usuarios.getNombres()%>">
+                                <input required name="Nombres" type="text" class="form-control" id="Nombres" value="<%=usuarios.getNombres()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
-                              <label for="Apellidos" class="col-md-4 col-lg-3 col-form-label">Nombres</label>
+                              <label for="Apellidos" class="col-md-4 col-lg-3 col-form-label">Apellidos</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="Apellidos" type="text" class="form-control" id="Apellidos" value="<%=usuarios.getApellidos()%>">
+                                <input required name="Apellidos" type="text" class="form-control" id="Apellidos" value="<%=usuarios.getApellidos()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
                               <label for="Correo" class="col-md-4 col-lg-3 col-form-label">Correo</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="Correo PUCP" type="text" class="form-control" id="Correo" value="<%=usuarios.getCorreoPucp()%>">
+                                <input required name="Correo PUCP" type="text" class="form-control" id="Correo" value="<%=usuarios.getCorreoPucp()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
                               <label for="DNI" class="col-md-4 col-lg-3 col-form-label">DNI</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="DNI" type="text" class="form-control" id="DNI" value="<%=usuarios.getDni()%>">
+                                <input required name="DNI" type="number" class="form-control" id="DNI" value="<%=usuarios.getDni()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
                               <label for="Celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="Celular" type="text" class="form-control" id="Celular" value="<%=usuarios.getCelular()%>">
+                                <input required min="1" max="999999999999" name="Celular" type="number" class="form-control" id="Celular" value="<%=usuarios.getCelular()%>">
                               </div>
                             </div>
 
                             <div class="row mb-3">
                               <label for="Rol" class="col-md-4 col-lg-3 col-form-label">Rol</label>
                               <div class="col-md-8 col-lg-9">
-                                <select class="form-select" id="Rol" placeholder="Rol" name="Rol">
-                                  <option selected value="<%=usuarios.getRol()%>">Seleccione una opción</option>
+                                <select required class="form-select" id="Rol" placeholder="Rol" name="Rol">
+                                  <option value="">Seleccione una opción para cambiar <%=usuarios.getRol()%></option>
                                   <option value="Usuario PUCP">Usuario PUCP</option>
                                   <option value="Seguridad">Seguridad</option>
                                 </select>
@@ -229,8 +229,8 @@
                             <div class="row mb-3">
                               <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
                               <div class="col-md-8 col-lg-9">
-                                <select class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
-                                  <option selected value="<%=usuarios.getCategorias()%>">Seleccione una opción</option>
+                                <select required class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
+                                  <option value="">Seleccione una opción para cambiar <%=usuarios.getCategorias()%></option>
                                   <option value="Alumno">Alumno</option>
                                   <option value="Administrativo">Administrativo</option>
                                   <option value="Jefe de practica">Jefe de práctica</option>
