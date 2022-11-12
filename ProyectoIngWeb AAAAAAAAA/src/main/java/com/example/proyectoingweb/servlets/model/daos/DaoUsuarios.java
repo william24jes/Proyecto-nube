@@ -18,7 +18,44 @@ public class DaoUsuarios {
         }
 
         String url = "jdbc:mysql://localhost:3306/mydb";
-        String sql = "SELECT * FROM mydb.usuarios ORDER BY codigoPucp LIMIT 0,15";
+        String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario LIMIT 0,15";
+
+        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while(rs.next()){
+                Usuarios usuarios = new Usuarios();
+
+                usuarios.setIdUsuarios(rs.getInt(1));
+                usuarios.setNombres(rs.getString(2));
+                usuarios.setApellidos(rs.getString(3));
+                usuarios.setDni(rs.getString(4));
+                usuarios.setCelular(rs.getString(5));
+                usuarios.setCodigoPucp(rs.getString(6));
+                usuarios.setCorreoPucp(rs.getString(7));
+                usuarios.setCategorias(rs.getString(8));
+                usuarios.setRol(rs.getString(9));
+
+                listaUsuarios.add(usuarios);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+    }
+
+    public ArrayList<Usuarios> obtenerlistaUsuariosCompleta(){
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url = "jdbc:mysql://localhost:3306/mydb";
+        String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario";
 
         try(Connection connection = DriverManager.getConnection(url,"root",pass);
             Statement stmt = connection.createStatement();
@@ -256,7 +293,7 @@ public class DaoUsuarios {
         return listaUsuarios;
     }
 
-    public ArrayList<Usuarios> paginarUsuarios(){
+    public ArrayList<Usuarios> paginarUsuarios(int i){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
 
         try{
@@ -265,8 +302,10 @@ public class DaoUsuarios {
             throw new RuntimeException(e);
         }
 
+        int inicio=15*(i-1);
+
         String url = "jdbc:mysql://localhost:3306/mydb";
-        String sql = "SELECT * FROM mydb.usuarios ORDER BY codigoPucp LIMIT 15,50";
+        String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario LIMIT "+inicio+","+"15";
 
         try(Connection connection = DriverManager.getConnection(url,"root",pass);
             Statement stmt = connection.createStatement();

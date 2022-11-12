@@ -12,6 +12,8 @@ import java.util.ArrayList;
 @WebServlet(name = "AdminServlet", value = "/AdminServlet")
 public class AdminServlet extends HttpServlet {
 
+    private ArrayList<Usuarios> listaPermanente;
+    private ArrayList<Usuarios> listaPaginada;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,11 +25,15 @@ public class AdminServlet extends HttpServlet {
         RequestDispatcher requestDispatcher;
         Usuarios usuarios;
         String idUsuario;
+        int idPage;
 
         switch (action) {
             case "listar":
 
-                request.setAttribute("lista", daoUsuarios.obtenerlistaUsuarios());
+                request.setAttribute("listaPaginada", daoUsuarios.obtenerlistaUsuarios());
+                request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
+                setListaPermanente(daoUsuarios.obtenerlistaUsuariosCompleta());
+                System.out.println(getListaPermanente().size());
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
 
@@ -80,8 +86,11 @@ public class AdminServlet extends HttpServlet {
                 break;
 
             case "page":
+                idPage = Integer.parseInt(request.getParameter("id"));
+                setListaPaginada(daoUsuarios.paginarUsuarios(idPage));
+                request.setAttribute("listaPermanente",getListaPermanente());
+                request.setAttribute("listaPaginada", getListaPaginada());
 
-                request.setAttribute("lista", daoUsuarios.paginarUsuarios());
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
 
@@ -167,5 +176,21 @@ public class AdminServlet extends HttpServlet {
 
                 break;
         }
+    }
+
+    public ArrayList<Usuarios> getListaPermanente() {
+        return listaPermanente;
+    }
+
+    public void setListaPermanente(ArrayList<Usuarios> listaPermanente) {
+        this.listaPermanente = listaPermanente;
+    }
+
+    public ArrayList<Usuarios> getListaPaginada() {
+        return listaPaginada;
+    }
+
+    public void setListaPaginada(ArrayList<Usuarios> listaPaginada) {
+        this.listaPaginada = listaPaginada;
     }
 }

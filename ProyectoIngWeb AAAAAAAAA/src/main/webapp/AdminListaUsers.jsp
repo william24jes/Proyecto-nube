@@ -1,8 +1,11 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.AdminServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ArrayList<Usuarios> listaUsuarios = (ArrayList<Usuarios>) request.getAttribute("lista");
+    ArrayList<Usuarios> listaPermanente = (ArrayList<Usuarios>) request.getAttribute("listaPermanente");
+    ArrayList<Usuarios> listaPaginada = (ArrayList<Usuarios>) request.getAttribute("listaPaginada");
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +118,7 @@
                             </thead>
                             <tbody>
                                 <%
-                                    for (Usuarios usuarios : listaUsuarios) {
+                                    for (Usuarios usuarios : listaPaginada) {
                                 %>
                                 <tr>
                                     <td scope="row"><%=usuarios.getIdUsuarios()%>
@@ -161,11 +164,9 @@
 
                 <nav aria-label="Page navigation example" style="margin-top: 20px;">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/AdminServlet">1</a></li>
-                        <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/AdminServlet?action=page">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        <%for (double i=1;i<=Math.ceil((double)(listaPermanente.size())/15.0);i++){%>
+                        <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/AdminServlet?action=page&id=<%=(int)i%>"><%=(int)i%></a></li>
+                        <%}%>
                     </ul>
                 </nav>
             </section>
