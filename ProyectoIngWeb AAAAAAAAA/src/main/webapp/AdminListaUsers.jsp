@@ -1,6 +1,5 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.proyectoingweb.servlets.AdminServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ArrayList<Usuarios> listaPermanente = (ArrayList<Usuarios>) request.getAttribute("listaPermanente");
@@ -66,7 +65,7 @@
                         <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet">Lista
                             de usuarios</a></li>
                         <li><a class="nav-link scrollto"
-                               href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
+                               href="<%=request.getContextPath()%>/AdminServlet?action=perfil">Perfil</a></li>
                         <li>
                             <div class="container-fluid">
                                 <form method="post" class="d-flex input-group w-auto"

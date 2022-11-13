@@ -1,4 +1,5 @@
-<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %><%--
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: willi
   Date: 25/10/2022
@@ -8,6 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   Usuarios usuarios = (Usuarios) request.getAttribute("usuarioEditar");
+  ArrayList<String> roles = (ArrayList<String>) request.getAttribute("roles");
+  ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -219,9 +222,12 @@
                               <label for="Rol" class="col-md-4 col-lg-3 col-form-label">Rol</label>
                               <div class="col-md-8 col-lg-9">
                                 <select required class="form-select" id="Rol" placeholder="Rol" name="Rol">
-                                  <option value="">Seleccione una opción para cambiar <%=usuarios.getRol()%></option>
+                                  <!--<option value="">Seleccione una opción para cambiar <%=usuarios.getRol()%></option>
                                   <option value="Usuario PUCP">Usuario PUCP</option>
-                                  <option value="Seguridad">Seguridad</option>
+                                  <option value="Seguridad">Seguridad</option>-->
+                                  <%for (String rol: roles){%>
+                                  <option value="<%=rol%>" <%=rol.equals(usuarios.getRol())? "selected":""%>><%=rol%></option>
+                                  <%}%>
                                 </select>
                               </div>
                             </div>
@@ -230,12 +236,15 @@
                               <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
                               <div class="col-md-8 col-lg-9">
                                 <select required class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
-                                  <option value="">Seleccione una opción para cambiar <%=usuarios.getCategorias()%></option>
+                                  <!--<option value="">Seleccione una opción para cambiar <%=usuarios.getCategorias()%></option>
                                   <option value="Alumno">Alumno</option>
                                   <option value="Administrativo">Administrativo</option>
                                   <option value="Jefe de practica">Jefe de práctica</option>
                                   <option value="Profesor">Profesor</option>
-                                  <option value="Egresado">Egresado</option>
+                                  <option value="Egresado">Egresado</option>-->
+                                  <%for (String categoria: categorias){%>
+                                  <option value="<%=categoria%>" <%=categoria.equals(usuarios.getCategorias())? "selected":""%>><%=categoria%></option>
+                                  <%}%>
                                 </select>
                               </div>
                             </div>
