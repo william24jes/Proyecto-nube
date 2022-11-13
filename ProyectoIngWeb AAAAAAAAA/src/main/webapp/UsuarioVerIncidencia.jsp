@@ -169,7 +169,7 @@
                                         <div><br><h4>Nivel de urgencia: </h4></div>
                                         <div>
                                             <a href="#" class="btn btn-primary btn-lg disabled" role="button"
-                                               aria-disabled="true"><%=incidencia_send_jsp.getEstadoIncidencia()%></a>
+                                               aria-disabled="true"><%=incidencia_send_jsp.getUrgencia()%></a>
                                         </div>
 
                                         <div><br><h5>Comentario de Seguridad: </h5>Lorem ipsum dolor sit amet, consectetur
