@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DaoUsuarios {
 
-    private String pass="root";
+    private String pass="123456";
     public ArrayList<Usuarios> obtenerlistaUsuarios(){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
 

@@ -8,7 +8,8 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.Date;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 @WebServlet(name = "ServletUsuarioInicio", value = "/Inicio")
 public class ServletUsuarioInicio extends HttpServlet {
     @Override
@@ -66,6 +67,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         String action = request.getParameter("action");
 
         DaoIncidencias daoIncidencias = new DaoIncidencias();
+        Incidencias incidencias = new Incidencias();
         switch (action) {
             case "guardar":
                 String nombre = request.getParameter("nombre");
@@ -74,16 +76,18 @@ public class ServletUsuarioInicio extends HttpServlet {
                 String nivel = request.getParameter("nivel");
                 String zona = request.getParameter("zona");
 
-                Incidencias incidencias = new Incidencias();
+
                 incidencias.setIdUsuario(3);
                 incidencias.setNombre(nombre);
                 incidencias.setDescripcion(descripcion);
                 incidencias.setDestacado(1);
                 incidencias.setTipo(tipo);
                 incidencias.setUrgencia(nivel);
-                incidencias.setIdZonaPucp(2);
-                Date date = new Date();
-                incidencias.setDatetime(date.toString());
+                incidencias.setIdZonaPucp(Integer.parseInt(zona));
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = myDateObj.format(myFormatObj);
+                incidencias.setDatetime(formattedDate);
                 incidencias.setAnonimo(0);
                 incidencias.setEstadoIncidencia("No registrado");
                 daoIncidencias.guardarIncidencias(incidencias);

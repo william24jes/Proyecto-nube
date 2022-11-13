@@ -146,11 +146,11 @@
                                                         <select class="form-select" aria-label="Default select example"
                                                                 name="tipo">
                                                             <option selected>Seleccione...</option>
-                                                            <option value="1">Reporte de robos</option>
-                                                            <option value="2">Objetos perdidos</option>
-                                                            <option value="3">Infraestructura en mal estado</option>
-                                                            <option value="4">Ambulancia PUCP</option>
-                                                            <option value="5">Accidente y Otros</option>
+                                                            <option value="Reporte de robos">Reporte de robos</option>
+                                                            <option value="Objetos perdidos">Objetos perdidos</option>
+                                                            <option value="Infraestructura en mal estado">Infraestructura en mal estado</option>
+                                                            <option value="Ambulancia PUCP">Ambulancia PUCP</option>
+                                                            <option value="Accidente y Otros">Accidente y Otros</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -162,9 +162,9 @@
                                                         <select class="form-select" aria-label="Default select example"
                                                                 name="nivel">
                                                             <option selected>Seleccione...</option>
-                                                            <option value="1">Leve</option>
-                                                            <option value="2">Moderado</option>
-                                                            <option value="3">Crítico</option>
+                                                            <option value="Leve">Leve</option>
+                                                            <option value="Moderado">Moderado</option>
+                                                            <option value="Crítico">Crítico</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -172,11 +172,10 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-2 col-form-label"><h5>Zona PUCP</h5></label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example">
+                                                        <select class="form-select" aria-label="Default select example" name="zona">
                                                             <option selected>Seleccione...</option>
                                                             <% for (ZonaPucp zonas : listaZonasPUCP) { %>
-                                                            <option value="<%=zonas.getIdZonaPucp()%>"
-                                                                    name="zona"><%=zonas.getNombreZona()%>
+                                                            <option value="<%=zonas.getIdZonaPucp()%>"><%=zonas.getNombreZona()%>
                                                             </option>
                                                             <% } %>
 
@@ -209,40 +208,40 @@
                                                     <input type="file" class="form-control" style="width: 350px"
                                                            id="customFile"/>
                                                 </div>
-                                            <!-- Form Group (location)-->
-                                        <!-- Form Group (email address)-->
+                                                <!-- Form Group (location)-->
+                                                <!-- Form Group (email address)-->
 
 
-                                        <!-- Form Row-->
+                                                <!-- Form Row-->
 
-                                        <!-- Save changes button-->
+                                                <!-- Save changes button-->
 
-                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <a class="nav-link  ">
-                                                <a type="submit" class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Guardar
-                                                </a>
-                                                <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio"
-                                                   type="button">Cancelar
-                                                </a>
-                                            </a>
+                                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                    <a class="nav-link  ">
+                                                        <button type="submit" class="btn btn-primary">Guardar
+                                                        </button>
+                                                        <button class="btn btn-primary"
+                                                           href="<%=request.getContextPath()%>/Inicio">Cancelar
+                                                        </button>
+                                                    </a>
 
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox"
-                                                       role="switch" id="flexSwitchCheckDefault">
-                                                <label class="form-check-label"
-                                                       for="flexSwitchCheckDefault">Activar publicación
-                                                    anónima</label>
-                                            </div>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               role="switch" id="flexSwitchCheckDefault">
+                                                        <label class="form-check-label"
+                                                               for="flexSwitchCheckDefault">Activar publicación
+                                                            anónima</label>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
-                </div>
 
 
                 </div>

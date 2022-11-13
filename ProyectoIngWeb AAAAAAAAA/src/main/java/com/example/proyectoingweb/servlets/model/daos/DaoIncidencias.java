@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoIncidencias {
-    private String pass ="root";
+    private String pass ="123456";
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
 
