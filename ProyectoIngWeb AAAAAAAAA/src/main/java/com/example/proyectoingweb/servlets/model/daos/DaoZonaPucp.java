@@ -5,19 +5,15 @@ import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DaoZonaPucp {
-    private String pass = "123456";
+public class DaoZonaPucp extends DaoBase{
 
     public ArrayList<ZonaPucp> obtenerListaZonaPucp(){
         ArrayList<ZonaPucp> listaZonaPucp = new ArrayList<>();
+        String sql = "select * from mydb.zonapucp";
 
-        try {
-            String url = "jdbc:mysql://localhost:3306/mydb";
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, "root", pass);
-            Statement stmt = connection.createStatement();
-            String sql = "select * from mydb.zonapucp";
-            ResultSet rs = stmt.executeQuery(sql);
+        try (Connection connection = this.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
 
             while (rs.next()){
                 ZonaPucp zona = new ZonaPucp();
@@ -26,11 +22,9 @@ public class DaoZonaPucp {
                 listaZonaPucp.add(zona);
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
         return listaZonaPucp;
     }
 }

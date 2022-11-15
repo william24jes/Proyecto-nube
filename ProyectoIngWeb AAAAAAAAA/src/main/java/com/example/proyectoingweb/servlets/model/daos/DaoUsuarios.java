@@ -5,22 +5,15 @@ import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DaoUsuarios {
+public class DaoUsuarios extends DaoBase{
 
     private String pass="123456";
     public ArrayList<Usuarios> obtenerlistaUsuarios(){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
 
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        String sql = "SELECT * FROM usuarios ORDER BY idUsuario LIMIT 0,15";
 
-        String url = "jdbc:mysql://localhost:3306/mydb";
-        String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario LIMIT 0,15";
-
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
@@ -48,16 +41,9 @@ public class DaoUsuarios {
     public ArrayList<Usuarios> obtenerlistaUsuariosCompleta(){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
 
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario";
 
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 
@@ -84,17 +70,10 @@ public class DaoUsuarios {
 
     public Usuarios buscarPorId(String idUsuario){
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
         Usuarios usuarios = null;
 
-        try(Connection conn = DriverManager.getConnection(url, "root", pass);
+        try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, idUsuario);
@@ -125,17 +104,10 @@ public class DaoUsuarios {
 
     public String obtenerRol(String codigo, String passw, String correo){
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM usuarios WHERE codigoPucp = ? and contrasena = ? and correoPucp = ?";
         Usuarios usuarios = null;
 
-        try(Connection conn = DriverManager.getConnection(url, "root", pass);
+        try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, codigo);
@@ -160,17 +132,9 @@ public class DaoUsuarios {
     }
 
     public void guardarUsuario(Usuarios usuarios){
-
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "INSERT INTO usuarios (nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol, contrasena) VALUES (?,?,?,?,?,?,?,?,?)";
 
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1,usuarios.getNombres());
@@ -191,17 +155,9 @@ public class DaoUsuarios {
     }
 
     public void actualizarUsuario(Usuarios usuarios){
-
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "UPDATE usuarios SET nombres = ?, apellidos = ?, dni = ?, celular = ?, codigoPucp = ?, correoPucp = ?, categoria = ?, rol = ? WHERE idUsuario = ?";
 
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1,usuarios.getNombres());
@@ -224,16 +180,9 @@ public class DaoUsuarios {
     }
 
     public void borrarUsuario(String idUsuario){
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "DELETE from usuarios WHERE idUsuario = ?";
 
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             PreparedStatement pstmt=connection.prepareStatement(sql))
         {
 
@@ -248,17 +197,9 @@ public class DaoUsuarios {
 
     public ArrayList<Usuarios> buscarUsuarios(String nombreuser){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
-
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.usuarios WHERE lower(nombres) like ? or lower(apellidos) like ? or dni like ? or codigoPucp like ?";
 
-        try(Connection conn = DriverManager.getConnection(url, "root", pass);
+        try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "%"+nombreuser+"%");
@@ -295,19 +236,11 @@ public class DaoUsuarios {
 
     public ArrayList<Usuarios> paginarUsuarios(int i){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
-
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
         int inicio=15*(i-1);
 
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario LIMIT "+inicio+","+"15";
 
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
 

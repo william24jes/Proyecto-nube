@@ -7,21 +7,13 @@ import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DaoIncidencias {
-    private String pass ="123456";
+public class DaoIncidencias extends DaoBase{
+    private String pass ="root";
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.incidencias";
 
-        try (Connection connection = DriverManager.getConnection(url, "root", pass);
+        try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -55,16 +47,9 @@ public class DaoIncidencias {
     public ArrayList<Incidencias> obtenerlistaIncidenciasDestacadas() {
         ArrayList<Incidencias> listaIncidenciasDestacadas = new ArrayList<>();
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario` FROM mydb.incidencias incidencias , mydb.usuarios users where incidencias.destacado = 1 and  incidencias.idUsuario = users.idUsuario;\n";
 
-        try (Connection connection = DriverManager.getConnection(url, "root", pass);
+        try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -99,16 +84,9 @@ public class DaoIncidencias {
     }
     public void guardarIncidencias(Incidencias incidencias){
 
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "INSERT INTO mydb.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1,String.valueOf(incidencias.getIdUsuario()));
@@ -121,6 +99,7 @@ public class DaoIncidencias {
             pstmt.setString(8,incidencias.getDatetime());
             pstmt.setString(9,String.valueOf(incidencias.getAnonimo()));
             pstmt.setString(10,incidencias.getEstadoIncidencia());
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -129,16 +108,9 @@ public class DaoIncidencias {
     public ArrayList<ZonaPucp> obtenerlistaZonasPUCP() {
         ArrayList<ZonaPucp> listaZonaPUCP = new ArrayList<>();
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT * FROM mydb.zonapucp";
 
-        try (Connection connection = DriverManager.getConnection(url, "root", pass);
+        try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -156,17 +128,11 @@ public class DaoIncidencias {
     }
     public Incidencias buscarPorId(String IDincidencias){
 
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         Incidencias incidencias = null;
 
-        String url = "jdbc:mysql://localhost:3306/mydb";
         String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario`,zonapucp.nombreZona FROM mydb.incidencias incidencias , mydb.usuarios users,mydb.zonapucp where incidencias.idIncidencia = ? and  incidencias.idUsuario = users.idUsuario and incidencias.idzonaPucp = zonapucp.idzonaPucp";
 
-        try(Connection connection = DriverManager.getConnection(url,"root",pass);
+        try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, IDincidencias);
