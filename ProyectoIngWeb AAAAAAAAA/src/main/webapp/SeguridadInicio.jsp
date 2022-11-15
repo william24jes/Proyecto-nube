@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %><%--
   Created by IntelliJ IDEA.
   User: 321
   Date: 26/10/2022
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaIncidencias" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>" scope="request"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,7 +89,7 @@
 						</span>
                     </form>
                 </div></li>
-                <li><a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=inicioSeguridad">Inicio</a></li>
+                <li><a class="nav-link active" href="<%=request.getContextPath()%>/SeguridadInicio?action=inicioSeguridad">Inicio</a></li>
                 <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/SeguridadInicio?action=perfil">Perfil</a></li>
                 <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>/SeguridadInicio?action=cerrarSesion">Cerrar sesión</a></li>
             </ul>
@@ -113,6 +115,8 @@
                 </div>
 
                 <div class="container">
+                    <% DaoUsuarios daoUsuarios = new DaoUsuarios();
+                        for (Incidencias i: listaIncidencias){%>
 
                     <div class="col-lg-10 mx-auto">
 
@@ -125,24 +129,21 @@
                                     <img src="assets/img/profile_upload.png" height="70px"/>
                                     <br>
                                     <div></div>
-                                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Pérdida de carnet
-                                        universitario #ayuda
-                                        #cachimbo #2022-2
-                                        <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                                            Einstein </h6><h6>Registrado hoy</h6></div>
+                                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=i.getNombre()%>
+                                        <div style="color:darkgray;display: flex;flex-direction: column">
+                                            <h6><%=daoUsuarios.buscarPorId(""+i.getIdUsuario()+"").getNombres()%> <%=daoUsuarios.buscarPorId(""+i.getIdUsuario()+"").getApellidos()%></h6>
+                                            <h6>Registrado </h6></div>
                                         <div><a href="#" class="btn btn-warning btn-circle">
-                                            <i class="fas fa-exclamation-triangle"> 8</i>
+                                            <i class="fas fa-exclamation-triangle"> <%=i.getDestacado()%></i>
                                         </a></div>
                                     </h4>
-                                    <button type="button" class="btn btn-primary btn-sm">Registrado</button>
-
-
+                                    <button type="button" class="btn btn-primary btn-sm"><%=i.getEstadoIncidencia()%></button>
                                 </div>
-
                             </div>
                         </a>
 
                     </div>
+                    <% }%>
 
                     <div class="col-lg-10 mx-auto">
 
