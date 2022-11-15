@@ -91,6 +91,16 @@
         <!-- End Header -->
 
         <main id="main" data-aos="fade-up">
+
+            <%if(session.getAttribute("msg")=="Usuario creado exitosamente" || session.getAttribute("msg")=="Usuario editado correctamente"){%>
+                <div class="alert alert-success" role="alert"><%=session.getAttribute("msg")%></div>
+            <%session.removeAttribute("msg");%>
+            <%} else if (session.getAttribute("msg") == "Usuario borrado exitosamente") {%>
+                <div class="alert alert-danger" role="alert"><%=session.getAttribute("msg")%></div>
+                <%session.removeAttribute("msg");%>
+            <%}%>
+
+
             <section class="section profile" style="padding-top: 30px">
                 <div class="container">
                     <div class="container-fluid">

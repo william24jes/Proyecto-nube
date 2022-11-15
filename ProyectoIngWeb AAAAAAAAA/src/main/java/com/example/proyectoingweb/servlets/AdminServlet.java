@@ -22,6 +22,7 @@ public class AdminServlet extends HttpServlet {
         action = (action == null) ? "listar" : action;
 
         DaoUsuarios daoUsuarios = new DaoUsuarios();
+        HttpSession session=request.getSession();
         RequestDispatcher requestDispatcher;
         Usuarios usuarios;
         String idUsuario;
@@ -33,7 +34,6 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("listaPaginada", daoUsuarios.obtenerlistaUsuarios());
                 request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
                 setListaPermanente(daoUsuarios.obtenerlistaUsuariosCompleta());
-                System.out.println(getListaPermanente().size());
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
 
@@ -79,6 +79,8 @@ public class AdminServlet extends HttpServlet {
             case "borrar":
                 idUsuario = request.getParameter("id");
                 daoUsuarios.borrarUsuario(idUsuario);
+                session.setAttribute("msg","Usuario borrado exitosamente");
+
 
                 response.sendRedirect(request.getContextPath() + "/AdminServlet");
                 break;
@@ -102,6 +104,7 @@ public class AdminServlet extends HttpServlet {
         String action = request.getParameter("action");
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         Usuarios usuarios = new Usuarios();
+        HttpSession session=request.getSession();
         RequestDispatcher requestDispatcher;
 
         switch (action) {
@@ -117,6 +120,7 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setCodigoPucp(request.getParameter("Codigo"));
 
                 daoUsuarios.guardarUsuario(usuarios);
+                session.setAttribute("msg","Usuario creado exitosamente");
 
                 response.sendRedirect(request.getContextPath()+"/AdminServlet");
                 break;
@@ -134,7 +138,7 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setCodigoPucp(request.getParameter("Codigo"));
 
                 daoUsuarios.actualizarUsuario(usuarios);
-
+                session.setAttribute("msg","Usuario editado correctamente");
                 response.sendRedirect(request.getContextPath() + "/AdminServlet");
 
                 break;
