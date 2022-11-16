@@ -113,13 +113,13 @@
                         <!-- Dropdown Card Example -->
                         <div class="card shadow mb-4 ">
                             <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <img src="assets/img/profile_upload.png" height="70px"/>
+                            <div class="card-header p-5 d-flex flex-row align-items-center justify-content-between">
+                                <img class="d-lg-block" src="assets/img/profile_upload.png" width="10%"/>
                                 <br>
                                 <div></div>
                                 <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=incidencia.getNombre()%>
                                     <div style="color:darkgray;display: flex;flex-direction: column">
-                                        <h6><%=incidencia.getUsuario().getNombres()+" "+incidencia.getUsuario().getApellidos()%></h6>
+                                        <h6><%=(incidencia.getAnonimo()==0)?(incidencia.getUsuario().getNombres()+" "+incidencia.getUsuario().getApellidos()):"Anónimo"%></h6>
                                         <h6>Registrado hoy</h6></div>
                                     <div><a href="#" class="btn btn-warning btn-circle">
                                         <i class="fas fa-exclamation-triangle"> <%=incidencia.getDestacado()%></i>
@@ -137,7 +137,7 @@
                                 <div><h4>Descripción</h4></div>
                                 <%=incidencia.getDescripcion()%>
                                 <div><br><h4>Zona PUCP:</h4></div>
-                                <%=incidencia.getZonaPucp().getNombreZona()%>>
+                                <%=incidencia.getZonaPucp().getNombreZona()%>
                                 <div><br><h4>Ubicación 
 								<div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 150px">
 									<iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"

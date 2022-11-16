@@ -2,6 +2,8 @@ package com.example.proyectoingweb.servlets.model.daos;
 
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -149,7 +151,7 @@ public class DaoUsuarios extends DaoBase{
     }
 
     public void guardarUsuario(Usuarios usuarios){
-        String sql = "INSERT INTO usuarios (nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol, contrasena) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios (nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol, fotoPerfil) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -162,11 +164,13 @@ public class DaoUsuarios extends DaoBase{
             pstmt.setString(6,usuarios.getCorreoPucp());
             pstmt.setString(7,usuarios.getCategorias());
             pstmt.setString(8,usuarios.getRol());
-            pstmt.setNull(9, Types.VARCHAR);
+            FileInputStream img = new FileInputStream("C:\\Users\\amanr\\Music\\Entregable-5\\ProyectoIngWeb AAAAAAAAA\\src\\main\\webapp\\assets\\img\\profile_upload.png");
+            pstmt.setBlob(9,img);
+            //pstmt.setNull(9, Types.VARCHAR);
 
             pstmt.executeUpdate();
 
-        } catch (SQLException e) {
+        } catch (SQLException | FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

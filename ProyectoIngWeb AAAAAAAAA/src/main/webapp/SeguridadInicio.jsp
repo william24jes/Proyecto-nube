@@ -110,8 +110,7 @@
                 </div>
 
                 <div class="container">
-                    <% DaoUsuarios daoUsuarios = new DaoUsuarios();
-                        for (Incidencias i: listaIncidencias){%>
+                    <% for (Incidencias i: listaIncidencias){%>
 
                     <div class="col-lg-10 mx-auto">
 
@@ -152,10 +151,10 @@
                                     <div></div>
                                     <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Ruidos sospechosos en el baño
                                         de la facultad Indusitial
-                                        #xdeee
-                                        #campeones #2022-2
-                                        <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                                            Einstein </h6><h6>Registrado hace 1 día</h6></div>
+                                        <div style="color:darkgray;display: flex;flex-direction: column">
+                                            <h6>Frank Einstein </h6>
+                                            <h6>Registrado hace 1 día</h6>
+                                        </div>
                                         <div><a href="#" class="btn btn-warning btn-circle">
                                             <i class="fas fa-exclamation-triangle"> 14</i>
                                         </a></div>

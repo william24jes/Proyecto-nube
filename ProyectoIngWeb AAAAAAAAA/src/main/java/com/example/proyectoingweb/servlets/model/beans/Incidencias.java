@@ -3,7 +3,7 @@ package com.example.proyectoingweb.servlets.model.beans;
 public class Incidencias {
     private int idIncidencia;
     private Usuarios usuario;
-    private int idSeguridad;
+    private Usuarios seguridad;
     private String nombre;
     private String descripcion;
     private String tipo;
@@ -26,12 +26,12 @@ public class Incidencias {
         this.nombreUsuarioQueDestaco = nombreUsuarioQueDestaco;
     }
 
-    public int getIdSeguridad() {
-        return idSeguridad;
+    public Usuarios getSeguridad() {
+        return seguridad;
     }
 
-    public void setIdSeguridad(int idSeguridad) {
-        this.idSeguridad = idSeguridad;
+    public void setSeguridad(Usuarios seguridad) {
+        this.seguridad = seguridad;
     }
 
     public int getIdIncidencia() {

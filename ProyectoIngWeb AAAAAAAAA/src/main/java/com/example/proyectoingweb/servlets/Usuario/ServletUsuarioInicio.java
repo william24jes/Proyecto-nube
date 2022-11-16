@@ -22,6 +22,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         action = (action == null) ? "listar" : action;
         RequestDispatcher requestDispatcher;
         DaoIncidencias daoIncidencias = new DaoIncidencias();
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         String idIncidencia;
         Incidencias incidencia;
 
@@ -36,12 +37,14 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "misIncidencias":
+                /*
                 request.setAttribute("listaIncidenciasDestacadas", daoIncidencias.obtenerlistaIncidenciasDestacadas());
                 requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
                 requestDispatcher.forward(request, response);
+                */
                 break;
             case "registrarIncidencia":
-                request.setAttribute("listaZonasPUCP", daoIncidencias.obtenerlistaZonasPUCP());
+                request.setAttribute("listaZonasPUCP", daoZonaPucp.obtenerListaZonaPucp());
                 requestDispatcher = request.getRequestDispatcher("UsuarioRegistrarIncidencia.jsp");
                 requestDispatcher.forward(request, response);
                 break;
