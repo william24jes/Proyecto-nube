@@ -1,8 +1,13 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaIncidencias" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>" scope="request"/>
 <jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+<%
+    ArrayList<Incidencias> listaPermanente = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPermanente");
+    ArrayList<Incidencias> listaPaginada = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPaginada");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +115,7 @@
                 </div>
 
                 <div class="container">
-                    <% for (Incidencias i: listaIncidencias){%>
+                    <% for (Incidencias i: listaPaginada){%>
 
                     <div class="col-lg-10 mx-auto">
 
@@ -139,134 +144,15 @@
                     </div>
                     <% }%>
 
-                    <div class="col-lg-10 mx-auto">
-
-                        <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <img src="assets/img/profile_upload.png" height="70px"/>
-                                    <br>
-                                    <div></div>
-                                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Ruidos sospechosos en el baño
-                                        de la facultad Indusitial
-                                        <div style="color:darkgray;display: flex;flex-direction: column">
-                                            <h6>Frank Einstein </h6>
-                                            <h6>Registrado hace 1 día</h6>
-                                        </div>
-                                        <div><a href="#" class="btn btn-warning btn-circle">
-                                            <i class="fas fa-exclamation-triangle"> 14</i>
-                                        </a></div>
-                                    </h4>
-                                    <button type="button" class="btn btn-primary btn-sm">Atendido</button>
-
-                                </div>
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="col-lg-10 mx-auto">
-
-                        <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <img src="assets/img/profile_upload.png" height="70px"/>
-                                    <br>
-                                    <div></div>
-                                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Objeto perdido encontrado en ee.gg.cc
-                                        #xdeee
-                                        #campeones #2022-2
-                                        <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                                            Einstein </h6><h6>Registrado hace 1 día</h6></div>
-                                        <div><a href="#" class="btn btn-warning btn-circle">
-                                            <i class="fas fa-exclamation-triangle"> 5</i>
-                                        </a></div>
-                                    </h4>
-                                    <button type="button" class="btn btn-primary btn-sm">Registrado</button>
-
-                                </div>
-
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-lg-10 mx-auto">
-
-                        <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <img src="assets/img/profile_upload.png" height="70px"/>
-                                    <br>
-                                    <div></div>
-                                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Ruidos sospechosos en el baño
-                                        de la facultad Indusitial
-                                        #xdeee
-                                        #campeones #2022-2
-                                        <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                                            Einstein </h6><h6>Registrado hace 1 día</h6></div>
-                                        <div><a href="#" class="btn btn-warning btn-circle">
-                                            <i class="fas fa-exclamation-triangle"> 3</i>
-                                        </a></div>
-                                    </h4>
-                                    <button type="button" class="btn btn-primary btn-sm">Registrado</button>
-
-                                </div>
-
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-lg-10 mx-auto">
-
-                        <!-- Dropdown Card Example -->
-                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles"">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <img src="assets/img/profile_upload.png" height="70px"/>
-                                    <br>
-                                    <div></div>
-                                    <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Objeto perdido encontrado en ee.gg.cc
-                                        #xdeee
-                                        #campeones #2022-2
-                                        <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                                            Einstein </h6><h6>Registrado hace 1 día</h6></div>
-                                        <div><a href="#" class="btn btn-warning btn-circle">
-                                            <i class="fas fa-exclamation-triangle"> 11</i>
-                                        </a></div>
-                                    </h4>
-                                    <button type="button" class="btn btn-primary btn-sm">Registrado</button>
-
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
 
 
                 </div>
-                <nav aria-label="Page navigation example">
+                <nav aria-label="Page navigation example" style="margin-top: 20px;">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="Seguridad_inicio.html">1</a></li>
-                        <li class="page-item"><a class="page-link" href="Seguridad_inicio.html">2</a></li>
-                        <li class="page-item"><a class="page-link" href="Seguridad_inicio.html">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="Seguridad_inicio.html">Next</a>
-                        </li>
+                        <%for (double j=1;j<=Math.ceil((double)(listaPermanente.size())/16.0);j++){%>
+                        <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/SeguridadInicio?action=page&id=<%=(int)j%>"><%=(int)j%></a></li>
+                        <%}%>
                     </ul>
-                </nav>
                 </nav>
 
             </div>

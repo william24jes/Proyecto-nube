@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DaoIncidencias extends DaoBase{
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,16    ";
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,16";
 
         Usuarios seguridad;
         Usuarios usuario;

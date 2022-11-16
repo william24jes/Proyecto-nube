@@ -8,9 +8,13 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "ServletSeguridadInicio", value = "/SeguridadInicio")
 public class ServletSeguridadInicio extends HttpServlet {
+
+    private ArrayList<Incidencias> listaPermanente;
+    private ArrayList<Incidencias> listaPaginada;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -18,10 +22,13 @@ public class ServletSeguridadInicio extends HttpServlet {
         RequestDispatcher requestDispatcher;
         DaoIncidencias daoIncidencias = new DaoIncidencias();
         Incidencias incidencia;
+        int idPage;
 
         switch (action){
             case "inicioSeguridad":
-                request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
+                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
+                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompleta());
                 requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
                 requestDispatcher.forward(request,response);
                 break;
@@ -46,11 +53,38 @@ public class ServletSeguridadInicio extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(request,response);
                 break;
+
+            case "page":
+                idPage = Integer.parseInt(request.getParameter("id"));
+                setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
+                request.setAttribute("listaIncidenciasPermanente",getListaPermanente());
+                request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+
+                requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
+                requestDispatcher.forward(request, response);
+
+                break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    public ArrayList<Incidencias> getListaPermanente() {
+        return listaPermanente;
+    }
+
+    public void setListaPermanente(ArrayList<Incidencias> listaPermanente) {
+        this.listaPermanente = listaPermanente;
+    }
+
+    public ArrayList<Incidencias> getListaPaginada() {
+        return listaPaginada;
+    }
+
+    public void setListaPaginada(ArrayList<Incidencias> listaPaginada) {
+        this.listaPaginada = listaPaginada;
     }
 }
