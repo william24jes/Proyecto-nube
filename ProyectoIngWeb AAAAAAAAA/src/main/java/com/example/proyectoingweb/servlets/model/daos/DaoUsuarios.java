@@ -150,24 +150,35 @@ public class DaoUsuarios extends DaoBase{
         return usuario;
     }
 
-    public void guardarUsuario(Usuarios usuarios){
+    public boolean guardarUsuario(Usuarios usuarios){
+
         String sql = "INSERT INTO usuarios (nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol, fotoPerfil) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1,usuarios.getNombres());
-            pstmt.setString(2,usuarios.getApellidos());
-            pstmt.setString(3,usuarios.getDni());
-            pstmt.setString(4,usuarios.getCelular());
-            pstmt.setString(5,usuarios.getCodigoPucp());
-            pstmt.setString(6,usuarios.getCorreoPucp());
-            pstmt.setString(7,usuarios.getCategorias());
-            pstmt.setString(8,usuarios.getRol());
-            pstmt.setString(9,"perfilDefault.png");
-            //pstmt.setNull(9, Types.VARCHAR);
+            // VALIDAR codigo, dni, celular
 
-            pstmt.executeUpdate();
+            if (usuarios.getCodigoPucp().length()<=8 && usuarios.getDni().length()<=8 && usuarios.getCelular().length()<=9){
+
+                pstmt.setString(1,usuarios.getNombres());
+                pstmt.setString(2,usuarios.getApellidos());
+                pstmt.setString(3,usuarios.getDni());
+                pstmt.setString(4,usuarios.getCelular());
+                pstmt.setString(5,usuarios.getCodigoPucp());
+                pstmt.setString(6,usuarios.getCorreoPucp());
+                pstmt.setString(7,usuarios.getCategorias());
+                pstmt.setString(8,usuarios.getRol());
+                pstmt.setString(9,"perfilDefault.png");
+                //pstmt.setNull(9, Types.VARCHAR);
+
+                pstmt.executeUpdate();
+
+                return true;
+            }
+            else {
+                return false;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -284,6 +295,5 @@ public class DaoUsuarios extends DaoBase{
         }
         return listaUsuarios;
     }
-
 
 }

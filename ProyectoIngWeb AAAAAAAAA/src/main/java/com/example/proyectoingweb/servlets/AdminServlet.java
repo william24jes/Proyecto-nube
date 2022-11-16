@@ -119,10 +119,15 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setRol(request.getParameter("Rol"));
                 usuarios.setCodigoPucp(request.getParameter("Codigo"));
 
-                daoUsuarios.guardarUsuario(usuarios);
-                session.setAttribute("msg","Usuario creado exitosamente");
+                if (daoUsuarios.guardarUsuario(usuarios)){
+                    session.setAttribute("msg","Usuario creado exitosamente");
+                    response.sendRedirect(request.getContextPath()+"/AdminServlet");
+                }
+                else {
+                    requestDispatcher = request.getRequestDispatcher("AdminAddUser.jsp");
+                    requestDispatcher.forward(request, response);
+                }
 
-                response.sendRedirect(request.getContextPath()+"/AdminServlet");
                 break;
 
             case "actualizar":
@@ -136,7 +141,7 @@ public class AdminServlet extends HttpServlet {
                 //VALIDACION DNI-------------------
 
                 if (usuarios.getDni().length()<8){
-                    
+
                 }
 
                 //---------------------------------
