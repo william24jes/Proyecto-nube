@@ -1,13 +1,8 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
-<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %><%--
-  Created by IntelliJ IDEA.
-  User: 321
-  Date: 26/10/2022
-  Time: 14:21
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaIncidencias" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>" scope="request"/>
+<jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +58,7 @@
 
         <div class="d-md-flex align-items-center">
             <div>
-                <h1 class="name" style="margin-top: 25px">Julio Flores
+                <h1 class="name" style="margin-top: 25px"><%=seguridadSession.getNombres()%> <%=seguridadSession.getApellidos()%>
                     <br><h6>Seguridad</h6></br>
                 </h1>
             </div>

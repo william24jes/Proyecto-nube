@@ -1,5 +1,6 @@
 package com.example.proyectoingweb.servlets.Inicio;
 
+import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
 import jakarta.servlet.*;
@@ -47,8 +48,13 @@ public class ServletIniciarSesion extends HttpServlet {
         RequestDispatcher requestDispatcher;
         switch(post){
             case "iniciosesion":
-                requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
-                requestDispatcher.forward(request,response);
+                Usuarios usuario = (Usuarios) request.getSession().getAttribute("usuarioSession");
+                if(usuario != null && usuario.getIdUsuarios() != 0){
+                    response.sendRedirect(request.getContextPath());
+                }else{
+                    requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
+                    requestDispatcher.forward(request,response);
+                }
                 break;
             case "validar":
                 String codigo = request.getParameter("codigo");
@@ -56,17 +62,36 @@ public class ServletIniciarSesion extends HttpServlet {
                 String correo = request.getParameter("correo");
 
                 String rol = daoUsuarios.obtenerRol(codigo, password, correo);
+                Usuarios usuarioValido = daoUsuarios.validarUsuarioPassword(codigo, password, correo);
 
                 switch (rol){
                     case "Usuario PUCP":
+                        if(usuarioValido != null){
+                            HttpSession sessionUsuario = request.getSession();
+                            sessionUsuario.setAttribute("usuarioSession", usuarioValido);
+                            sessionUsuario.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
+                            response.sendRedirect(request.getContextPath()+"/Inicio");
+                        }else{
+                            response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?error");
+                        }
+                        /*
                         request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
                         requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
                         requestDispatcher.forward(request,response);
+                        */
                         break;
                     case "Seguridad":
+                        if(usuarioValido != null){
+                            HttpSession sessionSeguridad = request.getSession();
+                            sessionSeguridad.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
+                            sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
+                            response.sendRedirect(request.getContextPath()+"/SeguridadInicio");
+                        }
+                        /*
                         request.setAttribute("correo", correo);
                         requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
                         requestDispatcher.forward(request,response);
+                         */
                         break;
                     default:
                         requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");

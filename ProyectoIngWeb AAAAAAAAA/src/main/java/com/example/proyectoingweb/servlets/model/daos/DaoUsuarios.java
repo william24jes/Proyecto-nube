@@ -104,7 +104,29 @@ public class DaoUsuarios extends DaoBase{
     public String obtenerRol(String codigo, String passw, String correo){
 
         String sql = "SELECT * FROM usuarios WHERE codigoPucp = ? and contrasena = ? and correoPucp = ?";
-        Usuarios usuarios = null;
+        String rol = null;
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, codigo);
+            pstmt.setString(2, passw);
+            pstmt.setString(3, correo);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    rol = rs.getString(9);
+                }
+            }
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+        return rol;
+    }
+
+    public Usuarios validarUsuarioPassword(String codigo, String passw, String correo ){
+        Usuarios usuario = null;
+        String sql = "SELECT * FROM usuarios WHERE codigoPucp = ? and contrasena = ? and correoPucp = ?";
 
         try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -113,21 +135,17 @@ public class DaoUsuarios extends DaoBase{
             pstmt.setString(2, passw);
             pstmt.setString(3, correo);
 
-
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
-                    usuarios = new Usuarios();
-                    usuarios.setRol(rs.getString(9));
+                    int usuarioId = rs.getInt(1);
+                    usuario = this.buscarPorId(String.valueOf(usuarioId));
                 }
             }
-            if(usuarios == null){
-                return "default";
-            }
-            return usuarios.getRol();
         }
         catch (SQLException e){
             throw new RuntimeException();
         }
+        return usuario;
     }
 
     public void guardarUsuario(Usuarios usuarios){

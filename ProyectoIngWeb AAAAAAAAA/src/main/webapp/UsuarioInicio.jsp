@@ -1,6 +1,8 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaIncidencias" scope="request" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+<jsp:useBean id="listaIncidencias" scope="session" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
+
 
 <html lang="en">
 
@@ -55,7 +57,7 @@
 
         <div class="d-md-flex align-items-center">
           <div>
-            <h1 class="name" style="margin-top: 25px">José Bustamante
+            <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombres()%> <%=usuarioSession.getApellidos()%>
               <br><h6>Usuario PUCP</h6></br>
             </h1>
           </div>
