@@ -132,6 +132,9 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setApellidos(request.getParameter("Apellidos"));
                 usuarios.setCorreoPucp(request.getParameter("Correo PUCP"));
                 usuarios.setDni(request.getParameter("DNI"));
+
+
+
                 usuarios.setCelular(request.getParameter("Celular"));
                 usuarios.setCategorias(request.getParameter("Categoría"));
                 usuarios.setRol(request.getParameter("Rol"));

@@ -86,16 +86,22 @@
                     <div class="container-fluid">
                         <h4 class="hero">Completar datos del nuevo usuario:</h4>
                         <form method="post" action="<%=request.getContextPath()%>/AdminServlet?action=guardar"
-                              class="row g-3">
+                              class="row g-3 needs-validation" novalidate>
                             <div class="col-lg-4">
                                 <label for="Nombres" class="form-label">Nombres</label>
                                 <input required type="text" class="form-control" id="Nombres" placeholder="Nombres"
                                        name="Nombres">
+                                <div class="invalid-feedback">
+                                    Ingresa un nombre
+                                </div>
                             </div>
                             <div class="col-lg-4">
                                 <label for="Apellidos" class="form-label">Apellidos</label>
                                 <input required type="text" class="form-control" id="Apellidos" placeholder="Apellidos"
                                        name="Apellidos">
+                                <div class="invalid-feedback">
+                                    Ingresa los apellidos
+                                </div>
                             </div>
                             <div class="col-lg-4">
                                 <label for="Correo PUCP" class="form-label">Correo PUCP</label>
@@ -103,20 +109,32 @@
                                     <span class="input-group-text" id="inputGroupPrepend2">@</span>
                                     <input required type="email" class="form-control" id="Correo PUCP" placeholder="Correo PUCP"
                                            name="Correo PUCP" aria-describedby="inputGroupPrepend2">
+                                    <div class="invalid-feedback">
+                                        Ingresa un correo PUCP
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <label for="Codigo" class="form-label">Código</label>
-                                <input required type="text" class="form-control" id="Codigo" placeholder="Codigo" name="Codigo">
+                                <input required type="number" class="form-control" id="Codigo" placeholder="Codigo" name="Codigo">
+                                <div class="invalid-feedback">
+                                    Ingrese un código
+                                </div>
                             </div>
                             <div class="col-lg-2">
                                 <label for="DNI" class="form-label">DNI</label>
-                                <input required type="text" class="form-control" id="DNI" placeholder="DNI" name="DNI">
+                                <input required type="number" class="form-control" id="DNI" placeholder="DNI" name="DNI">
+                                <div class="invalid-feedback">
+                                    Ingrese un DNI
+                                </div>
                             </div>
                             <div class="col-lg-2">
                                 <label for="Celular" class="form-label">Celular</label>
-                                <input required type="text" class="form-control" id="Celular" placeholder="Celular"
+                                <input required type="number" class="form-control" id="Celular" placeholder="Celular"
                                        name="Celular">
+                                <div class="invalid-feedback">
+                                    Ingrese un número de celular
+                                </div>
                             </div>
                             <div class="col-lg-3">
                                 <label for="Categoría" class="form-label">Categoría</label>
@@ -128,6 +146,9 @@
                                     <option value="Profesor">Profesor</option>
                                     <option value="Egresado">Egresado</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    Seleccione una categoría
+                                </div>
                             </div>
 
                             <div class="col-lg-3">
@@ -137,6 +158,9 @@
                                     <option value="Usuario PUCP">Usuario PUCP</option>
                                     <option value="Seguridad">Seguridad</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    Seleccione un rol
+                                </div>
                             </div>
 
                             <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 mx-auto">
@@ -168,5 +192,28 @@
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
+
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+        </script>
     </body>
 </html>

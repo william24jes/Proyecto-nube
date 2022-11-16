@@ -162,7 +162,7 @@
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                           <!-- Profile Edit Form -->
-                          <form method="post" action="<%=request.getContextPath()%>/AdminServlet?action=actualizar">
+                          <form class="needs-validation" method="post" action="<%=request.getContextPath()%>/AdminServlet?action=actualizar" novalidate>
                             <div class="row mb-3">
                               <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
                               <div class="col-md-8 col-lg-9">
@@ -222,9 +222,6 @@
                               <label for="Rol" class="col-md-4 col-lg-3 col-form-label">Rol</label>
                               <div class="col-md-8 col-lg-9">
                                 <select required class="form-select" id="Rol" placeholder="Rol" name="Rol">
-                                  <!--<option value="">Seleccione una opción para cambiar <%=usuarios.getRol()%></option>
-                                  <option value="Usuario PUCP">Usuario PUCP</option>
-                                  <option value="Seguridad">Seguridad</option>-->
                                   <%for (String rol: roles){%>
                                   <option value="<%=rol%>" <%=rol.equals(usuarios.getRol())? "selected":""%>><%=rol%></option>
                                   <%}%>
@@ -236,12 +233,6 @@
                               <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
                               <div class="col-md-8 col-lg-9">
                                 <select required class="form-select" id="Categoría" placeholder="Categoría" name="Categoría">
-                                  <!--<option value="">Seleccione una opción para cambiar <%=usuarios.getCategorias()%></option>
-                                  <option value="Alumno">Alumno</option>
-                                  <option value="Administrativo">Administrativo</option>
-                                  <option value="Jefe de practica">Jefe de práctica</option>
-                                  <option value="Profesor">Profesor</option>
-                                  <option value="Egresado">Egresado</option>-->
                                   <%for (String categoria: categorias){%>
                                   <option value="<%=categoria%>" <%=categoria.equals(usuarios.getCategorias())? "selected":""%>><%=categoria%></option>
                                   <%}%>
@@ -255,47 +246,6 @@
                           </form>
                           <!-- End Profile Edit Form -->
                         </div>
-
-                        <div class="tab-pane fade pt-3" id="profile-settings">
-
-                          <!-- Settings Form -->
-                          <!--<form>
-
-                            <div class="row mb-3">
-                              <label for="fullName" class="col-md-4 col-lg-3 col-form-label"> Permitir Notificaciones</label>
-                              <div class="col-md-8 col-lg-9">
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                                  <label class="form-check-label" for="changesMade">
-                                    Incidencias urgentes
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                                  <label class="form-check-label" for="newProducts">
-                                    Incidencia atendida
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" id="proOffers">
-                                  <label class="form-check-label" for="proOffers">
-                                    Reclamo de incidencias
-                                  </label>
-                                </div>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                                  <label class="form-check-label" for="securityNotify">
-                                    Cada nueva incidencia
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="text-center">
-                              <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                          </form>-->
-                          <!-- End settings Form -->
-                        </div>
                         <div class="tab-pane fade pt-3" id="profile-change-password">
                         </div>
                       </div>
@@ -303,9 +253,6 @@
                     </div>
                   </div>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <!--<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                      Eliminar usuario
-                    </button>-->
                     <a href="<%=request.getContextPath()%>/AdminServlet?action=borrar&id=<%=usuarios.getIdUsuarios()%>" class="btn btn-danger" type="button">Eliminar usuario</a>
 
                   </div>
@@ -333,7 +280,28 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+        'use strict'
 
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                  form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                  }, false)
+                })
+      })()
+    </script>
 
   </body>
 
