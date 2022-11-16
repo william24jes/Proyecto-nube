@@ -56,7 +56,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px"><%=userAdmin.%>
+                        <h1 class="name" style="margin-top: 25px"><%=userAdmin.getNombres()%> <%=userAdmin.getApellidos()%>
                             <br><h6>Administrador</h6><br>
                         </h1>
                     </div>
