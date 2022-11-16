@@ -1,5 +1,6 @@
 package com.example.proyectoingweb.servlets.model.daos;
 
+import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
 
 import java.sql.*;
@@ -26,5 +27,31 @@ public class DaoZonaPucp extends DaoBase{
             e.printStackTrace();
         }
         return listaZonaPucp;
+    }
+
+    public ZonaPucp obtenerXId (String idZona){
+        String sql = "SELECT * FROM zonapucp WHERE idzonaPucp=?";
+        ZonaPucp zonaPucp = null;
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, idZona);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    zonaPucp = new ZonaPucp();
+
+                    zonaPucp.setIdZonaPucp(Integer.parseInt(idZona));
+                    zonaPucp.setNombreZona(rs.getString(2));
+                }
+            }
+
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+
+        return zonaPucp;
     }
 }

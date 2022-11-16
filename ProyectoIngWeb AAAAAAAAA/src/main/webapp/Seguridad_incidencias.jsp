@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="incidencia" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -117,16 +117,15 @@
                                 <img src="assets/img/profile_upload.png" height="70px"/>
                                 <br>
                                 <div></div>
-                                <h4 class="m-0 font-weight-bold text-primary" style="width:75%">Pérdida de carnet
-                                    universitario #ayuda
-                                    #cachimbo #2022-2
-                                    <div style="color:darkgray;display: flex;flex-direction: column"><h6>Frank
-                                        Einstein </h6><h6>Registrado hoy</h6></div>
+                                <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=incidencia.getNombre()%>
+                                    <div style="color:darkgray;display: flex;flex-direction: column">
+                                        <h6><%=incidencia.getUsuario().getNombres()+" "+incidencia.getUsuario().getApellidos()%></h6>
+                                        <h6>Registrado hoy</h6></div>
                                     <div><a href="#" class="btn btn-warning btn-circle">
-                                        <i class="fas fa-exclamation-triangle"> 8</i>
+                                        <i class="fas fa-exclamation-triangle"> <%=incidencia.getDestacado()%></i>
                                     </a></div>
                                 </h4>
-                                <button type="button" class="btn btn-primary btn-sm">Registrado</button>
+                                <button type="button" class="btn btn-primary btn-sm"><%=incidencia.getEstadoIncidencia()%></button>
 
 
                             </div>
@@ -136,13 +135,9 @@
 
                             <div class="card-body">
                                 <div><h4>Descripción</h4></div>
-                                Dropdown menus can be placed in the card header in order to extend the functionality
-                                of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
-                                icon in the card header can be clicked on in order to toggle a dropdown menu.
-                                <div><br><h4>Zona PUCP</h4></div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem corporis
-                                doloribus error ex facere itaque iusto neque nobis non optio quaerat quam quas, quisquam
-                                ut vero voluptate voluptatibus!
+                                <%=incidencia.getDescripcion()%>
+                                <div><br><h4>Zona PUCP:</h4></div>
+                                <%=incidencia.getZonaPucp().getNombreZona()%>>
                                 <div><br><h4>Ubicación 
 								<div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 150px">
 									<iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
@@ -172,14 +167,14 @@
 								<div class="row mb-3">
 								  <label class="col-sm-2 col-form-label"><h5>Tipo de incidencia </h5></label>
 								  <div class="col-sm-2">
-									<input type="text" class="form-control" value="Reporte de robo" disabled>
+									<input type="text" class="form-control" value="<%=incidencia.getTipo()%>" disabled>
 								  </div>
 								</div>
 								
                                 <div class="row mb-3">
 								  <label class="col-sm-2 col-form-label"><h5>Nivel de urgencia </h5></label>
 								  <div class="col-sm-2">
-									<input type="text" class="form-control" value="Leve" disabled>
+									<input type="text" class="form-control" value="<%=incidencia.getUrgencia()%>" disabled>
 								  </div>
 								</div>
 								
@@ -190,7 +185,6 @@
 									  <option selected>Registrado</option>
 									  <option value="1">Atendido</option>
 									  <option value="2">En proceso</option>
-									  
 									</select>
 								  </div>
 								</div>

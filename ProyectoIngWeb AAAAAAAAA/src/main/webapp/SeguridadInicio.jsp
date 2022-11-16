@@ -122,7 +122,7 @@
 
                         <!-- Dropdown Card Example -->
 
-                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles">
+                        <a class="nav-link  " href="<%=request.getContextPath()%>/SeguridadInicio?action=detalles&id=<%=i.getIdIncidencia()%>">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -131,7 +131,7 @@
                                     <div></div>
                                     <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=i.getNombre()%>
                                         <div style="color:darkgray;display: flex;flex-direction: column">
-                                            <h6><%=daoUsuarios.buscarPorId(""+i.getIdUsuario()+"").getNombres()%> <%=daoUsuarios.buscarPorId(""+i.getIdUsuario()+"").getApellidos()%></h6>
+                                            <h6><%=i.getUsuario().getNombres()%> <%=i.getUsuario().getApellidos()%></h6>
                                             <h6>Registrado </h6></div>
                                         <div><a href="#" class="btn btn-warning btn-circle">
                                             <i class="fas fa-exclamation-triangle"> <%=i.getDestacado()%></i>

@@ -1,8 +1,10 @@
 package com.example.proyectoingweb.servlets.Usuario;
 import com.example.proyectoingweb.servlets.model.beans.Incidencias;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
+import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
+import com.example.proyectoingweb.servlets.model.daos.DaoZonaPucp;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -70,8 +72,10 @@ public class ServletUsuarioInicio extends HttpServlet {
 
         DaoIncidencias daoIncidencias = new DaoIncidencias();
         Incidencias incidencias = new Incidencias();
-        Usuarios usuario = new Usuarios();
+        Usuarios usuario;
+        ZonaPucp zonaPucp;
         DaoUsuarios daoUsuarios = new DaoUsuarios();
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         switch (action) {
             case "guardar":
                 String nombre = request.getParameter("nombre");
@@ -88,13 +92,14 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencias.setDestacado(1);
                 incidencias.setTipo(tipo);
                 incidencias.setUrgencia(nivel);
-                incidencias.setIdZonaPucp(Integer.parseInt(zona));
+                zonaPucp = daoZonaPucp.obtenerXId(zona);
+                incidencias.setZonaPucp(zonaPucp);
                 LocalDateTime myDateObj = LocalDateTime.now();
                 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDate = myDateObj.format(myFormatObj);
                 incidencias.setDatetime(formattedDate);
                 incidencias.setAnonimo(0);
-                incidencias.setEstadoIncidencia("No registrado");
+                incidencias.setEstadoIncidencia("Registrado");
                 daoIncidencias.guardarIncidencias(incidencias);
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;

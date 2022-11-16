@@ -6,7 +6,6 @@ public class Incidencias {
     private int idSeguridad;
     private String nombre;
     private String descripcion;
-    private int idZonaPucp;
     private String tipo;
     private String ubicacion;
     private String foto;
@@ -16,17 +15,8 @@ public class Incidencias {
     private String urgencia;
     private String estadoIncidencia;
     private int numEstrellas;
-
     private String nombreUsuarioQueDestaco;
-    private String nombreZonaPucp;
-
-    public String getNombreZonaPucp() {
-        return nombreZonaPucp;
-    }
-
-    public void setNombreZonaPucp(String nombreZonaPucp) {
-        this.nombreZonaPucp = nombreZonaPucp;
-    }
+    private ZonaPucp zonaPucp;
 
     public String getNombreUsuarioQueDestaco() {
         return nombreUsuarioQueDestaco;
@@ -74,14 +64,6 @@ public class Incidencias {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public int getIdZonaPucp() {
-        return idZonaPucp;
-    }
-
-    public void setIdZonaPucp(int idZonaPucp) {
-        this.idZonaPucp = idZonaPucp;
     }
 
     public String getTipo() {
@@ -154,5 +136,13 @@ public class Incidencias {
 
     public void setNumEstrellas(int numEstrellas) {
         this.numEstrellas = numEstrellas;
+    }
+
+    public ZonaPucp getZonaPucp() {
+        return zonaPucp;
+    }
+
+    public void setZonaPucp(ZonaPucp zonaPucp) {
+        this.zonaPucp = zonaPucp;
     }
 }

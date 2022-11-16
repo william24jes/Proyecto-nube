@@ -13,6 +13,7 @@ public class DaoIncidencias extends DaoBase{
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
         String sql = "SELECT * FROM mydb.incidencias";
         DaoUsuarios daoUsuarios = new DaoUsuarios();
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
 
         try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
@@ -22,11 +23,13 @@ public class DaoIncidencias extends DaoBase{
                 Incidencias incidencias = new Incidencias();
 
                 incidencias.setIdIncidencia(rs.getInt(1));
-                incidencias.setUsuario(daoUsuarios.buscarPorId(""+rs.getInt(2)+""));
+                Usuarios usuario = daoUsuarios.buscarPorId(rs.getString(2));
+                incidencias.setUsuario(usuario);
                 incidencias.setIdSeguridad(rs.getInt(3));
                 incidencias.setNombre(rs.getString(4));
                 incidencias.setDescripcion(rs.getString(5));
-                incidencias.setIdZonaPucp(rs.getInt(6));
+                ZonaPucp zonaPucp = daoZonaPucp.obtenerXId(""+rs.getInt(6)+"");
+                incidencias.setZonaPucp(zonaPucp);
                 incidencias.setTipo(rs.getString(7));
                 incidencias.setUbicacion(rs.getString(8));
                 incidencias.setFoto(rs.getString(9));
@@ -48,6 +51,7 @@ public class DaoIncidencias extends DaoBase{
     public ArrayList<Incidencias> obtenerlistaIncidenciasDestacadas() {
         ArrayList<Incidencias> listaIncidenciasDestacadas = new ArrayList<>();
         DaoUsuarios daoUsuarios = new DaoUsuarios();
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
 
         String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario` FROM mydb.incidencias incidencias , mydb.usuarios users where incidencias.destacado = 1 and  incidencias.idUsuario = users.idUsuario;\n";
 
@@ -63,7 +67,8 @@ public class DaoIncidencias extends DaoBase{
                 incidencias.setIdSeguridad(rs.getInt(3));
                 incidencias.setNombre(rs.getString(4));
                 incidencias.setDescripcion(rs.getString(5));
-                incidencias.setIdZonaPucp(rs.getInt(6));
+                ZonaPucp zonaPucp = daoZonaPucp.obtenerXId(""+rs.getInt(6)+"");
+                incidencias.setZonaPucp(zonaPucp);
                 incidencias.setTipo(rs.getString(7));
                 incidencias.setUbicacion(rs.getString(8));
                 incidencias.setFoto(rs.getString(9));
@@ -97,7 +102,7 @@ public class DaoIncidencias extends DaoBase{
             pstmt.setString(4,String.valueOf(incidencias.getDestacado()));
             pstmt.setString(5,incidencias.getTipo());
             pstmt.setString(6,incidencias.getUrgencia());
-            pstmt.setString(7,String.valueOf(incidencias.getIdZonaPucp()));
+            pstmt.setString(7,String.valueOf(incidencias.getZonaPucp().getIdZonaPucp()));
             pstmt.setString(8,incidencias.getDatetime());
             pstmt.setString(9,String.valueOf(incidencias.getAnonimo()));
             pstmt.setString(10,incidencias.getEstadoIncidencia());
@@ -132,8 +137,8 @@ public class DaoIncidencias extends DaoBase{
 
         Incidencias incidencias = null;
 
-        String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario`,zonapucp.nombreZona FROM mydb.incidencias incidencias , mydb.usuarios users,mydb.zonapucp where incidencias.idIncidencia = ? and  incidencias.idUsuario = users.idUsuario and incidencias.idzonaPucp = zonapucp.idzonaPucp";
-
+        String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario` FROM mydb.incidencias incidencias , mydb.usuarios users where incidencias.idIncidencia = ? and  incidencias.idUsuario = users.idUsuario";
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -144,13 +149,13 @@ public class DaoIncidencias extends DaoBase{
 
                     incidencias.setNombre(rs.getString(4));
                     incidencias.setDescripcion(rs.getString(5));
-                    incidencias.setIdZonaPucp(rs.getInt(6));
+                    ZonaPucp zonaPucp = daoZonaPucp.obtenerXId(""+rs.getInt(6)+"");
+                    incidencias.setZonaPucp(zonaPucp);
                     incidencias.setTipo(rs.getString(7));
                     incidencias.setDatetime(rs.getString(11));
                     incidencias.setUrgencia(rs.getString(13));
                     incidencias.setEstadoIncidencia(rs.getString(14));
                     incidencias.setNombreUsuarioQueDestaco(rs.getString(16));
-                    incidencias.setNombreZonaPucp(rs.getString(17));
                 }
             }
         } catch (SQLException e) {

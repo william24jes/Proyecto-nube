@@ -1,5 +1,6 @@
 package com.example.proyectoingweb.servlets;
 
+import com.example.proyectoingweb.servlets.model.beans.Incidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoBase;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import jakarta.servlet.*;
@@ -16,6 +17,7 @@ public class ServletSeguridadInicio extends HttpServlet {
         action = (action == null) ? "inicioSeguridad" : action;
         RequestDispatcher requestDispatcher;
         DaoIncidencias daoIncidencias = new DaoIncidencias();
+        Incidencias incidencia;
 
         switch (action){
             case "inicioSeguridad":
@@ -33,6 +35,9 @@ public class ServletSeguridadInicio extends HttpServlet {
                 requestDispatcher.forward(request,response);
                 break;
             case "detalles":
+                String idIncidencia = request.getParameter("id");
+                incidencia = daoIncidencias.buscarPorId(idIncidencia);
+                request.setAttribute("incidencia", incidencia);
                 requestDispatcher = request.getRequestDispatcher("Seguridad_incidencias.jsp");
                 requestDispatcher.forward(request,response);
                 break;
