@@ -107,6 +107,8 @@ public class AdminServlet extends HttpServlet {
         HttpSession session=request.getSession();
         RequestDispatcher requestDispatcher;
 
+        String idUsuario;
+
         switch (action) {
             case "guardar":
 
@@ -137,23 +139,41 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setApellidos(request.getParameter("Apellidos"));
                 usuarios.setCorreoPucp(request.getParameter("Correo PUCP"));
                 usuarios.setDni(request.getParameter("DNI"));
-
-                //VALIDACION DNI-------------------
-
-                if (usuarios.getDni().length()<8){
-
-                }
-
-                //---------------------------------
-
                 usuarios.setCelular(request.getParameter("Celular"));
                 usuarios.setCategorias(request.getParameter("Categoría"));
                 usuarios.setRol(request.getParameter("Rol"));
                 usuarios.setCodigoPucp(request.getParameter("Codigo"));
 
-                daoUsuarios.actualizarUsuario(usuarios);
-                session.setAttribute("msg","Usuario editado correctamente");
-                response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                if (daoUsuarios.actualizarUsuario(usuarios)){
+                    session.setAttribute("msg","Usuario editado correctamente");
+                    response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                }
+                else {
+                    idUsuario = request.getParameter("id");
+                    usuarios = daoUsuarios.buscarPorId(idUsuario);
+
+                    if (usuarios != null){
+                        ArrayList<String> roles = new ArrayList<>();
+                        roles.add("Usuario PUCP");
+                        roles.add("Seguridad");
+
+                        ArrayList<String> categorias = new ArrayList<>();
+                        categorias.add("Alumno");
+                        categorias.add("Administrativo");
+                        categorias.add("Jefe de practica");
+                        categorias.add("Profesor");
+                        categorias.add("Egresado");
+
+                        request.setAttribute("usuarioEditar", usuarios);
+                        request.setAttribute("roles", roles);
+                        request.setAttribute("categorias", categorias);
+                        requestDispatcher = request.getRequestDispatcher("AdminEditUser.jsp");
+                        requestDispatcher.forward(request, response);
+                    }
+                    else {
+                        response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                    }
+                }
 
                 break;
             case "buscar":

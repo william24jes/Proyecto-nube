@@ -157,8 +157,6 @@ public class DaoUsuarios extends DaoBase{
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            // VALIDAR codigo, dni, celular
-
             if (usuarios.getCodigoPucp().length()<=8 && usuarios.getDni().length()<=8 && usuarios.getCelular().length()<=9){
 
                 pstmt.setString(1,usuarios.getNombres());
@@ -185,23 +183,32 @@ public class DaoUsuarios extends DaoBase{
         }
     }
 
-    public void actualizarUsuario(Usuarios usuarios){
+    public boolean actualizarUsuario(Usuarios usuarios){
         String sql = "UPDATE usuarios SET nombres = ?, apellidos = ?, dni = ?, celular = ?, codigoPucp = ?, correoPucp = ?, categoria = ?, rol = ? WHERE idUsuario = ?";
 
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1,usuarios.getNombres());
-            pstmt.setString(2,usuarios.getApellidos());
-            pstmt.setString(3,usuarios.getDni());
-            pstmt.setString(4,usuarios.getCelular());
-            pstmt.setString(5,usuarios.getCodigoPucp());
-            pstmt.setString(6,usuarios.getCorreoPucp());
-            pstmt.setString(7,usuarios.getCategorias());
-            pstmt.setString(8,usuarios.getRol());
-            pstmt.setInt(9, usuarios.getIdUsuarios());
+            if (usuarios.getCodigoPucp().length()<=8 && usuarios.getDni().length()<=8 && usuarios.getCelular().length()<=9){
 
-            pstmt.executeUpdate();
+                pstmt.setString(1,usuarios.getNombres());
+                pstmt.setString(2,usuarios.getApellidos());
+                pstmt.setString(3,usuarios.getDni());
+                pstmt.setString(4,usuarios.getCelular());
+                pstmt.setString(5,usuarios.getCodigoPucp());
+                pstmt.setString(6,usuarios.getCorreoPucp());
+                pstmt.setString(7,usuarios.getCategorias());
+                pstmt.setString(8,usuarios.getRol());
+                pstmt.setInt(9, usuarios.getIdUsuarios());
+
+                pstmt.executeUpdate();
+
+
+                return true;
+            }
+            else {
+                return false;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
