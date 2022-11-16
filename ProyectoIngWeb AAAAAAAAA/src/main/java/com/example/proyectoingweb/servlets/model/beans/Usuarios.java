@@ -1,5 +1,7 @@
 package com.example.proyectoingweb.servlets.model.beans;
 
+import java.util.ArrayList;
+
 public class Usuarios {
     private int idUsuarios;
     private String nombres;
@@ -90,5 +92,11 @@ public class Usuarios {
 
     public void setFotoPerfil(String fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
+    }
+
+    public String getNombreYApellido(){
+        String[] strings = this.getNombres().split(" ");
+        String nombreYApellido = strings[0] + " " + strings[-2];
+        return nombreYApellido;
     }
 }

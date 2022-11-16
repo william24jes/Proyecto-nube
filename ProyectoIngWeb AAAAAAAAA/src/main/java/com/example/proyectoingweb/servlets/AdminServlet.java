@@ -133,7 +133,13 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setCorreoPucp(request.getParameter("Correo PUCP"));
                 usuarios.setDni(request.getParameter("DNI"));
 
+                //VALIDACION DNI-------------------
 
+                if (usuarios.getDni().length()<8){
+                    
+                }
+
+                //---------------------------------
 
                 usuarios.setCelular(request.getParameter("Celular"));
                 usuarios.setCategorias(request.getParameter("Categoría"));
