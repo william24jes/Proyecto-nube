@@ -250,7 +250,7 @@ public class DaoIncidencias extends DaoBase{
     public ArrayList<Incidencias> incidenciasDestXUser(String idUsuario){
         ArrayList<Incidencias> lista = new ArrayList<>();
         Incidencias incidencias;
-        String sql = "SELECT idIncidencia FROM incidencias_detacadas WHERE idUsuario = ?";
+        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ?";
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 

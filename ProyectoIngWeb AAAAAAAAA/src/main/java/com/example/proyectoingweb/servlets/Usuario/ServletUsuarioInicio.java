@@ -45,11 +45,11 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "misIncidencias":
-                /*
-                request.setAttribute("listaIncidenciasDestacadas", daoIncidencias.obtenerlistaIncidenciasDestacadas());
+                HttpSession sessionUsuario = request.getSession();
+                Usuarios user = (Usuarios) sessionUsuario.getAttribute("usuarioSession");
+                request.setAttribute("listaIncidenciasDestacadas", daoIncidencias.incidenciasDestXUser(""+user.getIdUsuarios()+""));
                 requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
                 requestDispatcher.forward(request, response);
-                */
                 break;
             case "registrarIncidencia":
                 request.setAttribute("listaZonasPUCP", daoZonaPucp.obtenerListaZonaPucp());
