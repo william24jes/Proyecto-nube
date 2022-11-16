@@ -1,6 +1,8 @@
 package com.example.proyectoingweb.servlets.Usuario;
 import com.example.proyectoingweb.servlets.model.beans.Incidencias;
+import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
+import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -68,6 +70,8 @@ public class ServletUsuarioInicio extends HttpServlet {
 
         DaoIncidencias daoIncidencias = new DaoIncidencias();
         Incidencias incidencias = new Incidencias();
+        Usuarios usuario = new Usuarios();
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
         switch (action) {
             case "guardar":
                 String nombre = request.getParameter("nombre");
@@ -77,7 +81,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 String zona = request.getParameter("zona");
 
 
-                incidencias.setIdUsuario(3);
+                usuario = daoUsuarios.buscarPorId("3");
+                incidencias.setUsuario(usuario);
                 incidencias.setNombre(nombre);
                 incidencias.setDescripcion(descripcion);
                 incidencias.setDestacado(1);

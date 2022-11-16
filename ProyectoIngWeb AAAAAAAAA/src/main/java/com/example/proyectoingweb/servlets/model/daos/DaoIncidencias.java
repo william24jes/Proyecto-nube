@@ -12,6 +12,7 @@ public class DaoIncidencias extends DaoBase{
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
         String sql = "SELECT * FROM mydb.incidencias";
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
 
         try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
@@ -21,7 +22,7 @@ public class DaoIncidencias extends DaoBase{
                 Incidencias incidencias = new Incidencias();
 
                 incidencias.setIdIncidencia(rs.getInt(1));
-                incidencias.setIdUsuario(rs.getInt(2));
+                incidencias.setUsuario(daoUsuarios.buscarPorId(""+rs.getInt(2)+""));
                 incidencias.setIdSeguridad(rs.getInt(3));
                 incidencias.setNombre(rs.getString(4));
                 incidencias.setDescripcion(rs.getString(5));
@@ -46,6 +47,7 @@ public class DaoIncidencias extends DaoBase{
 
     public ArrayList<Incidencias> obtenerlistaIncidenciasDestacadas() {
         ArrayList<Incidencias> listaIncidenciasDestacadas = new ArrayList<>();
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
 
         String sql = "SELECT incidencias.* , concat(users.nombres,' ',users.apellidos) as `Nombre de usuario` FROM mydb.incidencias incidencias , mydb.usuarios users where incidencias.destacado = 1 and  incidencias.idUsuario = users.idUsuario;\n";
 
@@ -57,7 +59,7 @@ public class DaoIncidencias extends DaoBase{
                 Incidencias incidencias = new Incidencias();
 
                 incidencias.setIdIncidencia(rs.getInt(1));
-                incidencias.setIdUsuario(rs.getInt(2));
+                incidencias.setUsuario(daoUsuarios.buscarPorId(""+rs.getInt(2)+""));
                 incidencias.setIdSeguridad(rs.getInt(3));
                 incidencias.setNombre(rs.getString(4));
                 incidencias.setDescripcion(rs.getString(5));
@@ -89,7 +91,7 @@ public class DaoIncidencias extends DaoBase{
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1,String.valueOf(incidencias.getIdUsuario()));
+            pstmt.setString(1,String.valueOf(incidencias.getUsuario().getIdUsuarios()));
             pstmt.setString(2,incidencias.getNombre());
             pstmt.setString(3,incidencias.getDescripcion());
             pstmt.setString(4,String.valueOf(incidencias.getDestacado()));

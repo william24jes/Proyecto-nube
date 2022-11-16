@@ -1,5 +1,6 @@
 package com.example.proyectoingweb.servlets.Inicio;
 
+import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -42,6 +43,7 @@ public class ServletIniciarSesion extends HttpServlet {
         String post = request.getParameter("post");
         post = (post == null) ? "iniciosesion" : post;
         DaoUsuarios daoUsuarios = new DaoUsuarios();
+        DaoIncidencias daoIncidencias = new DaoIncidencias();
         RequestDispatcher requestDispatcher;
         switch(post){
             case "iniciosesion":
@@ -57,6 +59,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 switch (rol){
                     case "Usuario PUCP":
+                        request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
                         requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
                         requestDispatcher.forward(request,response);
                         break;

@@ -2,7 +2,7 @@ package com.example.proyectoingweb.servlets.model.beans;
 
 public class Incidencias {
     private int idIncidencia;
-    private int idUsuario;
+    private Usuarios usuario;
     private int idSeguridad;
     private String nombre;
     private String descripcion;
@@ -52,12 +52,12 @@ public class Incidencias {
         this.idIncidencia = idIncidencia;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuarios getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
     }
 
     public String getNombre() {
