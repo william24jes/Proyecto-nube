@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoIncidencias extends DaoBase{
-    private String pass ="root";
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
         String sql = "SELECT * FROM mydb.incidencias";
