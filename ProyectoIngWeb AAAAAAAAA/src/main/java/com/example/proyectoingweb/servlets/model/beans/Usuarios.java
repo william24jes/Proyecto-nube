@@ -10,6 +10,7 @@ public class Usuarios {
     private String correoPucp;
     private String categorias;
     private String rol;
+    private String fotoPerfil;
 
     public int getIdUsuarios() {
         return idUsuarios;
@@ -81,5 +82,13 @@ public class Usuarios {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 }

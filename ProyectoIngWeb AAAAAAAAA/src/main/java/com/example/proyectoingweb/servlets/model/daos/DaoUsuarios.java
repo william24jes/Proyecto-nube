@@ -92,6 +92,7 @@ public class DaoUsuarios extends DaoBase{
                     usuarios.setCorreoPucp(rs.getString(7));
                     usuarios.setCategorias(rs.getString(8));
                     usuarios.setRol(rs.getString(9));
+                    usuarios.setFotoPerfil(rs.getString(11));
                 }
             }
 
@@ -164,13 +165,12 @@ public class DaoUsuarios extends DaoBase{
             pstmt.setString(6,usuarios.getCorreoPucp());
             pstmt.setString(7,usuarios.getCategorias());
             pstmt.setString(8,usuarios.getRol());
-            FileInputStream img = new FileInputStream("C:\\Users\\amanr\\Music\\Entregable-5\\ProyectoIngWeb AAAAAAAAA\\src\\main\\webapp\\assets\\img\\profile_upload.png");
-            pstmt.setBlob(9,img);
+            pstmt.setString(9,"perfilDefault.png");
             //pstmt.setNull(9, Types.VARCHAR);
 
             pstmt.executeUpdate();
 
-        } catch (SQLException | FileNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

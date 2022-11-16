@@ -120,7 +120,7 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <img src="assets/img/profile_upload.png" height="70px"/>
+                                    <img src="<%=i.getAnonimo()==1?"assets/img/fotosPerfil/perfilDefault.png":"assets/img/fotosPerfil/"+i.getUsuario().getFotoPerfil()%>" height="70px"/>
                                     <br>
                                     <div></div>
                                     <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=i.getNombre()%>

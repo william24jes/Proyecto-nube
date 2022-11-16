@@ -114,7 +114,7 @@
                         <div class="card shadow mb-4 ">
                             <!-- Card Header - Dropdown -->
                             <div class="card-header p-5 d-flex flex-row align-items-center justify-content-between">
-                                <img class="d-lg-block" src="assets/img/profile_upload.png" width="10%"/>
+                                <img class="d-lg-block" src="assets/img/fotosPerfil/<%=incidencia.getUsuario().getFotoPerfil()%>" width="10%"/>
                                 <br>
                                 <div></div>
                                 <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=incidencia.getNombre()%>
