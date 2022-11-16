@@ -95,8 +95,9 @@ public class Usuarios {
     }
 
     public String getNombreYApellido(){
-        String[] strings = this.getNombres().split(" ");
-        String nombreYApellido = strings[0] + " " + strings[-2];
+        String[] nombres = this.getNombres().split(" ");
+        String[] apellidos = this.getApellidos().split(" ");
+        String nombreYApellido = nombres[0] + " " + apellidos[0];
         return nombreYApellido;
     }
 }
