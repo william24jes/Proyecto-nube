@@ -1,6 +1,8 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+
 <%
     ArrayList<Usuarios> listaPermanente = (ArrayList<Usuarios>) request.getAttribute("listaPermanente");
     ArrayList<Usuarios> listaPaginada = (ArrayList<Usuarios>) request.getAttribute("listaPaginada");
@@ -54,7 +56,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px">Juan Perez
+                        <h1 class="name" style="margin-top: 25px"><%=userAdmin.%>
                             <br><h6>Administrador</h6><br>
                         </h1>
                     </div>

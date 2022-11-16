@@ -130,7 +130,7 @@
                                     <div></div>
                                     <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=i.getNombre()%>
                                         <div style="color:darkgray;display: flex;flex-direction: column">
-                                            <h6><%=i.getUsuario().getNombres()%> <%=i.getUsuario().getApellidos()%></h6>
+                                            <h6><%=(i.getAnonimo()==1)?"Anónimo":i.getUsuario().getNombres()+" "+i.getUsuario().getApellidos()%></h6>
                                             <h6>Registrado </h6></div>
                                         <div><a href="#" class="btn btn-warning btn-circle">
                                             <i class="fas fa-exclamation-triangle"> <%=i.getDestacado()%></i>

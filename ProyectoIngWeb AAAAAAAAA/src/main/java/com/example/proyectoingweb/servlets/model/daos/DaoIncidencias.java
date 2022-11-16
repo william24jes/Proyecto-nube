@@ -247,5 +247,25 @@ public class DaoIncidencias extends DaoBase{
         return incidencias;
     }
 
+    public ArrayList<Incidencias> incidenciasDestXUser(String idUsuario){
+        ArrayList<Incidencias> lista = new ArrayList<>();
+        Incidencias incidencias;
+        String sql = "SELECT idIncidencia FROM incidencias_detacadas WHERE idUsuario = ?";
+        try(Connection connection = this.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUsuario);
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    incidencias = this.buscarPorId(rs.getString(1));
+                    lista.add(incidencias);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+
 
 }
