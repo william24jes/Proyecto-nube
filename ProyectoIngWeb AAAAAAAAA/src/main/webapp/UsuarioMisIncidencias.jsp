@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaIncidenciasDestacadas" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
-
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 <html lang="en">
 
     <head>
@@ -56,7 +56,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px">José Bustamante
+                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombres()%> <%=usuarioSession.getApellidos()%>
                             <br><h6>Usuario PUCP</h6></br>
                         </h1>
                     </div>
@@ -130,7 +130,7 @@
                                                 style="width:75%"><%=incidenciasDestacadas.getNombre()%>
                                         </a>
                                         <div style="color:darkgray;display: flex;flex-direction: column">
-                                            <h6><%=incidenciasDestacadas.getNombreUsuarioQueDestaco()%>
+                                            <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%>
                                             </h6><h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
                                         </h6></div>
                                         </h4>
