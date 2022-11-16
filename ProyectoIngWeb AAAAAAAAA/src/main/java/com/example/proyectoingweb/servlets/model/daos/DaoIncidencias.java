@@ -10,7 +10,94 @@ import java.util.ArrayList;
 public class DaoIncidencias extends DaoBase{
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-        String sql = "SELECT * FROM incidencias";
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,16    ";
+
+        Usuarios seguridad;
+        Usuarios usuario;
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+
+        try (Connection connection = this.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Incidencias incidencias = new Incidencias();
+
+                incidencias.setIdIncidencia(rs.getInt(1));
+                usuario = daoUsuarios.buscarPorId(rs.getString(2));
+                incidencias.setUsuario(usuario);
+                seguridad = daoUsuarios.buscarPorId(rs.getString(3));
+                incidencias.setSeguridad(seguridad);
+                incidencias.setNombre(rs.getString(4));
+                incidencias.setDescripcion(rs.getString(5));
+                ZonaPucp zonaPucp = daoZonaPucp.obtenerXId(""+rs.getInt(6)+"");
+                incidencias.setZonaPucp(zonaPucp);
+                incidencias.setTipo(rs.getString(7));
+                incidencias.setUbicacion(rs.getString(8));
+                incidencias.setFoto(rs.getString(9));
+                incidencias.setDestacado(rs.getInt(10));
+                incidencias.setDatetime(rs.getString(11));
+                incidencias.setAnonimo(rs.getInt(12));
+                incidencias.setUrgencia(rs.getString(13));
+                incidencias.setEstadoIncidencia(rs.getString(14));
+                incidencias.setNumEstrellas(rs.getInt(15));
+
+                listaIncidencias.add(incidencias);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaIncidencias;
+    }
+
+    public ArrayList<Incidencias> paginarIncidencias(int i){
+        ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
+        int inicio=16*(i-1);
+
+        Usuarios seguridad;
+        Usuarios usuario;
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT "+inicio+","+"16";
+
+        try(Connection connection = this.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while(rs.next()){
+                Incidencias incidencias = new Incidencias();
+
+                incidencias.setIdIncidencia(rs.getInt(1));
+                usuario = daoUsuarios.buscarPorId(rs.getString(2));
+                incidencias.setUsuario(usuario);
+                seguridad = daoUsuarios.buscarPorId(rs.getString(3));
+                incidencias.setSeguridad(seguridad);
+                incidencias.setNombre(rs.getString(4));
+                incidencias.setDescripcion(rs.getString(5));
+                ZonaPucp zonaPucp = daoZonaPucp.obtenerXId(""+rs.getInt(6)+"");
+                incidencias.setZonaPucp(zonaPucp);
+                incidencias.setTipo(rs.getString(7));
+                incidencias.setUbicacion(rs.getString(8));
+                incidencias.setFoto(rs.getString(9));
+                incidencias.setDestacado(rs.getInt(10));
+                incidencias.setDatetime(rs.getString(11));
+                incidencias.setAnonimo(rs.getInt(12));
+                incidencias.setUrgencia(rs.getString(13));
+                incidencias.setEstadoIncidencia(rs.getString(14));
+                incidencias.setNumEstrellas(rs.getInt(15));
+
+                listaIncidencias.add(incidencias);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaIncidencias;
+    }
+
+    public ArrayList<Incidencias> obtenerlistaIncidenciasCompleta() {
+        ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia";
 
         Usuarios seguridad;
         Usuarios usuario;
@@ -159,4 +246,6 @@ public class DaoIncidencias extends DaoBase{
 
         return incidencias;
     }
+
+
 }

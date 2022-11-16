@@ -11,11 +11,15 @@ import jakarta.servlet.annotation.*;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 @WebServlet(name = "ServletUsuarioInicio", value = "/Inicio")
 public class ServletUsuarioInicio extends HttpServlet {
+
+    private ArrayList<Incidencias> listaPermanente;
+    private ArrayList<Incidencias> listaPaginada;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -25,10 +29,14 @@ public class ServletUsuarioInicio extends HttpServlet {
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         String idIncidencia;
         Incidencias incidencia;
+        int idPage;
 
         switch (action) {
             case "listar":
-                request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
+
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
+                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
+                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompleta());
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
                 requestDispatcher.forward(request, response);
                 break;
@@ -69,6 +77,17 @@ public class ServletUsuarioInicio extends HttpServlet {
                 } else { //id no encontrado
                     response.sendRedirect(request.getContextPath() + "/Inicio?action=listar");
                 }
+                break;
+
+            case "page":
+                idPage = Integer.parseInt(request.getParameter("id"));
+                setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
+                request.setAttribute("listaIncidenciasPermanente",getListaPermanente());
+                request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+
+                requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
+                requestDispatcher.forward(request, response);
+
                 break;
 
         }
@@ -112,6 +131,22 @@ public class ServletUsuarioInicio extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;
         }
+    }
+
+    public ArrayList<Incidencias> getListaPermanente() {
+        return listaPermanente;
+    }
+
+    public void setListaPermanente(ArrayList<Incidencias> listaPermanente) {
+        this.listaPermanente = listaPermanente;
+    }
+
+    public ArrayList<Incidencias> getListaPaginada() {
+        return listaPaginada;
+    }
+
+    public void setListaPaginada(ArrayList<Incidencias> listaPaginada) {
+        this.listaPaginada = listaPaginada;
     }
 }
 

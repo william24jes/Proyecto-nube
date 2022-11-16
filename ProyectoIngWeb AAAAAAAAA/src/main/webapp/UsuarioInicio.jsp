@@ -1,8 +1,12 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
-<jsp:useBean id="listaIncidencias" scope="session" type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
+<%
+  ArrayList<Incidencias> listaPermanente = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPermanente");
+  ArrayList<Incidencias> listaPaginada = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPaginada");
 
+%>
 
 <html lang="en">
 
@@ -110,7 +114,7 @@
 
 
             <div class="row">
-                <% for (Incidencias incidencias : listaIncidencias) { %>
+                <% for (Incidencias incidencias : listaPaginada) { %>
               <div class="col-lg-6">
                 <!-- Dropdown Card Example -->
                 <div class="card shadow mb-4">
@@ -153,17 +157,11 @@
               </div>
                 <% } %>
             </div>
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" style="margin-top: 20px;">
               <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-                </li>
+                <%for (double i=1;i<=Math.ceil((double)(listaPermanente.size())/16.0);i++){%>
+                <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/Inicio?action=page&id=<%=(int)i%>"><%=(int)i%></a></li>
+                <%}%>
               </ul>
             </nav>
           </div>
