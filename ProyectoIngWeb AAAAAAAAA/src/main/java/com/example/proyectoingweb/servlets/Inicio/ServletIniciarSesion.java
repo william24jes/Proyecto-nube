@@ -88,12 +88,14 @@ public class ServletIniciarSesion extends HttpServlet {
                              */
                             break;
                         default:
-                            response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?error");
+                            request.getSession().setAttribute("error", "Error en usuario o contraseña");
+                            response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion");
                             break;
                     }
                 }
                 else{
-                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?error");
+                    request.getSession().setAttribute("error", "Error en usuario o contraseña");
+                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion");
                 }
                 break;
             case "doblef":

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="en">
 
   <head>
@@ -92,9 +93,10 @@
                           <label class="form-check-label" for="rememberMe">Recordame</label>
                         </div>
                       </div>
-                      <% if (request.getParameter("error") != null) { %>
-                      <div class="text-danger mb-2">Error en usuario o contraseña</div>
-                      <% } %>
+                      <% if (session.getAttribute("error") != null) { %>
+                      <div class="text-danger mb-2"><%=session.getAttribute("error")%></div>
+                      <% session.removeAttribute("error");
+                      } %>
                       <div class="col-12">
                         <a class="nav-link  " >
                           <button type="submit" class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
