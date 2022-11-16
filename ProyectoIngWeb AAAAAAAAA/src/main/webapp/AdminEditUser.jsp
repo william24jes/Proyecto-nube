@@ -93,7 +93,7 @@
                 <div class="col-xl-4">
                   <div class="card mb-4 mb-xl-0">
                     <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
-                      <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile" class="rounded-circle">
+                      <img src="assets/img/fotosPerfil/<%=usuarios.getFotoPerfil()%>" width=70% alt="Profile" class="rounded-circle">
                       <h2><%=usuarios.getNombres()%></h2>
                       <h5><%=usuarios.getRol()%></h5>
                     </div>
