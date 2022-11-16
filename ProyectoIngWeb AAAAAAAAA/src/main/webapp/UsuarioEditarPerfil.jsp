@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+
 <html lang="en">
 
   <head>
@@ -53,7 +55,7 @@
 
         <div class="d-md-flex align-items-center">
           <div>
-            <h1 class="name" style="margin-top: 25px">José Bustamante
+            <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombres()%> <%=usuarioSession.getApellidos()%>
               <br><h6>Usuario PUCP</h6></br>
             </h1>
           </div>
@@ -139,38 +141,32 @@
 
                           <div class="row">
                             <div class="col-lg-3 col-md-4 label ">Nombre completo</div>
-                            <div class="col-lg-9 col-md-8">José Manuel Bustamante Richelli</div>
+                            <div class="col-lg-9 col-md-8"><%=usuarioSession.getNombres()%> <%=usuarioSession.getApellidos()%></div>
                           </div>
 
                           <div class="row">
-                            <div class="col-lg-3 col-md-4 label ">Cargo</div>
+                            <div class="col-lg-3 col-md-4 label ">Rol</div>
                             <div class="col-lg-9 col-md-8">Usuario PUCP</div>
                           </div>
 
                           <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Edad</div>
-                            <div class="col-lg-9 col-md-8">22 años</div>
-                          </div>
-
-
-                          <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Pais</div>
-                            <div class="col-lg-9 col-md-8">Perú</div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Dirección</div>
-                            <div class="col-lg-9 col-md-8">Av Las Nuevas Lomas, Lima</div>
+                            <div class="col-lg-3 col-md-4 label">Dni</div>
+                            <div class="col-lg-9 col-md-8"><%=usuarioSession.getDni()%></div>
                           </div>
 
                           <div class="row">
                             <div class="col-lg-3 col-md-4 label">Telefono</div>
-                            <div class="col-lg-9 col-md-8">986-126-855</div>
+                            <div class="col-lg-9 col-md-8"><%=usuarioSession.getCelular()%></div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Código</div>
+                            <div class="col-lg-9 col-md-8"><%=usuarioSession.getCodigoPucp()%></div>
                           </div>
 
                           <div class="row">
                             <div class="col-lg-3 col-md-4 label">Correo</div>
-                            <div class="col-lg-9 col-md-8">ajulioflores@pucp.edu.pe</div>
+                            <div class="col-lg-9 col-md-8"><%=usuarioSession.getCorreoPucp()%></div>
                           </div>
 
                         </div>
@@ -182,7 +178,7 @@
                             <div class="row mb-3">
                               <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
                               <div class="col-md-8 col-lg-9">
-                                <img src="assets/img/perfiles/perfil1.svg" height="150" width="150"  alt="Profile">
+                                <img src="assets/img/fotosPerfil/<%=usuarioSession.getFotoPerfil()%>" height="150" width="150"  alt="Profile">
                                 <div class="pt-2">
                                   <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                                   <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -193,7 +189,7 @@
                             <div class="row mb-3">
                               <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre Completo</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="fullName" type="text" class="form-control" id="fullName" value="Julio Manuel Flores Richelli" disabled>
+                                <input name="fullName" type="text" class="form-control" id="fullName" value="<%=usuarioSession.getNombres()%> <%=usuarioSession.getApellidos()%>" disabled>
                               </div>
                             </div>
 
@@ -201,31 +197,18 @@
                             <div class="row mb-3">
                               <label for="Email" class="col-md-4 col-lg-3 col-form-label">Correo</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="email" type="email" class="form-control" id="Email" value="ajulioflores@pucp.edu.pe" disabled>
-                              </div>
-                            </div>
-
-
-                            <div class="row mb-3">
-                              <label for="Country" class="col-md-4 col-lg-3 col-form-label">Pais</label>
-                              <div class="col-md-8 col-lg-9">
-                                <input name="country" type="text" class="form-control" id="Country" value="Perú">
-                              </div>
-                            </div>
-
-                            <div class="row mb-3">
-                              <label for="Address" class="col-md-4 col-lg-3 col-form-label">Direcion</label>
-                              <div class="col-md-8 col-lg-9">
-                                <input name="address" type="text" class="form-control" id="Address" value="Av Las Nuevas Lomas, Lima">
+                                <input name="email" type="email" class="form-control" id="Email" value="<%=usuarioSession.getCorreoPucp()%>" disabled>
                               </div>
                             </div>
 
                             <div class="row mb-3">
                               <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
                               <div class="col-md-8 col-lg-9">
-                                <input name="phone" type="text" class="form-control" id="Phone" value="986-126-855">
+                                <input name="phone" type="text" class="form-control" id="Phone" value="<%=usuarioSession.getCelular()%>">
                               </div>
                             </div>
+
+                            
 
 
 
