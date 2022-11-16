@@ -61,42 +61,39 @@ public class ServletIniciarSesion extends HttpServlet {
                 String password = request.getParameter("password");
                 String correo = request.getParameter("correo");
 
-                String rol = daoUsuarios.obtenerRol(codigo, password, correo);
                 Usuarios usuarioValido = daoUsuarios.validarUsuarioPassword(codigo, password, correo);
-
-                switch (rol){
-                    case "Usuario PUCP":
-                        if(usuarioValido != null){
+                if(usuarioValido != null) {
+                    switch (usuarioValido.getRol()) {
+                        case "Usuario PUCP":
                             HttpSession sessionUsuario = request.getSession();
                             sessionUsuario.setAttribute("usuarioSession", usuarioValido);
                             sessionUsuario.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
-                            response.sendRedirect(request.getContextPath()+"/Inicio");
-                        }else{
-                            response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?error");
-                        }
-                        /*
-                        request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
-                        requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
-                        requestDispatcher.forward(request,response);
-                        */
-                        break;
-                    case "Seguridad":
-                        if(usuarioValido != null){
+                            response.sendRedirect(request.getContextPath() + "/Inicio");
+                            /*
+                            request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
+                            requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
+                            requestDispatcher.forward(request,response);
+                            */
+                            break;
+                        case "Seguridad":
                             HttpSession sessionSeguridad = request.getSession();
                             sessionSeguridad.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
                             sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
-                            response.sendRedirect(request.getContextPath()+"/SeguridadInicio");
-                        }
-                        /*
-                        request.setAttribute("correo", correo);
-                        requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
-                        requestDispatcher.forward(request,response);
-                         */
-                        break;
-                    default:
-                        requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
-                        requestDispatcher.forward(request,response);
-                        break;
+                            response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
+
+                            /*
+                            request.setAttribute("correo", correo);
+                            requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
+                            requestDispatcher.forward(request,response);
+                             */
+                            break;
+                        default:
+                            response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?error");
+                            break;
+                    }
+                }
+                else{
+                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?error");
                 }
                 break;
             case "doblef":

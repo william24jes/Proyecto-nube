@@ -140,8 +140,7 @@ public class DaoUsuarios extends DaoBase{
 
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
-                    int usuarioId = rs.getInt(1);
-                    usuario = this.buscarPorId(String.valueOf(usuarioId));
+                    usuario = this.buscarPorId(rs.getString(1));
                 }
             }
         }
