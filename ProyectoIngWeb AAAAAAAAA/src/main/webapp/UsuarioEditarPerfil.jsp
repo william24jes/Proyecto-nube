@@ -106,7 +106,7 @@
                   <div class="card mb-4 mb-xl-0">
                     <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
 
-                      <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile" class="rounded-circle">
+                      <img src="assets/img/fotosPerfil/<%=usuarioSession.getFotoPerfil()%>" width=70% alt="Profile" class="rounded-circle">
                       <h2>José Bustamante</h2>
                       <h5>Usuario PUCP</h5>
 
@@ -208,7 +208,7 @@
                               </div>
                             </div>
 
-                            
+
 
 
 
