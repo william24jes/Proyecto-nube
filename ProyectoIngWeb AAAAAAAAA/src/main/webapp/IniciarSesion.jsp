@@ -69,14 +69,14 @@
                         <label for="correo" class="form-label">Correo</label>
                         <div class="input-group has-validation">
                           <span class="input-group-text" id="inputGroupPrepend">@</span>
-                          <input type="text" name="correo" class="form-control" id="correo" required>
+                          <input required type="text" name="correo" class="form-control" id="correo">
                           <div class="invalid-feedback">Ingresa tu usuario.</div>
                         </div>
                       </div>
 
                       <div class="col-12">
                         <label for="codigo" class="form-label">Código PUCP</label>
-                        <input type="text" name="codigo" class="form-control" id="codigo" required>
+                        <input  required type="text" name="codigo" class="form-control" id="codigo">
                         <div class="invalid-feedback">Ingresa tu código!</div>
                       </div>
 
@@ -86,17 +86,17 @@
                         <div class="invalid-feedback">Ingresa tu contraseña!</div>
                         <p class="small mb-0"><a href="<%=request.getContextPath()%>/ServletIniciarSesion?action=olvidoContraseña">¿Olvidaste tu contraseña?</a></p>
                       </div>
+                      <% if (session.getAttribute("error") != null) { %>
+                      <p class="text-danger small mb-0"><%=session.getAttribute("error")%></p>
+                      <% session.removeAttribute("error");
+                      } %>
 
                       <div class="col-12">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                          <label class="form-check-label" for="rememberMe">Recordame</label>
+                          <label class="form-label" for="rememberMe">Recordame</label>
                         </div>
                       </div>
-                      <% if (session.getAttribute("error") != null) { %>
-                      <div class="text-danger mb-2"><%=session.getAttribute("error")%></div>
-                      <% session.removeAttribute("error");
-                      } %>
                       <div class="col-12">
                         <a class="nav-link  " >
                           <button type="submit" class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
@@ -133,6 +133,28 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                  form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                  }, false)
+                })
+      })()
+    </script>
 
   </body>
 
