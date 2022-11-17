@@ -55,7 +55,7 @@
 
         <div class="d-md-flex align-items-center">
           <div>
-            <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombres()%> <%=usuarioSession.getApellidos()%>
+            <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
               <br><h6>Usuario PUCP</h6></br>
             </h1>
           </div>
@@ -107,7 +107,7 @@
                     <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
 
                       <img src="assets/img/fotosPerfil/<%=usuarioSession.getFotoPerfil()%>" width=70% alt="Profile" class="rounded-circle">
-                      <h2>José Bustamante</h2>
+                      <h2><%=usuarioSession.getNombreYApellido()%></h2>
                       <h5>Usuario PUCP</h5>
 
                     </div>

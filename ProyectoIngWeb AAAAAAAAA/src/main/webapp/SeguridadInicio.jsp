@@ -63,7 +63,7 @@
 
         <div class="d-md-flex align-items-center">
             <div>
-                <h1 class="name" style="margin-top: 25px"><%=seguridadSession.getNombres()%> <%=seguridadSession.getApellidos()%>
+                <h1 class="name" style="margin-top: 25px"><%=seguridadSession.getNombreYApellido()%>
                     <br><h6>Seguridad</h6></br>
                 </h1>
             </div>

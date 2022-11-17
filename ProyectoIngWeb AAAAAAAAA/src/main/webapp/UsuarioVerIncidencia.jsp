@@ -135,7 +135,7 @@
                                         <div><h4>Descripción:</h4></div>
                                         <%=incidencia_send_jsp.getDescripcion()%>
                                         <div><br><h4>Zona PUCP:</h4></div>
-                                        <%=incidencia_send_jsp.getNombreZonaPucp()%>
+                                        <%=incidencia_send_jsp.getZonaPucp().getNombreZona()%>
                                         <div><br><h4>Ubicación: </h4></div>
                                         <button type="button" class="btn btn-primary btn-lg"
                                                 style="background-color: red;border:red">Ver en el mapa
