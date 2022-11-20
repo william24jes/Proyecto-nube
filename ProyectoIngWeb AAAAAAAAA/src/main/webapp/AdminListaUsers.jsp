@@ -82,7 +82,7 @@
                                 </form>
                             </div>
                         </li>
-                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>">Cerrar sesión</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/AdminServlet?action=cerrarSesion">Cerrar sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>

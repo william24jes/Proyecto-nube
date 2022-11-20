@@ -50,9 +50,15 @@ public class ServletSeguridadInicio extends HttpServlet {
                 break;
 
             case "cerrarSesion":
+                HttpSession session = request.getSession();
+                session.invalidate();
+                response.sendRedirect(request.getContextPath());
+                /*
                 requestDispatcher = request.getRequestDispatcher("index.jsp");
                 requestDispatcher.forward(request,response);
+                */
                 break;
+
 
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));

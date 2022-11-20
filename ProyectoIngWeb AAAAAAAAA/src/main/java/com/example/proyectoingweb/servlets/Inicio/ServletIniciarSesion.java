@@ -17,23 +17,43 @@ public class ServletIniciarSesion extends HttpServlet {
         String action = request.getParameter("action");
         action = (action == null) ? "iniciarSesion" : action;
         RequestDispatcher requestDispatcher;
-
-        switch (action){
+        HttpSession session = request.getSession();
+        switch (action) {
             case "iniciarSesion":
-                requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
-                requestDispatcher.forward(request,response);
+                if (session.getAttribute("usuarioSession") == null) {
+                    if (session.getAttribute("seguridadSession") == null) {
+                        if (session.getAttribute("userAdmin") == null) {
+                            requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
+                            requestDispatcher.forward(request, response);
+                        }else{
+                            if (session.getAttribute("userAdmin") != null) {
+                                response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                            }
+                        }
+                    } else {
+                        if (session.getAttribute("seguridadSession") != null) {
+                            response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
+                        }
+                    }
+                } else {
+                    if (session.getAttribute("usuarioSession") != null) {
+                        response.sendRedirect(request.getContextPath() + "/Inicio");
+                    }
+
+                }
+
                 break;
             case "olvidoContraseña":
                 requestDispatcher = request.getRequestDispatcher("OlvidoContraseña.jsp");
-                requestDispatcher.forward(request,response);
+                requestDispatcher.forward(request, response);
                 break;
             case "inicioUsuario":
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
-                requestDispatcher.forward(request,response);
+                requestDispatcher.forward(request, response);
                 break;
             case "crearCuenta":
                 requestDispatcher = request.getRequestDispatcher("InicioRegistrarse.jsp");
-                requestDispatcher.forward(request,response);
+                requestDispatcher.forward(request, response);
                 break;
 
         }
@@ -46,14 +66,14 @@ public class ServletIniciarSesion extends HttpServlet {
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         DaoIncidencias daoIncidencias = new DaoIncidencias();
         RequestDispatcher requestDispatcher;
-        switch(post){
+        switch (post) {
             case "iniciosesion":
                 Usuarios usuario = (Usuarios) request.getSession().getAttribute("usuarioSession");
-                if(usuario != null && usuario.getIdUsuarios() != 0){
+                if (usuario != null && usuario.getIdUsuarios() != 0) {
                     response.sendRedirect(request.getContextPath());
-                }else{
+                } else {
                     requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
-                    requestDispatcher.forward(request,response);
+                    requestDispatcher.forward(request, response);
                 }
                 break;
             case "validar":
@@ -62,7 +82,7 @@ public class ServletIniciarSesion extends HttpServlet {
                 String correo = request.getParameter("correo");
 
                 Usuarios usuarioValido = daoUsuarios.validarUsuarioPassword(codigo, password, correo);
-                if(usuarioValido != null) {
+                if (usuarioValido != null) {
                     switch (usuarioValido.getRol()) {
                         case "Usuario PUCP":
                             HttpSession sessionUsuario = request.getSession();
@@ -87,22 +107,21 @@ public class ServletIniciarSesion extends HttpServlet {
                             break;
                         case "Administrador":
                             HttpSession sessionAdmin = request.getSession();
-                            sessionAdmin.setAttribute("userAdmin",usuarioValido);
+                            sessionAdmin.setAttribute("userAdmin", usuarioValido);
                             response.sendRedirect(request.getContextPath() + "/AdminServlet");
                             break;
                         default:
                             request.getSession().setAttribute("error", "Error en usuario o contraseña");
-                            response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion");
+                            response.sendRedirect(request.getContextPath() + "/ServletIniciarSesion");
                             break;
                     }
-                }
-                else{
+                } else {
                     request.getSession().setAttribute("error", "Error en usuario o contraseña");
-                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion");
+                    response.sendRedirect(request.getContextPath() + "/ServletIniciarSesion");
                 }
                 break;
             case "doblef":
-                response.sendRedirect(request.getContextPath()+"/SeguridadInicio");
+                response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
                 break;
         }
     }

@@ -95,6 +95,11 @@ public class AdminServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
 
                 break;
+                //añadido cerrar sesión
+            case "cerrarSesion":
+                session.invalidate();
+                response.sendRedirect(request.getContextPath());
+                break;
         }
     }
 
