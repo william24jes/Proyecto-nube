@@ -5,8 +5,8 @@
 <%
   ArrayList<Incidencias> listaPermanente = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPermanente");
   ArrayList<Incidencias> listaPaginada = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPaginada");
-
 %>
+
 
 <html lang="en">
 
@@ -137,8 +137,8 @@
                       <br>
                       <div class="row">
                         <div class="col-auto">
-                          <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em">
+                          <img class="crop" src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidencias.getIdIncidencia()%>"
+                               style="height: 80px;border-radius: 1em"/>
                         </div>
                         <div class="col-auto">
                           <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"

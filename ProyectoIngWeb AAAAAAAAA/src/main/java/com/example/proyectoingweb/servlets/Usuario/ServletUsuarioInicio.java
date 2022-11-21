@@ -1,4 +1,5 @@
 package com.example.proyectoingweb.servlets.Usuario;
+
 import com.example.proyectoingweb.servlets.model.beans.Incidencias;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
@@ -11,15 +12,20 @@ import jakarta.servlet.annotation.*;
 
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 @WebServlet(name = "ServletUsuarioInicio", value = "/Inicio")
+@MultipartConfig(maxFileSize = 16177215)
+
 public class ServletUsuarioInicio extends HttpServlet {
 
     private ArrayList<Incidencias> listaPermanente;
     private ArrayList<Incidencias> listaPaginada;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -30,15 +36,14 @@ public class ServletUsuarioInicio extends HttpServlet {
         String idIncidencia;
         Incidencias incidencia;
         int idPage;
-
+        HttpSession session = request.getSession();
         switch (action) {
             case "listar":
-
-                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
-                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
-                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompleta());
-                requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
-                requestDispatcher.forward(request, response);
+                    request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
+                    request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
+                    setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompleta());
+                    requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
+                    requestDispatcher.forward(request, response);
                 break;
             case "perfil":
                 requestDispatcher = request.getRequestDispatcher("UsuarioEditarPerfil.jsp");
@@ -47,7 +52,7 @@ public class ServletUsuarioInicio extends HttpServlet {
             case "misIncidencias":
                 HttpSession sessionUsuario = request.getSession();
                 Usuarios user = (Usuarios) sessionUsuario.getAttribute("usuarioSession");
-                request.setAttribute("listaIncidenciasDestacadas", daoIncidencias.incidenciasDestXUser(""+user.getIdUsuarios()+""));
+                request.setAttribute("listaIncidenciasDestacadas", daoIncidencias.incidenciasDestXUser("" + user.getIdUsuarios() + ""));
                 requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
                 requestDispatcher.forward(request, response);
                 break;
@@ -57,7 +62,6 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "cerrarSesion":
-                HttpSession session = request.getSession();
                 session.invalidate();
                 response.sendRedirect(request.getContextPath());
                 /*
@@ -82,7 +86,7 @@ public class ServletUsuarioInicio extends HttpServlet {
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
                 setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
-                request.setAttribute("listaIncidenciasPermanente",getListaPermanente());
+                request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                 request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
 
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
@@ -93,10 +97,10 @@ public class ServletUsuarioInicio extends HttpServlet {
         }
     }
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
         DaoIncidencias daoIncidencias = new DaoIncidencias();
         Incidencias incidencias = new Incidencias();
         Usuarios usuario;
@@ -105,14 +109,23 @@ public class ServletUsuarioInicio extends HttpServlet {
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         switch (action) {
             case "guardar":
+                InputStream inputStream; // input stream of the upload file
+                String idusuario = request.getParameter("id");
                 String nombre = request.getParameter("nombre");
                 String descripcion = request.getParameter("descripcion");
                 String tipo = request.getParameter("tipo");
                 String nivel = request.getParameter("nivel");
                 String zona = request.getParameter("zona");
+                Part filePart = request.getPart("foto1");
+                inputStream = filePart.getInputStream();
+                if (filePart != null) {
+                    // prints out some information for debugging
+                    System.out.println(filePart.getContentType());
 
-
-                usuario = daoUsuarios.buscarPorId("3");
+                    // obtains input stream of the upload file
+                    inputStream = filePart.getInputStream();
+                }
+                usuario = daoUsuarios.buscarPorId(idusuario);
                 incidencias.setUsuario(usuario);
                 incidencias.setNombre(nombre);
                 incidencias.setDescripcion(descripcion);
@@ -127,7 +140,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencias.setDatetime(formattedDate);
                 incidencias.setAnonimo(0);
                 incidencias.setEstadoIncidencia("Registrado");
-                daoIncidencias.guardarIncidencias(incidencias);
+                daoIncidencias.guardarIncidencias(incidencias, inputStream);
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;
         }

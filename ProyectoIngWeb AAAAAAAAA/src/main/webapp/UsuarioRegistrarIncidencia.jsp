@@ -2,9 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaZonasPUCP" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.ZonaPucp>"/>
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+             class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang=com.example.proyectoingweb.servlets.model.daos.DaoIncidencias"en">
 
     <head>
         <meta charset="utf-8">
@@ -56,8 +58,9 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px">José Bustamante
-                            <br><h6>Usuario PUCP</h6></br>
+                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
+                            <br><h6><%=usuarioSession.getRol()%>
+                            </h6></br>
                         </h1>
                     </div>
                 </div>
@@ -123,9 +126,12 @@
                                     <div class="card mb-4">
                                         <div class="card-header fw-bold"> Registrar Incidencia</div>
                                         <div class="card-body">
-                                            <form method="post"
-                                                  action="<%=request.getContextPath()%>/Inicio?action=guardar">
+                                            <form method="post" action="<%=request.getContextPath()%>/Inicio?action=guardar" enctype="multipart/form-data">
                                                 <!-- Form Group (username)-->
+                                                <div class="mb-3">
+                                                    <input class="form-control " id="idUsuario" type="hidden"
+                                                           name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                                </div>
                                                 <div class="mb-3">
                                                     <label for="inputUsername">Nombre de la Incidencia: </label>
                                                     <input class="form-control " id="inputUsername" type="text"
@@ -148,7 +154,9 @@
                                                             <option selected>Seleccione...</option>
                                                             <option value="Reporte de robos">Reporte de robos</option>
                                                             <option value="Objetos perdidos">Objetos perdidos</option>
-                                                            <option value="Infraestructura en mal estado">Infraestructura en mal estado</option>
+                                                            <option value="Infraestructura en mal estado">
+                                                                Infraestructura en mal estado
+                                                            </option>
                                                             <option value="Ambulancia PUCP">Ambulancia PUCP</option>
                                                             <option value="Accidente y Otros">Accidente y Otros</option>
                                                         </select>
@@ -172,7 +180,8 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-2 col-form-label"><h5>Zona PUCP</h5></label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example" name="zona">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                                name="zona">
                                                             <option selected>Seleccione...</option>
                                                             <% for (ZonaPucp zonas : listaZonasPUCP) { %>
                                                             <option value="<%=zonas.getIdZonaPucp()%>"><%=zonas.getNombreZona()%>
@@ -206,24 +215,19 @@
                                                     <label for="customFile">Subir fotos de la
                                                         incidencia: </label>
                                                     <input type="file" class="form-control" style="width: 350px"
-                                                           id="customFile"/>
+                                                           id="customFile" name="foto1" />
                                                 </div>
                                                 <!-- Form Group (location)-->
                                                 <!-- Form Group (email address)-->
-
-
                                                 <!-- Form Row-->
-
                                                 <!-- Save changes button-->
-
                                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                    <a class="nav-link  ">
                                                         <button type="submit" class="btn btn-primary">Guardar
                                                         </button>
                                                         <button class="btn btn-primary"
-                                                           href="<%=request.getContextPath()%>/Inicio">Cancelar
+                                                                href="<%=request.getContextPath()%>/Inicio">Cancelar
                                                         </button>
-                                                    </a>
+
 
                                                     <div class="form-check form-switch">
                                                         <input class="form-check-input" type="checkbox"
