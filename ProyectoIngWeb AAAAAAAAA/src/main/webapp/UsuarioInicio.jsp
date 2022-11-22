@@ -125,9 +125,15 @@
 
                           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <a href = "<%=request.getContextPath()%>/Inicio?action=verIncidencia" disabled=""><h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%></h6></a>
-                    <a href="#" class="btn btn-warning btn-circle">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </a>
+
+                    <form method="post" action="<%=request.getContextPath()%>/DestacarIncidenciaServlet?action=destacarIncidencia&id=<%=incidencias.getIdIncidencia()%>" enctype="multipart/form-data">
+
+                      <button type="submit" class="btn btn-warning btn-circle">
+                            <i class="fas fa-exclamation-triangle"> <%=incidencias.getDestacado()%></i>
+                        </button>
+                    </form>
+
+
 
                   </div>
                   <!-- Card Body -->

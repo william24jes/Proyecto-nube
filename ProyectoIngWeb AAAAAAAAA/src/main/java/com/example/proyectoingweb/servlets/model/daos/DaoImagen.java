@@ -25,7 +25,6 @@ public class DaoImagen extends DaoBase {
                 }
                 return content;
             }
-
         } catch (SQLException error) {
             error.printStackTrace();
         }

@@ -273,4 +273,27 @@ public class DaoIncidencias extends DaoBase {
         return lista;
     }
 
+    public ArrayList<Usuarios> IdDeUsuariosQueDestacaron(String idIncidencia) {
+        ArrayList<Usuarios> lista_Usuarios = new ArrayList<>();
+        Usuarios usuarios;
+        DaoUsuarios daoUsers=null;
+        String sql = "SELECT nombres,apellidos, incidencias.idIncidencia, usuarios.idUsuario,incidencias.nombre FROM mydb.incidencias_destacadas, usuarios,incidencias\n" +
+                " where usuarios.idUsuario = incidencias_destacadas.idUsuario and incidencias.idIncidencia = incidencias_destacadas.idIncidencia\n" +
+                " and incidencias.idIncidencia=?\n" +
+                " order by idIncidencia;";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idIncidencia);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    usuarios = daoUsers.buscarPorId(rs.getString(4));
+                    lista_Usuarios.add(usuarios);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista_Usuarios;
+    }
 }
