@@ -1,6 +1,11 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoIncidencias" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.Usuario.ServletUsuarioInicio"%>
+
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletSeguridadInicio" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
@@ -139,21 +144,30 @@
 
                                         <form method="post"
                                               action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia"
-                                              >
+                                        >
                                             <input class="form-control " id="idUsuario" type="hidden"
                                                    name="id" value="<%=usuarioSession.getIdUsuarios()%>">
                                             <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
                                                    name="Cantidad_destacados" value="<%=incidencias.getDestacado()%>">
                                             <input class="form-control" id="idIncidencia" type="hidden"
                                                    name="idIncidencia" value="<%=incidencias.getIdIncidencia()%>">
-
-
-
+                                            <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
+                                            <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
+                                            <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                                            <%ArrayList<Usuarios> lista_Usuarios =daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidencias.getIdIncidencia()));%>
+                                            <%Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
+                                            <%boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios,user2);%>
+                                            <%if(validacion) {%>
                                             <button type="submit" class="btn btn-warning btn-circle">
                                                 <i class="fas fa-exclamation-triangle"><%=incidencias.getDestacado()%>
                                                 </i>Destacada!
                                             </button>
-
+                                            <%} else {%>
+                                            <button type="submit" class="btn btn-warning btn-circle">
+                                                <i class="fas fa-exclamation-triangle"><%=incidencias.getDestacado()%>
+                                                </i>Puedes Destacar Ahora (:
+                                            </button>
+                                            <%}%>
                                         </form>
 
 
