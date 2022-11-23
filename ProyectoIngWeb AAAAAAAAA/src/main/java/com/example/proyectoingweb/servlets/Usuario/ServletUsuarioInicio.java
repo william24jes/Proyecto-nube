@@ -168,10 +168,15 @@ public class ServletUsuarioInicio extends HttpServlet {
             case "CambiarTelefono":{
                 String idUsuario3 = request.getParameter("id");
                 String nuevo_celular = request.getParameter("phone");
+
                 Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
                 user_a_cambiar.setCelular(nuevo_celular);
-                DaoUsuarios daoUsuarios1 = new DaoUsuarios();
-                daoUsuarios1.actualizar_usuario_telefono(user_a_cambiar);
+
+                daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("usuarioSession", user_a_cambiar);
+
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
             break;
             }
