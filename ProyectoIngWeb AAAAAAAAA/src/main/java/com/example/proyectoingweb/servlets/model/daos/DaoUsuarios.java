@@ -216,6 +216,17 @@ public class DaoUsuarios extends DaoBase{
 
 
     }
+    public void actualizar_usuario_telefono(Usuarios idUser) {
+        String sql = "UPDATE usuarios SET  celular = ? WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, idUser.getCelular());
+            pstmt.setString(2, String.valueOf(idUser.getIdUsuarios()));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void borrarUsuario(String idUsuario){
         String sql = "DELETE from usuarios WHERE idUsuario = ?";
