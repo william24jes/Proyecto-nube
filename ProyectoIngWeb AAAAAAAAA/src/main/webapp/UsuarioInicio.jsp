@@ -1,201 +1,228 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+             class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 <%
-  ArrayList<Incidencias> listaPermanente = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPermanente");
-  ArrayList<Incidencias> listaPaginada = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPaginada");
+    ArrayList<Incidencias> listaPermanente = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPermanente");
+    ArrayList<Incidencias> listaPaginada = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPaginada");
 %>
 
 
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Inicio / Incidencias PUCP</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+        <title>Inicio / Incidencias PUCP</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/600382161a.js" crossorigin="anonymous"></script>
-
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style_usuario.css" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: BizLand - v3.9.0
-    * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
-  </head>
-
-  <body>
-
-    <!-- ======= Top Bar ======= -->
-    <section id="topbar" class="d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-      </div>
-    </section>
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="d-flex align-items-center">
-      <div class="container d-flex align-items-center justify-content-between">
-
-        <div class="d-md-flex align-items-center">
-          <div>
-            <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
-              <br><h6>Usuario PUCP</h6></br>
-            </h1>
-          </div>
-        </div>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
-
-        <nav id="navbar" class="navbar">
+        <!-- Favicons -->
+        <link href="assets/img/favicon.png" rel="icon">
+        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 
-          <ul>
-            <li><div class="container-fluid">
-              <form class="d-flex input-group w-auto">
-                <input
-                        type="search"
-                        class="form-control rounded"
-                        placeholder="Buscar Incidencia"
-                        aria-label="Search"
-                        aria-describedby="search-addon"
-                />
-                <span class="input-group-text border-0" id="search-addon">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+              rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/600382161a.js" crossorigin="anonymous"></script>
+
+        <!-- Template Main CSS File -->
+        <link href="assets/css/style_usuario.css" rel="stylesheet">
+
+        <!-- =======================================================
+        * Template Name: BizLand - v3.9.0
+        * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
+        * Author: BootstrapMade.com
+        * License: https://bootstrapmade.com/license/
+        ======================================================== -->
+    </head>
+
+    <body>
+
+        <!-- ======= Top Bar ======= -->
+        <section id="topbar" class="d-flex align-items-center">
+            <div class="container d-flex justify-content-center justify-content-md-between">
+            </div>
+        </section>
+
+        <!-- ======= Header ======= -->
+        <header id="header" class="d-flex align-items-center">
+            <div class="container d-flex align-items-center justify-content-between">
+
+                <div class="d-md-flex align-items-center">
+                    <div>
+                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
+                            <br><h6>Usuario PUCP</h6></br>
+                        </h1>
+                    </div>
+                </div>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
+
+                <nav id="navbar" class="navbar">
+
+
+                    <ul>
+                        <li>
+                            <div class="container-fluid">
+                                <form class="d-flex input-group w-auto">
+                                    <input
+                                            type="search"
+                                            class="form-control rounded"
+                                            placeholder="Buscar Incidencia"
+                                            aria-label="Search"
+                                            aria-describedby="search-addon"
+                                    />
+                                    <span class="input-group-text border-0" id="search-addon">
         <i class="fas fa-search"></i>
       </span>
-              </form>
-            </div></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis Incidencias</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar Incidencia</a></li>
-            <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar sesión</a></li>
-          </ul>
+                                </form>
+                            </div>
+                        </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a>
+                        </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a>
+                        </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis
+                            Incidencias</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar
+                            Incidencia</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar
+                            sesión</a></li>
+                    </ul>
 
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
 
-      </div>
-    </header><!-- End Header -->
-
-    <main id="main" data-aos="fade-up">
-
-      <!-- ======= Portfolio Details Section ======= -->
-      <section id="portfolio-details" class="portfolio-details">
-        <div class="container">
-          <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Incidencias PUCP</h1>
             </div>
+        </header><!-- End Header -->
 
+        <main id="main" data-aos="fade-up">
 
-            <div class="row">
-                <% for (Incidencias incidencias : listaPaginada) { %>
-              <div class="col-lg-6">
-                <!-- Dropdown Card Example -->
-                <div class="card shadow mb-4">
+            <!-- ======= Portfolio Details Section ======= -->
+            <section id="portfolio-details" class="portfolio-details">
+                <div class="container">
+                    <div class="container-fluid">
 
-                  <!-- Card Header - Dropdown -->
-
-                  <div
-
-                          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <a href = "<%=request.getContextPath()%>/Inicio?action=verIncidencia" disabled=""><h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%></h6></a>
-
-                    <form method="post" action="<%=request.getContextPath()%>/DestacarIncidenciaServlet?action=destacarIncidencia&id=<%=incidencias.getIdIncidencia()%>" enctype="multipart/form-data">
-
-                      <button type="submit" class="btn btn-warning btn-circle">
-                            <i class="fas fa-exclamation-triangle"> <%=incidencias.getDestacado()%></i>
-                        </button>
-                    </form>
-
-
-
-                  </div>
-                  <!-- Card Body -->
-                  <div class="card-body">
-                    <%=incidencias.getDescripcion()%>
-                    <div class="col-12">
-                      <br>
-                      <div class="row">
-                        <div class="col-auto">
-                          <img class="crop" src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidencias.getIdIncidencia()%>"
-                               style="height: 80px;border-radius: 1em"/>
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Incidencias PUCP</h1>
                         </div>
-                        <div class="col-auto">
-                          <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
-                        <div class="col-auto">
-                          <img src="assets/img/vista_area_pucp.jpg" alt="logo" class="img-fluid d-block mx-auto"
-                               style="height: 80px;border-radius: 1em"></div>
-                      </div>
 
+
+                        <div class="row">
+                            <% for (Incidencias incidencias : listaPaginada) { %>
+                            <div class="col-lg-6">
+                                <!-- Dropdown Card Example -->
+                                <div class="card shadow mb-4">
+
+                                    <!-- Card Header - Dropdown -->
+
+                                    <div
+
+                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia" disabled="">
+                                            <h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%>
+                                            </h6></a>
+
+                                        <form method="post"
+                                              action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia"
+                                              >
+                                            <input class="form-control " id="idUsuario" type="hidden"
+                                                   name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                            <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
+                                                   name="Cantidad_destacados" value="<%=incidencias.getDestacado()%>">
+                                            <input class="form-control" id="idIncidencia" type="hidden"
+                                                   name="idIncidencia" value="<%=incidencias.getIdIncidencia()%>">
+
+
+
+                                            <button type="submit" class="btn btn-warning btn-circle">
+                                                <i class="fas fa-exclamation-triangle"><%=incidencias.getDestacado()%>
+                                                </i>Destacada!
+                                            </button>
+
+                                        </form>
+
+
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <%=incidencias.getDescripcion()%>
+                                        <div class="col-12">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <img class="crop"
+                                                         src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidencias.getIdIncidencia()%>"
+                                                         style="height: 80px;border-radius: 1em"/>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
+                                                         class="img-fluid d-block mx-auto"
+                                                         style="height: 80px;border-radius: 1em"></div>
+                                                <div class="col-auto">
+                                                    <img src="assets/img/vista_area_pucp.jpg" alt="logo"
+                                                         class="img-fluid d-block mx-auto"
+                                                         style="height: 80px;border-radius: 1em"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <% } %>
+                        </div>
+                        <nav aria-label="Page navigation example" style="margin-top: 20px;">
+                            <ul class="pagination justify-content-center">
+                                <%for (double i = 1; i <= Math.ceil((double) (listaPermanente.size()) / 16.0); i++) {%>
+                                <li class="page-item"><a class="page-link"
+                                                         href="<%=request.getContextPath()%>/Inicio?action=page&id=<%=(int)i%>"><%=(int) i%>
+                                </a></li>
+                                <%}%>
+                            </ul>
+                        </nav>
                     </div>
 
-                  </div>
 
                 </div>
+            </section><!-- End Portfolio Details Section -->
 
-              </div>
-                <% } %>
-            </div>
-            <nav aria-label="Page navigation example" style="margin-top: 20px;">
-              <ul class="pagination justify-content-center">
-                <%for (double i=1;i<=Math.ceil((double)(listaPermanente.size())/16.0);i++){%>
-                <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/Inicio?action=page&id=<%=(int)i%>"><%=(int)i%></a></li>
-                <%}%>
-              </ul>
-            </nav>
-          </div>
+        </main><!-- End #main -->
 
 
-        </div>
-      </section><!-- End Portfolio Details Section -->
+        <div id="preloader"></div>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
 
-    </main><!-- End #main -->
+        <!-- Vendor JS Files -->
+        <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+        <script src="assets/vendor/aos/aos.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+        <script src="assets/vendor/php-email-form/validate.js"></script>
 
+        <!-- Template Main JS File -->
+        <script src="assets/js/main.js"></script>
 
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-
-  </body>
+    </body>
 
 </html>

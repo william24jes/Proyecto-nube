@@ -211,7 +211,7 @@ public class DaoIncidencias extends DaoBase {
 
     public Incidencias buscarPorId(String IDincidencias) {
 
-        Incidencias incidencias = null;
+        Incidencias incidencias = new Incidencias();
         Usuarios usuarios = null;
         Usuarios seguridad = null;
 
@@ -273,14 +273,39 @@ public class DaoIncidencias extends DaoBase {
         return lista;
     }
 
+    public void destacarIncidencia_para_idUsuario(String idUser, String idIncidencia) {
+        String sql = "Insert into mydb.incidencias_destacadas (idUsuario, idIncidencia) Values (?,?)";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, idUser);
+            pstmt.setString(2, idIncidencia);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void destacar_en_tabla_incidencias(String idIncidencia,String Cantidad_destacados) {
+        String sql = "update mydb.incidencias set destacado = ? where idIncidencia = ?;";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(2, idIncidencia);
+            int cantidad_destacados_actualizada = Integer.parseInt(Cantidad_destacados)+1;
+            pstmt.setString(1, String.valueOf(cantidad_destacados_actualizada));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     public ArrayList<Usuarios> IdDeUsuariosQueDestacaron(String idIncidencia) {
         ArrayList<Usuarios> lista_Usuarios = new ArrayList<>();
         Usuarios usuarios;
-        DaoUsuarios daoUsers=null;
+        DaoUsuarios daoUsers = new DaoUsuarios();
         String sql = "SELECT nombres,apellidos, incidencias.idIncidencia, usuarios.idUsuario,incidencias.nombre FROM mydb.incidencias_destacadas, usuarios,incidencias\n" +
                 " where usuarios.idUsuario = incidencias_destacadas.idUsuario and incidencias.idIncidencia = incidencias_destacadas.idIncidencia\n" +
                 " and incidencias.idIncidencia=?\n" +
-                " order by idIncidencia;";
+                " order by idIncidencia";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -296,4 +321,30 @@ public class DaoIncidencias extends DaoBase {
         }
         return lista_Usuarios;
     }
+    public void destacarIncidencia_para_idUsuario_negativo(String idUser, String idIncidencia) {
+        String sql = "DELETE from mydb.incidencias_destacadas where idUsuario = ? and  idIncidencia = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, idUser);
+            pstmt.setString(2, idIncidencia);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void destacar_en_tabla_incidencias_negativo(String idIncidencia,String Cantidad_destacados) {
+        String sql = "update mydb.incidencias set destacado = ? where idIncidencia = ?;";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(2, idIncidencia);
+            int cantidad_destacados_actualizada = Integer.parseInt(Cantidad_destacados)-1;
+            pstmt.setString(1, String.valueOf(cantidad_destacados_actualizada));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

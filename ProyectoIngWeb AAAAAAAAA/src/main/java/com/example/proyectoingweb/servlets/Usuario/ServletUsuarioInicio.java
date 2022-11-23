@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.time.LocalDateTime;
@@ -39,11 +40,12 @@ public class ServletUsuarioInicio extends HttpServlet {
         HttpSession session = request.getSession();
         switch (action) {
             case "listar":
-                    request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
-                    request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
-                    setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompleta());
-                    requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
-                    requestDispatcher.forward(request, response);
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
+                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
+                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompleta());
+                requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
+                requestDispatcher.forward(request, response);
+
                 break;
             case "perfil":
                 requestDispatcher = request.getRequestDispatcher("UsuarioEditarPerfil.jsp");
@@ -107,6 +109,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         ZonaPucp zonaPucp;
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        ArrayList<Usuarios> lista_usuarios;
         switch (action) {
             case "guardar":
                 InputStream inputStream; // input stream of the upload file
@@ -143,7 +146,36 @@ public class ServletUsuarioInicio extends HttpServlet {
                 daoIncidencias.guardarIncidencias(incidencias, inputStream);
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;
+            case "DestacarIncidencia": {
+                String idUsuario2 = request.getParameter("id");
+                String Cantidad_destacados = request.getParameter("Cantidad_destacados");
+                String idIncidencia = request.getParameter("idIncidencia");
+                Usuarios usuario2 = daoUsuarios.buscarPorId(idUsuario2);//indica el usuario de la sesion
+                lista_usuarios = daoIncidencias.IdDeUsuariosQueDestacaron(idIncidencia);
+                boolean validacion = Usuario_destaco_o_no(lista_usuarios, usuario2);
+                if (validacion) {
+                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2,idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia,Cantidad_destacados);
+                    response.sendRedirect(request.getContextPath() + "/Inicio");
+                    break;
+                } else {
+                    daoIncidencias.destacarIncidencia_para_idUsuario(idUsuario2, idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias(idIncidencia, Cantidad_destacados);
+                    response.sendRedirect(request.getContextPath() + "/Inicio");
+                    break;
+                }
+            }
         }
+    }
+
+    public boolean Usuario_destaco_o_no(ArrayList<Usuarios> lista_users_que_destacan, Usuarios usuario_sesion) {
+        for (Usuarios lista_destacaron : lista_users_que_destacan) {
+            if (lista_destacaron.getIdUsuarios() == usuario_sesion.getIdUsuarios()) {
+                //significa que el usuario ha destacado, entonces a volver a casa
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Incidencias> getListaPermanente() {
