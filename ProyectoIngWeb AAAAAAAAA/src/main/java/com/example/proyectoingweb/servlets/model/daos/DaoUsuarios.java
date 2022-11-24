@@ -216,6 +216,7 @@ public class DaoUsuarios extends DaoBase{
 
 
     }
+
     public void actualizar_usuario_telefono(Usuarios idUser) {
         String sql = "UPDATE usuarios SET celular = ? WHERE idUsuario = ?";
         try (Connection connection = this.getConnection();
@@ -314,6 +315,43 @@ public class DaoUsuarios extends DaoBase{
             throw new RuntimeException(e);
         }
         return listaUsuarios;
+    }
+
+    public Usuarios validarRegistro(String correoPucp, String codigoPucp){
+
+        String sql = "select * from usuarios where correoPucp = ? and codigoPucp = ?";
+        Usuarios usuario = null;
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, correoPucp);
+            pstmt.setString(2, codigoPucp);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    usuario = new Usuarios();
+
+                    usuario.setIdUsuarios(rs.getInt(1));
+                    usuario.setNombres(rs.getString(2));
+                    usuario.setApellidos(rs.getString(3));
+                    usuario.setDni(rs.getString(4));
+                    usuario.setCelular(rs.getString(5));
+                    usuario.setCodigoPucp(rs.getString(6));
+                    usuario.setCorreoPucp(rs.getString(7));
+                    usuario.setCategorias(rs.getString(8));
+                    usuario.setRol(rs.getString(9));
+                    usuario.setFotoPerfil(rs.getString(11));
+
+                }
+            }
+
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
+
+        return usuario;
+
     }
 
 }

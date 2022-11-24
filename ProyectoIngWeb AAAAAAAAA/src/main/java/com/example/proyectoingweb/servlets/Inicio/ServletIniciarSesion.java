@@ -54,6 +54,20 @@ public class ServletIniciarSesion extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
 
+            case "confirmaRegistro":
+
+                requestDispatcher = request.getRequestDispatcher("CorreoConfirmaRegistro.jsp");
+                requestDispatcher.forward(request, response);
+
+                break;
+
+            case "crearContrasena":
+
+                requestDispatcher = request.getRequestDispatcher(".jsp");
+                requestDispatcher.forward(request, response);
+
+                break;
+
         }
     }
 
@@ -61,12 +75,16 @@ public class ServletIniciarSesion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String post = request.getParameter("post");
         post = (post == null) ? "iniciosesion" : post;
+
+        Usuarios usuario;
+
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         DaoIncidencias daoIncidencias = new DaoIncidencias();
         RequestDispatcher requestDispatcher;
+
         switch (post) {
             case "iniciosesion":
-                Usuarios usuario = (Usuarios) request.getSession().getAttribute("usuarioSession");
+                usuario = (Usuarios) request.getSession().getAttribute("usuarioSession");
                 if (usuario != null && usuario.getIdUsuarios() != 0) {
                     response.sendRedirect(request.getContextPath());
                 } else {
@@ -80,6 +98,7 @@ public class ServletIniciarSesion extends HttpServlet {
                 String correo = request.getParameter("correo");
 
                 Usuarios usuarioValido = daoUsuarios.validarUsuarioPassword(codigo, password, correo);
+
                 if (usuarioValido != null) {
                     switch (usuarioValido.getRol()) {
                         case "Usuario PUCP":
@@ -124,9 +143,19 @@ public class ServletIniciarSesion extends HttpServlet {
                 String correoPucp = request.getParameter("correoPucp");
                 String codigoPucp = request.getParameter("codigoPucp");
 
-                // Validar si el usuario existe en base de datos
-                // Si existe, enviar a crear contraseña
-                // Si no existe, enviar por sesion mensaje de error
+                usuario = daoUsuarios.validarRegistro(correoPucp, codigoPucp);
+
+                if (usuario != null){
+                    // Si existe, enviar a crear contraseña
+                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?action=confirmaRegistro");
+                }
+                else {
+                    // Si no existe, enviar por sesion mensaje de error
+                    HttpSession session = request.getSession();
+                    session.setAttribute("msg", "Correo o código inválido(s)");
+
+                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?action=registrarse");
+                }
 
                 break;
 
