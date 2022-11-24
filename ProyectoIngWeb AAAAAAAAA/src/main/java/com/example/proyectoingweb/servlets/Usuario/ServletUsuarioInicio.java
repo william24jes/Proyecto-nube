@@ -1,8 +1,10 @@
 package com.example.proyectoingweb.servlets.Usuario;
 
+import com.example.proyectoingweb.servlets.model.beans.Comentarios;
 import com.example.proyectoingweb.servlets.model.beans.Incidencias;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
+import com.example.proyectoingweb.servlets.model.daos.DaoComentarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoZonaPucp;
@@ -33,6 +35,8 @@ public class ServletUsuarioInicio extends HttpServlet {
         action = (action == null) ? "listar" : action;
         RequestDispatcher requestDispatcher;
         DaoIncidencias daoIncidencias = new DaoIncidencias();
+        DaoComentarios daoComentarios = new DaoComentarios();
+        Comentarios comentario = new Comentarios();
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         String idIncidencia;
         Incidencias incidencia;
@@ -75,8 +79,13 @@ public class ServletUsuarioInicio extends HttpServlet {
 
                 idIncidencia = request.getParameter("id");
                 incidencia = daoIncidencias.buscarPorId(idIncidencia);
+                HttpSession sessionUsuario2 = request.getSession();
+                Usuarios user2 = (Usuarios) sessionUsuario2.getAttribute("usuarioSession");
+                comentario = daoComentarios.buscarporIdIncidencia_y_idUsuarioQueCreo(String.valueOf(1),String.valueOf(5));
+
 
                 if (incidencia != null) { //abro el form para editar
+                    request.setAttribute("comentario2",comentario);
                     request.setAttribute("incidencia_send_jsp", incidencia);
                     requestDispatcher = request.getRequestDispatcher("UsuarioVerIncidencia.jsp");
                     requestDispatcher.forward(request, response);

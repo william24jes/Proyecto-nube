@@ -4,10 +4,13 @@
 <%@ page import="com.example.proyectoingweb.servlets.Usuario.ServletUsuarioInicio" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoComentarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="incidencia_send_jsp" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+<jsp:useBean id="comentario2" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Comentarios"/>
+
 <html lang="en">
 
     <head>
@@ -110,7 +113,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Mis Incidencias</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Detalle de Incidencias</h1>
                         </div>
 
                         <div class="container">
@@ -202,15 +205,9 @@
                                                aria-disabled="true"><%=incidencia_send_jsp.getUrgencia()%></a>
                                         </div>
 
-                                        <div><br><h5>Comentario de Seguridad: </h5>Lorem ipsum dolor sit amet, consectetur
-                                            adipisicing elit. Ab accusantium alias amet
-                                            dolore doloremque ea, et exercitationem impedit itaque iure maxime neque nobis odit
-                                            praesentium ratione rem sit vitae voluptates! Lorem ipsum dolor sit amet,
-                                            consectetur
-                                            adipisicing elit. Impedit iste nesciunt nulla perspiciatis, quaerat rem
-                                            reprehenderit
-                                            saepe! Accusantium consectetur, delectus deserunt eum hic nihil provident quos sunt
-                                            tempore tenetur veniam?
+                                        <div><br><h5>Comentario de Seguridad: </h5>
+                                            <%comentario2.getContenido1();%>xdxd
+                                            <%comentario2.getIdComentario();%>
                                         </div>
 
                                         <div style="text-align: right"><br><h5>Comentario de Frank Einstein: </h5>Lorem ipsum dolor
