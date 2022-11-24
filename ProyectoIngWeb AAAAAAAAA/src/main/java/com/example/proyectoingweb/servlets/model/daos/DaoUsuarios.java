@@ -2,10 +2,15 @@ package com.example.proyectoingweb.servlets.model.daos;
 
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Properties;
 
 public class DaoUsuarios extends DaoBase{
 
@@ -351,6 +356,42 @@ public class DaoUsuarios extends DaoBase{
         }
 
         return usuario;
+
+    }
+
+    public void enviarCorreo(String correoDestino, String asunto, String mensaje){
+
+        String correoOrigen = "incidencias.pucp@gmail.com";
+        String password = "kfgcgpcesrrsicmt";
+
+        Properties properties = new Properties();
+
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.port", "587");
+        properties.setProperty("mail.smtp.port", "587");
+        properties.put("mail.smtp.user", correoOrigen);
+        properties.setProperty("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(properties);
+        MimeMessage mail = new MimeMessage(session);
+
+        try {
+
+            mail.setFrom(new InternetAddress(correoOrigen, "Incidencias PUCP"));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(correoDestino));
+            mail.setSubject(asunto, "UTF-8");
+            mail.setText(mensaje, "UTF-8");
+            mail.setSentDate(new Date());
+
+            Transport transport = session.getTransport("smtp");
+            transport.connect(correoOrigen, password);
+            transport.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+            transport.close();
+
+        }catch (Exception e){
+            e.getStackTrace();
+        }
 
     }
 

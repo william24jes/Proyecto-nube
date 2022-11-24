@@ -146,7 +146,13 @@ public class ServletIniciarSesion extends HttpServlet {
                 usuario = daoUsuarios.validarRegistro(correoPucp, codigoPucp);
 
                 if (usuario != null){
-                    // Si existe, enviar a crear contraseña
+                    // Si existe, enviar correo para crear contraseña
+
+                    String mensaje = "Tu registro está casi completado.\nIngresa al siguiente link para crear tu contraseña:";
+                    String asunto = "Crea tu nueva contraseña";
+
+                    daoUsuarios.enviarCorreo(correoPucp, asunto, mensaje);
+
                     response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?action=confirmaRegistro");
                 }
                 else {
