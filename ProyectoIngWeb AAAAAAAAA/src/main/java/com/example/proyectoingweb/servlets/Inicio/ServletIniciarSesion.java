@@ -14,12 +14,13 @@ public class ServletIniciarSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-        action = (action == null) ? "iniciarSesion" : action;
+        String action = request.getParameter("action") == null? "iniciarSesion":request.getParameter("action");
         RequestDispatcher requestDispatcher;
         HttpSession session = request.getSession();
+
         switch (action) {
             case "iniciarSesion":
+                // Verificacion de si ya existe sesion
                 if (session.getAttribute("usuarioSession") == null) {
                     if (session.getAttribute("seguridadSession") == null) {
                         if (session.getAttribute("userAdmin") == null) {
@@ -41,17 +42,14 @@ public class ServletIniciarSesion extends HttpServlet {
                     }
 
                 }
-
                 break;
+
             case "olvidoContraseña":
                 requestDispatcher = request.getRequestDispatcher("OlvidoContraseña.jsp");
                 requestDispatcher.forward(request, response);
                 break;
-            case "inicioUsuario":
-                requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
-                requestDispatcher.forward(request, response);
-                break;
-            case "crearCuenta":
+
+            case "registrarse":
                 requestDispatcher = request.getRequestDispatcher("InicioRegistrarse.jsp");
                 requestDispatcher.forward(request, response);
                 break;
@@ -120,6 +118,18 @@ public class ServletIniciarSesion extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/ServletIniciarSesion");
                 }
                 break;
+
+            case "registrarse":
+
+                String correoPucp = request.getParameter("correoPucp");
+                String codigoPucp = request.getParameter("codigoPucp");
+
+                // Validar si el usuario existe en base de datos
+                // Si existe, enviar a crear contraseña
+                // Si no existe, enviar por sesion mensaje de error
+
+                break;
+
             case "doblef":
                 response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
                 break;

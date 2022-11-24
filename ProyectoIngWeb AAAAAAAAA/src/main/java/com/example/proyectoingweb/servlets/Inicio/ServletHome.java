@@ -40,14 +40,6 @@ public class ServletHome extends HttpServlet {
 
                 }
                 break;
-            case "iniciarSesion":
-                requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
-                requestDispatcher.forward(request,response);
-                break;
-            case "registrarse":
-                requestDispatcher = request.getRequestDispatcher("InicioRegistrarse.jsp");
-                requestDispatcher.forward(request,response);
-                break;
         }
 
 
