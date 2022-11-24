@@ -181,7 +181,7 @@
                                                 <div class="col-auto">
                                                     <img class="crop"
                                                          src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidencias.getIdIncidencia()%>"
-                                                         style="max-width: 100%;max-height: 100%;border-radius: 1em"/>
+                                                         style="height: 150px;border-radius: 1em"/>
                                                 </div>
                                             </div>
 

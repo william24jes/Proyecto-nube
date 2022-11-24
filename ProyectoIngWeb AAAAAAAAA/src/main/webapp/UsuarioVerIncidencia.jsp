@@ -1,4 +1,9 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoIncidencias" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.Usuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="incidencia_send_jsp" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
@@ -120,9 +125,39 @@
                                         <div></div>
                                         <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=incidencia_send_jsp.getNombre()%>
                                             <div style="color:darkgray;display: flex;flex-direction: column"><h6><%=incidencia_send_jsp.getNombreUsuarioQueDestaco()%></h6><h6>Registrado <%=incidencia_send_jsp.getDatetime()%></h6></div>
-                                            <div><a class="btn btn-warning btn-circle disabled">
-                                                <i class="fas fa-exclamation-triangle "> <%=incidencia_send_jsp.getDestacado()%></i>
-                                            </a></div>
+                                            <div>
+                                                <form method="post"
+                                                                 action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia_verIncidencias"
+                                            >
+                                                <input class="form-control " id="idUsuario" type="hidden"
+                                                       name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                                <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
+                                                       name="Cantidad_destacados" value="<%=incidencia_send_jsp.getDestacado()%>">
+                                                <input class="form-control" id="idIncidencia" type="hidden"
+                                                       name="idIncidencia" value="<%=incidencia_send_jsp.getIdIncidencia()%>">
+                                                <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
+                                                <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
+                                                <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                                                <%ArrayList<Usuarios> lista_Usuarios =daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidencia_send_jsp.getIdIncidencia()));%>
+                                                <%Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
+                                                <%boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios,user2);%>
+                                                <%if(validacion) {%>
+                                                <button type="submit" class="btn btn-warning btn-circle">
+                                                    <i class="fas fa-exclamation-triangle"> <%=incidencia_send_jsp.getDestacado()%>
+                                                    </i> Destacada!
+                                                </button>
+                                                <%} else {%>
+                                                <button type="submit" class="btn btn-warning btn-circle" style="background-color: grey;border-color:grey" >
+                                                    <i class="fas fa-exclamation-triangle"> <%=incidencia_send_jsp.getDestacado()%>
+                                                    </i> (:
+                                                </button>
+                                                <%}%>
+                                            </form>
+                                            </div>
+
+
+
+
                                         </h4>
                                         <button type="button" class="btn btn-primary btn-sm disabled"> <%=incidencia_send_jsp.getEstadoIncidencia()%></button>
 
@@ -163,7 +198,7 @@
 
                                         <div><br><h4>Nivel de urgencia: </h4></div>
                                         <div>
-                                            <a href="#" class="btn btn-primary btn-lg disabled" role="button"
+                                            <a href="#" class="btn btn-primary btn-lg disabled" role="button" style="background: red;border: red"
                                                aria-disabled="true"><%=incidencia_send_jsp.getUrgencia()%></a>
                                         </div>
 
@@ -197,6 +232,7 @@
                                             consectetur
                                             adipisicing elit.
                                         </div>
+                                        <%if(incidencia_send_jsp.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()){%>
                                         <div class="row">
                                             <div class="col-auto">
                                                 <br>
@@ -208,6 +244,7 @@
                                                 <div><button type="button" class="btn btn-primary btn-lg"  href="<%=request.getContextPath()%>/Inicio">Reabrir (4)</button></div>
                                             </div>
                                         </div>
+                                        <%}%>
 
                                     </div>
                                 </div>

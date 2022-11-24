@@ -180,6 +180,44 @@ public class ServletUsuarioInicio extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
             break;
             }
+            case "DestacarIncidencia_verIncidencias": {
+                String idUsuario2 = request.getParameter("id");
+                String Cantidad_destacados = request.getParameter("Cantidad_destacados");
+                String idIncidencia = request.getParameter("idIncidencia");
+                Usuarios usuario2 = daoUsuarios.buscarPorId(idUsuario2);//indica el usuario de la sesion
+                lista_usuarios = daoIncidencias.IdDeUsuariosQueDestacaron(idIncidencia);
+                boolean validacion = Usuario_destaco_o_no(lista_usuarios, usuario2);
+                if (validacion) {
+                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2,idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia,Cantidad_destacados);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id="+idIncidencia);
+                    break;
+                } else {
+                    daoIncidencias.destacarIncidencia_para_idUsuario(idUsuario2, idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias(idIncidencia, Cantidad_destacados);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id="+idIncidencia);
+                    break;
+                }
+            }
+            case "DestacarIncidencia_MisIncidencias": {
+                String idUsuario2 = request.getParameter("id");
+                String Cantidad_destacados = request.getParameter("Cantidad_destacados");
+                String idIncidencia = request.getParameter("idIncidencia");
+                Usuarios usuario2 = daoUsuarios.buscarPorId(idUsuario2);//indica el usuario de la sesion
+                lista_usuarios = daoIncidencias.IdDeUsuariosQueDestacaron(idIncidencia);
+                boolean validacion = Usuario_destaco_o_no(lista_usuarios, usuario2);
+                if (validacion) {
+                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2,idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia,Cantidad_destacados);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
+                    break;
+                } else {
+                    daoIncidencias.destacarIncidencia_para_idUsuario(idUsuario2, idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias(idIncidencia, Cantidad_destacados);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
+                    break;
+                }
+            }
         }
     }
 

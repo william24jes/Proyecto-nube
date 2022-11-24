@@ -1,4 +1,9 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoIncidencias" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.Usuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaIncidenciasDestacadas" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
@@ -132,14 +137,41 @@
                                         <div style="color:darkgray;display: flex;flex-direction: column">
                                             <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%>
                                             </h6><h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
-                                        </h6></div>
+                                        </h6>
+                                            <h6 style="color:red"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                        </div>
                                         </h4>
 
-                                        <h6 style="color:red"><%=incidenciasDestacadas.getUrgencia()%>
-                                        </h6>
-                                        <a href="#" class="btn btn-warning btn-circle disabled">12
-                                            <i class="bi bi-exclamation-triangle"></i>
-                                        </a>
+
+                                        <div>
+                                            <form method="post"
+                                                  action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia_MisIncidencias"
+                                            >
+                                                <input class="form-control " id="idUsuario" type="hidden"
+                                                       name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                                <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
+                                                       name="Cantidad_destacados" value="<%=incidenciasDestacadas.getDestacado()%>">
+                                                <input class="form-control" id="idIncidencia" type="hidden"
+                                                       name="idIncidencia" value="<%=incidenciasDestacadas.getIdIncidencia()%>">
+                                                <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
+                                                <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
+                                                <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                                                <%ArrayList<Usuarios> lista_Usuarios =daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidenciasDestacadas.getIdIncidencia()));%>
+                                                <%Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
+                                                <%boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios,user2);%>
+                                                <%if(validacion) {%>
+                                                <button type="submit" class="btn btn-warning btn-circle">
+                                                    <i class="fas fa-exclamation-triangle"> <%=incidenciasDestacadas.getDestacado()%>
+                                                    </i> Destacada!
+                                                </button>
+                                                <%} else {%>
+                                                <button type="submit" class="btn btn-warning btn-circle" style="background-color: grey;border-color:grey" >
+                                                    <i class="fas fa-exclamation-triangle"> <%=incidenciasDestacadas.getDestacado()%>
+                                                    </i> (:
+                                                </button>
+                                                <%}%>
+                                            </form>
+                                        </div>
 
                                     </div>
 
@@ -151,14 +183,10 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-auto">
-                                                    <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo"
-                                                         class="img-fluid d-block mx-auto"
-                                                         style="height: 80px;border-radius: 1em">
+                                                    <img class="crop"
+                                                         src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidenciasDestacadas.getIdIncidencia()%>"
+                                                         style="max-width: 100%;max-height: 100%;border-radius: 1em"/>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
-                                                         class="img-fluid d-block mx-auto"
-                                                         style="height: 80px;border-radius: 1em"></div>
 
                                                 <div><br>
                                                     <button type="button" class="btn btn-primary btn-lg disabled"><%=incidenciasDestacadas.getEstadoIncidencia()%>

@@ -2,6 +2,7 @@ package com.example.proyectoingweb.servlets.model.beans;
 
 public class Incidencias {
     private int idIncidencia;
+    private int idUsuarioQueCreoIncidencia;
     private Usuarios usuario;
     private Usuarios seguridad;
     private String nombre;
@@ -17,6 +18,14 @@ public class Incidencias {
     private int numEstrellas;
     private String nombreUsuarioQueDestaco;
     private ZonaPucp zonaPucp;
+
+    public int getIdUsuarioQueCreoIncidencia() {
+        return idUsuarioQueCreoIncidencia;
+    }
+
+    public void setIdUsuarioQueCreoIncidencia(int idUsuarioQueCreoIncidencia) {
+        this.idUsuarioQueCreoIncidencia = idUsuarioQueCreoIncidencia;
+    }
 
     public String getNombreUsuarioQueDestaco() {
         return nombreUsuarioQueDestaco;
