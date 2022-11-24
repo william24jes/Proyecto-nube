@@ -138,7 +138,7 @@
                                     <div
 
                                             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia" disabled="">
+                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidencias.getIdIncidencia()%>">
                                             <h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%>
                                             </h6></a>
 
@@ -159,13 +159,13 @@
                                             <%boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios,user2);%>
                                             <%if(validacion) {%>
                                             <button type="submit" class="btn btn-warning btn-circle">
-                                                <i class="fas fa-exclamation-triangle"><%=incidencias.getDestacado()%>
-                                                </i>Destacada!
+                                                <i class="fas fa-exclamation-triangle"> <%=incidencias.getDestacado()%>
+                                                </i> Destacada!
                                             </button>
                                             <%} else {%>
-                                            <button type="submit" class="btn btn-warning btn-circle">
-                                                <i class="fas fa-exclamation-triangle"><%=incidencias.getDestacado()%>
-                                                </i>Puedes Destacar Ahora (:
+                                            <button type="submit" class="btn btn-warning btn-circle" style="background-color: grey;border-color:grey" >
+                                                <i class="fas fa-exclamation-triangle"> <%=incidencias.getDestacado()%>
+                                                </i> (:
                                             </button>
                                             <%}%>
                                         </form>
@@ -181,16 +181,8 @@
                                                 <div class="col-auto">
                                                     <img class="crop"
                                                          src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidencias.getIdIncidencia()%>"
-                                                         style="height: 80px;border-radius: 1em"/>
+                                                         style="max-width: 100%;max-height: 100%;border-radius: 1em"/>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
-                                                         class="img-fluid d-block mx-auto"
-                                                         style="height: 80px;border-radius: 1em"></div>
-                                                <div class="col-auto">
-                                                    <img src="assets/img/vista_area_pucp.jpg" alt="logo"
-                                                         class="img-fluid d-block mx-auto"
-                                                         style="height: 80px;border-radius: 1em"></div>
                                             </div>
 
                                         </div>

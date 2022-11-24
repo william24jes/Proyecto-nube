@@ -229,6 +229,7 @@ public class DaoIncidencias extends DaoBase {
                     incidencias.setIdIncidencia(Integer.parseInt(IDincidencias));
                     usuarios = daoUsuarios.buscarPorId(rs.getString(2));
                     incidencias.setUsuario(usuarios);
+                    incidencias.setNombreUsuarioQueDestaco(usuarios.getNombreYApellido());
                     seguridad = daoUsuarios.buscarPorId(rs.getString(3));
                     incidencias.setSeguridad(seguridad);
                     incidencias.setNombre(rs.getString(4));

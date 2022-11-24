@@ -1,7 +1,8 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="incidencia_send_jsp" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
-
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+             class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 <html lang="en">
 
     <head>
@@ -54,7 +55,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px">José Bustamante
+                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
                             <br><h6>Usuario PUCP</h6></br>
                         </h1>
                     </div>
@@ -119,11 +120,11 @@
                                         <div></div>
                                         <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=incidencia_send_jsp.getNombre()%>
                                             <div style="color:darkgray;display: flex;flex-direction: column"><h6><%=incidencia_send_jsp.getNombreUsuarioQueDestaco()%></h6><h6>Registrado <%=incidencia_send_jsp.getDatetime()%></h6></div>
-                                            <div><a href="#" class="btn btn-warning btn-circle">
-                                                <i class="fas fa-exclamation-triangle"> 10</i>
+                                            <div><a class="btn btn-warning btn-circle disabled">
+                                                <i class="fas fa-exclamation-triangle "> <%=incidencia_send_jsp.getDestacado()%></i>
                                             </a></div>
                                         </h4>
-                                        <button type="button" class="btn btn-primary btn-sm disabled"><%=incidencia_send_jsp.getEstadoIncidencia()%></button>
+                                        <button type="button" class="btn btn-primary btn-sm disabled"> <%=incidencia_send_jsp.getEstadoIncidencia()%></button>
 
 
                                     </div>
@@ -143,16 +144,10 @@
                                         <div><br><h4>Fotos:</h4></div>
                                         <div class="col-12">
                                             <br>
-                                            <div class="row">
-                                                <div class="col-auto">
-                                                    <img src="assets/img/facultad_matematicas_pucp.jpg" alt="logo"
-                                                         class="img-fluid d-block mx-auto"
-                                                         style="height: 200px;border-radius: 1em">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <img src="assets/img/facultad_derecho_pucp.jpg" alt="logo"
-                                                         class="img-fluid d-block mx-auto"
-                                                         style="height: 200px;border-radius: 1em"></div>
+                                            <div class="col-auto">
+                                                <img class="crop"
+                                                     src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidencia_send_jsp.getIdIncidencia()%>"
+                                                     style="max-width: 100%;max-height: 100%; border-radius: 1em"/>
                                             </div>
                                             <br>
 
