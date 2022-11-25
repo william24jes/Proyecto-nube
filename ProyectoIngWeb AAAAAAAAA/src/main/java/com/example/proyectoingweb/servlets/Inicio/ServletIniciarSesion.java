@@ -63,7 +63,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
             case "crearContrasena":
 
-                requestDispatcher = request.getRequestDispatcher(".jsp");
+                requestDispatcher = request.getRequestDispatcher("CrearContraseña.jsp");
                 requestDispatcher.forward(request, response);
 
                 break;
@@ -77,6 +77,7 @@ public class ServletIniciarSesion extends HttpServlet {
         post = (post == null) ? "iniciosesion" : post;
 
         Usuarios usuario;
+        String password;
 
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         DaoIncidencias daoIncidencias = new DaoIncidencias();
@@ -94,7 +95,7 @@ public class ServletIniciarSesion extends HttpServlet {
                 break;
             case "validar":
                 String codigo = request.getParameter("codigo");
-                String password = request.getParameter("password");
+                password = request.getParameter("password");
                 String correo = request.getParameter("correo");
 
                 Usuarios usuarioValido = daoUsuarios.validarUsuarioPassword(codigo, password, correo);
@@ -148,7 +149,8 @@ public class ServletIniciarSesion extends HttpServlet {
                 if (usuario != null){
                     // Si existe, enviar correo para crear contraseña
 
-                    String mensaje = "Tu registro está casi completado.\nIngresa al siguiente link para crear tu contraseña:";
+                    String link = "";
+                    String mensaje = "Tu registro está casi completo.\n\nIngresa al siguiente link para crear tu contraseña:\n"+link;
                     String asunto = "Crea tu nueva contraseña";
 
                     daoUsuarios.enviarCorreo(correoPucp, asunto, mensaje);
@@ -165,7 +167,14 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 break;
 
-            case "doblef":
+            case "guardarContrasena":
+
+                password = request.getParameter("password");
+                String passwordConfirmada = request.getParameter("passwordConfirmada");
+
+                break;
+
+            case "dobleFactor":
                 response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
                 break;
         }

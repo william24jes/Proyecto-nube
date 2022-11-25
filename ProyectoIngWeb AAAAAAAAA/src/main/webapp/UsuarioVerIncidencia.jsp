@@ -206,8 +206,8 @@
                                         </div>
 
                                         <div><br><h5>Comentario de Seguridad: </h5>
-                                            <%comentario2.getContenido1();%>xdxd
-                                            <%comentario2.getIdComentario();%>
+                                            <%=comentario2.getContenido1()%>
+                                            <%=comentario2.getIdComentario()%>
                                         </div>
 
                                         <div style="text-align: right"><br><h5>Comentario de Frank Einstein: </h5>Lorem ipsum dolor

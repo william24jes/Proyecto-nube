@@ -6,7 +6,7 @@
 <%
     ArrayList<Usuarios> listaPermanente = (ArrayList<Usuarios>) request.getAttribute("listaPermanente");
     ArrayList<Usuarios> listaPaginada = (ArrayList<Usuarios>) request.getAttribute("listaPaginada");
-
+    String searchText = (String) request.getAttribute("searchText");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +76,7 @@
                                            name="searchText"
                                            class="form-control rounded"
                                            placeholder="Buscar usuario"
-                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"/>
+                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon" value="<%=searchText != null? searchText:""%>"/>
                                     <span class="input-group-text border-0" id="search-addon"><i
                                             class="fas fa-search"></i></span>
                                 </form>
@@ -120,11 +120,11 @@
                                     <th>Código</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
-                                    <th scope="col">Correo</th>
-                                    <th scope="col">DNI</th>
-                                    <th scope="col">Rol</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
+                                    <th>Correo</th>
+                                    <th>DNI</th>
+                                    <th>Rol</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -132,7 +132,7 @@
                                     for (Usuarios usuarios : listaPaginada) {
                                 %>
                                 <tr>
-                                    <td scope="row"><%=usuarios.getIdUsuarios()%>
+                                    <td><%=usuarios.getIdUsuarios()%>
                                     </td>
                                     <td><%=usuarios.getCodigoPucp()%>
                                     </td>

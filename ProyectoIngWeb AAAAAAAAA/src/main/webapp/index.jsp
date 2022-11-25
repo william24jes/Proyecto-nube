@@ -6,8 +6,6 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
         <title>Página principal</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
 
         <!-- Favicons -->
         <link href="assets/img/telepucp.png" rel="icon">
@@ -27,27 +25,13 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: BizLand - v3.9.0
-        * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
     </head>
 
     <body>
-
-
-
         <!-- ======= Header ======= -->
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center justify-content-between">
-
-                <h1 class="logo"><a href="home.html">Incidencias PUCP<span>.</span></a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
-
-
+                <h1 class="logo"> <a>Incidencias PUCP</a></h1>
 
             </div>
         </header><!-- End Header -->
@@ -56,12 +40,12 @@
         <section id="hero" class="d-flex align-items-center">
             <div class="container" data-aos="zoom-out" data-aos-delay="100">
                 <div class="row d-flex align-items-center">
-                    <div class="col-lg-2 text-lg-right text-center">
+                    <div class="col-lg-2 col-md-3 col-sm-3">
                         <img src="assets/img/telepucp.png" width="100%" alt="logo">
                     </div>
                 </div>
                 <h1>Registra tu primera</br><span> incidencia</span></h1>
-                <h2>...y ayudemos a nuestra comunidad PUCP a mantener todo en orden</h2>
+                <h2>y ayudemos a nuestra comunidad PUCP a mantener todo en orden</h2>
                 <div class="d-flex">
                     <a href="<%=request.getContextPath()%>/ServletIniciarSesion" class="btn-get-started scrollto">Inicia sesión</a>
                     <a href="<%=request.getContextPath()%>/ServletIniciarSesion?action=registrarse" class=" btn-watch-video"><span>Regístrate</span></a>
@@ -70,22 +54,14 @@
 
         </section><!-- End Hero -->
 
-        <main id="main">
-
-        </main><!-- End #main -->
-
         <!-- ======= Footer ======= -->
         <footer id="footer">
             <div class="container py-4">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>Incidencias PUCP</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>Incidencias PUCP</span></strong>. Todos los derechos reservados
                 </div>
                 <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Desarrollado por TELEPUCP
                 </div>
             </div>
         </footer><!-- End Footer -->

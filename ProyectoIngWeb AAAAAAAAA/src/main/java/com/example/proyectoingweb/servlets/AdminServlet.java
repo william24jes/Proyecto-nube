@@ -185,7 +185,8 @@ public class AdminServlet extends HttpServlet {
                 String searchText = request.getParameter("searchText");
 
                 ArrayList<Usuarios> lista = daoUsuarios.buscarUsuarios(searchText);
-                request.setAttribute("lista", lista);
+                request.setAttribute("listaPaginada", lista);
+                request.setAttribute("searchText", searchText);
 
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);

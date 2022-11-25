@@ -75,7 +75,7 @@
                                             <div class="col-12 ">
                                                 <label for="yourUsername" class="form-label">Nueva contraseña:</label>
                                                 <div class="input-group has-validation">
-                                                    <input type="text" name="username" class="form-control"
+                                                    <input type="password" name="password" class="form-control"
                                                            id="yourUsername" required>
                                                     <div class="invalid-feedback">Ingresa tu nueva contraseña.</div>
                                                 </div>
@@ -85,17 +85,11 @@
                                             <div class="col-12">
                                                 <label for="yourPassword" class="form-label">Confirmar nueva
                                                     contraseña</label>
-                                                <input type="password" name="password" class="form-control"
+                                                <input type="password" name="passwordConfirmada" class="form-control"
                                                        id="yourPassword" required>
                                                 <div class="invalid-feedback">Confirma tu nueva contraseña</div>
                                             </div>
                                             <br>
-                                            <!--
-                                            <div class="col-12 text-center">
-                                                <p class="small mb-0" style="color: #1d0bff">Se ha establecido su
-                                                    contraseña con éxito</p>
-                                            </div>-->
-
                                             <div class="col-12">
                                                 <button class="btn btn-primary w-100" type="submit">Guardar contraseña
                                                 </button>
