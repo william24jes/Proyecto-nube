@@ -222,18 +222,18 @@
                                                 <!-- Form Row-->
                                                 <!-- Save changes button-->
                                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                        <button type="submit" class="btn btn-primary">Guardar
-                                                        </button>
-                                                        <button class="btn btn-primary"
-                                                                href="<%=request.getContextPath()%>/Inicio">Cancelar
-                                                        </button>
+                                                    <button type="submit" class="btn btn-primary">Guardar
+                                                    </button>
+                                                    <button class="btn btn-primary"
+                                                            href="<%=request.getContextPath()%>/Inicio">Cancelar
+                                                    </button>
 
 
                                                     <div class="form-check form-switch">
                                                         <input class="form-check-input" type="checkbox"
                                                                role="switch" id="flexSwitchCheckDefault">
                                                         <label class="form-check-label"
-                                                               for="flexSwitchCheckDefault">Publicación
+                                                               for="flexSwitchCheckDefault">Activar publicación
                                                             anónima</label>
                                                     </div>
                                                 </div>

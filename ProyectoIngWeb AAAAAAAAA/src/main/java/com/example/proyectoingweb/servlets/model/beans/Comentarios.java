@@ -5,6 +5,7 @@ public class Comentarios {
     private int idSeguridad;
     private int idIncidencia;
     private int idComentario;
+    private int validacion_usuario_comentar;
     private String contenido1;
     private String contenido2;
     private String contenido3;
@@ -15,6 +16,14 @@ public class Comentarios {
     private String contenido8;
     private String contenido9;
     private String contenido10;
+
+    public int getValidacion_usuario_comentar() {
+        return validacion_usuario_comentar;
+    }
+
+    public void setValidacion_usuario_comentar(int validacion_usuario_comentar) {
+        this.validacion_usuario_comentar = validacion_usuario_comentar;
+    }
 
     public int getIdUsuario() {
         return idUsuario;

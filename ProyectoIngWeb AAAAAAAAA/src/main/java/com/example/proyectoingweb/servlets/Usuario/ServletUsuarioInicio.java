@@ -81,11 +81,11 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencia = daoIncidencias.buscarPorId(idIncidencia);
                 HttpSession sessionUsuario2 = request.getSession();
                 Usuarios user2 = (Usuarios) sessionUsuario2.getAttribute("usuarioSession");
-                comentario = daoComentarios.buscarporIdIncidencia_y_idUsuarioQueCreo(String.valueOf(1),String.valueOf(5));
+                comentario = daoComentarios.buscarporIdIncidencia_y_idUsuarioQueCreo(idIncidencia, String.valueOf(user2.getIdUsuarios()));
 
 
                 if (incidencia != null) { //abro el form para editar
-                    request.setAttribute("comentario2",comentario);
+                    request.setAttribute("comentario2", comentario);
                     request.setAttribute("incidencia_send_jsp", incidencia);
                     requestDispatcher = request.getRequestDispatcher("UsuarioVerIncidencia.jsp");
                     requestDispatcher.forward(request, response);
@@ -118,6 +118,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         ZonaPucp zonaPucp;
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        DaoComentarios daoComentarios = new DaoComentarios();
         ArrayList<Usuarios> lista_usuarios;
         switch (action) {
             case "guardar":
@@ -163,8 +164,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 lista_usuarios = daoIncidencias.IdDeUsuariosQueDestacaron(idIncidencia);
                 boolean validacion = Usuario_destaco_o_no(lista_usuarios, usuario2);
                 if (validacion) {
-                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2,idIncidencia);
-                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia,Cantidad_destacados);
+                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2, idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia, Cantidad_destacados);
                     response.sendRedirect(request.getContextPath() + "/Inicio");
                     break;
                 } else {
@@ -174,7 +175,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                     break;
                 }
             }
-            case "CambiarTelefono":{
+            case "CambiarTelefono": {
                 String idUsuario3 = request.getParameter("id");
                 String nuevo_celular = request.getParameter("phone");
 
@@ -182,12 +183,12 @@ public class ServletUsuarioInicio extends HttpServlet {
                 user_a_cambiar.setCelular(nuevo_celular);
 
                 daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
-                
+
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioSession", user_a_cambiar);
 
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
-            break;
+                break;
             }
             case "DestacarIncidencia_verIncidencias": {
                 String idUsuario2 = request.getParameter("id");
@@ -197,14 +198,14 @@ public class ServletUsuarioInicio extends HttpServlet {
                 lista_usuarios = daoIncidencias.IdDeUsuariosQueDestacaron(idIncidencia);
                 boolean validacion = Usuario_destaco_o_no(lista_usuarios, usuario2);
                 if (validacion) {
-                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2,idIncidencia);
-                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia,Cantidad_destacados);
-                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id="+idIncidencia);
+                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2, idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia, Cantidad_destacados);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + idIncidencia);
                     break;
                 } else {
                     daoIncidencias.destacarIncidencia_para_idUsuario(idUsuario2, idIncidencia);
                     daoIncidencias.destacar_en_tabla_incidencias(idIncidencia, Cantidad_destacados);
-                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id="+idIncidencia);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + idIncidencia);
                     break;
                 }
             }
@@ -216,8 +217,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 lista_usuarios = daoIncidencias.IdDeUsuariosQueDestacaron(idIncidencia);
                 boolean validacion = Usuario_destaco_o_no(lista_usuarios, usuario2);
                 if (validacion) {
-                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2,idIncidencia);
-                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia,Cantidad_destacados);
+                    daoIncidencias.destacarIncidencia_para_idUsuario_negativo(idUsuario2, idIncidencia);
+                    daoIncidencias.destacar_en_tabla_incidencias_negativo(idIncidencia, Cantidad_destacados);
                     response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                     break;
                 } else {
@@ -227,7 +228,37 @@ public class ServletUsuarioInicio extends HttpServlet {
                     break;
                 }
             }
+            case "Usuario_reabre_incidencia": {
+                String user_validacion = request.getParameter("usuario_quiere_comentar");
+                String id_incidencia = request.getParameter("id_incidencia");
+                String id_usuario = request.getParameter("id");
+                String ultima_columna_llena = request.getParameter("ultima_columna_llena");
+                String mensaje = request.getParameter("mensaje");
+                Comentarios comment_user = daoComentarios.buscarporIdIncidencia_y_idUsuarioQueCreo(id_incidencia, id_usuario);
+                if (Integer.parseInt(user_validacion) == 0) {
+                    daoComentarios.actualizarComentario_subida(comment_user);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + id_incidencia);
+                    break;
+
+                } else if (Integer.parseInt(user_validacion) == 1) {
+                    daoComentarios.actualizarComentario_bajada(comment_user);
+                    int columna_para_llenar = Integer.parseInt(ultima_columna_llena) + 1;
+                    daoComentarios.actualizar_tabla_comentarios(comment_user, String.valueOf(columna_para_llenar), mensaje);
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + id_incidencia);
+                    break;
+                }
+
+            }
+            case "AceptarResultado": {
+                String id_incidencia = request.getParameter("id_incidencia");
+                daoIncidencias.actualizar_estado("Atendido", id_incidencia);
+                response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + id_incidencia);
+                break;
+            }
+
         }
+
+
     }
 
     public boolean Usuario_destaco_o_no(ArrayList<Usuarios> lista_users_que_destacan, Usuarios usuario_sesion) {

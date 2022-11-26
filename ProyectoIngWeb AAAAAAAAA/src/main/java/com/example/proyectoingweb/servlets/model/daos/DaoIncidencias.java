@@ -348,5 +348,17 @@ public class DaoIncidencias extends DaoBase {
         }
 
     }
+    public void actualizar_estado(String nuevo_estado, String id_incidencia) {
+        String sql = "update mydb.incidencias set estadoIncidencia = ? where idIncidencia = ?;";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, nuevo_estado);
+            pstmt.setString(2, id_incidencia);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }

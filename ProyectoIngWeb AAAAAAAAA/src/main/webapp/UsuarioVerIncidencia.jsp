@@ -6,7 +6,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoComentarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="incidencia_send_jsp" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
+<jsp:useBean id="incidencia_send_jsp" scope="request"
+             type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 <jsp:useBean id="comentario2" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Comentarios"/>
@@ -90,11 +91,16 @@
       </span>
                                 </form>
                             </div>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis Incidencias</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar Incidencia</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar sesión</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a>
+                        </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a>
+                        </li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis
+                            Incidencias</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar
+                            Incidencia</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar
+                            sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -126,43 +132,51 @@
                                         <img src="assets/img/profile_upload.png" height="70px"/>
                                         <br>
                                         <div></div>
-                                        <h4 class="m-0 font-weight-bold text-primary" style="width:75%"><%=incidencia_send_jsp.getNombre()%>
-                                            <div style="color:darkgray;display: flex;flex-direction: column"><h6><%=incidencia_send_jsp.getNombreUsuarioQueDestaco()%></h6><h6>Registrado <%=incidencia_send_jsp.getDatetime()%></h6></div>
+                                        <h4 class="m-0 font-weight-bold text-primary"
+                                            style="width:75%"><%=incidencia_send_jsp.getNombre()%>
+                                            <div style="color:darkgray;display: flex;flex-direction: column">
+                                                <h6><%=incidencia_send_jsp.getNombreUsuarioQueDestaco()%>
+                                                </h6><h6>Registrado <%=incidencia_send_jsp.getDatetime()%>
+                                            </h6></div>
                                             <div>
                                                 <form method="post"
-                                                                 action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia_verIncidencias"
-                                            >
-                                                <input class="form-control " id="idUsuario" type="hidden"
-                                                       name="id" value="<%=usuarioSession.getIdUsuarios()%>">
-                                                <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
-                                                       name="Cantidad_destacados" value="<%=incidencia_send_jsp.getDestacado()%>">
-                                                <input class="form-control" id="idIncidencia" type="hidden"
-                                                       name="idIncidencia" value="<%=incidencia_send_jsp.getIdIncidencia()%>">
-                                                <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
-                                                <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
-                                                <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
-                                                <%ArrayList<Usuarios> lista_Usuarios =daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidencia_send_jsp.getIdIncidencia()));%>
-                                                <%Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
-                                                <%boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios,user2);%>
-                                                <%if(validacion) {%>
-                                                <button type="submit" class="btn btn-warning btn-circle">
-                                                    <i class="fas fa-exclamation-triangle"> <%=incidencia_send_jsp.getDestacado()%>
-                                                    </i> Destacada!
-                                                </button>
-                                                <%} else {%>
-                                                <button type="submit" class="btn btn-warning btn-circle" style="background-color: grey;border-color:grey" >
-                                                    <i class="fas fa-exclamation-triangle"> <%=incidencia_send_jsp.getDestacado()%>
-                                                    </i> (:
-                                                </button>
-                                                <%}%>
-                                            </form>
+                                                      action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia_verIncidencias"
+                                                >
+                                                    <input class="form-control " id="idUsuario" type="hidden"
+                                                           name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                                    <input class="form-control" id="Cantidad_de_Destacados"
+                                                           type="hidden"
+                                                           name="Cantidad_destacados"
+                                                           value="<%=incidencia_send_jsp.getDestacado()%>">
+                                                    <input class="form-control" id="idIncidencia" type="hidden"
+                                                           name="idIncidencia"
+                                                           value="<%=incidencia_send_jsp.getIdIncidencia()%>">
+                                                    <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
+                                                    <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
+                                                    <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                                                    <%ArrayList<Usuarios> lista_Usuarios = daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidencia_send_jsp.getIdIncidencia()));%>
+                                                    <%Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
+                                                    <%boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios, user2);%>
+                                                    <%if (validacion) {%>
+                                                    <button type="submit" class="btn btn-warning btn-circle">
+                                                        <i class="fas fa-exclamation-triangle"><%=incidencia_send_jsp.getDestacado()%>
+                                                        </i>
+                                                    </button>
+                                                    <%} else {%>
+                                                    <button type="submit" class="btn btn-warning btn-circle"
+                                                            style="background-color: grey;border-color:grey">
+                                                        <i class="fas fa-exclamation-triangle"><%=incidencia_send_jsp.getDestacado()%>
+                                                        </i>
+                                                    </button>
+                                                    <%}%>
+                                                </form>
                                             </div>
 
 
-
-
                                         </h4>
-                                        <button type="button" class="btn btn-primary btn-sm disabled"> <%=incidencia_send_jsp.getEstadoIncidencia()%></button>
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm disabled"><%=incidencia_send_jsp.getEstadoIncidencia()%>
+                                        </button>
 
 
                                     </div>
@@ -194,54 +208,235 @@
                                         <div><br><h4>Tipo de incidencia: </h4></div>
                                         <div>
                                             <a href="#" class="btn btn-primary btn-lg disabled" role="button"
-                                               aria-disabled="true"><%=incidencia_send_jsp.getTipo()%></a>
+                                               aria-disabled="true"><%=incidencia_send_jsp.getTipo()%>
+                                            </a>
                                         </div>
-
 
 
                                         <div><br><h4>Nivel de urgencia: </h4></div>
                                         <div>
-                                            <a href="#" class="btn btn-primary btn-lg disabled" role="button" style="background: red;border: red"
-                                               aria-disabled="true"><%=incidencia_send_jsp.getUrgencia()%></a>
+                                            <a href="#" class="btn btn-primary btn-lg disabled" role="button"
+                                               style="background: red;border: red"
+                                               aria-disabled="true"><%=incidencia_send_jsp.getUrgencia()%>
+                                            </a>
                                         </div>
 
-                                        <div><br><h5>Comentario de Seguridad: </h5>
+                                        <%int contador = 0;%>
+                                        <%if (comentario2.getContenido1() != null) {%>
+                                        <div>
+                                            <%contador = 1;%>
+                                            <br><h5>Comentario de Seguridad: </h5>
                                             <%=comentario2.getContenido1()%>
-                                            <%=comentario2.getIdComentario()%>
-                                        </div>
-
-                                        <div style="text-align: right"><br><h5>Comentario de Frank Einstein: </h5>Lorem ipsum dolor
-                                            sit amet, consectetur adipisicing elit. Ab accusantium alias amet
-                                            dolore doloremque ea, et exercitationem impedit itaque iure maxime neque nobis odit
-                                            praesentium ratione rem sit vitae voluptates! Lorem ipsum dolor sit amet,
-                                            consectetur
-                                            adipisicing elit. Impedit iste nesciunt nulla perspiciatis, quaerat rem
-                                            reprehenderit
-                                            saepe! Accusantium consectetur, delectus deserunt eum hic nihil provident quos sunt
-                                            tempore tenetur veniam?
-                                        </div>
-
-
-                                        <div><br><h5>Comentario de Seguridad: </h5>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium alias amet
-                                            dolore doloremque ea, et exercitationem impedit itaque iure maxime neque nobis odit
-                                            praesentium ratione rem sit vitae voluptates! Lorem ipsum dolor sit amet,
-                                            consectetur
-                                            adipisicing elit.
-                                        </div>
-                                        <%if(incidencia_send_jsp.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()){%>
-                                        <div class="row">
-                                            <div class="col-auto">
-                                                <br>
-                                                <div><button type="button" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias" >Aceptar</button></div>
-
-                                            </div>
-                                            <div class="col-auto">
-                                                <br>
-                                                <div><button type="button" class="btn btn-primary btn-lg"  href="<%=request.getContextPath()%>/Inicio">Reabrir (4)</button></div>
-                                            </div>
                                         </div>
                                         <%}%>
+
+                                        <%if (comentario2.getContenido2() != null) {%>
+                                        <%contador = 2;%>
+                                        <div style="text-align: right"><br><h5>Comentario
+                                            de <%=usuarioSession.getNombreYApellido()%>: </h5>
+                                            <%=comentario2.getContenido2()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido3() != null) {%>
+                                        <div>
+                                            <%contador = 3;%>
+                                            <br><h5>Comentario de Seguridad: </h5>
+                                            <%=comentario2.getContenido3()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido4() != null) {%>
+                                        <%contador = 4;%>
+                                        <div style="text-align: right"><br><h5>Comentario
+                                            de <%=usuarioSession.getNombreYApellido()%>: </h5>
+                                            <%=comentario2.getContenido4()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido5() != null) {%>
+                                        <div>
+                                            <%contador = 5;%>
+                                            <br><h5>Comentario de Seguridad: </h5>
+                                            <%=comentario2.getContenido5()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido6() != null) {%>
+                                        <%contador = 6;%>
+                                        <div style="text-align: right"><br><h5>Comentario
+                                            de <%=usuarioSession.getNombreYApellido()%>: </h5>
+                                            <%=comentario2.getContenido6()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido7() != null) {%>
+                                        <div>
+                                            <%contador = 7;%>
+                                            <br><h5>Comentario de Seguridad: </h5>
+                                            <%=comentario2.getContenido7()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido8() != null) {%>
+                                        <%contador = 8;%>
+                                        <div style="text-align: right"><br><h5>Comentario
+                                            de <%=usuarioSession.getNombreYApellido()%>: </h5>
+                                            <%=comentario2.getContenido8()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido9() != null) {%>
+                                        <div>
+                                            <%contador = 9;%>
+                                            <br><h5>Comentario de Seguridad: </h5>
+                                            <%=comentario2.getContenido9()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%if (comentario2.getContenido10() != null) {%>
+                                        <%contador = 10;%>
+                                        <div style="text-align: right"><br><h5>Comentario
+                                            de <%=usuarioSession.getNombreYApellido()%>: </h5>
+                                            <%=comentario2.getContenido10()%>
+                                        </div>
+                                        <%}%>
+
+                                        <%int value_enviar = 0;%>
+                                        <%int i;%>
+                                        <%int variable = 0;%>
+                                        <%int n = 0;%>
+                                        <%for (i = 1; i <= 10; i++) {%>
+                                        <%if (i == contador) {%>
+                                        <%value_enviar = i;%>
+                                        <%variable = contador;%>
+                                        <%if (variable == 1 || variable == 2) {%>
+                                        <%n = 5;%>
+                                        <%}%>
+                                        <%if (variable == 3 || variable == 4) {%>
+                                        <%n = 4;%>
+                                        <%}%>
+                                        <%if (variable == 5 || variable == 6) {%>
+                                        <%n = 3;%>
+                                        <%}%>
+                                        <%if (variable == 7 || variable == 8) {%>
+                                        <%n = 2;%>
+                                        <%}%>
+                                        <%if (variable == 9 || variable == 10) {%>
+                                        <%n = 1;%>
+                                        <%}%>
+
+                                        <%}%>
+                                        <%}%>
+
+                                        <form method="post">
+                                            <input class="form-control " type="hidden"
+                                                   name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                            <input class="form-control" type="hidden"
+                                                   name="usuario_quiere_comentar"
+                                                   value="<%=comentario2.getValidacion_usuario_comentar()%>">
+                                            <input class="form-control " type="hidden"
+                                                   name="id_incidencia"
+                                                   value="<%=incidencia_send_jsp.getIdIncidencia()%>">
+                                            <input class="form-control " type="hidden"
+                                                   name="ultima_columna_llena" value="<%=value_enviar%>">
+                                            <%if (variable % 2 == 0) {%>
+                                            <%if (incidencia_send_jsp.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()) {%>
+
+                                            <%
+                                                if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Registrado")
+                                                        || incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("En proceso")) {
+                                            %>
+
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <br>
+                                                    <div>
+                                                        <button type="submit"
+                                                                formaction="<%=request.getContextPath()%>/Inicio?action=AceptarResultado"
+                                                                class="btn btn-primary btn-lg">
+                                                            Aceptar Respuesta
+                                                        </button>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="col-auto">
+                                                    <br>
+                                                    <div>
+                                                        <button type="button"
+                                                                class="btn btn-primary btn-lg disabled ">
+                                                            Reabrir(<%=n - 1%>)
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%
+                                                } else if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {
+
+                                                }
+                                            %>
+                                            <%}%>
+
+                                            <%} else {%>
+                                            <%if (incidencia_send_jsp.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()) {%>
+
+
+                                            <%if (comentario2.getValidacion_usuario_comentar() == 0) {%>
+
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <br>
+                                                    <div>
+                                                        <button type="submit"
+                                                                formaction="<%=request.getContextPath()%>/Inicio?action=AceptarResultado"
+                                                                class="btn btn-primary btn-lg">
+                                                            Aceptar Respuesta
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-auto">
+
+                                                    <br>
+                                                    <div>
+                                                        <button type="submit"
+                                                                formaction="<%=request.getContextPath()%>/Inicio?action=Usuario_reabre_incidencia"
+                                                                class="btn btn-primary btn-lg">Reabrir
+                                                            (<%=n%>)
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <%} else if (comentario2.getValidacion_usuario_comentar() == 1) {%>
+                                            <br>
+                                            <div class="row">
+                                                <div style="text-align: right"><br><h5>Comentario
+                                                    de <%=usuarioSession.getNombreYApellido()%>: </h5>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                                    <textarea class="form-control"
+                                                                              id="exampleFormControlTextarea1"
+                                                                              rows="3" name="mensaje"></textarea>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <br>
+                                                    <div>
+                                                        <button type="submit"
+                                                                formaction="<%=request.getContextPath()%>/Inicio?action=Usuario_reabre_incidencia"
+                                                                class="btn btn-primary btn-lg">
+                                                            Enviar
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <%}%>
+                                            <%}%>
+                                            <%}%>
+                                        </form>
 
                                     </div>
                                 </div>

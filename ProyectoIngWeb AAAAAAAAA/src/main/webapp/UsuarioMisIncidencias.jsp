@@ -162,12 +162,12 @@
                                                 <%if(validacion) {%>
                                                 <button type="submit" class="btn btn-warning btn-circle">
                                                     <i class="fas fa-exclamation-triangle"> <%=incidenciasDestacadas.getDestacado()%>
-                                                    </i> Destacada!
+                                                    </i>
                                                 </button>
                                                 <%} else {%>
                                                 <button type="submit" class="btn btn-warning btn-circle" style="background-color: grey;border-color:grey" >
                                                     <i class="fas fa-exclamation-triangle"> <%=incidenciasDestacadas.getDestacado()%>
-                                                    </i> (:
+                                                    </i>
                                                 </button>
                                                 <%}%>
                                             </form>
