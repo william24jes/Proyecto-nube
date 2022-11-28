@@ -28,6 +28,8 @@ public class AdminServlet extends HttpServlet {
         String idUsuario;
         int idPage;
 
+        ArrayList<String> categorias = null;
+
         switch (action) {
             case "listar":
 
@@ -46,6 +48,14 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "perfil":
 
+                categorias = new ArrayList<>();
+                categorias.add("Alumno");
+                categorias.add("Administrativo");
+                categorias.add("Jefe de practica");
+                categorias.add("Profesor");
+                categorias.add("Egresado");
+
+                request.setAttribute("categorias", categorias);
                 requestDispatcher = request.getRequestDispatcher("AdminPerfil.jsp");
                 requestDispatcher.forward(request, response);
 
@@ -60,7 +70,7 @@ public class AdminServlet extends HttpServlet {
                     roles.add("Usuario PUCP");
                     roles.add("Seguridad");
 
-                    ArrayList<String> categorias = new ArrayList<>();
+                    categorias = new ArrayList<>();
                     categorias.add("Alumno");
                     categorias.add("Administrativo");
                     categorias.add("Jefe de practica");
@@ -150,6 +160,10 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setCodigoPucp(request.getParameter("Codigo"));
 
                 if (daoUsuarios.actualizarUsuario(usuarios)){
+
+                    session = request.getSession();
+                    session.setAttribute("userAdmin", usuarios);
+
                     session.setAttribute("msg","Usuario editado correctamente");
                     response.sendRedirect(request.getContextPath() + "/Admin");
                 }

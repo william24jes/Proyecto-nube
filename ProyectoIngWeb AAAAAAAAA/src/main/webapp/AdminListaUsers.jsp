@@ -15,8 +15,6 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
         <title>Lista de usuarios / Incidencias PUCP</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
@@ -130,6 +128,7 @@
                             <tbody>
                                 <%
                                     for (Usuarios usuarios : listaPaginada) {
+                                        if (!usuarios.getNombreYApellido().equals(userAdmin.getNombreYApellido())){
                                 %>
                                 <tr>
                                     <td><%=usuarios.getIdUsuarios()%>
@@ -165,6 +164,7 @@
                                     </td>
                                 </tr>
                                 <%
+                                        }
                                     }
                                 %>
 

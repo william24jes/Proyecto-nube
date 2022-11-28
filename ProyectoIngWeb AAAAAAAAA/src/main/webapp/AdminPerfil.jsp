@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: willi
   Date: 25/10/2022
@@ -6,15 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+             class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+
+<%
+    ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="description">
-        <meta content="" name="keywords">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+              rel="stylesheet">
         <link href="assets/vendor/aos/aos.css" rel="stylesheet">
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -28,7 +34,6 @@
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     </head>
 
@@ -48,31 +53,34 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px">Juan Perez
+                        <h1 class="name" style="margin-top: 25px"><%=userAdmin.getNombreYApellido()%>
                             <br><h6>Administrador</h6></br>
                         </h1>
                     </div>
                 </div>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
-
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/Admin?action=listar">Lista de usuarios</a></li>
-                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/ServletAdminPerfil">Perfil</a></li>
-                        <li><div class="container-fluid">
-                            <form class="d-flex input-group w-auto">
-                                <input
-                                        type="search"
-                                        class="form-control rounded"
-                                        placeholder="Buscar usuario"
-                                        aria-label="Search"
-                                        aria-describedby="search-addon"
-                                />
-                                <span class="input-group-text border-0" id="search-addon"><i class="fas fa-search"></i></span>
-                            </form></div>
+                        <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/Admin?action=listar">Lista
+                            de usuarios</a></li>
+                        <li><a class="nav-link scrollto active"
+                               href="<%=request.getContextPath()%>/Admin?action=perfil">Perfil</a></li>
+                        <li>
+                            <div class="container-fluid">
+                                <form class="d-flex input-group w-auto">
+                                    <input
+                                            type="search"
+                                            class="form-control rounded"
+                                            placeholder="Buscar usuario"
+                                            aria-label="Search"
+                                            aria-describedby="search-addon"
+                                    />
+                                    <span class="input-group-text border-0" id="search-addon"><i
+                                            class="fas fa-search"></i></span>
+                                </form>
+                            </div>
                         </li>
-                        <li><a class="nav-link scrollto" href="<%=request.getContextPath()%>">Cerrar Sesión</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=cerrarSesion">Cerrar
+                            sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -93,8 +101,10 @@
                                     <div class="card mb-4 mb-xl-0">
                                         <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
 
-                                            <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile" class="rounded-circle">
-                                            <h2>Juan Perez</h2>
+                                            <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile"
+                                                 class="rounded-circle">
+                                            <h2><%=userAdmin.getNombreYApellido()%>
+                                            </h2>
                                             <h5>Administrador</h5>
 
                                         </div>
@@ -108,58 +118,77 @@
                                             <ul class="nav nav-tabs nav-tabs-bordered">
 
                                                 <li class="nav-item">
-                                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
+                                                    <button class="nav-link active" data-bs-toggle="tab"
+                                                            data-bs-target="#profile-overview">Detalles
+                                                    </button>
                                                 </li>
 
                                                 <li class="nav-item">
-                                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
+                                                    <button class="nav-link" data-bs-toggle="tab"
+                                                            data-bs-target="#profile-edit">Editar Perfil
+                                                    </button>
                                                 </li>
 
                                                 <li class="nav-item">
-                                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar contraseña</button>
+                                                    <button class="nav-link" data-bs-toggle="tab"
+                                                            data-bs-target="#profile-change-password">Cambiar contraseña
+                                                    </button>
                                                 </li>
 
                                             </ul>
                                             <div class="tab-content pt-2">
 
-                                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                                <div class="tab-pane fade show active profile-overview"
+                                                     id="profile-overview">
 
                                                     <h5 class="card-title">Detalles del Perfil</h5>
 
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label ">Nombre completo</div>
-                                                        <div class="col-lg-9 col-md-8">Juan Manuel Perez Richelli</div>
+                                                        <div class="col-lg-3 col-md-4 label ">ID Administrador</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getIdUsuarios()%>
+                                                        </div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label ">Cargo</div>
-                                                        <div class="col-lg-9 col-md-8">Administrador</div>
+                                                        <div class="col-lg-3 col-md-4 label ">Código</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCodigoPucp()%>
+                                                        </div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Edad</div>
-                                                        <div class="col-lg-9 col-md-8">22 años</div>
+                                                        <div class="col-lg-3 col-md-4 label ">Nombres</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getNombres()%>
+                                                        </div>
                                                     </div>
-
-
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Pais</div>
-                                                        <div class="col-lg-9 col-md-8">Perú</div>
+                                                        <div class="col-lg-3 col-md-4 label ">Apellidos</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getApellidos()%>
+                                                        </div>
                                                     </div>
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Dirección</div>
-                                                        <div class="col-lg-9 col-md-8">Av Las Nuevas Lomas, Lima</div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Telefono</div>
-                                                        <div class="col-lg-9 col-md-8">986-126-855</div>
-                                                    </div>
-
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Correo</div>
-                                                        <div class="col-lg-9 col-md-8">ajuanperez@pucp.edu.pe</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCorreoPucp()%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">DNI</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getDni()%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Celular</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCelular()%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Categoría</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCategorias()%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Rol</div>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getRol()%>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -167,60 +196,106 @@
                                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                                     <!-- Profile Edit Form -->
-                                                    <form>
-                                                        <div class="row mb-3">
-                                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <img src="assets/img/perfiles/perfil1.svg" height="150" width="150"  alt="Profile">
-                                                                <div class="pt-2">
-                                                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                                                                </div>
+                                                    <form class="needs-validation" method="post"
+                                                          action="<%=request.getContextPath()%>/Admin?action=actualizar"
+                                                          novalidate>
+                                                    <div class="row mb-3">
+                                                        <label for="profileImage"
+                                                               class="col-md-4 col-lg-3 col-form-label">Imagen de
+                                                            Perfil</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <img src="assets/img/perfiles/perfil1.svg" height="150"
+                                                                 width="150" alt="Profile" id="profileImage">
+                                                            <div class="pt-2">
+                                                                <a href="#" class="btn btn-primary btn-sm"
+                                                                   title="Upload new profile image"><i
+                                                                        class="bi bi-upload"></i></a>
+                                                                <a href="#" class="btn btn-danger btn-sm"
+                                                                   title="Remove my profile image"><i
+                                                                        class="bi bi-trash"></i></a>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="row mb-3">
-                                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre Completo</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="fullName" type="text" class="form-control" id="fullName" value="Juan Manuel Perez Richelli" disabled>
-                                                            </div>
+                                                    <input name="ID Usuario" type="hidden" class="form-control"
+                                                           id="ID Usuario" value="<%=userAdmin.getIdUsuarios()%>">
+
+                                                    <div class="row mb-3">
+                                                        <label for="Codigo" class="col-md-4 col-lg-3 col-form-label">Código</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input minlength="8" maxlength="8" required name="Codigo"
+                                                                   type="number" class="form-control" id="Codigo"
+                                                                   value="<%=userAdmin.getCodigoPucp()%>">
                                                         </div>
+                                                    </div>
 
-
-                                                        <div class="row mb-3">
-                                                            <label for="Email" class="col-md-4 col-lg-3 col-form-label">Correo</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="email" type="email" class="form-control" id="Email" value="ajuanperez@pucp.edu.pe" disabled>
-                                                            </div>
+                                                    <div class="row mb-3">
+                                                        <label for="Nombres" class="col-md-4 col-lg-3 col-form-label">Nombres</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input required name="Nombres" type="text"
+                                                                   class="form-control" id="Nombres"
+                                                                   value="<%=userAdmin.getNombres()%>">
                                                         </div>
+                                                    </div>
 
-
-                                                        <div class="row mb-3">
-                                                            <label for="Country" class="col-md-4 col-lg-3 col-form-label">Pais</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="country" type="text" class="form-control" id="Country" value="Perú">
-                                                            </div>
+                                                    <div class="row mb-3">
+                                                        <label for="Apellidos" class="col-md-4 col-lg-3 col-form-label">Apellidos</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input required name="Apellidos" type="text"
+                                                                   class="form-control" id="Apellidos"
+                                                                   value="<%=userAdmin.getApellidos()%>">
                                                         </div>
+                                                    </div>
 
-                                                        <div class="row mb-3">
-                                                            <label for="Address" class="col-md-4 col-lg-3 col-form-label">Direcion</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="address" type="text" class="form-control" id="Address" value="Av Las Nuevas Lomas, Lima">
-                                                            </div>
+                                                    <div class="row mb-3">
+                                                        <label for="Correo" class="col-md-4 col-lg-3 col-form-label">Correo</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input required name="Correo PUCP" type="text"
+                                                                   class="form-control" id="Correo"
+                                                                   value="<%=userAdmin.getCorreoPucp()%>">
                                                         </div>
+                                                    </div>
 
-                                                        <div class="row mb-3">
-                                                            <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="phone" type="text" class="form-control" id="Phone" value="986-126-855">
-                                                            </div>
+                                                    <div class="row mb-3">
+                                                        <label for="DNI"
+                                                               class="col-md-4 col-lg-3 col-form-label">DNI</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input required name="DNI" type="number"
+                                                                   class="form-control" id="DNI"
+                                                                   value="<%=userAdmin.getDni()%>">
                                                         </div>
+                                                    </div>
 
-
-
-                                                        <div class="text-center">
-                                                            <button href= "Admin_perfil.html" type="submit" class="btn btn-primary">Guardar</button>
+                                                    <div class="row mb-3">
+                                                        <label for="Celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input required min="1" max="999999999999" name="Celular"
+                                                                   type="number" class="form-control" id="Celular"
+                                                                   value="<%=userAdmin.getCelular()%>">
                                                         </div>
+                                                    </div>
+
+                                                    <input name="Rol" type="hidden" class="form-control" id="Rol"
+                                                           value="<%=userAdmin.getRol()%>">
+
+                                                    <div class="row mb-3">
+                                                        <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <select required class="form-select" id="Categoría"
+                                                                    name="Categoría">
+                                                                <%for (String categoria : categorias) {%>
+                                                                <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
+                                                                </option>
+                                                                <%}%>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <button href="Admin_perfil.html" type="submit"
+                                                                class="btn btn-primary">Guardar
+                                                        </button>
+                                                    </div>
                                                     </form><!-- End Profile Edit Form -->
 
                                                 </div>
@@ -231,29 +306,36 @@
                                                     <form>
 
                                                         <div class="row mb-3">
-                                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label"> Permitir Notificaciones</label>
+                                                            <label for="changesMade"
+                                                                   class="col-md-4 col-lg-3 col-form-label"> Permitir
+                                                                Notificaciones</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="changesMade" checked>
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                           id="changesMade" checked>
                                                                     <label class="form-check-label" for="changesMade">
                                                                         Incidencias urgentes
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="newProducts" checked>
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                           id="newProducts" checked>
                                                                     <label class="form-check-label" for="newProducts">
                                                                         Incidencia atendida
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="proOffers">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                           id="proOffers">
                                                                     <label class="form-check-label" for="proOffers">
                                                                         Reclamo de incidencias
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                                                                    <label class="form-check-label" for="securityNotify">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                           id="securityNotify" checked disabled>
+                                                                    <label class="form-check-label"
+                                                                           for="securityNotify">
                                                                         Cada nueva incidencia
                                                                     </label>
                                                                 </div>
@@ -261,7 +343,8 @@
                                                         </div>
 
                                                         <div class="text-center">
-                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                            <button type="submit" class="btn btn-primary">Guardar
+                                                            </button>
                                                         </div>
                                                     </form><!-- End settings Form -->
 
@@ -272,28 +355,39 @@
                                                     <form>
 
                                                         <div class="row mb-3">
-                                                            <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña actual</label>
+                                                            <label for="currentPassword"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Contraseña
+                                                                actual</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <input name="password" type="password" class="form-control" id="currentPassword">
+                                                                <input name="password" type="password"
+                                                                       class="form-control" id="currentPassword">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mb-3">
-                                                            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva contraseña</label>
+                                                            <label for="newPassword"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Nueva
+                                                                contraseña</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <input name="newpassword" type="password" class="form-control" id="newPassword">
+                                                                <input name="newpassword" type="password"
+                                                                       class="form-control" id="newPassword">
                                                             </div>
                                                         </div>
 
                                                         <div class="row mb-3">
-                                                            <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar nueva contraseña</label>
+                                                            <label for="renewPassword"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Confirmar
+                                                                nueva contraseña</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                                                                <input name="renewpassword" type="password"
+                                                                       class="form-control" id="renewPassword">
                                                             </div>
                                                         </div>
 
                                                         <div class="text-center">
-                                                            <button type="submit" class="btn btn-primary">Cambiar contraseña</button>
+                                                            <button type="submit" class="btn btn-primary">Cambiar
+                                                                contraseña
+                                                            </button>
                                                         </div>
                                                     </form><!-- End Change Password Form -->
 
@@ -306,11 +400,7 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-xl-8">
-
-
-
                         </div>
                     </div>
                 </div>
@@ -320,8 +410,6 @@
 
 
         <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -336,9 +424,28 @@
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
 
-    </body>
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict'
 
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
 
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+        </script>
 
     </body>
 
