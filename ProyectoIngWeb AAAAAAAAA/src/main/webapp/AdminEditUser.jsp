@@ -12,6 +12,7 @@
   ArrayList<String> roles = (ArrayList<String>) request.getAttribute("roles");
   ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
 %>
+<jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +50,7 @@
 
         <div class="d-md-flex align-items-center">
           <div>
-            <h1 class="name" style="margin-top: 25px">Juan Perez
+            <h1 class="name" style="margin-top: 25px"><%=userAdmin.getNombreYApellido()%>
               <br><h6>Administrador</h6><br>
             </h1>
           </div>
@@ -57,12 +58,12 @@
 
         <nav id="navbar" class="navbar">
           <ul>
-            <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet">Lista de usuarios</a></li>
-            <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/AdminServlet?action=perfil">Perfil</a></li>
+            <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/Admin">Lista de usuarios</a></li>
+            <li><a class="nav-link scrollto " href="<%=request.getContextPath()%>/Admin?action=perfil">Perfil</a></li>
             <li>
               <div class="container-fluid">
                 <form method="post" class="d-flex input-group w-auto"
-                      action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
+                      action="<%=request.getContextPath()%>/Admin?action=buscar">
                   <input type="text"
                          name="searchText"
                          class="form-control rounded"
@@ -162,7 +163,7 @@
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                           <!-- Profile Edit Form -->
-                          <form class="needs-validation" method="post" action="<%=request.getContextPath()%>/AdminServlet?action=actualizar" novalidate>
+                          <form class="needs-validation" method="post" action="<%=request.getContextPath()%>/Admin?action=actualizar" novalidate>
                             <div class="row mb-3">
                               <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
                               <div class="col-md-8 col-lg-9">
@@ -253,7 +254,7 @@
                     </div>
                   </div>
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="<%=request.getContextPath()%>/AdminServlet?action=borrar&id=<%=usuarios.getIdUsuarios()%>" class="btn btn-danger" type="button">Eliminar usuario</a>
+                    <a href="<%=request.getContextPath()%>/Admin?action=borrar&id=<%=usuarios.getIdUsuarios()%>" class="btn btn-danger" type="button">Eliminar usuario</a>
 
                   </div>
                 </div>

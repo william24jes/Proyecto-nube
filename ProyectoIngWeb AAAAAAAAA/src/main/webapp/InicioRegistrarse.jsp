@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -56,7 +57,7 @@
                                         </div>
 
                                         <form class="row g-3 needs-validation" method="post"
-                                              action="<%=request.getContextPath()%>/ServletIniciarSesion?post=registrarse"
+                                              action="<%=request.getContextPath()%>/IniciarSesion?post=registrarse"
                                               novalidate>
 
                                             <div class="col-12">
@@ -91,7 +92,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <p class="small mb-0">¿Ya tienes una cuenta? <a
-                                                        href="<%=request.getContextPath()%>/ServletIniciarSesion">Inicia
+                                                        href="<%=request.getContextPath()%>/IniciarSesion">Inicia
                                                     sesión aquí</a></p>
                                             </div>
                                         </form>

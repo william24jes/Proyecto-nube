@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -6,8 +7,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Olvidar Contraseña</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
 
     <!-- Favicons -->
     <link href="assets/img/telepucp.png" rel="icon">
@@ -29,12 +28,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style_inicio_sesion.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: NiceAdmin - v2.4.0
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
   </head>
 
   <body>
@@ -84,19 +77,17 @@
                           <button class="btn btn-secondary w-100" type="button">Cancelar</button>
                         </a>
                       </div>
-
+                    </form>
                   </div>
                 </div>
 
               </div>
             </div>
-
+          </div>
         </section>
 
       </div>
     </main><!-- End #main -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

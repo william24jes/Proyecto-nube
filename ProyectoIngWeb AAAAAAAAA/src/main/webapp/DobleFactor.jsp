@@ -80,7 +80,7 @@
 
                           </div>
                         </div>
-                        <form method="post" action="<%=request.getContextPath()%>/ServletIniciarSesion?post=doblef">
+                        <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=doblef">
                           <p>Ingrese el PIN:</p>
 
                           <div class="row mb-4">

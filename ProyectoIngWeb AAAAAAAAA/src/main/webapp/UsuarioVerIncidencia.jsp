@@ -1,7 +1,7 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoIncidencias" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
-<%@ page import="com.example.proyectoingweb.servlets.Usuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoComentarios" %>
@@ -19,8 +19,6 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
         <title>Incidencia / Incidencias PUCP</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
@@ -42,12 +40,6 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style_usuario.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: BizLand - v3.9.0
-        * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
     </head>
 
     <body>
@@ -69,11 +61,8 @@
                         </h1>
                     </div>
                 </div>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
                 <nav id="navbar" class="navbar">
-
 
                     <ul>
                         <li>
@@ -110,7 +99,6 @@
         </header><!-- End Header -->
 
         <main id="main" data-aos="fade-up">
-
 
             <!-- ======= Portfolio Details Section ======= -->
             <section id="portfolio-details" class="portfolio-details">

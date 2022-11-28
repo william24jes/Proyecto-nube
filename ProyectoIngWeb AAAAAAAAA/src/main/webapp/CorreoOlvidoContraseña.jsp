@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -67,7 +68,7 @@
                       <a class="nav-link  " href="<%=request.getContextPath()%>/ServletCorreoOlvidoContrasena?action=recibirCorreo">
                         <button type="button" style="margin-right: 10px;" class="btn btn-primary" >Reenviar correo</button>
                       </a>
-                      <a class="nav-link  " href="<%=request.getContextPath()%>/ServletIniciarSesion">
+                      <a class="nav-link  " href="<%=request.getContextPath()%>/IniciarSesion">
                         <button style="margin-left: 10px;" class="btn btn-primary" >Volver a inicio</button>
                       </a>
                     </div>

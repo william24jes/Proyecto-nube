@@ -1,13 +1,14 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoIncidencias" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
-<%@ page import="com.example.proyectoingweb.servlets.Usuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaIncidenciasDestacadas" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+<!doctype html>
 <html lang="en">
 
     <head>
@@ -15,13 +16,10 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
         <title>Mis incidencias / Incidencias PUCP</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -39,12 +37,6 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style_usuario.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: BizLand - v3.9.0
-        * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
     </head>
 
     <body>
@@ -66,8 +58,6 @@
                         </h1>
                     </div>
                 </div>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
                 <nav id="navbar" class="navbar">
 

@@ -1,5 +1,6 @@
-package com.example.proyectoingweb.servlets.Inicio;
+package com.example.proyectoingweb.servlets.ServletsLogin;
 
+import com.example.proyectoingweb.servlets.model.beans.Credenciales;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
@@ -9,7 +10,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "ServletIniciarSesion", value = "/ServletIniciarSesion")
+@WebServlet(name = "ServletIniciarSesion", value = "/IniciarSesion")
 public class ServletIniciarSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,12 +29,12 @@ public class ServletIniciarSesion extends HttpServlet {
                             requestDispatcher.forward(request, response);
                         }else{
                             if (session.getAttribute("userAdmin") != null) {
-                                response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                                response.sendRedirect(request.getContextPath() + "/Admin");
                             }
                         }
                     } else {
                         if (session.getAttribute("seguridadSession") != null) {
-                            response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
+                            response.sendRedirect(request.getContextPath() + "/Seguridad");
                         }
                     }
                 } else {
@@ -73,6 +74,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String post = request.getParameter("post");
         post = (post == null) ? "iniciosesion" : post;
 
@@ -94,13 +96,17 @@ public class ServletIniciarSesion extends HttpServlet {
                 }
                 break;
             case "validar":
+
                 String codigo = request.getParameter("codigo");
                 password = request.getParameter("password");
                 String correo = request.getParameter("correo");
 
-                Usuarios usuarioValido = daoUsuarios.validarUsuarioPassword(codigo, password, correo);
+                Credenciales credenciales = daoUsuarios.validarUsuarioPassword(codigo, password, correo);
 
-                if (usuarioValido != null) {
+                if (credenciales != null) {
+
+                    Usuarios usuarioValido = daoUsuarios.buscarPorId(credenciales.getIdUsuario());
+
                     switch (usuarioValido.getRol()) {
                         case "Usuario PUCP":
                             HttpSession sessionUsuario = request.getSession();
@@ -115,7 +121,7 @@ public class ServletIniciarSesion extends HttpServlet {
                         case "Seguridad":
                             HttpSession sessionSeguridad = request.getSession();
                             sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
-                            response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
+                            response.sendRedirect(request.getContextPath() + "/Seguridad");
 
                             /*
                             request.setAttribute("correo", correo);
@@ -126,7 +132,7 @@ public class ServletIniciarSesion extends HttpServlet {
                         case "Administrador":
                             HttpSession sessionAdmin = request.getSession();
                             sessionAdmin.setAttribute("userAdmin", usuarioValido);
-                            response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                            response.sendRedirect(request.getContextPath() + "/Admin");
                             break;
                         default:
                             request.getSession().setAttribute("error", "Error en usuario o contraseña");
@@ -175,7 +181,7 @@ public class ServletIniciarSesion extends HttpServlet {
                 break;
 
             case "dobleFactor":
-                response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
+                response.sendRedirect(request.getContextPath() + "/Seguridad");
                 break;
         }
     }

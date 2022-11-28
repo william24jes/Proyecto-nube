@@ -47,8 +47,8 @@
                 <h1>Registra tu primera</br><span> incidencia</span></h1>
                 <h2>y ayudemos a nuestra comunidad PUCP a mantener todo en orden</h2>
                 <div class="d-flex">
-                    <a href="<%=request.getContextPath()%>/ServletIniciarSesion" class="btn-get-started scrollto">Inicia sesión</a>
-                    <a href="<%=request.getContextPath()%>/ServletIniciarSesion?action=registrarse" class=" btn-watch-video"><span>Regístrate</span></a>
+                    <a href="<%=request.getContextPath()%>/IniciarSesion" class="btn-get-started scrollto">Inicia sesión</a>
+                    <a href="<%=request.getContextPath()%>/IniciarSesion?action=registrarse" class=" btn-watch-video"><span>Regístrate</span></a>
                 </div>
             </div>
 
@@ -67,7 +67,6 @@
         </footer><!-- End Footer -->
 
         <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>

@@ -1,4 +1,4 @@
-package com.example.proyectoingweb.servlets.Usuario;
+package com.example.proyectoingweb.servlets.ServletsUsuario;
 
 import com.example.proyectoingweb.servlets.model.daos.DaoImagen;
 import jakarta.servlet.*;

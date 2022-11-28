@@ -1,4 +1,4 @@
-package com.example.proyectoingweb.servlets.Usuario;
+package com.example.proyectoingweb.servlets.ServletsUsuario;
 
 import com.example.proyectoingweb.servlets.model.beans.Comentarios;
 import com.example.proyectoingweb.servlets.model.beans.Incidencias;
@@ -15,9 +15,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

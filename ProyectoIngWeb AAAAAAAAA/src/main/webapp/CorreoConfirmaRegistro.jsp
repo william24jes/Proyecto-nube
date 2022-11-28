@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -55,7 +56,7 @@
 
                                         <form class="row g-3 needs-validation" novalidate>
                                             <div class="col-12">
-                                                <a class="nav-link  " href="<%=request.getContextPath()%>/ServletIniciarSesion">
+                                                <a class="nav-link  " href="<%=request.getContextPath()%>/IniciarSesion">
                                                     <button type="button" class="btn btn-primary w-100" >Volver a la página principal</button>
                                                 </a>
                                             </div>
@@ -66,7 +67,7 @@
 
                             </div>
                         </div>
-
+                    </div>
                 </section>
 
             </div>

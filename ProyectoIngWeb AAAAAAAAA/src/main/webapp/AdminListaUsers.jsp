@@ -64,14 +64,14 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/AdminServlet">Lista
+                        <li><a class="nav-link scrollto active" href="<%=request.getContextPath()%>/Admin">Lista
                             de usuarios</a></li>
                         <li><a class="nav-link scrollto"
-                               href="<%=request.getContextPath()%>/AdminServlet?action=perfil">Perfil</a></li>
+                               href="<%=request.getContextPath()%>/Admin?action=perfil">Perfil</a></li>
                         <li>
                             <div class="container-fluid">
                                 <form method="post" class="d-flex input-group w-auto"
-                                      action="<%=request.getContextPath()%>/AdminServlet?action=buscar">
+                                      action="<%=request.getContextPath()%>/Admin?action=buscar">
                                     <input type="text"
                                            name="searchText"
                                            class="form-control rounded"
@@ -82,7 +82,7 @@
                                 </form>
                             </div>
                         </li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/AdminServlet?action=cerrarSesion">Cerrar sesión</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=cerrarSesion">Cerrar sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -108,7 +108,7 @@
                     <div class="container-fluid">
                         <div class="container"><h4 class="hero">Usuarios guardados:</h4>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a class="btn btn-danger" href="<%=request.getContextPath()%>/AdminServlet?action=crear"
+                                <a class="btn btn-danger" href="<%=request.getContextPath()%>/Admin?action=crear"
                                    role="button">Añadir nuevo usuario</a>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
                                     <td>
 
                                         <a type="button" class="btn btn-primary"
-                                           href="<%=request.getContextPath()%>/AdminServlet?action=editar&id=<%=usuarios.getIdUsuarios()%>">
+                                           href="<%=request.getContextPath()%>/Admin?action=editar&id=<%=usuarios.getIdUsuarios()%>">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                                  class="bi bi-pencil" viewBox="0 0 16 16">
                                                 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
@@ -159,7 +159,7 @@
                                     <td>
                                         <a type="button" class="btn btn-danger"
                                            onclick="return confirm('¿Estas seguro(a) que deseas borrar?')"
-                                           href="<%=request.getContextPath()%>/AdminServlet?action=borrar&id=<%=usuarios.getIdUsuarios()%>">
+                                           href="<%=request.getContextPath()%>/Admin?action=borrar&id=<%=usuarios.getIdUsuarios()%>">
                                             <i class="bi bi-trash"></i></a>
 
                                     </td>
@@ -176,7 +176,7 @@
                 <nav aria-label="Page navigation example" style="margin-top: 20px;">
                     <ul class="pagination justify-content-center">
                         <%for (double i=1;i<=Math.ceil((double)(listaPermanente.size())/15.0);i++){%>
-                        <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/AdminServlet?action=page&id=<%=(int)i%>"><%=(int)i%></a></li>
+                        <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/Admin?action=page&id=<%=(int)i%>"><%=(int)i%></a></li>
                         <%}%>
                     </ul>
                 </nav>

@@ -1,6 +1,5 @@
-package com.example.proyectoingweb.servlets.Inicio;
+package com.example.proyectoingweb.servlets.ServletsLogin;
 
-import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -25,12 +24,12 @@ public class ServletHome extends HttpServlet {
                             requestDispatcher.forward(request, response);
                         }else{
                             if (session.getAttribute("userAdmin") != null) {
-                                response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                                response.sendRedirect(request.getContextPath() + "/Admin");
                             }
                         }
                     } else {
                         if (session.getAttribute("seguridadSession") != null) {
-                            response.sendRedirect(request.getContextPath() + "/SeguridadInicio");
+                            response.sendRedirect(request.getContextPath() + "/Seguridad");
                         }
                     }
                 } else {

@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "ServletSeguridadInicio", value = "/SeguridadInicio")
+@WebServlet(name = "ServletSeguridadInicio", value = "/Seguridad")
 public class ServletSeguridadInicio extends HttpServlet {
 
     private ArrayList<Incidencias> listaPermanente;

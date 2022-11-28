@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -7,12 +7,9 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
         <title>Iniciar sesión</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -31,12 +28,6 @@
         <!-- Template Main CSS File -->
         <link href="assets/css/style_inicio_sesion.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: NiceAdmin - v2.4.0
-        * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
     </head>
 
     <body>
@@ -66,7 +57,7 @@
                                         </div>
 
                                         <form method="post"
-                                              action="<%=request.getContextPath()%>/ServletIniciarSesion?post=validar"
+                                              action="<%=request.getContextPath()%>/IniciarSesion?post=validar"
                                               class="row g-3 needs-validation" novalidate>
 
                                             <div class="col-12">
@@ -92,7 +83,7 @@
                                                        id="password" required>
                                                 <div class="invalid-feedback">Ingresa tu contraseña!</div>
                                                 <p class="small mb-0"><a
-                                                        href="<%=request.getContextPath()%>/ServletIniciarSesion?action=olvidoContraseña">¿Olvidaste
+                                                        href="<%=request.getContextPath()%>/IniciarSesion?action=olvidoContraseña">¿Olvidaste
                                                     tu contraseña?</a></p>
                                             </div>
                                             <% if (session.getAttribute("error") != null) { %>
@@ -118,7 +109,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <p class="small mb-0">Aún no tienes una cuenta? <a
-                                                        href="<%=request.getContextPath()%>/ServletIniciarSesion?action=registrarse">Crear
+                                                        href="<%=request.getContextPath()%>/IniciarSesion?action=registrarse">Crear
                                                     cuenta</a></p>
                                             </div>
                                         </form>

@@ -1,5 +1,6 @@
 package com.example.proyectoingweb.servlets.model.daos;
 
+import com.example.proyectoingweb.servlets.model.beans.Credenciales;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 
 import javax.mail.Message;
@@ -97,7 +98,7 @@ public class DaoUsuarios extends DaoBase{
                     usuarios.setCorreoPucp(rs.getString(7));
                     usuarios.setCategorias(rs.getString(8));
                     usuarios.setRol(rs.getString(9));
-                    usuarios.setFotoPerfil(rs.getString(11));
+                    usuarios.setFotoPerfil(rs.getString(10));
                 }
             }
 
@@ -132,27 +133,34 @@ public class DaoUsuarios extends DaoBase{
         return rol;
     }
 
-    public Usuarios validarUsuarioPassword(String codigo, String passw, String correo ){
-        Usuarios usuario = null;
-        String sql = "SELECT * FROM usuarios WHERE codigoPucp = ? and contrasena = ? and correoPucp = ?";
+    public Credenciales validarUsuarioPassword(String codigo, String passw, String correo ){
+
+        Credenciales credenciales = null;
+        String sql = "select * from credenciales " +
+                "where correoPucp = ? and codigoPucp = ? and contrasenaHasheada = sha2(?, 256)";
 
         try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, codigo);
-            pstmt.setString(2, passw);
-            pstmt.setString(3, correo);
+            pstmt.setString(1, correo);
+            pstmt.setString(2, codigo);
+            pstmt.setString(3, passw);
 
             try (ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()){
-                    usuario = this.buscarPorId(rs.getString(1));
+                    credenciales = new Credenciales();
+
+                    credenciales.setIdUsuario(rs.getString(1));
+                    credenciales.setCorreoPucp(rs.getString(2));
+                    credenciales.setCodigoPucp(rs.getString(3));
+                    credenciales.setContrasenaHasheada(rs.getString(4));
                 }
             }
         }
         catch (SQLException e){
             throw new RuntimeException();
         }
-        return usuario;
+        return credenciales;
     }
 
     public boolean guardarUsuario(Usuarios usuarios){

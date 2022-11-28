@@ -9,7 +9,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "AdminServlet", value = "/AdminServlet")
+@WebServlet(name = "AdminServlet", value = "/Admin")
 public class AdminServlet extends HttpServlet {
 
     private ArrayList<Usuarios> listaPermanente;
@@ -73,7 +73,7 @@ public class AdminServlet extends HttpServlet {
                     requestDispatcher = request.getRequestDispatcher("AdminEditUser.jsp");
                     requestDispatcher.forward(request, response);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                    response.sendRedirect(request.getContextPath() + "/Admin");
                 }
                 break;
             case "borrar":
@@ -82,7 +82,7 @@ public class AdminServlet extends HttpServlet {
                 session.setAttribute("msg","Usuario borrado exitosamente");
 
 
-                response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                response.sendRedirect(request.getContextPath() + "/Admin");
                 break;
 
             case "page":
@@ -128,7 +128,7 @@ public class AdminServlet extends HttpServlet {
 
                 if (daoUsuarios.guardarUsuario(usuarios)){
                     session.setAttribute("msg","Usuario creado exitosamente");
-                    response.sendRedirect(request.getContextPath()+"/AdminServlet");
+                    response.sendRedirect(request.getContextPath()+"/Admin");
                 }
                 else {
                     requestDispatcher = request.getRequestDispatcher("AdminAddUser.jsp");
@@ -151,7 +151,7 @@ public class AdminServlet extends HttpServlet {
 
                 if (daoUsuarios.actualizarUsuario(usuarios)){
                     session.setAttribute("msg","Usuario editado correctamente");
-                    response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                    response.sendRedirect(request.getContextPath() + "/Admin");
                 }
                 else {
                     idUsuario = request.getParameter("id");
@@ -176,7 +176,7 @@ public class AdminServlet extends HttpServlet {
                         requestDispatcher.forward(request, response);
                     }
                     else {
-                        response.sendRedirect(request.getContextPath() + "/AdminServlet");
+                        response.sendRedirect(request.getContextPath() + "/Admin");
                     }
                 }
 
