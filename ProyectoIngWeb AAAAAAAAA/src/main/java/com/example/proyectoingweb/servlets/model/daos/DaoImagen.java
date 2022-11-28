@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoImagen extends DaoBase {
-    private static String sql_imagenes = "select foto from mydb.incidencias where idIncidencia=?";
+    private static String sql_imagenes = "select foto from mydb2.incidencias where idIncidencia=?";
 
     public byte[] obtenerimagenes(int id) {
         byte[] content = null;

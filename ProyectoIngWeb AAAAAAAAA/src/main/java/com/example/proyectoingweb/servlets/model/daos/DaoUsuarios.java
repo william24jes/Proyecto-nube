@@ -48,7 +48,7 @@ public class DaoUsuarios extends DaoBase{
     public ArrayList<Usuarios> obtenerlistaUsuariosCompleta(){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
 
-        String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario";
+        String sql = "SELECT * FROM mydb2.usuarios ORDER BY idUsuario";
 
         try(Connection connection = this.getConnection();
             Statement stmt = connection.createStatement();
@@ -262,7 +262,7 @@ public class DaoUsuarios extends DaoBase{
 
     public ArrayList<Usuarios> buscarUsuarios(String nombreuser){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
-        String sql = "SELECT * FROM mydb.usuarios WHERE lower(nombres) like ? or lower(apellidos) like ? or dni like ? or codigoPucp like ?";
+        String sql = "SELECT * FROM mydb2.usuarios WHERE lower(nombres) like ? or lower(apellidos) like ? or dni like ? or codigoPucp like ?";
 
         try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -303,7 +303,7 @@ public class DaoUsuarios extends DaoBase{
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
         int inicio=15*(i-1);
 
-        String sql = "SELECT * FROM mydb.usuarios ORDER BY idUsuario LIMIT "+inicio+","+"15";
+        String sql = "SELECT * FROM mydb2.usuarios ORDER BY idUsuario LIMIT "+inicio+","+"15";
 
         try(Connection connection = this.getConnection();
             Statement stmt = connection.createStatement();

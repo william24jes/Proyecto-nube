@@ -10,7 +10,7 @@ public class DaoZonaPucp extends DaoBase{
 
     public ArrayList<ZonaPucp> obtenerListaZonaPucp(){
         ArrayList<ZonaPucp> listaZonaPucp = new ArrayList<>();
-        String sql = "select * from mydb.zonapucp";
+        String sql = "select * from mydb2.zonapucp";
 
         try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();

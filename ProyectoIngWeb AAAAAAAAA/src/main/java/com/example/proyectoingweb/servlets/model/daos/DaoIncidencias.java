@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoIncidencias extends DaoBase {
-    private static String sql_imagenes = "select foto from mydb.incidencias where idIncidencia=?";
+    private static String sql_imagenes = "select foto from mydb2.incidencias where idIncidencia=?";
 
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
@@ -185,7 +185,7 @@ public class DaoIncidencias extends DaoBase {
         }
         */
     public void guardarIncidencias(Incidencias incidencias, InputStream file) {
-        String sql = "INSERT INTO mydb.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia,foto) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO mydb2.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia,foto) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -276,7 +276,7 @@ public class DaoIncidencias extends DaoBase {
     }
 
     public void destacarIncidencia_para_idUsuario(String idUser, String idIncidencia) {
-        String sql = "Insert into mydb.incidencias_destacadas (idUsuario, idIncidencia) Values (?,?)";
+        String sql = "Insert into mydb2.incidencias_destacadas (idUsuario, idIncidencia) Values (?,?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, idUser);
@@ -288,7 +288,7 @@ public class DaoIncidencias extends DaoBase {
 
     }
     public void destacar_en_tabla_incidencias(String idIncidencia,String Cantidad_destacados) {
-        String sql = "update mydb.incidencias set destacado = ? where idIncidencia = ?;";
+        String sql = "update mydb2.incidencias set destacado = ? where idIncidencia = ?;";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(2, idIncidencia);
@@ -304,7 +304,7 @@ public class DaoIncidencias extends DaoBase {
         ArrayList<Usuarios> lista_Usuarios = new ArrayList<>();
         Usuarios usuarios;
         DaoUsuarios daoUsers = new DaoUsuarios();
-        String sql = "SELECT nombres,apellidos, incidencias.idIncidencia, usuarios.idUsuario,incidencias.nombre FROM mydb.incidencias_destacadas, usuarios,incidencias\n" +
+        String sql = "SELECT nombres,apellidos, incidencias.idIncidencia, usuarios.idUsuario,incidencias.nombre FROM mydb2.incidencias_destacadas, usuarios,incidencias\n" +
                 " where usuarios.idUsuario = incidencias_destacadas.idUsuario and incidencias.idIncidencia = incidencias_destacadas.idIncidencia\n" +
                 " and incidencias.idIncidencia=?\n" +
                 " order by idIncidencia";
@@ -324,7 +324,7 @@ public class DaoIncidencias extends DaoBase {
         return lista_Usuarios;
     }
     public void destacarIncidencia_para_idUsuario_negativo(String idUser, String idIncidencia) {
-        String sql = "DELETE from mydb.incidencias_destacadas where idUsuario = ? and  idIncidencia = ?";
+        String sql = "DELETE from mydb2.incidencias_destacadas where idUsuario = ? and  idIncidencia = ?";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, idUser);
@@ -336,7 +336,7 @@ public class DaoIncidencias extends DaoBase {
 
     }
     public void destacar_en_tabla_incidencias_negativo(String idIncidencia,String Cantidad_destacados) {
-        String sql = "update mydb.incidencias set destacado = ? where idIncidencia = ?;";
+        String sql = "update mydb2.incidencias set destacado = ? where idIncidencia = ?;";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(2, idIncidencia);
@@ -349,7 +349,7 @@ public class DaoIncidencias extends DaoBase {
 
     }
     public void actualizar_estado(String nuevo_estado, String id_incidencia) {
-        String sql = "update mydb.incidencias set estadoIncidencia = ? where idIncidencia = ?;";
+        String sql = "update mydb2.incidencias set estadoIncidencia = ? where idIncidencia = ?;";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, nuevo_estado);
