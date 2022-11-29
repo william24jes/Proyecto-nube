@@ -22,6 +22,7 @@ public class ServletIniciarSesion extends HttpServlet {
         switch (action) {
             case "iniciarSesion":
                 // Verificacion de si ya existe sesion
+
                 if (session.getAttribute("usuarioSession") == null) {
                     if (session.getAttribute("seguridadSession") == null) {
                         if (session.getAttribute("userAdmin") == null) {
@@ -120,7 +121,7 @@ public class ServletIniciarSesion extends HttpServlet {
                             break;
                         case "Seguridad":
                             HttpSession sessionSeguridad = request.getSession();
-                            sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
+                            sessionSeguridad.setAttribute("usuarioSession", usuarioValido);
                             response.sendRedirect(request.getContextPath() + "/Seguridad");
 
                             /*
@@ -131,17 +132,17 @@ public class ServletIniciarSesion extends HttpServlet {
                             break;
                         case "Administrador":
                             HttpSession sessionAdmin = request.getSession();
-                            sessionAdmin.setAttribute("userAdmin", usuarioValido);
+                            sessionAdmin.setAttribute("usuarioSession", usuarioValido);
                             response.sendRedirect(request.getContextPath() + "/Admin");
                             break;
                         default:
                             request.getSession().setAttribute("error", "Error en usuario o contraseña");
-                            response.sendRedirect(request.getContextPath() + "/ServletIniciarSesion");
+                            response.sendRedirect(request.getContextPath() + "/IniciarSesion");
                             break;
                     }
                 } else {
                     request.getSession().setAttribute("error", "Error en usuario o contraseña");
-                    response.sendRedirect(request.getContextPath() + "/ServletIniciarSesion");
+                    response.sendRedirect(request.getContextPath() + "/IniciarSesion");
                 }
                 break;
 
@@ -161,14 +162,14 @@ public class ServletIniciarSesion extends HttpServlet {
 
                     daoUsuarios.enviarCorreo(correoPucp, asunto, mensaje);
 
-                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?action=confirmaRegistro");
+                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=confirmaRegistro");
                 }
                 else {
                     // Si no existe, enviar por sesion mensaje de error
                     HttpSession session = request.getSession();
                     session.setAttribute("msg", "Correo o código inválido(s)");
 
-                    response.sendRedirect(request.getContextPath()+"/ServletIniciarSesion?action=registrarse");
+                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=registrarse");
                 }
 
                 break;

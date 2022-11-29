@@ -2,7 +2,7 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 <%
     ArrayList<Incidencias> listaPermanente = (ArrayList<Incidencias>) request.getAttribute("listaIncidenciasPermanente");
@@ -56,7 +56,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px"><%=seguridadSession.getNombreYApellido()%>
+                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
                             <br><h6>Seguridad</h6></br>
                         </h1>
                     </div>

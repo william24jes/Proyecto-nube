@@ -192,7 +192,7 @@
                                                                 Perfil</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <img src="assets/img/fotosPerfil/<%=usuarioSession.getFotoPerfil()%>"
-                                                                     height="150" width="150" alt="Profile">
+                                                                     height="150" width="150" alt="Profile" id="profileImage">
                                                                 <div class="pt-2">
                                                                     <a href="#" class="btn btn-primary btn-sm"
                                                                        title="Upload new profile image"><i

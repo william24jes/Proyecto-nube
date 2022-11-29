@@ -10,7 +10,6 @@
 
     <!-- Favicons -->
     <link href="assets/img/telepucp.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -73,7 +72,7 @@
                       </div>
 
                       <div class="col-6">
-                        <a class="nav-link" href="<%=request.getContextPath()%>/ServletCorreoOlvidoContrasena?action=cancelar">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/IniciarSesion">
                           <button class="btn btn-secondary w-100" type="button">Cancelar</button>
                         </a>
                       </div>
@@ -101,6 +100,29 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                  form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                  }, false)
+                })
+      })()
+    </script>
 
   </body>
 

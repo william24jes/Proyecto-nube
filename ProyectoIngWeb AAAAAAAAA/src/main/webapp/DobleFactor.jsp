@@ -8,12 +8,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Pages / Login - NiceAdmin Bootstrap Template</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -31,12 +28,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style_inicio_sesion.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: NiceAdmin - v2.4.0
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
   </head>
 
   <body>

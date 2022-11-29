@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 
 <!DOCTYPE html>
@@ -190,7 +190,7 @@
                                                                 Perfil</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <img src="assets/img/perfiles/perfil1.svg" height="150"
-                                                                     width="150" alt="Profile">
+                                                                     width="150" alt="Profile" id="profileImage">
                                                                 <div class="pt-2">
                                                                     <a href="#" class="btn btn-primary btn-sm"
                                                                        title="Upload new profile image"><i

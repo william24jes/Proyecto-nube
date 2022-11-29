@@ -195,6 +195,15 @@ public class AdminServlet extends HttpServlet {
                 }
 
                 break;
+
+            case "actualizarPassword":
+
+                String password = request.getParameter("password");
+
+
+
+                break;
+
             case "buscar":
                 String searchText = request.getParameter("searchText");
 
