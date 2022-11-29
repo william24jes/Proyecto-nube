@@ -367,6 +367,55 @@ public class DaoUsuarios extends DaoBase{
 
     }
 
+    public Credenciales validarCambioPassword(int idUsuario, String password){
+
+        String sql = "select * from credenciales where idUsuario = ? and contrasenaHasheada = sha2(?, 256)";
+        Credenciales credenciales = null;
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, idUsuario);
+            pstmt.setString(2, password);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+
+                if (rs.next()){
+                    credenciales = new Credenciales();
+
+                    credenciales.setIdUsuario(rs.getString(1));
+                    credenciales.setCorreoPucp(rs.getString(2));
+                    credenciales.setCodigoPucp(rs.getString(3));
+                    credenciales.setContrasenaHasheada(rs.getString(4));
+                }
+
+            }
+
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
+
+        return credenciales;
+    }
+
+    public void actualizarPassword(int idUsuario, String nuevaPassword){
+
+        String sql = "update credenciales set contrasenaHasheada = sha2(?, 256) where idUsuario = ?";
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1, nuevaPassword);
+            pstmt.setInt(2, idUsuario);
+
+            pstmt.executeUpdate();
+
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
+
+    }
+
     public void enviarCorreo(String correoDestino, String asunto, String mensaje){
 
         String correoOrigen = "incidencias.pucp@gmail.com";

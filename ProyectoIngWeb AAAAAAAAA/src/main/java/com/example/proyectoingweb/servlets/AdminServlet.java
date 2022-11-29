@@ -1,5 +1,6 @@
 package com.example.proyectoingweb.servlets;
 
+import com.example.proyectoingweb.servlets.model.beans.Credenciales;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
 import jakarta.servlet.*;
@@ -119,7 +120,7 @@ public class AdminServlet extends HttpServlet {
         String action = request.getParameter("action");
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         Usuarios usuarios = new Usuarios();
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
         RequestDispatcher requestDispatcher;
 
         String idUsuario;
@@ -162,7 +163,7 @@ public class AdminServlet extends HttpServlet {
                 if (daoUsuarios.actualizarUsuario(usuarios)){
 
                     session = request.getSession();
-                    session.setAttribute("userAdmin", usuarios);
+                    session.setAttribute("usuarioSession", usuarios);
 
                     session.setAttribute("msg","Usuario editado correctamente");
                     response.sendRedirect(request.getContextPath() + "/Admin");
@@ -198,9 +199,28 @@ public class AdminServlet extends HttpServlet {
 
             case "actualizarPassword":
 
+                usuarios = (Usuarios) session.getAttribute("usuarioSession");
                 String password = request.getParameter("password");
 
+                Credenciales credenciales = daoUsuarios.validarCambioPassword(usuarios.getIdUsuarios(), password);
 
+                if (credenciales != null){
+                    if (request.getParameter("nuevaPassword1").equals(request.getParameter("nuevaPassword2"))){
+
+                        daoUsuarios.actualizarPassword(Integer.parseInt(credenciales.getIdUsuario()), request.getParameter("nuevaPassword1"));
+
+                        session.setAttribute("msg","Contraseña cambiada correctamente");
+                        response.sendRedirect(request.getContextPath() + "/Admin");
+                    }
+                    else {
+                        session.setAttribute("msgError", "Las contraseñas deben ser iguales");
+                        response.sendRedirect(request.getContextPath()+"/Admin?action=perfil");
+                    }
+                }
+                else {
+                    session.setAttribute("msgError", "La contraseña actual es incorrecta");
+                    response.sendRedirect(request.getContextPath()+"/Admin?action=perfil");
+                }
 
                 break;
 
