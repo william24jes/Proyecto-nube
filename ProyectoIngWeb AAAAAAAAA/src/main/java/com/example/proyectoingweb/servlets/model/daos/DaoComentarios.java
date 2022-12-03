@@ -105,7 +105,33 @@ public class DaoComentarios extends DaoBase {
             throw new RuntimeException(e);
         }
     }
+
+    public void actualizarComentario_idSeguridad(int id_security, int id_Comentario){
+        String sql = "UPDATE comentarios SET idSeguridad = ? where idComentario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, String.valueOf(id_security));
+            pstmt.setString(2, String.valueOf(id_Comentario));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void actualizar_tabla_comentarios(Comentarios comment,String columna_a_llenar,String mensaje){
+
+        if(Integer.parseInt(columna_a_llenar) == 1){
+            String sql = "UPDATE comentarios SET contenido1  = ? where idIncidencia = ? and idUsuario = ?";
+            try (Connection connection = this.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1,mensaje);
+                pstmt.setString(2, String.valueOf(comment.getIdIncidencia()));
+                pstmt.setString(3, String.valueOf(comment.getIdUsuario()));
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         if(Integer.parseInt(columna_a_llenar) == 2){
             String sql = "UPDATE comentarios SET contenido2  = ? ,validacion_usuario = ? where idIncidencia = ? and idUsuario = ?";
@@ -121,6 +147,20 @@ public class DaoComentarios extends DaoBase {
                 throw new RuntimeException(e);
             }
         }
+
+        if(Integer.parseInt(columna_a_llenar) == 3){
+            String sql = "UPDATE comentarios SET contenido3  = ? where idIncidencia = ? and idUsuario = ?";
+            try (Connection connection = this.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1,mensaje);
+                pstmt.setString(2, String.valueOf(comment.getIdIncidencia()));
+                pstmt.setString(3, String.valueOf(comment.getIdUsuario()));
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         if(Integer.parseInt(columna_a_llenar) == 4){
             String sql = "UPDATE comentarios SET contenido4  = ? ,validacion_usuario = ? where idIncidencia = ? and idUsuario = ?";
             try (Connection connection = this.getConnection();
@@ -134,8 +174,21 @@ public class DaoComentarios extends DaoBase {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
         }
+
+        if(Integer.parseInt(columna_a_llenar) == 5){
+            String sql = "UPDATE comentarios SET contenido5  = ? where idIncidencia = ? and idUsuario = ?";
+            try (Connection connection = this.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1,mensaje);
+                pstmt.setString(2, String.valueOf(comment.getIdIncidencia()));
+                pstmt.setString(3, String.valueOf(comment.getIdUsuario()));
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         if(Integer.parseInt(columna_a_llenar) == 6){
             String sql = "UPDATE comentarios SET contenido6  = ? ,validacion_usuario = ? where idIncidencia = ? and idUsuario = ?";
             try (Connection connection = this.getConnection();
@@ -149,8 +202,21 @@ public class DaoComentarios extends DaoBase {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
         }
+
+        if(Integer.parseInt(columna_a_llenar) == 7){
+            String sql = "UPDATE comentarios SET contenido7  = ? where idIncidencia = ? and idUsuario = ?";
+            try (Connection connection = this.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1,mensaje);
+                pstmt.setString(2, String.valueOf(comment.getIdIncidencia()));
+                pstmt.setString(3, String.valueOf(comment.getIdUsuario()));
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         if(Integer.parseInt(columna_a_llenar) == 8){
             String sql = "UPDATE comentarios SET contenido8  = ? ,validacion_usuario = ? where idIncidencia = ? and idUsuario = ?";
             try (Connection connection = this.getConnection();
@@ -164,9 +230,21 @@ public class DaoComentarios extends DaoBase {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-
         }
+
+        if(Integer.parseInt(columna_a_llenar) == 9){
+            String sql = "UPDATE comentarios SET contenido9  = ?     where idIncidencia = ? and idUsuario = ?";
+            try (Connection connection = this.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1,mensaje);
+                pstmt.setString(2, String.valueOf(comment.getIdIncidencia()));
+                pstmt.setString(3, String.valueOf(comment.getIdUsuario()));
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         if(Integer.parseInt(columna_a_llenar) == 10){
 
             String sql = "UPDATE comentarios SET contenido10  = ? ,validacion_usuario = ? where idIncidencia = ? and idUsuario = ?";

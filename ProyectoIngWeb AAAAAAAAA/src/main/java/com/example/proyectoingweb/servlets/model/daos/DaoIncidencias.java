@@ -300,6 +300,7 @@ public class DaoIncidencias extends DaoBase {
         }
 
     }
+
     public ArrayList<Usuarios> IdDeUsuariosQueDestacaron(String idIncidencia) {
         ArrayList<Usuarios> lista_Usuarios = new ArrayList<>();
         Usuarios usuarios;

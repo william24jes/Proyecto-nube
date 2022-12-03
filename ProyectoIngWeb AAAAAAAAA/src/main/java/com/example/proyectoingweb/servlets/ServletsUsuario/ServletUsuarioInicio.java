@@ -235,6 +235,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 Comentarios comment_user = daoComentarios.buscarporIdIncidencia_y_idUsuarioQueCreo(id_incidencia, id_usuario);
                 if (Integer.parseInt(user_validacion) == 0) {
                     daoComentarios.actualizarComentario_subida(comment_user);
+                    daoIncidencias.actualizar_estado("En proceso", id_incidencia);
                     response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + id_incidencia);
                     break;
 
@@ -249,7 +250,7 @@ public class ServletUsuarioInicio extends HttpServlet {
             }
             case "AceptarResultado": {
                 String id_incidencia = request.getParameter("id_incidencia");
-                daoIncidencias.actualizar_estado("Atendido", id_incidencia);
+                daoIncidencias.actualizar_estado("Resuelto", id_incidencia);
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + id_incidencia);
                 break;
             }

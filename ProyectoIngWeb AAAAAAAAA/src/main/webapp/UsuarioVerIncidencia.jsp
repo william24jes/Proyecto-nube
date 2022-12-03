@@ -337,6 +337,7 @@
                                             %>
 
                                             <div class="row">
+                                                <%if (n != 0) {%>
                                                 <div class="col-auto">
                                                     <br>
                                                     <div>
@@ -349,6 +350,9 @@
 
 
                                                 </div>
+
+                                                <%if( n-1 != 0 ){%>                                                }}%>
+
                                                 <div class="col-auto">
                                                     <br>
                                                     <div>
@@ -358,6 +362,20 @@
                                                         </button>
                                                     </div>
                                                 </div>
+                                                <%}%>
+
+                                                <%} else {%>
+                                                <div class="col-auto">
+                                                    <br>
+                                                    <div>
+                                                        <button type="button"
+                                                                class="btn btn-primary btn-lg disabled"
+                                                                style="background-color: yellow; border: yellow; color: black">
+                                                            Esperando Respuesta del Seguridad . . .
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <%}%>
                                             </div>
                                             <%
                                                 } else if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {
@@ -367,8 +385,11 @@
                                             <%}%>
 
                                             <%} else {%>
+
                                             <%if (incidencia_send_jsp.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()) {%>
 
+                                            <%if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Registrado") || incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("En proceso")
+                                                    || incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {%>
 
                                             <%if (comentario2.getValidacion_usuario_comentar() == 0) {%>
 
@@ -422,6 +443,11 @@
 
                                             </div>
                                             <%}%>
+                                            <%}else if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Resuelto")) {%>
+
+                                            <%}%>
+
+
                                             <%}%>
                                             <%}%>
                                         </form>
