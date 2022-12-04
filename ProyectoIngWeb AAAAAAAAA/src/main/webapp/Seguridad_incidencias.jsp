@@ -194,7 +194,7 @@
                                         <%if (comentario2.getContenido1() != null) {%>
                                         <%contador = 1;%>
                                         <div><br><h5>Comentario
-                                            de <%=seguridadSession.getNombreYApellido()%>: </h5>
+                                            de <%=incidencia.getSeguridad().getNombreYApellido()%>: </h5>
                                             <%=comentario2.getContenido1()%>
                                         </div>
                                         <%}%>
@@ -211,7 +211,7 @@
                                         <%if (comentario2.getContenido3() != null) {%>
                                         <%contador = 3;%>
                                         <div><br><h5>Comentario
-                                            de <%=seguridadSession.getNombreYApellido()%>: </h5>
+                                            de <%=incidencia.getSeguridad().getNombreYApellido()%>: </h5>
                                             <%=comentario2.getContenido3()%>
                                         </div>
                                         <%}%>
@@ -228,7 +228,7 @@
                                         <%if (comentario2.getContenido5() != null) {%>
                                         <%contador = 5;%>
                                         <div><br><h5>Comentario
-                                            de <%=seguridadSession.getNombreYApellido()%>: </h5>
+                                            de <%=incidencia.getSeguridad().getNombreYApellido()%>: </h5>
                                             <%=comentario2.getContenido5()%>
                                         </div>
                                         <%}%>
@@ -245,7 +245,7 @@
                                         <%if (comentario2.getContenido7() != null) {%>
                                         <%contador = 7;%>
                                         <div><br><h5>Comentario
-                                            de <%=seguridadSession.getNombreYApellido()%>: </h5>
+                                            de <%=incidencia.getSeguridad().getNombreYApellido()%>: </h5>
                                             <%=comentario2.getContenido7()%>
                                         </div>
                                         <%}%>
@@ -262,7 +262,7 @@
                                         <%if (comentario2.getContenido9() != null) {%>
                                         <%contador = 9;%>
                                         <div><br><h5>Comentario
-                                            de <%=seguridadSession.getNombreYApellido()%>: </h5>
+                                            de <%=incidencia.getSeguridad().getNombreYApellido()%>: </h5>
                                             <%=comentario2.getContenido9()%>
                                         </div>
                                         <%}%>

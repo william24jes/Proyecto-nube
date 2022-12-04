@@ -107,8 +107,7 @@ public class ServletSeguridadInicio extends HttpServlet {
                 daoComentarios.actualizar_tabla_comentarios(comment_user, String.valueOf(columna_para_llenar), mensaje);
                 daoComentarios.actualizarComentario_idSeguridad(Integer.parseInt(id_security),comment_user.getIdComentario());
                 daoIncidencias.actualizar_estado("Atendido", id_incidencia);
-                incidencias = daoIncidencias.buscarPorId(id_incidencia);
-                incidencias.setSeguridad(usuario);
+                daoIncidencias.actualizar_idSecurity_from_incidencias(id_security,id_incidencia);
                 response.sendRedirect(request.getContextPath() + "/Seguridad?action=detalles&id=" + id_incidencia);
                 break;
             }
