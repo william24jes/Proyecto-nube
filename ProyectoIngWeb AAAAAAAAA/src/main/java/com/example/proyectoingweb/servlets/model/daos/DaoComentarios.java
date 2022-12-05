@@ -5,6 +5,7 @@ import com.example.proyectoingweb.servlets.model.beans.Incidencias;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -32,8 +33,8 @@ public class DaoComentarios extends DaoBase {
                 comentarios.setContenido10(rs.getString(10));
                 comentarios.setIdIncidencia(rs.getInt(11));
                 comentarios.setIdComentario(rs.getInt(12));
-                comentarios.setIdUsuario(rs.getInt(rs.getInt(13)));
-                comentarios.setIdSeguridad(rs.getInt(rs.getInt(14)));
+                comentarios.setIdUsuario(rs.getInt(13));
+                comentarios.setIdSeguridad(rs.getInt(14));
                 comentarios.setValidacion_usuario_comentar(rs.getInt(15));
                 listaComentarios.add(comentarios);
             }
@@ -117,6 +118,23 @@ public class DaoComentarios extends DaoBase {
             throw new RuntimeException(e);
         }
     }
+
+
+    public void guardarComentario(String idIncidencia,String idUsuario) {
+        String sql = "INSERT INTO mydb2.comentarios (idIncidencia,idUsuario) VALUES (?,?)";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, idIncidencia);
+            pstmt.setString(2, idUsuario);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 
     public void actualizar_tabla_comentarios(Comentarios comment,String columna_a_llenar,String mensaje){
 

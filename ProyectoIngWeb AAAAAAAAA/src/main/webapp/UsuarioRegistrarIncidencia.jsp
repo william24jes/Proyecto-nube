@@ -1,4 +1,5 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.ZonaPucp" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Comentarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaZonasPUCP" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.ZonaPucp>"/>
@@ -29,6 +30,7 @@
         <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
         <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
         <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/600382161a.js" crossorigin="anonymous"></script>
 
         <!-- Template Main CSS File -->
@@ -188,14 +190,10 @@
                                                     <!-- Form Group (first name)-->
 
                                                     <div class="col-md-6">
-                                                        <label for="map-container-google-2">Ubicacion</label>
-                                                        <div id="map-container-google-2"
-                                                             class="z-depth-1-half map-container"
-                                                             style="height: 200px">
-                                                            <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                                                    frameborder="0"
-                                                                    style="border:0" allowfullscreen></iframe>
-                                                        </div>
+                                                        <div id="coordinates" hidden ></div>
+                                                        <input type="hidden" name="latitud" id="latitud" />
+                                                        <input type="hidden" name="longitud" id="longitud" />
+
                                                     </div>
                                                     <!-- Form Group (last name)-->
 
@@ -254,6 +252,26 @@
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
+        <script>
+            $(document).ready(function(){
+                getLocation();
+            });
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+
+            }
+            function showPosition(position) {
+                document.getElementById("coordinates").innerHTML = "Latitude: " + position.coords.latitude +
+                    "<br>Longitude: " + position.coords.longitude;
+                document.getElementById("latitud").value = position.coords.latitude;
+                document.getElementById("longitud").value = position.coords.longitude;
+            }
+        </script>
 
     </body>
 

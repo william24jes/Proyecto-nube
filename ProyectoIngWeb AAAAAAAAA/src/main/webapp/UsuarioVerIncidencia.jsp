@@ -171,16 +171,28 @@
 
 
                                     <!-- Card Body -->
-
                                     <div class="card-body">
                                         <div><h4>Descripción:</h4></div>
                                         <%=incidencia_send_jsp.getDescripcion()%>
                                         <div><br><h4>Zona PUCP:</h4></div>
                                         <%=incidencia_send_jsp.getZonaPucp().getNombreZona()%>
                                         <div><br><h4>Ubicación: </h4></div>
-                                        <button type="button" class="btn btn-primary btn-lg"
-                                                style="background-color: red;border:red">Ver en el mapa
-                                        </button>
+                                        <p>
+                                            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
+                                                    style="background-color: red;border:red">Ver en el mapa
+                                            </button>
+                                        </p>
+                                        <div class="col-lg-8">
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                <div class="wrapper" style="position: relative; overflow: hidden;padding-top:56.25%">
+                                                    <iframe style="position: absolute;top:0;left:0;width:100%;height:100%" loading="lazy" allowfullscreen
+                                                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDT71SdHy5wcg6PK_JVCcuON5AqLpCcqA4&q=<%=incidencia_send_jsp.getLatitud()%>,<%=incidencia_send_jsp.getLongitud()%>&zoom=19"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
                                         <div><br><h4>Fotos:</h4></div>
                                         <div class="col-12">
                                             <br>

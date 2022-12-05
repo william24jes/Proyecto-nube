@@ -145,11 +145,13 @@
                                         <%=incidencia.getZonaPucp().getNombreZona()%>
                                         <div><br>
                                             <h4>Ubicación
-                                                <div id="map-container-google-2" class="z-depth-1-half map-container"
-                                                     style="height: 150px">
-                                                    <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                                            frameborder="0"
-                                                            style="border:0" allowfullscreen></iframe>
+                                                <div class="col-lg-8">
+                                                        <div class="card card-body">
+                                                            <div class="wrapper" style="position: relative; overflow: hidden;padding-top:56.25%">
+                                                                <iframe style="position: absolute;top:0;left:0;width:100%;height:100%" loading="lazy" allowfullscreen
+                                                                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDT71SdHy5wcg6PK_JVCcuON5AqLpCcqA4&q=<%=incidencia.getLatitud()%>,<%=incidencia.getLongitud()%>&zoom=19"></iframe>
+                                                            </div>
+                                                        </div>
                                                 </div>
                                             </h4>
                                         </div>

@@ -185,7 +185,7 @@ public class DaoIncidencias extends DaoBase {
         }
         */
     public void guardarIncidencias(Incidencias incidencias, InputStream file) {
-        String sql = "INSERT INTO mydb2.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia,foto) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO mydb2.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia,foto,longitud,latitud) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -199,6 +199,9 @@ public class DaoIncidencias extends DaoBase {
             pstmt.setString(8, incidencias.getDatetime());
             pstmt.setString(9, String.valueOf(incidencias.getAnonimo()));
             pstmt.setString(10, "Registrado");
+            pstmt.setString(12,incidencias.getLongitud());
+            pstmt.setString(13,incidencias.getLatitud());
+
             if (file != null) {
                 pstmt.setBlob(11, file);
             }
@@ -246,6 +249,8 @@ public class DaoIncidencias extends DaoBase {
                     incidencias.setUrgencia(rs.getString(13));
                     incidencias.setEstadoIncidencia(rs.getString(14));
                     incidencias.setNumEstrellas(rs.getInt(15));
+                    incidencias.setLatitud(rs.getString(16));
+                    incidencias.setLongitud(rs.getString(17));
                 }
             }
         } catch (SQLException e) {

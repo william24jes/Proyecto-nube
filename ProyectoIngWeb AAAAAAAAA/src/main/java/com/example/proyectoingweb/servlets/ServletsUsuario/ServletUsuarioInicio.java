@@ -13,8 +13,10 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 
+import javax.xml.stream.events.Comment;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -118,6 +120,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         DaoComentarios daoComentarios = new DaoComentarios();
         ArrayList<Usuarios> lista_usuarios;
+        ArrayList<Comentarios> lista_comentarios;
         switch (action) {
             case "guardar":
                 InputStream inputStream; // input stream of the upload file
@@ -128,6 +131,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 String nivel = request.getParameter("nivel");
                 String zona = request.getParameter("zona");
                 Part filePart = request.getPart("foto1");
+                String latitud = request.getParameter("latitud");
+                String longitud = request.getParameter("longitud");
                 inputStream = filePart.getInputStream();
                 if (filePart != null) {
                     // prints out some information for debugging
@@ -138,6 +143,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 }
                 usuario = daoUsuarios.buscarPorId(idusuario);
                 incidencias.setUsuario(usuario);
+                incidencias.setLatitud(latitud);
+                incidencias.setLongitud(longitud);
                 incidencias.setNombre(nombre);
                 incidencias.setDescripcion(descripcion);
                 incidencias.setDestacado(1);
@@ -152,6 +159,13 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencias.setAnonimo(0);
                 incidencias.setEstadoIncidencia("Registrado");
                 daoIncidencias.guardarIncidencias(incidencias, inputStream);
+                lista_comentarios =daoComentarios.obtenerListaComentarios();
+                int value_id_Incidencia = 0;
+                for(Comentarios lista: lista_comentarios){
+                    value_id_Incidencia = lista.getIdIncidencia();
+                }
+                String id_incidencia_nuevo = String.valueOf(value_id_Incidencia+ 1);
+                daoComentarios.guardarComentario(id_incidencia_nuevo,idusuario);
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;
             case "DestacarIncidencia": {
