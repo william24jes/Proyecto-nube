@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+<jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 
 <%
@@ -53,7 +53,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
+                        <h1 class="name" style="margin-top: 25px"><%=userAdmin.getNombreYApellido()%>
                             <br><h6>Administrador</h6></br>
                         </h1>
                     </div>
@@ -103,7 +103,7 @@
 
                                             <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile"
                                                  class="rounded-circle">
-                                            <h2><%=usuarioSession.getNombreYApellido()%>
+                                            <h2><%=userAdmin.getNombreYApellido()%>
                                             </h2>
                                             <h5>Administrador</h5>
 
@@ -145,49 +145,49 @@
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label ">ID Administrador</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getIdUsuarios()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getIdUsuarios()%>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label ">Código</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getCodigoPucp()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCodigoPucp()%>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label ">Nombres</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getNombres()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getNombres()%>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label ">Apellidos</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getApellidos()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getApellidos()%>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Correo</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getCorreoPucp()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCorreoPucp()%>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">DNI</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getDni()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getDni()%>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Celular</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getCelular()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCelular()%>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Categoría</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getCategorias()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getCategorias()%>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Rol</div>
-                                                        <div class="col-lg-9 col-md-8"><%=usuarioSession.getRol()%>
+                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getRol()%>
                                                         </div>
                                                     </div>
 
@@ -218,14 +218,14 @@
                                                     </div>
 
                                                     <input name="ID Usuario" type="hidden" class="form-control"
-                                                           id="ID Usuario" value="<%=usuarioSession.getIdUsuarios()%>">
+                                                           id="ID Usuario" value="<%=userAdmin.getIdUsuarios()%>">
 
                                                     <div class="row mb-3">
                                                         <label for="Codigo" class="col-md-4 col-lg-3 col-form-label">Código</label>
                                                         <div class="col-md-8 col-lg-9">
                                                             <input minlength="8" maxlength="8" required name="Codigo"
                                                                    type="number" class="form-control" id="Codigo"
-                                                                   value="<%=usuarioSession.getCodigoPucp()%>">
+                                                                   value="<%=userAdmin.getCodigoPucp()%>">
                                                         </div>
                                                     </div>
 
@@ -234,7 +234,7 @@
                                                         <div class="col-md-8 col-lg-9">
                                                             <input required name="Nombres" type="text"
                                                                    class="form-control" id="Nombres"
-                                                                   value="<%=usuarioSession.getNombres()%>">
+                                                                   value="<%=userAdmin.getNombres()%>">
                                                         </div>
                                                     </div>
 
@@ -243,7 +243,7 @@
                                                         <div class="col-md-8 col-lg-9">
                                                             <input required name="Apellidos" type="text"
                                                                    class="form-control" id="Apellidos"
-                                                                   value="<%=usuarioSession.getApellidos()%>">
+                                                                   value="<%=userAdmin.getApellidos()%>">
                                                         </div>
                                                     </div>
 
@@ -252,7 +252,7 @@
                                                         <div class="col-md-8 col-lg-9">
                                                             <input required name="Correo PUCP" type="text"
                                                                    class="form-control" id="Correo"
-                                                                   value="<%=usuarioSession.getCorreoPucp()%>">
+                                                                   value="<%=userAdmin.getCorreoPucp()%>">
                                                         </div>
                                                     </div>
 
@@ -262,7 +262,7 @@
                                                         <div class="col-md-8 col-lg-9">
                                                             <input required name="DNI" type="number"
                                                                    class="form-control" id="DNI"
-                                                                   value="<%=usuarioSession.getDni()%>">
+                                                                   value="<%=userAdmin.getDni()%>">
                                                         </div>
                                                     </div>
 
@@ -271,12 +271,12 @@
                                                         <div class="col-md-8 col-lg-9">
                                                             <input required min="1" max="999999999999" name="Celular"
                                                                    type="number" class="form-control" id="Celular"
-                                                                   value="<%=usuarioSession.getCelular()%>">
+                                                                   value="<%=userAdmin.getCelular()%>">
                                                         </div>
                                                     </div>
 
                                                     <input name="Rol" type="hidden" class="form-control" id="Rol"
-                                                           value="<%=usuarioSession.getRol()%>">
+                                                           value="<%=userAdmin.getRol()%>">
 
                                                     <div class="row mb-3">
                                                         <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
@@ -284,7 +284,7 @@
                                                             <select required class="form-select" id="Categoría"
                                                                     name="Categoría">
                                                                 <%for (String categoria : categorias) {%>
-                                                                <option value="<%=categoria%>" <%=categoria.equals(usuarioSession.getCategorias()) ? "selected" : ""%>><%=categoria%>
+                                                                <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
                                                                 </option>
                                                                 <%}%>
                                                             </select>
