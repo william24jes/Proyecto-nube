@@ -108,7 +108,10 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Incidencias PUCP</h1>
+                            <a class="nav-link"
+                               href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF">Generar Reporte</a>
                         </div>
+
 
                         <div class="container">
                             <% for (Incidencias i : listaPaginada) {%>

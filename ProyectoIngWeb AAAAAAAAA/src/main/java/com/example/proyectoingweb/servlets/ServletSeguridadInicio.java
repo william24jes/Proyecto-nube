@@ -5,6 +5,8 @@ import com.example.proyectoingweb.servlets.model.beans.Incidencias;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
 import com.example.proyectoingweb.servlets.model.daos.*;
+import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciasPDF;
+import com.itextpdf.text.DocumentException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -29,6 +31,7 @@ public class ServletSeguridadInicio extends HttpServlet {
         Usuarios usuario = new Usuarios();
         DaoComentarios daoComentarios = new DaoComentarios();
         HttpSession session = request.getSession();
+        ReporteIncidenciasPDF reporte = new ReporteIncidenciasPDF();
         int idPage;
         switch (action) {
             case "inicioSeguridad":
@@ -58,6 +61,25 @@ public class ServletSeguridadInicio extends HttpServlet {
                 request.setAttribute("comentario2", comentario);
                 requestDispatcher = request.getRequestDispatcher("Seguridad_incidencias.jsp");
                 requestDispatcher.forward(request, response);
+                break;
+
+            case "incidenciasPDF":
+                try {
+                    reporte.crearDocumento();
+                    reporte.abrirDOcumento();
+                    reporte.agregarTitulo("REPORTE DE INCIDENCIAS PUCP");
+                    reporte.agregarSaltoLiena();
+                    reporte.agregarParrafo("Reporte actual de las incidencias PUCP 2022");
+                    reporte.agregarSaltoLiena();
+                    reporte.agregarTablaIncidencias();
+                    reporte.cerrarDocumento();
+                    response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
+                    System.out.printf("reporte completado");
+
+                } catch (DocumentException e) {
+                    throw new RuntimeException(e);
+                }
+
                 break;
 
             case "cerrarSesion":
