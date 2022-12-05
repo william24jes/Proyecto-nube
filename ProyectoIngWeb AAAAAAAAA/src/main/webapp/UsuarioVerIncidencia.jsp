@@ -187,7 +187,7 @@
                                             <div class="card card-body">
                                                 <div class="wrapper" style="position: relative; overflow: hidden;padding-top:56.25%">
                                                     <iframe style="position: absolute;top:0;left:0;width:100%;height:100%" loading="lazy" allowfullscreen
-                                                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDT71SdHy5wcg6PK_JVCcuON5AqLpCcqA4&q=<%=incidencia_send_jsp.getLatitud()%>,<%=incidencia_send_jsp.getLongitud()%>&zoom=19"></iframe>
+                                                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAIaTIoLtWkd_HzedbV4wzDF596WAbcPBo&q=<%=incidencia_send_jsp.getLatitud()%>,<%=incidencia_send_jsp.getLongitud()%>&zoom=19"></iframe>
                                                 </div>
                                             </div>
                                         </div>
