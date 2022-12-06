@@ -2,11 +2,11 @@
 <jsp:useBean id="incidencia" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
 <jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+
 <jsp:useBean id="comentario2" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Comentarios"/>
 
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -91,6 +91,7 @@
 
             </div>
         </header><!-- End Header -->
+
 
         <main id="main" data-aos="fade-up">
 
@@ -342,6 +343,7 @@
                                             </div>
 
                                             <%}%>
+                                            <%if(incidencia.getSeguridad() != null){%>
                                             <%if (incidencia.getSeguridad().getIdUsuarios() == seguridadSession.getIdUsuarios() && variable != 0) {%>
                                             <%if (variable % 2 == 1) {%>
 
@@ -498,6 +500,7 @@
                                                 </div>
                                             </div>
                                             <%}%>
+                                            <%}%>
 
                                         </form>
 
@@ -520,6 +523,7 @@
                                             </div>
 
                                         </div>
+
 
 
                                     </div>

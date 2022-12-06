@@ -63,6 +63,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "registrarIncidencia":
+                request.setAttribute("listaIncidencias",daoIncidencias.obtenerlistaIncidenciasCompleta());
                 request.setAttribute("listaZonasPUCP", daoZonaPucp.obtenerListaZonaPucp());
                 requestDispatcher = request.getRequestDispatcher("UsuarioRegistrarIncidencia.jsp");
                 requestDispatcher.forward(request, response);
@@ -121,6 +122,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         DaoComentarios daoComentarios = new DaoComentarios();
         ArrayList<Usuarios> lista_usuarios;
         ArrayList<Comentarios> lista_comentarios;
+
         switch (action) {
             case "guardar":
                 InputStream inputStream; // input stream of the upload file
@@ -133,6 +135,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 Part filePart = request.getPart("foto1");
                 String latitud = request.getParameter("latitud");
                 String longitud = request.getParameter("longitud");
+                String value_incidencia = request.getParameter("idIncidencia");
+
                 inputStream = filePart.getInputStream();
                 if (filePart != null) {
                     // prints out some information for debugging
@@ -142,6 +146,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                     inputStream = filePart.getInputStream();
                 }
                 usuario = daoUsuarios.buscarPorId(idusuario);
+                incidencias.setIdIncidencia(Integer.parseInt(value_incidencia)+1);
                 incidencias.setUsuario(usuario);
                 incidencias.setLatitud(latitud);
                 incidencias.setLongitud(longitud);
@@ -159,6 +164,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencias.setAnonimo(0);
                 incidencias.setEstadoIncidencia("Registrado");
                 daoIncidencias.guardarIncidencias(incidencias, inputStream);
+
                 lista_comentarios =daoComentarios.obtenerListaComentarios();
                 int value_id_Incidencia = 0;
                 for(Comentarios lista: lista_comentarios){
@@ -166,6 +172,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 }
                 String id_incidencia_nuevo = String.valueOf(value_id_Incidencia+ 1);
                 daoComentarios.guardarComentario(id_incidencia_nuevo,idusuario);
+
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;
             case "DestacarIncidencia": {

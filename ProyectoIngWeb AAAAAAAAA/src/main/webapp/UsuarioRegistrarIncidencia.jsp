@@ -1,14 +1,16 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.ZonaPucp" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Comentarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaZonasPUCP" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.ZonaPucp>"/>
+<jsp:useBean id="listaIncidencias" scope="request"
+             type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 
 <!DOCTYPE html>
 <html lang=com.example.proyectoingweb.servlets.model.daos.DaoIncidencias"en">
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -98,10 +100,12 @@
         </header>
 
         <main id="main" data-aos="fade-up">
-
             <!-- ======= Breadcrumbs Section ======= -->
             <!-- Breadcrumbs Section -->
-
+            <%int value_num_incidencias = 0;%>
+            <%for(Incidencias lista_incidencias_totales : listaIncidencias){%>
+                <%value_num_incidencias = lista_incidencias_totales.getIdIncidencia();%>
+            <%}%>
             <!-- ======= Portfolio Details Section ======= -->
             <section id="portfolio-details" class="portfolio-details">
                 <div class="container">
@@ -123,6 +127,10 @@
                                                 <div class="mb-3">
                                                     <input class="form-control " id="idUsuario" type="hidden"
                                                            name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <input class="form-control " id="idIncidencia" type="hidden"
+                                                           name="idIncidencia" value="<%=value_num_incidencias%>">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="inputUsername">Nombre de la Incidencia: </label>
@@ -210,7 +218,7 @@
                                                 <!-- Form Row-->
                                                 <!-- Save changes button-->
                                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                    <button type="submit" class="btn btn-primary">Guardar
+                                                    <button type="submit" class="btn btn-primary ">Guardar
                                                     </button>
                                                     <button class="btn btn-primary"
                                                             href="<%=request.getContextPath()%>/Inicio">Cancelar
@@ -221,7 +229,7 @@
                                                         <input class="form-check-input" type="checkbox"
                                                                role="switch" id="flexSwitchCheckDefault">
                                                         <label class="form-check-label"
-                                                               for="flexSwitchCheckDefault">Activar publicación
+                                                               for="flexSwitchCheckDefault" >Activar publicación
                                                             anónima</label>
                                                     </div>
                                                 </div>

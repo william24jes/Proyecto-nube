@@ -185,7 +185,7 @@ public class DaoIncidencias extends DaoBase {
         }
         */
     public void guardarIncidencias(Incidencias incidencias, InputStream file) {
-        String sql = "INSERT INTO mydb2.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia,foto,longitud,latitud) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO mydb2.incidencias (idUsuario,nombre,descripcion,destacado,tipo,urgencia,idzonaPucp,fechaHora,anonimo,estadoIncidencia,foto,longitud,latitud,idIncidencia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection connection = this.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
@@ -201,6 +201,7 @@ public class DaoIncidencias extends DaoBase {
             pstmt.setString(10, "Registrado");
             pstmt.setString(12,incidencias.getLongitud());
             pstmt.setString(13,incidencias.getLatitud());
+            pstmt.setString(14, String.valueOf(incidencias.getIdIncidencia()));
 
             if (file != null) {
                 pstmt.setBlob(11, file);

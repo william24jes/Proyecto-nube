@@ -220,6 +220,12 @@
                                                aria-disabled="true"><%=incidencia_send_jsp.getUrgencia()%>
                                             </a>
                                         </div>
+                                        <%if(incidencia_send_jsp.getSeguridad() != null){%>
+                                        <%if(incidencia_send_jsp.getSeguridad().getIdUsuarios() == 2 ){%>
+                                        <%="hola, tienes que borrar esto"%>
+                                        <%}%>
+                                        <%}%>
+
 
                                         <%int contador = 0;%>
                                         <%if (comentario2.getContenido1() != null) {%>
@@ -363,7 +369,7 @@
 
                                                 </div>
 
-                                                <%if( n-1 != 0 ){%>                                                }}%>
+                                                <%if( n-1 != 0 ){%>
 
                                                 <div class="col-auto">
                                                     <br>
@@ -389,19 +395,17 @@
                                                 </div>
                                                 <%}%>
                                             </div>
-                                            <%
-                                                } else if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {
-
-                                                }
-                                            %>
+                                            <%} else if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {%>
+                                                <%}%>
                                             <%}%>
 
                                             <%} else {%>
 
                                             <%if (incidencia_send_jsp.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()) {%>
 
-                                            <%if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Registrado") || incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("En proceso")
-                                                    || incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {%>
+                                            <%if (incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Registrado") ||
+                                                    incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("En proceso") ||
+                                                    incidencia_send_jsp.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {%>
 
                                             <%if (comentario2.getValidacion_usuario_comentar() == 0) {%>
 
