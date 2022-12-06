@@ -13,9 +13,9 @@ import java.util.ArrayList;
 @WebServlet(name = "AdminServlet", value = "/Admin")
 public class AdminServlet extends HttpServlet {
 
-    private ArrayList<Usuarios> listaPermanente;
-    private ArrayList<Usuarios> listaPaginada;
-
+    private ArrayList<Usuarios> listaPermanente; //Lista de todos los usuarios
+    private ArrayList<Usuarios> listaPaginada; //Lista de 15 usuarios
+    private int centinelaSearch;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -33,6 +33,7 @@ public class AdminServlet extends HttpServlet {
 
         switch (action) {
             case "listar":
+                setCentinelaSearch(1);
 
                 request.setAttribute("listaPaginada", daoUsuarios.obtenerlistaUsuarios());
                 request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
@@ -225,10 +226,16 @@ public class AdminServlet extends HttpServlet {
                 break;
 
             case "buscar":
+
+                setCentinelaSearch(1);
                 String searchText = request.getParameter("searchText");
 
                 ArrayList<Usuarios> lista = daoUsuarios.buscarUsuarios(searchText);
-                request.setAttribute("listaPaginada", lista);
+                //request.setAttribute("listaPaginada", );
+                request.setAttribute("listaPermanente", lista);
+
+                //setListaPaginada();
+                setListaPermanente(lista);
                 request.setAttribute("searchText", searchText);
 
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
@@ -252,5 +259,13 @@ public class AdminServlet extends HttpServlet {
 
     public void setListaPaginada(ArrayList<Usuarios> listaPaginada) {
         this.listaPaginada = listaPaginada;
+    }
+
+    public int getCentinelaSearch() {
+        return centinelaSearch;
+    }
+
+    public void setCentinelaSearch(int centinelaSearch) {
+        this.centinelaSearch = centinelaSearch;
     }
 }
