@@ -96,7 +96,7 @@ public class ServletIniciarSesion extends HttpServlet {
                     requestDispatcher.forward(request, response);
                 }
                 break;
-            case "validar":
+            case "validar": //Clase 12 - 01:00:34
 
                 String codigo = request.getParameter("codigo");
                 password = request.getParameter("password");

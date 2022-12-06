@@ -281,7 +281,7 @@
                                                     <div class="row mb-3">
                                                         <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
                                                         <div class="col-md-8 col-lg-9">
-                                                            <select required class="form-select" id="Categoría"
+                                                            <select disabled class="form-select"
                                                                     name="Categoría">
                                                                 <%for (String categoria : categorias) {%>
                                                                 <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
@@ -289,6 +289,18 @@
                                                                 <%}%>
                                                             </select>
                                                         </div>
+
+                                                        <%//NO BORRAR, NO ES DUPLICADO%>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <select hidden class="form-select" id="Categoría"
+                                                                    name="Categoría">
+                                                                <%for (String categoria : categorias) {%>
+                                                                <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
+                                                                </option>
+                                                                <%}%>
+                                                            </select>
+                                                        </div>
+
                                                     </div>
 
                                                     <div class="text-center">
