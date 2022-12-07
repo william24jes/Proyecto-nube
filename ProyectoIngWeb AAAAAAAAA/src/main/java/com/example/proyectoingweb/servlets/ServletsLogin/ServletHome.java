@@ -18,17 +18,17 @@ public class ServletHome extends HttpServlet {
         switch (action){
             case "home":
                 if (session.getAttribute("usuarioSession") == null) {
-                    if (session.getAttribute("seguridadSession") == null) {
-                        if (session.getAttribute("userAdmin") == null) {
+                    if (session.getAttribute("usuarioSession") == null) {
+                        if (session.getAttribute("usuarioSession") == null) {
                             requestDispatcher = request.getRequestDispatcher("index.jsp");
                             requestDispatcher.forward(request, response);
                         }else{
-                            if (session.getAttribute("userAdmin") != null) {
+                            if (session.getAttribute("usuarioSession") != null) {
                                 response.sendRedirect(request.getContextPath() + "/Admin");
                             }
                         }
                     } else {
-                        if (session.getAttribute("seguridadSession") != null) {
+                        if (session.getAttribute("usuarioSession") != null) {
                             response.sendRedirect(request.getContextPath() + "/Seguridad");
                         }
                     }

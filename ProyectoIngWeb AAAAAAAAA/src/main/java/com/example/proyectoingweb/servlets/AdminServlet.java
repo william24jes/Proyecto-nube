@@ -42,16 +42,13 @@ public class AdminServlet extends HttpServlet {
                 setListaPermanente(daoUsuarios.obtenerlistaUsuariosCompleta());
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
-
                 break;
             case "crear":
-
                 requestDispatcher = request.getRequestDispatcher("AdminAddUser.jsp");
                 requestDispatcher.forward(request, response);
 
                 break;
             case "perfil":
-
                 categorias = new ArrayList<>();
                 categorias.add("Alumno");
                 categorias.add("Administrativo");
@@ -62,7 +59,6 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("categorias", categorias);
                 requestDispatcher = request.getRequestDispatcher("AdminPerfil.jsp");
                 requestDispatcher.forward(request, response);
-
                 break;
             case "editar":
                 idUsuario = request.getParameter("id");
@@ -93,38 +89,30 @@ public class AdminServlet extends HttpServlet {
             case "borrar":
                 idUsuario = request.getParameter("id");
                 daoUsuarios.borrarUsuario(idUsuario);
-                session.setAttribute("msg","Usuario borrado exitosamente");
-
-
+                session.setAttribute("msg", "Usuario borrado exitosamente");
                 response.sendRedirect(request.getContextPath() + "/Admin");
                 break;
-
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
-                centinela=getCentinelaSearch();
-                busqueda=getSearch();
+                centinela = getCentinelaSearch();
+                busqueda = getSearch();
 
-                if(centinela==0){
+                if (centinela == 0) {
                     setListaPaginada(daoUsuarios.paginarUsuarios(idPage));
-                    request.setAttribute("listaPermanente",getListaPermanente());
+                    request.setAttribute("listaPermanente", getListaPermanente());
                     request.setAttribute("listaPaginada", getListaPaginada());
-
-
-
-                } else if (centinela==1) {
-                    setListaPaginada(daoUsuarios.paginarUsuariosBuscados(idPage,busqueda));
-                    request.setAttribute("listaPermanente",getListaPermanente());
+                } else if (centinela == 1) {
+                    setListaPaginada(daoUsuarios.paginarUsuariosBuscados(idPage, busqueda));
+                    request.setAttribute("listaPermanente", getListaPermanente());
                     request.setAttribute("listaPaginada", getListaPaginada());
-
-
-
                 }
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
                 break;
                 //añadido cerrar sesión
             case "cerrarSesion":
-                session.invalidate();
+                //session.invalidate();
+                session.removeAttribute("usuarioSession");
                 response.sendRedirect(request.getContextPath());
                 break;
         }
@@ -241,13 +229,12 @@ public class AdminServlet extends HttpServlet {
                 break;
 
             case "buscar":
-
                 setCentinelaSearch(1);
                 String searchText = request.getParameter("searchText");
                 setSearch(searchText);
 
                 ArrayList<Usuarios> lista = daoUsuarios.buscarUsuariosCompleto(searchText);
-                request.setAttribute("listaPaginada",daoUsuarios.buscarUsuarios(searchText) ); //editar
+                request.setAttribute("listaPaginada", daoUsuarios.buscarUsuarios(searchText)); //editar
                 request.setAttribute("listaPermanente", lista);
 
                 setListaPermanente(lista);
@@ -255,7 +242,6 @@ public class AdminServlet extends HttpServlet {
 
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
-
                 break;
         }
     }

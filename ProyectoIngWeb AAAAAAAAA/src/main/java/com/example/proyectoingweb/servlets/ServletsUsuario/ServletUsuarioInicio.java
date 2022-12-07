@@ -69,7 +69,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "cerrarSesion":
-                session.invalidate();
+                //session.invalidate();
+                session.removeAttribute("usuarioSession");
                 response.sendRedirect(request.getContextPath());
                 /*
                 requestDispatcher = request.getRequestDispatcher("index.jsp");
