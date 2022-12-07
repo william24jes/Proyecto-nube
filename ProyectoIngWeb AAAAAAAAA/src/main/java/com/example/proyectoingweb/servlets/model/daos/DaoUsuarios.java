@@ -260,9 +260,48 @@ public class DaoUsuarios extends DaoBase{
 
     }
 
-    public ArrayList<Usuarios> buscarUsuarios(String nombreuser){
+    public ArrayList<Usuarios> buscarUsuariosCompleto(String nombreuser){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
         String sql = "SELECT * FROM mydb2.usuarios WHERE lower(nombres) like ? or lower(apellidos) like ? or dni like ? or codigoPucp like ?";
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%"+nombreuser+"%");
+            pstmt.setString(2, "%"+nombreuser+"%");
+            pstmt.setString(3, "%"+nombreuser+"%");
+            pstmt.setString(4, "%"+nombreuser+"%");
+
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    Usuarios usuario = new Usuarios();
+
+                    usuario.setIdUsuarios(rs.getInt(1));
+                    usuario.setNombres(rs.getString(2));
+                    usuario.setApellidos(rs.getString(3));
+                    usuario.setDni(rs.getString(4));
+                    usuario.setCelular(rs.getString(5));
+                    usuario.setCodigoPucp(rs.getString(6));
+                    usuario.setCorreoPucp(rs.getString(7));
+                    usuario.setCategorias(rs.getString(8));
+                    usuario.setRol(rs.getString(9));
+
+                    listaUsuarios.add(usuario);
+
+                }
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+
+        return listaUsuarios;
+    }
+
+    public ArrayList<Usuarios> buscarUsuarios(String nombreuser){
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+        String sql = "SELECT * FROM mydb2.usuarios WHERE lower(nombres) like ? or lower(apellidos) like ? or dni like ? or codigoPucp like ? limit 0,15";
 
         try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -327,6 +366,47 @@ public class DaoUsuarios extends DaoBase{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return listaUsuarios;
+    }
+
+    public ArrayList<Usuarios> paginarUsuariosBuscados(int i, String nombreuser){
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+        int inicio=15*(i-1);
+
+        String sql = "SELECT * FROM mydb2.usuarios WHERE lower(nombres) like ? or lower(apellidos) like ? or dni like ? or codigoPucp like ? LIMIT "+inicio+","+"15";
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%"+nombreuser+"%");
+            pstmt.setString(2, "%"+nombreuser+"%");
+            pstmt.setString(3, "%"+nombreuser+"%");
+            pstmt.setString(4, "%"+nombreuser+"%");
+
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    Usuarios usuario = new Usuarios();
+
+                    usuario.setIdUsuarios(rs.getInt(1));
+                    usuario.setNombres(rs.getString(2));
+                    usuario.setApellidos(rs.getString(3));
+                    usuario.setDni(rs.getString(4));
+                    usuario.setCelular(rs.getString(5));
+                    usuario.setCodigoPucp(rs.getString(6));
+                    usuario.setCorreoPucp(rs.getString(7));
+                    usuario.setCategorias(rs.getString(8));
+                    usuario.setRol(rs.getString(9));
+
+                    listaUsuarios.add(usuario);
+
+                }
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+
         return listaUsuarios;
     }
 

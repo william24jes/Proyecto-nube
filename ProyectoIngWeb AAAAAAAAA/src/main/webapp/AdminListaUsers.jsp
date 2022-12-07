@@ -108,6 +108,7 @@
             <section class="section profile" style="padding-top: 30px">
                 <div class="container">
                     <div class="container-fluid">
+
                         <div class="container"><h4 class="hero">Usuarios guardados:</h4>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <a class="btn btn-danger" href="<%=request.getContextPath()%>/Admin?action=crear"

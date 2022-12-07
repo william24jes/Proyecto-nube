@@ -16,12 +16,14 @@ public class AdminServlet extends HttpServlet {
     private ArrayList<Usuarios> listaPermanente; //Lista de todos los usuarios
     private ArrayList<Usuarios> listaPaginada; //Lista de 15 usuarios
     private int centinelaSearch;
+    private String search;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action");
         action = (action == null) ? "listar" : action;
-
+        int centinela;
+        String busqueda;
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         HttpSession session=request.getSession();
         RequestDispatcher requestDispatcher;
@@ -33,7 +35,7 @@ public class AdminServlet extends HttpServlet {
 
         switch (action) {
             case "listar":
-                setCentinelaSearch(1);
+                setCentinelaSearch(0);
 
                 request.setAttribute("listaPaginada", daoUsuarios.obtenerlistaUsuarios());
                 request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
@@ -99,13 +101,26 @@ public class AdminServlet extends HttpServlet {
 
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
-                setListaPaginada(daoUsuarios.paginarUsuarios(idPage));
-                request.setAttribute("listaPermanente",getListaPermanente());
-                request.setAttribute("listaPaginada", getListaPaginada());
+                centinela=getCentinelaSearch();
+                busqueda=getSearch();
 
+                if(centinela==0){
+                    setListaPaginada(daoUsuarios.paginarUsuarios(idPage));
+                    request.setAttribute("listaPermanente",getListaPermanente());
+                    request.setAttribute("listaPaginada", getListaPaginada());
+
+
+
+                } else if (centinela==1) {
+                    setListaPaginada(daoUsuarios.paginarUsuariosBuscados(idPage,busqueda));
+                    request.setAttribute("listaPermanente",getListaPermanente());
+                    request.setAttribute("listaPaginada", getListaPaginada());
+
+
+
+                }
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
-
                 break;
                 //añadido cerrar sesión
             case "cerrarSesion":
@@ -229,12 +244,12 @@ public class AdminServlet extends HttpServlet {
 
                 setCentinelaSearch(1);
                 String searchText = request.getParameter("searchText");
+                setSearch(searchText);
 
-                ArrayList<Usuarios> lista = daoUsuarios.buscarUsuarios(searchText);
-                //request.setAttribute("listaPaginada", );
+                ArrayList<Usuarios> lista = daoUsuarios.buscarUsuariosCompleto(searchText);
+                request.setAttribute("listaPaginada",daoUsuarios.buscarUsuarios(searchText) ); //editar
                 request.setAttribute("listaPermanente", lista);
 
-                //setListaPaginada();
                 setListaPermanente(lista);
                 request.setAttribute("searchText", searchText);
 
@@ -267,5 +282,13 @@ public class AdminServlet extends HttpServlet {
 
     public void setCentinelaSearch(int centinelaSearch) {
         this.centinelaSearch = centinelaSearch;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }
