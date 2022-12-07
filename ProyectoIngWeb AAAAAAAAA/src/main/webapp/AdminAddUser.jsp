@@ -25,6 +25,8 @@
         <title>Añadir usuario / Incidencias PUCP</title>
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            response.setDateHeader("Expires", 0);
             if(userAdmin == null){
                 response.sendRedirect(request.getContextPath());
             }
