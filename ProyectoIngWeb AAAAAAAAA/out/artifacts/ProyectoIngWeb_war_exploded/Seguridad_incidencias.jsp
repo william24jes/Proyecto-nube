@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="incidencia" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
-<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+<jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 
 <jsp:useBean id="comentario2" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Comentarios"/>
@@ -14,9 +14,7 @@
         <title>Seguridad / Incidencia </title>
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            response.setDateHeader("Expires", 0);
-            if(usuarioSession == null){
+            if(seguridadSession == null){
                 response.sendRedirect(request.getContextPath());
             }
         %>
@@ -59,7 +57,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
+                        <h1 class="name" style="margin-top: 25px"><%=seguridadSession.getNombreYApellido()%>
                             <br><h6>Seguridad</h6></br>
                         </h1>
                     </div>
@@ -319,7 +317,7 @@
                                                    name="id_usuario"
                                                    value="<%=incidencia.getUsuario().getIdUsuarios()%>">
                                             <input class="form-control " type="hidden"
-                                                   name="id_security" value="<%=usuarioSession.getIdUsuarios()%>">
+                                                   name="id_security" value="<%=seguridadSession.getIdUsuarios()%>">
                                             <input class="form-control" type="hidden"
                                                    name="usuario_quiere_comentar"
                                                    value="<%=comentario2.getValidacion_usuario_comentar()%>">
@@ -352,13 +350,13 @@
 
                                             <%}%>
                                             <%if(incidencia.getSeguridad() != null){%>
-                                            <%if (incidencia.getSeguridad().getIdUsuarios() == usuarioSession.getIdUsuarios() && variable != 0) {%>
+                                            <%if (incidencia.getSeguridad().getIdUsuarios() == seguridadSession.getIdUsuarios() && variable != 0) {%>
                                             <%if (variable % 2 == 1) {%>
 
                                             <%if (!(incidencia.getEstadoIncidencia().equalsIgnoreCase("Resuelto"))) {%>
 
 
-                                            <%if (incidencia.getSeguridad().getIdUsuarios() == usuarioSession.getIdUsuarios()) {%>
+                                            <%if (incidencia.getSeguridad().getIdUsuarios() == seguridadSession.getIdUsuarios()) {%>
                                             <%
                                                 if (incidencia.getEstadoIncidencia().equalsIgnoreCase("En proceso") ||
                                                         incidencia.getEstadoIncidencia().equalsIgnoreCase("Atendido")) {
@@ -405,13 +403,13 @@
                                             <%}%>
 
                                             <%} else {%>
-                                            <%if (incidencia.getSeguridad().getIdUsuarios() == usuarioSession.getIdUsuarios()) {%>
+                                            <%if (incidencia.getSeguridad().getIdUsuarios() == seguridadSession.getIdUsuarios()) {%>
                                             <br>
                                             <%if (!(incidencia.getEstadoIncidencia().equalsIgnoreCase("Resuelto"))) {%>
                                             <%if ((n - 1) != 0) {%>
                                             <div class="row">
                                                 <div><br><h5>Comentario
-                                                    de <%=usuarioSession.getNombreYApellido()%>: </h5>
+                                                    de <%=seguridadSession.getNombreYApellido()%>: </h5>
                                                 </div>
                                                 <div class="form-group mb-3">
                                                                     <textarea class="form-control"
@@ -493,7 +491,7 @@
                                             <%}%>
                                             <%}%>
                                             <%}%>
-                                            <%} else if (incidencia.getSeguridad().getIdUsuarios() != usuarioSession.getIdUsuarios() && variable != 0) {%>
+                                            <%} else if (incidencia.getSeguridad().getIdUsuarios() != seguridadSession.getIdUsuarios() && variable != 0) {%>
                                             <div class="row">
                                                 <div class="col-auto">
                                                     <br>

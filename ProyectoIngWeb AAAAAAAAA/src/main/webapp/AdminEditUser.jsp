@@ -6,7 +6,7 @@
   ArrayList<String> roles = (ArrayList<String>) request.getAttribute("roles");
   ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
 %>
-<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"></jsp:useBean>
+<jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,9 +30,7 @@
     <title>Editar usuario / Incidencias PUCP</title>
     <%
       response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-      response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-      response.setDateHeader("Expires", 0);
-      if(usuarioSession == null){
+      if(userAdmin == null){
         response.sendRedirect(request.getContextPath());
       }
     %>
@@ -52,7 +50,7 @@
 
         <div class="d-md-flex align-items-center">
           <div>
-            <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
+            <h1 class="name" style="margin-top: 25px"><%=userAdmin.getNombreYApellido()%>
               <br><h6>Administrador</h6><br>
             </h1>
           </div>

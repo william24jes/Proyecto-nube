@@ -1,7 +1,7 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+<jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 
 <%
@@ -18,9 +18,7 @@
         <title>Lista de usuarios / Incidencias PUCP</title>
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            response.setDateHeader("Expires", 0);
-            if(usuarioSession == null){
+            if(userAdmin == null){
                 response.sendRedirect(request.getContextPath());
             }
         %>
@@ -63,7 +61,7 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px"><%=usuarioSession.getNombreYApellido()%>
+                        <h1 class="name" style="margin-top: 25px"><%=userAdmin.getNombreYApellido()%>
                             <br><h6>Administrador</h6><br>
                         </h1>
                     </div>
@@ -141,7 +139,7 @@
                             <tbody>
                                 <%
                                     for (Usuarios usuarios : listaPaginada) {
-                                        if (!usuarios.getNombreYApellido().equals(usuarioSession.getNombreYApellido())) {
+                                        if (!usuarios.getNombreYApellido().equals(userAdmin.getNombreYApellido())) {
                                 %>
                                 <tr>
                                     <td><%=usuarios.getIdUsuarios()%>

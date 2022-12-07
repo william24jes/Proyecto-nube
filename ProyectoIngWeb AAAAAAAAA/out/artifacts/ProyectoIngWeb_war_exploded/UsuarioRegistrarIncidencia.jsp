@@ -18,8 +18,6 @@
         <title>Registrar incidencia / Incidencias PUCP</title>
         <%
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            response.setDateHeader("Expires", 0);
             if(usuarioSession == null){
                 response.sendRedirect(request.getContextPath());
             }

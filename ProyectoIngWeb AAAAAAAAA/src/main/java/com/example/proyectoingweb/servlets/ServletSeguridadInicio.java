@@ -52,11 +52,11 @@ public class ServletSeguridadInicio extends HttpServlet {
                 break;
             case "detalles":
 
-                Usuarios seguridad = (Usuarios) session.getAttribute("usuarioSession");
+                Usuarios seguridad = (Usuarios) session.getAttribute("seguridadSession");
                 String idIncidencia = request.getParameter("id");
                 incidencia = daoIncidencias.buscarPorId(idIncidencia);
                 request.setAttribute("incidencia", incidencia);
-                request.setAttribute("usuarioSession", seguridad);
+                request.setAttribute("seguridadSession", seguridad);
                 comentario = daoComentarios.buscarporIdIncidencia_y_idUsuarioQueCreo(idIncidencia, String.valueOf(incidencia.getUsuario().getIdUsuarios()));
                 request.setAttribute("comentario2", comentario);
                 requestDispatcher = request.getRequestDispatcher("Seguridad_incidencias.jsp");
@@ -84,7 +84,7 @@ public class ServletSeguridadInicio extends HttpServlet {
 
             case "cerrarSesion":
                 //session.invalidate();
-                session.removeAttribute("usuarioSession");
+                session.removeAttribute("seguridadSession");
                 response.sendRedirect(request.getContextPath());
                 /*
                 requestDispatcher = request.getRequestDispatcher("index.jsp");

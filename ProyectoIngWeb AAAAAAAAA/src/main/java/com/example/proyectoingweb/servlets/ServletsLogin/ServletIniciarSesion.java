@@ -24,17 +24,17 @@ public class ServletIniciarSesion extends HttpServlet {
                 // Verificacion de si ya existe sesion
 
                 if (session.getAttribute("usuarioSession") == null) {
-                    if (session.getAttribute("usuarioSession") == null) {
-                        if (session.getAttribute("usuarioSession") == null) {
+                    if (session.getAttribute("seguridadSession") == null) {
+                        if (session.getAttribute("userAdmin") == null) {
                             requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
                             requestDispatcher.forward(request, response);
                         }else{
-                            if (session.getAttribute("usuarioSession") != null) {
+                            if (session.getAttribute("userAdmin") != null) {
                                 response.sendRedirect(request.getContextPath() + "/Admin");
                             }
                         }
                     } else {
-                        if (session.getAttribute("usuarioSession") != null) {
+                        if (session.getAttribute("seguridadSession") != null) {
                             response.sendRedirect(request.getContextPath() + "/Seguridad");
                         }
                     }
@@ -121,7 +121,7 @@ public class ServletIniciarSesion extends HttpServlet {
                             break;
                         case "Seguridad":
                             HttpSession sessionSeguridad = request.getSession();
-                            sessionSeguridad.setAttribute("usuarioSession", usuarioValido);
+                            sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
                             response.sendRedirect(request.getContextPath() + "/Seguridad");
 
                             /*
@@ -132,7 +132,7 @@ public class ServletIniciarSesion extends HttpServlet {
                             break;
                         case "Administrador":
                             HttpSession sessionAdmin = request.getSession();
-                            sessionAdmin.setAttribute("usuarioSession", usuarioValido);
+                            sessionAdmin.setAttribute("userAdmin", usuarioValido);
                             response.sendRedirect(request.getContextPath() + "/Admin");
                             break;
                         default:

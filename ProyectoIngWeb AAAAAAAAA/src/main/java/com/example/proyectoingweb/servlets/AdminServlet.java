@@ -112,7 +112,7 @@ public class AdminServlet extends HttpServlet {
                 //añadido cerrar sesión
             case "cerrarSesion":
                 //session.invalidate();
-                session.removeAttribute("usuarioSession");
+                session.removeAttribute("userAdmin");
                 response.sendRedirect(request.getContextPath());
                 break;
         }
@@ -203,7 +203,7 @@ public class AdminServlet extends HttpServlet {
 
             case "actualizarPassword":
 
-                usuarios = (Usuarios) session.getAttribute("usuarioSession");
+                usuarios = (Usuarios) session.getAttribute("userAdmin");
                 String password = request.getParameter("password");
 
                 Credenciales credenciales = daoUsuarios.validarCambioPassword(usuarios.getIdUsuarios(), password);
