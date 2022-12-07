@@ -1,9 +1,6 @@
 package com.example.proyectoingweb.servlets.ServletsUsuario;
 
-import com.example.proyectoingweb.servlets.model.beans.Comentarios;
-import com.example.proyectoingweb.servlets.model.beans.Incidencias;
-import com.example.proyectoingweb.servlets.model.beans.Usuarios;
-import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
+import com.example.proyectoingweb.servlets.model.beans.*;
 import com.example.proyectoingweb.servlets.model.daos.DaoComentarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
@@ -276,6 +273,32 @@ public class ServletUsuarioInicio extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=verIncidencia&id=" + id_incidencia);
                 break;
             }
+            case "actualizarPassword":
+                HttpSession session = request.getSession();
+                Usuarios usuarios = (Usuarios) session.getAttribute("usuarioSession");
+                String password = request.getParameter("password");
+
+                Credenciales credenciales = daoUsuarios.validarCambioPassword(usuarios.getIdUsuarios(), password);
+
+                if (credenciales != null){
+                    if (request.getParameter("nuevaPassword1").equals(request.getParameter("nuevaPassword2"))){
+
+                        daoUsuarios.actualizarPassword(Integer.parseInt(credenciales.getIdUsuario()), request.getParameter("nuevaPassword1"));
+
+                        session.setAttribute("msg","Contraseña cambiada correctamente");
+                        response.sendRedirect(request.getContextPath() + "/Inicio");
+                    }
+                    else {
+                        session.setAttribute("msgError", "Las contraseñas deben ser iguales");
+                        response.sendRedirect(request.getContextPath()+"/Inicio?action=perfil");
+                    }
+                }
+                else {
+                    session.setAttribute("msgError", "La contraseña actual es incorrecta");
+                    response.sendRedirect(request.getContextPath()+"/Inicio?action=perfil");
+                }
+
+                break;
 
         }
 

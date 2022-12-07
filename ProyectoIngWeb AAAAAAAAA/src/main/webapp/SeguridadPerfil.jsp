@@ -320,14 +320,14 @@
 
                                                 <div class="tab-pane fade pt-3" id="profile-change-password">
                                                     <!-- Change Password Form -->
-                                                    <form>
+                                                    <form class="needs-validation" method="post" action="<%=request.getContextPath()%>/Seguridad?action=actualizarPassword" novalidate>
 
                                                         <div class="row mb-3">
                                                             <label for="currentPassword"
                                                                    class="col-md-4 col-lg-3 col-form-label">Contraseña
                                                                 actual</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <input name="password" type="password"
+                                                                <input required name="password" type="password"
                                                                        class="form-control" id="currentPassword">
                                                             </div>
                                                         </div>
@@ -337,7 +337,7 @@
                                                                    class="col-md-4 col-lg-3 col-form-label">Nueva
                                                                 contraseña</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <input name="newpassword" type="password"
+                                                                <input required name="nuevaPassword1" type="password"
                                                                        class="form-control" id="newPassword">
                                                             </div>
                                                         </div>
@@ -347,10 +347,14 @@
                                                                    class="col-md-4 col-lg-3 col-form-label">Confirmar
                                                                 nueva contraseña</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <input name="renewpassword" type="password"
+                                                                <input required name="nuevaPassword2" type="password"
                                                                        class="form-control" id="renewPassword">
                                                             </div>
                                                         </div>
+
+                                                        <%if(session.getAttribute("msgError") != null){%>
+                                                        <p class="text-danger"><%=session.getAttribute("msgError")%></p>
+                                                        <%session.removeAttribute("msgError");}%>
 
                                                         <div class="text-center">
                                                             <button type="submit" class="btn btn-primary">Cambiar

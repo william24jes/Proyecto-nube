@@ -108,6 +108,11 @@
         </header><!-- End Header -->
 
         <main id="main" data-aos="fade-up">
+            <%if(session.getAttribute("msg")=="Contraseña cambiada correctamente"){%>
+            <div class="alert alert-success" role="alert"><%=session.getAttribute("msg")%>
+            </div>
+            <%session.removeAttribute("msg");%>
+            <%}%>
 
             <!-- ======= Portfolio Details Section ======= -->
             <section id="portfolio-details" class="portfolio-details">

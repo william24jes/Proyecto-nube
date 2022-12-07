@@ -1,9 +1,6 @@
 package com.example.proyectoingweb.servlets;
 
-import com.example.proyectoingweb.servlets.model.beans.Comentarios;
-import com.example.proyectoingweb.servlets.model.beans.Incidencias;
-import com.example.proyectoingweb.servlets.model.beans.Usuarios;
-import com.example.proyectoingweb.servlets.model.beans.ZonaPucp;
+import com.example.proyectoingweb.servlets.model.beans.*;
 import com.example.proyectoingweb.servlets.model.daos.*;
 import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciasPDF;
 import com.itextpdf.text.DocumentException;
@@ -154,7 +151,32 @@ public class ServletSeguridadInicio extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Seguridad?action=detalles&id=" + id_incidencia);
                 break;
             }
+            case "actualizarPassword":
+                HttpSession session = request.getSession();
+                Usuarios usuarios = (Usuarios) session.getAttribute("seguridadSession");
+                String password = request.getParameter("password");
 
+                Credenciales credenciales = daoUsuarios.validarCambioPassword(usuarios.getIdUsuarios(), password);
+
+                if (credenciales != null){
+                    if (request.getParameter("nuevaPassword1").equals(request.getParameter("nuevaPassword2"))){
+
+                        daoUsuarios.actualizarPassword(Integer.parseInt(credenciales.getIdUsuario()), request.getParameter("nuevaPassword1"));
+
+                        session.setAttribute("msg","Contraseña cambiada correctamente");
+                        response.sendRedirect(request.getContextPath() + "/Seguridad");
+                    }
+                    else {
+                        session.setAttribute("msgError", "Las contraseñas deben ser iguales");
+                        response.sendRedirect(request.getContextPath()+"/Seguridad?action=perfil");
+                    }
+                }
+                else {
+                    session.setAttribute("msgError", "La contraseña actual es incorrecta");
+                    response.sendRedirect(request.getContextPath()+"/Seguridad?action=perfil");
+                }
+
+                break;
         }
     }
 
