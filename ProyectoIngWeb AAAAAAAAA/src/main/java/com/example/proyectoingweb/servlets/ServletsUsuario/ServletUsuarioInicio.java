@@ -25,6 +25,8 @@ public class ServletUsuarioInicio extends HttpServlet {
 
     private ArrayList<Incidencias> listaPermanente;
     private ArrayList<Incidencias> listaPaginada;
+    private String search;
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -120,6 +122,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         DaoComentarios daoComentarios = new DaoComentarios();
         ArrayList<Usuarios> lista_usuarios;
         ArrayList<Comentarios> lista_comentarios;
+        RequestDispatcher requestDispatcher;
 
         switch (action) {
             case "guardar":
@@ -300,6 +303,25 @@ public class ServletUsuarioInicio extends HttpServlet {
 
                 break;
 
+            case "buscar":
+                //setCentinelaSearch(1);
+                String searchText = request.getParameter("searchText");
+                setSearch(searchText);
+
+                ArrayList<Incidencias> lista = daoIncidencias.buscarIncidencias(searchText);
+                System.out.println(searchText + "1");
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.buscarIncidencias(searchText)); //editar
+                request.setAttribute("listaIncidenciasPermanente", lista);
+
+                setListaPermanente(lista);
+                request.setAttribute("searchText", searchText);
+
+
+                requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
+                requestDispatcher.forward(request, response);
+                break;
+
+
         }
 
 
@@ -329,6 +351,14 @@ public class ServletUsuarioInicio extends HttpServlet {
 
     public void setListaPaginada(ArrayList<Incidencias> listaPaginada) {
         this.listaPaginada = listaPaginada;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }
 
