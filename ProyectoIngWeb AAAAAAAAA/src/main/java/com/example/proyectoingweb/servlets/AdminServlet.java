@@ -17,6 +17,8 @@ public class AdminServlet extends HttpServlet {
     private ArrayList<Usuarios> listaPaginada; //Lista de 15 usuarios
     private int centinelaSearch;
     private String search;
+    private String opcion;
+    private String orden;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,6 +31,7 @@ public class AdminServlet extends HttpServlet {
         RequestDispatcher requestDispatcher;
         Usuarios usuarios;
         String idUsuario;
+
         int idPage;
 
         ArrayList<String> categorias = null;
@@ -103,6 +106,11 @@ public class AdminServlet extends HttpServlet {
                     request.setAttribute("listaPaginada", getListaPaginada());
                 } else if (centinela == 1) {
                     setListaPaginada(daoUsuarios.paginarUsuariosBuscados(idPage, busqueda));
+                    request.setAttribute("listaPermanente", getListaPermanente());
+                    request.setAttribute("listaPaginada", getListaPaginada());
+                }
+                else if (centinela == 2) {
+                    setListaPaginada(daoUsuarios.paginarUsuariosOrdenados(idPage, getOpcion(),getOrden()));
                     request.setAttribute("listaPermanente", getListaPermanente());
                     request.setAttribute("listaPaginada", getListaPaginada());
                 }
@@ -243,6 +251,22 @@ public class AdminServlet extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
                 break;
+
+            case "order":
+                setCentinelaSearch(2);
+                String opcionjsp = request.getParameter("tipo");
+                String ordenamiento= request.getParameter("orden");
+                setOpcion(opcionjsp);
+                setOrden(ordenamiento);
+
+                request.setAttribute("listaPaginada", daoUsuarios.paginarUsuariosOrdenados(1,opcionjsp,ordenamiento));
+                request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
+
+                setListaPermanente(daoUsuarios.obtenerlistaUsuariosCompletaOrdenada(opcionjsp,ordenamiento));
+
+                requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
+                requestDispatcher.forward(request, response);
+                break;
         }
     }
 
@@ -276,5 +300,20 @@ public class AdminServlet extends HttpServlet {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
+
+    public String getOrden() {
+        return orden;
+    }
+
+    public void setOrden(String orden) {
+        this.orden = orden;
     }
 }

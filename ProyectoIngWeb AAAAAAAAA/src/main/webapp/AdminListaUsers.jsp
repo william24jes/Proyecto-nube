@@ -117,6 +117,32 @@
                 <div class="container">
                     <div class="container-fluid">
 
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <form method="post" action="<%=request.getContextPath()%>/Admin?action=order" class="row g-3 needs-validation" >
+                                <div class="col-lg-4">
+                                    <select required class="form-select" id="tipo" placeholder="tipo" name="tipo">
+                                        <option value="nombres">Nombre</option>
+                                        <option value="apellidos">Apellido</option>
+                                        <option value="codigoPucp">Código</option>
+                                        <option value="rol">Rol</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <select required style="width: fit-content" class="form-select" id="orden" placeholder="orden" name="orden">
+                                        <option value="asc">Ascendente</option>
+                                        <option value="desc">Descendente</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 mx-auto">
+                                    <button class="btn btn-danger" type="submit">Ordenar</button>
+                                </div>
+                            </form>
+                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Admin?action=listar"
+                               role="button">Limpiar filtros</a>
+                        </div>
+                        <br>
                         <div class="container"><h4 class="hero">Usuarios guardados:</h4>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <a class="btn btn-danger" href="<%=request.getContextPath()%>/Admin?action=crear"

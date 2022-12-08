@@ -75,6 +75,36 @@ public class DaoUsuarios extends DaoBase{
         return listaUsuarios;
     }
 
+    public ArrayList<Usuarios> obtenerlistaUsuariosCompletaOrdenada(String tipo,String orden){
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+
+        String sql = "SELECT * FROM mydb2.usuarios ORDER BY "+tipo+" "+orden;
+
+        try(Connection connection = this.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while(rs.next()){
+                Usuarios usuarios = new Usuarios();
+
+                usuarios.setIdUsuarios(rs.getInt(1));
+                usuarios.setNombres(rs.getString(2));
+                usuarios.setApellidos(rs.getString(3));
+                usuarios.setDni(rs.getString(4));
+                usuarios.setCelular(rs.getString(5));
+                usuarios.setCodigoPucp(rs.getString(6));
+                usuarios.setCorreoPucp(rs.getString(7));
+                usuarios.setCategorias(rs.getString(8));
+                usuarios.setRol(rs.getString(9));
+
+                listaUsuarios.add(usuarios);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+    }
+
     public Usuarios buscarPorId(String idUsuario){
 
         String sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
@@ -410,6 +440,36 @@ public class DaoUsuarios extends DaoBase{
         return listaUsuarios;
     }
 
+    public ArrayList<Usuarios> paginarUsuariosOrdenados(int i,String tipo, String orden){
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+        int inicio=15*(i-1);
+
+        String sql = "SELECT * FROM mydb2.usuarios ORDER BY "+tipo+" "+orden+" LIMIT "+inicio+","+"15";
+
+        try(Connection connection = this.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while(rs.next()){
+                Usuarios usuarios = new Usuarios();
+
+                usuarios.setIdUsuarios(rs.getInt(1));
+                usuarios.setNombres(rs.getString(2));
+                usuarios.setApellidos(rs.getString(3));
+                usuarios.setDni(rs.getString(4));
+                usuarios.setCelular(rs.getString(5));
+                usuarios.setCodigoPucp(rs.getString(6));
+                usuarios.setCorreoPucp(rs.getString(7));
+                usuarios.setCategorias(rs.getString(8));
+                usuarios.setRol(rs.getString(9));
+
+                listaUsuarios.add(usuarios);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+    }
     public Usuarios validarRegistro(String correoPucp, String codigoPucp){
 
         String sql = "select * from usuarios where correoPucp = ? and codigoPucp = ?";
