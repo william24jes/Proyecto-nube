@@ -158,12 +158,21 @@
 
                                     <!-- Card Header - Dropdown -->
 
-                                    <div
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
-                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidencias.getIdIncidencia()%>">
-                                            <h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%>
-                                            </h6></a>
+
+
+                                        <div style="color:darkgray;display: flex;flex-direction: column">
+                                            <a  href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidencias.getIdIncidencia()%>">
+                                                <h4  class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%>
+                                                </h4>
+                                            </a>
+                                            <br>
+                                            <h6><%=incidencias.getUsuario().getNombres()%> <%=incidencias.getUsuario().getApellidos()%>
+                                            </h6><h6>Registrado <%=incidencias.getDatetime()%>
+                                        </h6>
+                                            <h6 style="color:red"> <%=incidencias.getUrgencia()%> </h6>
+                                        </div>
 
                                         <form method="post"
                                               action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia"

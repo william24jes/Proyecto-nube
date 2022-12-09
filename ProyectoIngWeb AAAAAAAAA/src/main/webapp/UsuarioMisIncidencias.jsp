@@ -120,7 +120,7 @@
 
                         <div class="container">
 
-                            <div class="col-lg-10 mx-auto">
+                            <div class="row">
                                 <!-- Dropdown Card Example -->
                                 <% for (Incidencias incidenciasDestacadas : listaIncidenciasDestacadas) { %>
                                 <div class="card shadow mb-4 ">
