@@ -173,15 +173,15 @@
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                    <label class="col-sm-2 col-form-label"><h5>Nivel de Urgencia </h5>
+                                                    <label class="col-sm-2 col-form-label"><h5>Nivel de Importancia </h5>
                                                     </label>
                                                     <div class="col-sm-4">
                                                         <select class="form-select" aria-label="Default select example"
                                                                 name="nivel">
                                                             <option selected>Seleccione...</option>
-                                                            <option value="Bajo">Leve</option>
-                                                            <option value="Medio">Moderado</option>
-                                                            <option value="Urgente">Crítico</option>
+                                                            <option value="Bajo">Bajo</option>
+                                                            <option value="Medio">Medio</option>
+                                                            <option value="Urgente">Urgente</option>
                                                         </select>
                                                     </div>
                                                 </div>
