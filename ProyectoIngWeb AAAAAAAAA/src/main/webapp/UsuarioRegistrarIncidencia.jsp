@@ -179,9 +179,9 @@
                                                         <select class="form-select" aria-label="Default select example"
                                                                 name="nivel">
                                                             <option selected>Seleccione...</option>
-                                                            <option value="Leve">Leve</option>
-                                                            <option value="Moderado">Moderado</option>
-                                                            <option value="Crítico">Crítico</option>
+                                                            <option value="Bajo">Leve</option>
+                                                            <option value="Medio">Moderado</option>
+                                                            <option value="Urgente">Crítico</option>
                                                         </select>
                                                     </div>
                                                 </div>
