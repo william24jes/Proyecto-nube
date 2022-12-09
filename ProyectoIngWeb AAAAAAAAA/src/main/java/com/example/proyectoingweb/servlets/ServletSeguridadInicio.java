@@ -16,6 +16,9 @@ public class ServletSeguridadInicio extends HttpServlet {
 
     private ArrayList<Incidencias> listaPermanente;
     private ArrayList<Incidencias> listaPaginada;
+    private int centinelaSearch;
+    private String opcion;
+    private String orden;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -109,6 +112,7 @@ public class ServletSeguridadInicio extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         DaoIncidencias daoIncidencias = new DaoIncidencias();
+        RequestDispatcher requestDispatcher;
         Incidencias incidencias = new Incidencias();
         Usuarios usuario;
         ZonaPucp zonaPucp;
@@ -194,6 +198,21 @@ public class ServletSeguridadInicio extends HttpServlet {
                 }
 
                 break;
+            case "order":
+                setCentinelaSearch(2);
+                String opcionjsp = request.getParameter("tipo");
+                String ordenamiento= request.getParameter("orden");
+                setOpcion(opcionjsp);
+                setOrden(ordenamiento);
+
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.paginarIncidenciasOrdenadas(1,opcionjsp,ordenamiento));
+                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
+
+                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompletaOrdenada(opcionjsp,ordenamiento));
+
+                requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
+                requestDispatcher.forward(request, response);
+                break;
         }
     }
 
@@ -211,5 +230,29 @@ public class ServletSeguridadInicio extends HttpServlet {
 
     public void setListaPaginada(ArrayList<Incidencias> listaPaginada) {
         this.listaPaginada = listaPaginada;
+    }
+
+    public int getCentinelaSearch() {
+        return centinelaSearch;
+    }
+
+    public void setCentinelaSearch(int centinelaSearch) {
+        this.centinelaSearch = centinelaSearch;
+    }
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
+
+    public String getOrden() {
+        return orden;
+    }
+
+    public void setOrden(String orden) {
+        this.orden = orden;
     }
 }

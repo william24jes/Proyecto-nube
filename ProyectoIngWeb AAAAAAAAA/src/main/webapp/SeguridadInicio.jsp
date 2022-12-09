@@ -116,19 +116,45 @@
             <section id="portfolio-details" class="portfolio-details">
                 <div class="container">
                     <div class="container-fluid">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <form method="post" action="<%=request.getContextPath()%>/Seguridad?action=order" class="row g-3 needs-validation" >
+                                <div class="col-lg-4">
+                                    <select required class="form-select" id="tipo" placeholder="tipo" name="tipo">
+                                        <option value="fechaHora">Fecha</option>
+                                        <option value="urgencia">Urgencia</option>
+                                        <option value="tipo">Tipo de accidente</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <select required style="width: fit-content" class="form-select" id="orden" placeholder="orden" name="orden">
+                                        <option value="asc">Ascendente</option>
+                                        <option value="desc">Descendente</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 mx-auto">
+                                    <button class="btn btn-danger" type="submit">Ordenar</button>
+                                </div>
+                            </form>
+                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad"
+                               role="button">Limpiar filtros</a>
+
+                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF"
+                               role="button">Generar Reporte PDF</a>
+
+                        </div>
+                        <br>
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Incidencias PUCP</h1>
-                            <a class="nav-link"
-                               href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF">Generar Reporte</a>
                         </div>
 
 
                         <div class="container">
                             <% for (Incidencias i : listaPaginada) {%>
 
-                            <div class="col-lg-10 mx-auto">
+                            <div class="col-lg-8 mx-auto">
 
                                 <!-- Dropdown Card Example -->
 
@@ -136,25 +162,27 @@
                                    href="<%=request.getContextPath()%>/Seguridad?action=detalles&id=<%=i.getIdIncidencia()%>">
                                     <div class="card shadow mb-4">
                                         <!-- Card Header - Dropdown -->
-                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <div class="card-header py-3 d-flex flex-row align-items-center ">
                                             <img src="<%=i.getAnonimo()==1?"assets/img/fotosPerfil/perfilDefault.png":"assets/img/fotosPerfil/"+i.getUsuario().getFotoPerfil()%>"
                                                  height="70px"/>
-                                            <br>
-                                            <div></div>
-                                            <h4 class="m-0 font-weight-bold text-primary"
-                                                style="width:75%"><%=i.getNombre()%>
-                                                <div style="color:darkgray;display: flex;flex-direction: column">
-                                                    <h6><%=(i.getAnonimo() == 1) ? "Anónimo" : i.getUsuario().getNombres() + " " + i.getUsuario().getApellidos()%>
-                                                    </h6>
-                                                    <h6>Registrado </h6></div>
-                                                <div><a class="btn btn-warning btn-circle disabled">
-                                                    <i class="fas fa-exclamation-triangle"><%=i.getDestacado()%>
-                                                    </i>
-                                                </a></div>
-                                            </h4>
+
+                                            <div class="col-9" style="color:darkgray;display: flex;flex-direction: column">
+
+                                                <h4  class="m-0 font-weight-bold text-primary"><%=i.getNombre()%>
+                                                </h4>
+
+                                                <br>
+                                                <h6><%=i.getUsuario().getNombres()%> <%=i.getUsuario().getApellidos()%>
+                                                </h6><h6>Registrado <%=i.getDatetime()%>
+                                            </h6>
+                                                <h6 style="color:red"> <%=i.getUrgencia()%> </h6>
+
+                                            </div>
+                                            <div class="col-3 justify-content-between">
                                             <button type="button"
                                                     class="btn btn-primary btn-sm"><%=i.getEstadoIncidencia()%>
                                             </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
