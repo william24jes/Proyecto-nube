@@ -514,18 +514,14 @@
 
                                         <div class="row">
 
-                                            <div class="col-sm-1">
+                                            <div class="col-sm-2">
                                                 <br>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger">
-                                                        <i class="bi bi-filetype-pdf"></i>
+                                                    <a class="page-link" href="<%=request.getContextPath()%>/Seguridad">
+                                                    <button type="button"
+                                                            class="btn btn-primary btn-sm">Volver a inicio
                                                     </button>
-                                                    <button type="button" class="btn btn-success">
-                                                        <i class="bi bi-filetype-xls"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary">
-                                                        <i class="bi bi-filetype-txt"></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
 
