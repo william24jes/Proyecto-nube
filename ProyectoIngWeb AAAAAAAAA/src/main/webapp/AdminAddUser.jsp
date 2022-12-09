@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"></jsp:useBean>
+<%
+    String searchText = (String) request.getAttribute("searchText");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,7 +69,8 @@
                                            name="searchText"
                                            class="form-control rounded"
                                            placeholder="Buscar usuario"
-                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"/>
+                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"
+                                           value="<%=searchText != null? searchText:""%>"/>
                                     <span class="input-group-text border-0" id="search-addon"><i
                                             class="fas fa-search"></i></span>
                                 </form>

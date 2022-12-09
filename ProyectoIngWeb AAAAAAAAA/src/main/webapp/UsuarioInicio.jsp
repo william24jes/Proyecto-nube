@@ -118,7 +118,32 @@
             <section id="portfolio-details" class="portfolio-details">
                 <div class="container">
                     <div class="container-fluid">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <form method="post" action="<%=request.getContextPath()%>/Inicio?action=order" class="row g-3 needs-validation" >
+                                <div class="col-lg-4">
+                                    <select required class="form-select" id="tipo" placeholder="tipo" name="tipo">
+                                        <option value="fechaHora">Fecha</option>
+                                        <option value="urgencia">Urgencia</option>
+                                        <option value="tipo">Tipo de accidente</option>
+                                        <option value="destacado">Destacado</option>
+                                    </select>
+                                </div>
 
+                                <div class="col-lg-4">
+                                    <select required style="width: fit-content" class="form-select" id="orden" placeholder="orden" name="orden">
+                                        <option value="asc">Ascendente</option>
+                                        <option value="desc">Descendente</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 mx-auto">
+                                    <button class="btn btn-danger" type="submit">Ordenar</button>
+                                </div>
+                            </form>
+                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=listar"
+                               role="button">Limpiar filtros</a>
+                        </div>
+                        <br>
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Incidencias PUCP</h1>
@@ -133,12 +158,21 @@
 
                                     <!-- Card Header - Dropdown -->
 
-                                    <div
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
-                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidencias.getIdIncidencia()%>">
-                                            <h6 class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%>
-                                            </h6></a>
+
+
+                                        <div style="color:darkgray;display: flex;flex-direction: column">
+                                            <a  href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidencias.getIdIncidencia()%>">
+                                                <h4  class="m-0 font-weight-bold text-primary"><%=incidencias.getNombre()%>
+                                                </h4>
+                                            </a>
+                                            <br>
+                                            <h6><%=incidencias.getUsuario().getNombres()%> <%=incidencias.getUsuario().getApellidos()%>
+                                            </h6><h6>Registrado <%=incidencias.getDatetime()%>
+                                        </h6>
+                                            <h6 style="color:red"> <%=incidencias.getUrgencia()%> </h6>
+                                        </div>
 
                                         <form method="post"
                                               action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia"

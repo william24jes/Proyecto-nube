@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+<%
+    String searchText = (String) request.getAttribute("searchText");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,17 +68,16 @@
                     <ul>
                         <li>
                             <div class="container-fluid">
-                                <form class="d-flex input-group w-auto">
-                                    <input
-                                            type="search"
-                                            class="form-control rounded"
-                                            placeholder="Buscar Incidencia"
-                                            aria-label="Search"
-                                            aria-describedby="search-addon"
-                                    />
-                                    <span class="input-group-text border-0" id="search-addon">
-        <i class="fas fa-search"></i>
-      </span>
+                                <form method="post" class="d-flex input-group w-auto"
+                                      action="<%=request.getContextPath()%>/Inicio?action=buscar">
+                                    <input type="text"
+                                           name="searchText"
+                                           class="form-control rounded"
+                                           placeholder="Buscar incidencia"
+                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"
+                                           value="<%=searchText != null? searchText:""%>"/>
+                                    <span class="input-group-text border-0" id="search-addon"><i
+                                            class="fas fa-search"></i></span>
                                 </form>
                             </div>
                         </li>

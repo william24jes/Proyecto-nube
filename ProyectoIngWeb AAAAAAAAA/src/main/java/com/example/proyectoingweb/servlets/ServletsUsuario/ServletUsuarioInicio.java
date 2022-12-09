@@ -26,6 +26,9 @@ public class ServletUsuarioInicio extends HttpServlet {
     private ArrayList<Incidencias> listaPermanente;
     private ArrayList<Incidencias> listaPaginada;
     private String search;
+    private int centinelaSearch;
+    private String opcion;
+    private String orden;
 
 
     @Override
@@ -39,6 +42,8 @@ public class ServletUsuarioInicio extends HttpServlet {
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
         String idIncidencia;
         Incidencias incidencia;
+        int centinela;
+        String busqueda;
         int idPage;
         HttpSession session = request.getSession();
         switch (action) {
@@ -97,10 +102,22 @@ public class ServletUsuarioInicio extends HttpServlet {
 
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
-                setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
-                request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
-                request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                centinela = getCentinelaSearch();
+                busqueda=getSearch();
 
+                if(centinela == 0) {
+                    setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                } else if (centinela == 1) {
+                    setListaPaginada(daoIncidencias.paginarIncidenciasBuscadas(idPage, busqueda));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                } else if (centinela == 2) {
+                    setListaPaginada(daoIncidencias.paginarIncidenciasOrdenadas(idPage, getOpcion(),getOrden()));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                }
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
                 requestDispatcher.forward(request, response);
 
@@ -304,12 +321,11 @@ public class ServletUsuarioInicio extends HttpServlet {
                 break;
 
             case "buscar":
-                //setCentinelaSearch(1);
+                setCentinelaSearch(1);
                 String searchText = request.getParameter("searchText");
                 setSearch(searchText);
 
-                ArrayList<Incidencias> lista = daoIncidencias.buscarIncidencias(searchText);
-                System.out.println(searchText + "1");
+                ArrayList<Incidencias> lista = daoIncidencias.buscarIncidenciasCompleto(searchText);
                 request.setAttribute("listaIncidenciasPaginada", daoIncidencias.buscarIncidencias(searchText)); //editar
                 request.setAttribute("listaIncidenciasPermanente", lista);
 
@@ -321,7 +337,21 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
 
+            case "order":
+                setCentinelaSearch(2);
+                String opcionjsp = request.getParameter("tipo");
+                String ordenamiento= request.getParameter("orden");
+                setOpcion(opcionjsp);
+                setOrden(ordenamiento);
 
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.paginarIncidenciasOrdenadas(1,opcionjsp,ordenamiento));
+                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
+
+                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompletaOrdenada(opcionjsp,ordenamiento));
+
+                requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
+                requestDispatcher.forward(request, response);
+                break;
         }
 
 
@@ -359,6 +389,30 @@ public class ServletUsuarioInicio extends HttpServlet {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public int getCentinelaSearch() {
+        return centinelaSearch;
+    }
+
+    public void setCentinelaSearch(int centinelaSearch) {
+        this.centinelaSearch = centinelaSearch;
+    }
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
+
+    public String getOrden() {
+        return orden;
+    }
+
+    public void setOrden(String orden) {
+        this.orden = orden;
     }
 }
 
