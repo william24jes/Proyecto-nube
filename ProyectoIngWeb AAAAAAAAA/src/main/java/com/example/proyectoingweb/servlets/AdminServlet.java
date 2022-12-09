@@ -38,8 +38,7 @@ public class AdminServlet extends HttpServlet {
 
         switch (action) {
             case "listar":
-                setCentinelaSearch(0);
-
+                //setCentinelaSearch(0);
                 request.setAttribute("listaPaginada", daoUsuarios.obtenerlistaUsuarios());
                 request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
                 setListaPermanente(daoUsuarios.obtenerlistaUsuariosCompleta());

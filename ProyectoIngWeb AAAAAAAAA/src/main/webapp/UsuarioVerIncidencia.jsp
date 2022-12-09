@@ -88,16 +88,11 @@
       </span>
                                 </form>
                             </div>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a>
-                        </li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a>
-                        </li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis
-                            Incidencias</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar
-                            Incidencia</a></li>
-                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar
-                            sesión</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=listar">Inicio</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=perfil">Perfil</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias">Mis incidencias</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=registrarIncidencia">Registrar incidencia</a></li>
+                        <li><a class="nav-link" href="<%=request.getContextPath()%>/Inicio?action=cerrarSesion">Cerrar sesión</a></li>
                     </ul>
 
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -115,7 +110,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Detalle de Incidencias</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Detalle de incidencias</h1>
                         </div>
 
                         <div class="container">

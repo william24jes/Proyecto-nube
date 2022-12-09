@@ -22,8 +22,24 @@ public class ServletIniciarSesion extends HttpServlet {
         switch (action) {
             case "iniciarSesion":
                 // Verificacion de si ya existe sesion
-
-                if (session.getAttribute("usuarioSession") == null) {
+                /*
+                if (session.getAttribute("usuario") != null) {
+                    switch (((Usuarios) session.getAttribute("usuario")).getCategorias()) {
+                        case "Administrador":
+                            response.sendRedirect(request.getContextPath() + "/Admin");
+                            break;
+                        case "Seguridad":
+                            response.sendRedirect(request.getContextPath() + "/Seguridad");
+                            break;
+                        case "Usuario Pucp":
+                            response.sendRedirect(request.getContextPath() + "/Inicio");
+                            break;
+                    }
+                }else {
+                    response.sendRedirect(request.getContextPath()+"/IniciarSesion");
+                }
+                */
+                if(session.getAttribute("usuarioSession") == null){
                     if (session.getAttribute("seguridadSession") == null) {
                         if (session.getAttribute("userAdmin") == null) {
                             requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
