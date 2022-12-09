@@ -57,8 +57,8 @@
 
                 <div class="d-md-flex align-items-center">
                     <div>
-                        <h1 class="name" style="margin-top: 25px">Julio Flores
-                            <br><h6>Seguridad</h6></br>
+                        <h1 class="name" style="margin-top: 25px"><%=seguridadSession.getNombreYApellido()%>
+                            <br><h6>Seguridad PUCP</h6></br>
                         </h1>
                     </div>
                 </div>
@@ -108,10 +108,11 @@
                                     <div class="card mb-4 mb-xl-0">
                                         <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
 
-                                            <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile"
-                                                 class="rounded-circle">
-                                            <h2>Julio Flores</h2>
-                                            <h5>Personal de seguridad</h5>
+                                            <img src="assets/img/fotosPerfil/<%=seguridadSession.getFotoPerfil()%>"
+                                                 width=70% alt="Profile" class="rounded-circle">
+                                            <h2><%=seguridadSession.getNombreYApellido()%>
+                                            </h2>
+                                            <h5>Seguridad PUCP</h5>
 
                                         </div>
                                     </div>
@@ -151,39 +152,37 @@
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label ">Nombre completo</div>
-                                                        <div class="col-lg-9 col-md-8">Julio Manuel Flores Richelli
+                                                        <div class="col-lg-9 col-md-8"><%=seguridadSession.getNombres()%> <%=seguridadSession.getApellidos()%>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label ">Cargo</div>
-                                                        <div class="col-lg-9 col-md-8">Seguridad</div>
+                                                        <div class="col-lg-3 col-md-4 label ">Rol</div>
+                                                        <div class="col-lg-9 col-md-8">Seguridad PUCP</div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Edad</div>
-                                                        <div class="col-lg-9 col-md-8">22 años</div>
-                                                    </div>
-
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Pais</div>
-                                                        <div class="col-lg-9 col-md-8">Perú</div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-lg-3 col-md-4 label">Dirección</div>
-                                                        <div class="col-lg-9 col-md-8">Av Las Nuevas Lomas, Lima</div>
+                                                        <div class="col-lg-3 col-md-4 label">Dni</div>
+                                                        <div class="col-lg-9 col-md-8"><%=seguridadSession.getDni()%>
+                                                        </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Telefono</div>
-                                                        <div class="col-lg-9 col-md-8">986-126-855</div>
+                                                        <div class="col-lg-9 col-md-8"><%=seguridadSession.getCelular()%>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Código</div>
+                                                        <div class="col-lg-9 col-md-8"><%=seguridadSession.getCodigoPucp()%>
+                                                        </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label">Correo</div>
-                                                        <div class="col-lg-9 col-md-8">ajulioflores@pucp.edu.pe</div>
+                                                        <div class="col-lg-9 col-md-8"><%=seguridadSession.getCorreoPucp()%>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -191,14 +190,16 @@
                                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                                     <!-- Profile Edit Form -->
-                                                    <form>
+                                                    <form method="post"
+                                                          action="<%=request.getContextPath()%>/Seguridad?action=CambiarTelefono">
+
                                                         <div class="row mb-3">
                                                             <label for="profileImage"
                                                                    class="col-md-4 col-lg-3 col-form-label">Imagen de
                                                                 Perfil</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <img src="assets/img/perfiles/perfil1.svg" height="150"
-                                                                     width="150" alt="Profile" id="profileImage">
+                                                                <img src="assets/img/fotosPerfil/<%=seguridadSession.getFotoPerfil()%>"
+                                                                     height="150" width="150" alt="Profile" id="profileImage">
                                                                 <div class="pt-2">
                                                                     <a href="#" class="btn btn-primary btn-sm"
                                                                        title="Upload new profile image"><i
@@ -217,7 +218,8 @@
                                                             <div class="col-md-8 col-lg-9">
                                                                 <input name="fullName" type="text" class="form-control"
                                                                        id="fullName"
-                                                                       value="Julio Manuel Flores Richelli" disabled>
+                                                                       value="<%=seguridadSession.getNombres()%> <%=seguridadSession.getApellidos()%>"
+                                                                       disabled>
                                                             </div>
                                                         </div>
 
@@ -226,44 +228,30 @@
                                                             <label for="Email" class="col-md-4 col-lg-3 col-form-label">Correo</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <input name="email" type="email" class="form-control"
-                                                                       id="Email" value="ajulioflores@pucp.edu.pe"
+                                                                       id="Email"
+                                                                       value="<%=seguridadSession.getCorreoPucp()%>"
                                                                        disabled>
                                                             </div>
                                                         </div>
 
-
                                                         <div class="row mb-3">
-                                                            <label for="Country"
-                                                                   class="col-md-4 col-lg-3 col-form-label">Pais</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="country" type="text" class="form-control"
-                                                                       id="Country" value="Perú">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row mb-3">
-                                                            <label for="Address"
-                                                                   class="col-md-4 col-lg-3 col-form-label">Direcion</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="address" type="text" class="form-control"
-                                                                       id="Address" value="Av Las Nuevas Lomas, Lima">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row mb-3">
-                                                            <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
+                                                            <input class="form-control " id="idUsuario" type="hidden"
+                                                                   name="id" value="<%=seguridadSession.getIdUsuarios()%>">
+                                                            <label for="Phone"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Telefono</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <input name="phone" type="text" class="form-control"
-                                                                       id="Phone" value="986-126-855">
+                                                                       id="Phone"
+                                                                       value="<%=seguridadSession.getCelular()%>">
                                                             </div>
                                                         </div>
 
-
                                                         <div class="text-center">
-                                                            <button href="Admin_perfil.html" type="submit"
+                                                            <button type="submit"
                                                                     class="btn btn-primary">Guardar
                                                             </button>
                                                         </div>
+
                                                     </form><!-- End Profile Edit Form -->
 
                                                 </div>

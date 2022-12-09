@@ -90,6 +90,8 @@ public class ServletSeguridadInicio extends HttpServlet {
                 break;
 
 
+
+
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
                 setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
@@ -129,6 +131,21 @@ public class ServletSeguridadInicio extends HttpServlet {
                 daoIncidencias.actualizar_estado("Atendido", id_incidencia);
                 daoIncidencias.actualizar_idSecurity_from_incidencias(id_security,id_incidencia);
                 response.sendRedirect(request.getContextPath() + "/Seguridad?action=detalles&id=" + id_incidencia);
+                break;
+            }
+            case "CambiarTelefono": {
+                String idSeguridad = request.getParameter("id");
+                String nuevo_celular = request.getParameter("phone");
+
+                Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idSeguridad);
+                user_a_cambiar.setCelular(nuevo_celular);
+
+                daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
+
+                HttpSession session = request.getSession();
+                session.setAttribute("seguridadSession", user_a_cambiar);
+
+                response.sendRedirect(request.getContextPath() + "/Seguridad?action=perfil");
                 break;
             }
             case "Seguridad_Responder_Incidencia": {
