@@ -5,6 +5,7 @@
 
 <%
     ArrayList<String> categorias = (ArrayList<String>) request.getAttribute("categorias");
+    String searchText = (String) request.getAttribute("searchText");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,14 +69,14 @@
                                href="<%=request.getContextPath()%>/Admin?action=perfil">Perfil</a></li>
                         <li>
                             <div class="container-fluid">
-                                <form class="d-flex input-group w-auto">
-                                    <input
-                                            type="search"
-                                            class="form-control rounded"
-                                            placeholder="Buscar usuario"
-                                            aria-label="Search"
-                                            aria-describedby="search-addon"
-                                    />
+                                <form method="post" class="d-flex input-group w-auto"
+                                      action="<%=request.getContextPath()%>/Admin?action=buscar">
+                                    <input type="text"
+                                           name="searchText"
+                                           class="form-control rounded"
+                                           placeholder="Buscar usuario"
+                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"
+                                           value="<%=searchText != null? searchText:""%>"/>
                                     <span class="input-group-text border-0" id="search-addon"><i
                                             class="fas fa-search"></i></span>
                                 </form>
