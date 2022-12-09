@@ -6,6 +6,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -78,7 +79,7 @@ public class ReporteIncidenciasPDF {
             tabla.addCell(String.valueOf(incidencia.getIdIncidencia()));
             tabla.addCell(incidencia.getNombre());
             tabla.addCell(incidencia.getDescripcion());
-            tabla.addCell(String.valueOf(incidencia.getZonaPucp()));
+            tabla.addCell(incidencia.getZonaPucp().getNombreZona());
             tabla.addCell(incidencia.getTipo());
             tabla.addCell(incidencia.getDatetime());
             tabla.addCell(incidencia.getUrgencia());
