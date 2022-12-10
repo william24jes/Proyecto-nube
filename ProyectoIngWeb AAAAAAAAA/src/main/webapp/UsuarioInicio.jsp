@@ -168,8 +168,13 @@
                                                 </h4>
                                             </a>
                                             <br>
+                                            <%if(incidencias.getAnonimo() == 0){%>
                                             <h6><%=incidencias.getUsuario().getNombres()%> <%=incidencias.getUsuario().getApellidos()%>
                                             </h6>
+                                            <%}else{%>
+                                            <h6>Anónimo
+                                            </h6>
+                                            <%}%>
                                             <h6>Registrado <%=incidencias.getDatetime()%>
                                             </h6>
                                             <%if (incidencias.getUrgencia().equals("Bajo")){%>
