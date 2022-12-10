@@ -189,6 +189,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencias.setDatetime(formattedDate);
                 incidencias.setEstadoIncidencia("Registrado");
                 daoIncidencias.guardarIncidencias(incidencias, inputStream);
+                daoIncidencias.destacarIncidencia_para_idUsuario(idusuario,String.valueOf(Integer.parseInt(value_incidencia)+1));
+
 
                 lista_comentarios =daoComentarios.obtenerListaComentarios();
                 int value_id_Incidencia = 0;

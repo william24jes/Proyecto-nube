@@ -473,7 +473,7 @@ public class DaoIncidencias extends DaoBase {
             pstmt.setString(1, String.valueOf(incidencias.getUsuario().getIdUsuarios()));
             pstmt.setString(2, incidencias.getNombre());
             pstmt.setString(3, incidencias.getDescripcion());
-            pstmt.setString(4, "0");
+            pstmt.setString(4, String.valueOf(incidencias.getDestacado()));
             pstmt.setString(5, incidencias.getTipo());
             pstmt.setString(6, incidencias.getUrgencia());
             pstmt.setString(7, String.valueOf(incidencias.getZonaPucp().getIdZonaPucp()));
