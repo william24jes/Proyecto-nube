@@ -645,8 +645,78 @@ public class DaoUsuarios extends DaoBase{
         return 0;
     }
 
-    public void guardarPassword(int idUsuario, String password){
+    public void guardarPassword(Usuarios usuario, String password){
 
+        String sql = "insert into credenciales (idUsuario, correoPucp, codigoPucp, contrasenaHasheada) " +
+                "values (?, ?, ?, sha2(?, 256))";
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, usuario.getIdUsuarios());
+            pstmt.setString(2, usuario.getCorreoPucp());
+            pstmt.setString(3, usuario.getCodigoPucp());
+            pstmt.setString(4, password);
+
+            pstmt.executeUpdate();
+
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
+
+    }
+
+    public Usuarios buscarPorToken(String token){
+        String sql = "select u.idUsuario, u.nombres, u.apellidos, u.dni, u.celular, u.codigoPucp, \n" +
+                "u.correoPucp, u.categoria, u.rol, u.fotoPerfil \n" +
+                "from usuarios u \n" +
+                "inner join tokens t on (t.idUsuario = u.idUsuario) \n" +
+                "where token = ?";
+
+        Usuarios usuarios = null;
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, token);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    usuarios = new Usuarios();
+
+                    usuarios.setIdUsuarios(rs.getInt(1));
+                    usuarios.setNombres(rs.getString(2));
+                    usuarios.setApellidos(rs.getString(3));
+                    usuarios.setDni(rs.getString(4));
+                    usuarios.setCelular(rs.getString(5));
+                    usuarios.setCodigoPucp(rs.getString(6));
+                    usuarios.setCorreoPucp(rs.getString(7));
+                    usuarios.setCategorias(rs.getString(8));
+                    usuarios.setRol(rs.getString(9));
+                    usuarios.setFotoPerfil(rs.getString(10));
+                }
+            }
+
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+
+        return usuarios;
+    }
+
+    public void borrarToken(String token){
+        String sql = "delete from tokens where token = ?";
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1, token);
+            pstmt.executeUpdate();
+
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
     }
 
 }

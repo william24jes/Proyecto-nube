@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: noqe2
-  Date: 24/11/2022
-  Time: 00:10
+  Date: 10/12/2022
+  Time: 16:44
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="token" scope="request" type="java.lang.String"></jsp:useBean>
 <!DOCTYPE html>
 <html>
     <head>
@@ -60,40 +59,38 @@
 
                                         <div class="pt-4 pb-2">
                                             <h5 class="card-title text-center pb-0 fs-4">Crea tu contraseña</h5>
-                                            <p class="text-center small">Rellena los campos cuidadosamente</p>
                                         </div>
 
                                         <form method="post"
                                               action="<%=request.getContextPath()%>/IniciarSesion?post=guardarPassword"
-                                              class="row g-3 needs-validation" novalidate>
-
-                                            <input name="token" value="<%=token%>" type="hidden">
+                                              class="row g-3 needs-validation">
 
                                             <div class="col-12 ">
                                                 <label for="yourUsername" class="form-label">Contraseña:</label>
                                                 <div class="input-group has-validation">
                                                     <input type="password" name="nuevaPassword1" class="form-control"
-                                                           id="yourUsername" required>
+                                                           id="yourUsername" required disabled>
                                                     <div class="invalid-feedback">Ingresa tu contraseña.</div>
                                                 </div>
 
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="yourPassword" class="form-label">Confirmar contraseña</label>
+                                                <label for="yourPassword" class="form-label">Confirmar
+                                                    contraseña</label>
                                                 <input type="password" name="nuevaPassword2" class="form-control"
-                                                       id="yourPassword" required>
+                                                       id="yourPassword" required disabled>
                                                 <div class="invalid-feedback">Confirma tu contraseña</div>
                                             </div>
                                             <br>
-                                            <% if (session.getAttribute("msgError") != null) { %>
-                                            <p class="text-danger small mb-0"><%=session.getAttribute("msgError")%>
+                                            <p class="text-primary small mb-0">Se ha establecido su contraseña con éxito
                                             </p>
-                                            <% session.removeAttribute("msgError");
-                                            } %>
                                             <div class="col-12">
-                                                <button class="btn btn-primary w-100" type="submit">Guardar contraseña
-                                                </button>
+                                                <a class="nav-link" href="<%=request.getContextPath()%>/IniciarSesion">
+                                                    <button type="button" class="btn btn-primary w-100">Volver a la página
+                                                        principal
+                                                    </button>
+                                                </a>
                                             </div>
 
                                         </form>
@@ -122,29 +119,6 @@
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
-
-        <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function () {
-                'use strict'
-
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.querySelectorAll('.needs-validation')
-
-                // Loop over them and prevent submission
-                Array.prototype.slice.call(forms)
-                    .forEach(function (form) {
-                        form.addEventListener('submit', function (event) {
-                            if (!form.checkValidity()) {
-                                event.preventDefault()
-                                event.stopPropagation()
-                            }
-
-                            form.classList.add('was-validated')
-                        }, false)
-                    })
-            })()
-        </script>
 
     </body>
 

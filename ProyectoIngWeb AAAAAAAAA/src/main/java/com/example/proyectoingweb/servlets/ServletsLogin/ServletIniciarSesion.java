@@ -94,6 +94,8 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 // * Validar tiempo de expiracion *
                 if (daoUsuarios.validarToken(token)<0){
+
+                    request.setAttribute("token", token);
                     requestDispatcher = request.getRequestDispatcher("CrearContraseña.jsp");
                     requestDispatcher.forward(request, response);
                 }
@@ -102,6 +104,13 @@ public class ServletIniciarSesion extends HttpServlet {
                     requestDispatcher = request.getRequestDispatcher("TokenInvalido.jsp");
                     requestDispatcher.forward(request, response);
                 }
+
+                break;
+
+            case "passwordCreada":
+
+                requestDispatcher = request.getRequestDispatcher("ContraseñaEstablecida.jsp");
+                requestDispatcher.forward(request, response);
 
                 break;
 
@@ -196,12 +205,6 @@ public class ServletIniciarSesion extends HttpServlet {
                     Random random = new Random();
                     String token = Hashing.sha256().hashString(correoPucp + codigoPucp + caracteres[random.nextInt(caracteres.length)], StandardCharsets.UTF_8).toString();
 
-                    /*Calendar fechaActual = Calendar.getInstance();
-                    long fechaActualSegundos = fechaActual.getTimeInMillis();
-                    Date fechaExpiracionDate = new Date(fechaActualSegundos + (5 * 60 * 1000));
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String fechaExpiracion = dateFormat.format(fechaExpiracionDate);*/
-
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
                     Date fechaActual = new Date();
@@ -219,7 +222,7 @@ public class ServletIniciarSesion extends HttpServlet {
                     String mensaje = "Tu registro está casi completo.\n\n" +
                             "Ingresa al siguiente link para crear tu contraseña:\n\n" +
                             "" + link + "\n\n" +
-                            "El enlace expirará en 5 minutos.";
+                            "Este enlace expirará en 5 minutos.";
 
                     daoUsuarios.enviarCorreo(correoPucp, asunto, mensaje);
 
@@ -234,16 +237,26 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 break;
 
-            case "guardarContrasena":
+            case "guardarPassword":
 
+                String token = request.getParameter("token");
                 String nuevaPassword1 = request.getParameter("nuevaPassword1");
                 String nuevaPassword2 = request.getParameter("nuevaPassword2");
 
                 if (nuevaPassword1.equals(nuevaPassword2)){
 
+                    usuario = daoUsuarios.buscarPorToken(token);
+                    daoUsuarios.guardarPassword(usuario, nuevaPassword1);
+                    daoUsuarios.borrarToken(token);
+
+                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=passwordCreada");
+
                 }
                 else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("msgError", "Las contraseñas deben ser iguales");
 
+                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=crearPassword&token="+token);
                 }
 
                 break;
