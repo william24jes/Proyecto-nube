@@ -169,9 +169,16 @@
                                             </a>
                                             <br>
                                             <h6><%=incidencias.getUsuario().getNombres()%> <%=incidencias.getUsuario().getApellidos()%>
-                                            </h6><h6>Registrado <%=incidencias.getDatetime()%>
-                                        </h6>
-                                            <h6 style="color:red"> <%=incidencias.getUrgencia()%> </h6>
+                                            </h6>
+                                            <h6>Registrado <%=incidencias.getDatetime()%>
+                                            </h6>
+                                            <%if (incidencias.getUrgencia().equals("Bajo")){%>
+                                                <h6 style="color:dodgerblue"> <%=incidencias.getUrgencia()%> </h6>
+                                            <%} else if (incidencias.getUrgencia().equals("Medio")) {%>
+                                                <h6 style="color:purple"> <%=incidencias.getUrgencia()%> </h6>
+                                            <%} else if (incidencias.getUrgencia().equals("Urgente")) {%>
+                                                <h6 style="color:red"> <%=incidencias.getUrgencia()%> </h6>
+                                            <%}%>
                                         </div>
 
                                         <form method="post"

@@ -138,7 +138,13 @@
                                             <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%>
                                             </h6><h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
                                         </h6>
+                                            <%if (incidenciasDestacadas.getUrgencia().equals("Bajo")){%>
+                                            <h6 style="color:dodgerblue"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <%} else if (incidenciasDestacadas.getUrgencia().equals("Medio")) {%>
+                                            <h6 style="color:purple"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <%} else if (incidenciasDestacadas.getUrgencia().equals("Urgente")) {%>
                                             <h6 style="color:red"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <%}%>
                                         </div>
                                         </h4>
 

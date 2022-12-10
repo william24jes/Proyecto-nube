@@ -175,7 +175,13 @@
                                                 <h6><%=i.getUsuario().getNombres()%> <%=i.getUsuario().getApellidos()%>
                                                 </h6><h6>Registrado <%=i.getDatetime()%>
                                             </h6>
+                                                <%if (i.getUrgencia().equals("Bajo")){%>
+                                                <h6 style="color:dodgerblue"> <%=i.getUrgencia()%> </h6>
+                                                <%} else if (i.getUrgencia().equals("Medio")) {%>
+                                                <h6 style="color:purple"> <%=i.getUrgencia()%> </h6>
+                                                <%} else if (i.getUrgencia().equals("Urgente")) {%>
                                                 <h6 style="color:red"> <%=i.getUrgencia()%> </h6>
+                                                <%}%>
 
                                             </div>
                                             <div class="col-3 justify-content-between">
