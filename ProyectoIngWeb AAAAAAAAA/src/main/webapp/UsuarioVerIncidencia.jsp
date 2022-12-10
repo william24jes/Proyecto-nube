@@ -224,12 +224,6 @@
                                                aria-disabled="true"><%=incidencia_send_jsp.getUrgencia()%>
                                             </a>
                                         </div>
-                                        <%if(incidencia_send_jsp.getSeguridad() != null){%>
-                                        <%if(incidencia_send_jsp.getSeguridad().getIdUsuarios() == 2 ){%>
-                                        <%="hola, tienes que borrar esto"%>
-                                        <%}%>
-                                        <%}%>
-
 
                                         <%int contador = 0;%>
                                         <%if (comentario2.getContenido1() != null) {%>
