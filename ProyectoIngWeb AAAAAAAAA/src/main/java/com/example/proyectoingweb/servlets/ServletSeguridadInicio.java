@@ -18,6 +18,7 @@ public class ServletSeguridadInicio extends HttpServlet {
     private ArrayList<Incidencias> listaPaginada;
     private int centinelaSearch;
     private String opcion;
+    private String search;
     private String orden;
 
     @Override
@@ -213,7 +214,32 @@ public class ServletSeguridadInicio extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
                 requestDispatcher.forward(request, response);
                 break;
+            case "buscar":
+                setCentinelaSearch(1);
+                String searchText = request.getParameter("searchText");
+                setSearch(searchText);
+
+                ArrayList<Incidencias> lista = daoIncidencias.buscarIncidenciasCompleto(searchText);
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
+                request.setAttribute("listaIncidenciasPermanente", lista);
+
+                setListaPermanente(lista);
+                request.setAttribute("searchText", searchText);
+
+                requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
+                requestDispatcher.forward(request, response);
+
+
+                break;
         }
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     public ArrayList<Incidencias> getListaPermanente() {

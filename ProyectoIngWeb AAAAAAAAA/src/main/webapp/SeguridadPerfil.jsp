@@ -64,22 +64,7 @@
                 </div>
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li>
-                            <div class="container-fluid">
-                                <form class="d-flex input-group w-auto">
-                                    <input
-                                            type="search"
-                                            class="form-control rounded"
-                                            placeholder="Buscar Incidencia"
-                                            aria-label="Search"
-                                            aria-describedby="search-addon"
-                                    />
-                                    <span class="input-group-text border-0" id="search-addon">
-        <i class="fas fa-search"></i>
-      </span>
-                                </form>
-                            </div>
-                        </li>
+
                         <li><a class="nav-link  "
                                href="<%=request.getContextPath()%>/Seguridad?action=inicioSeguridad">Inicio</a>
                         </li>
@@ -200,14 +185,18 @@
                                                             <div class="col-md-8 col-lg-9">
                                                                 <img src="assets/img/fotosPerfil/<%=seguridadSession.getFotoPerfil()%>"
                                                                      height="150" width="150" alt="Profile" id="profileImage">
-                                                                <div class="pt-2">
-                                                                    <a href="#" class="btn btn-primary btn-sm"
-                                                                       title="Upload new profile image"><i
-                                                                            class="bi bi-upload"></i></a>
-                                                                    <a href="#" class="btn btn-danger btn-sm"
-                                                                       title="Remove my profile image"><i
+                                                                <div class="mb-6">
+                                                                    <label for="customFile">Cambiar foto de perfil </label>
+                                                                    <input type="file" class="form-control" style="width: 350px"
+                                                                           id="customFile" name="foto" />
+
+                                                                    <a class="btn btn-danger btn-sm"
+                                                                       title="Quitar nueva foto de perfil"><i
                                                                             class="bi bi-trash"></i></a>
                                                                 </div>
+
+
+
                                                             </div>
                                                         </div>
 
@@ -221,6 +210,9 @@
                                                                        value="<%=seguridadSession.getNombres()%> <%=seguridadSession.getApellidos()%>"
                                                                        disabled>
                                                             </div>
+
+
+
                                                         </div>
 
 
