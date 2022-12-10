@@ -236,7 +236,7 @@
 
                                                     <div class="form-check form-switch">
                                                         <input class="form-check-input" type="checkbox"
-                                                               role="switch" id="flexSwitchCheckDefault">
+                                                               role="switch" id="flexSwitchCheckDefault" name="anonimo" value="1">
                                                         <label class="form-check-label"
                                                                for="flexSwitchCheckDefault" >Activar publicación
                                                             anónima</label>

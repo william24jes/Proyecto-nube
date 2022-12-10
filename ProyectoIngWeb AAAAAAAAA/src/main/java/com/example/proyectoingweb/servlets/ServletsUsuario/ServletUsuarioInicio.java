@@ -154,6 +154,14 @@ public class ServletUsuarioInicio extends HttpServlet {
                 String latitud = request.getParameter("latitud");
                 String longitud = request.getParameter("longitud");
                 String value_incidencia = request.getParameter("idIncidencia");
+                String anonimo = request.getParameter("anonimo");
+                if(anonimo==null){
+                    anonimo="0";
+                    incidencias.setAnonimo(Integer.parseInt(anonimo));
+                }
+                if(anonimo!=null){
+                    incidencias.setAnonimo(Integer.parseInt(anonimo));
+                }
 
                 inputStream = filePart.getInputStream();
                 if (filePart != null) {
@@ -179,7 +187,6 @@ public class ServletUsuarioInicio extends HttpServlet {
                 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDate = myDateObj.format(myFormatObj);
                 incidencias.setDatetime(formattedDate);
-                incidencias.setAnonimo(0);
                 incidencias.setEstadoIncidencia("Registrado");
                 daoIncidencias.guardarIncidencias(incidencias, inputStream);
 
@@ -227,6 +234,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
                 break;
             }
+
             case "DestacarIncidencia_verIncidencias": {
                 String idUsuario2 = request.getParameter("id");
                 String Cantidad_destacados = request.getParameter("Cantidad_destacados");
