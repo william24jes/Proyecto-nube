@@ -81,7 +81,7 @@
                                     <input type="text"
                                            name="searchText"
                                            class="form-control rounded"
-                                           placeholder="Buscar usuario"
+                                           placeholder="Buscar incidencia"
                                            id="floatingInput" aria-label="Search" aria-describedby="search-addon"
                                            value="<%=searchText != null? searchText:""%>"/>
                                     <span class="input-group-text border-0" id="search-addon"><i

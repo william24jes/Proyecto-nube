@@ -98,10 +98,22 @@ public class ServletSeguridadInicio extends HttpServlet {
 
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
-                setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
-                request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
-                request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                int centinela = getCentinelaSearch();
+                String busqueda=getSearch();
 
+                if(centinela == 0) {
+                    setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                } else if (centinela == 1) {
+                    setListaPaginada(daoIncidencias.paginarIncidenciasBuscadas(idPage, busqueda));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                } else if (centinela == 2) {
+                    setListaPaginada(daoIncidencias.paginarIncidenciasOrdenadas(idPage, getOpcion(),getOrden()));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                }
                 requestDispatcher = request.getRequestDispatcher("SeguridadInicio.jsp");
                 requestDispatcher.forward(request, response);
 
@@ -220,7 +232,7 @@ public class ServletSeguridadInicio extends HttpServlet {
                 setSearch(searchText);
 
                 ArrayList<Incidencias> lista = daoIncidencias.buscarIncidenciasCompleto(searchText);
-                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.buscarIncidencias(searchText)); //editar
                 request.setAttribute("listaIncidenciasPermanente", lista);
 
                 setListaPermanente(lista);

@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
-
+<%
+    String searchText = (String) request.getAttribute("searchText");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,13 +66,27 @@
                 </div>
                 <nav id="navbar" class="navbar">
                     <ul>
-
-                        <li><a class="nav-link  "
+                        <li>
+                            <div class="container-fluid">
+                                <form method="post" class="d-flex input-group w-auto"
+                                      action="<%=request.getContextPath()%>/Seguridad?action=buscar">
+                                    <input type="text"
+                                           name="searchText"
+                                           class="form-control rounded"
+                                           placeholder="Buscar incidencia"
+                                           id="floatingInput" aria-label="Search" aria-describedby="search-addon"
+                                           value="<%=searchText != null? searchText:""%>"/>
+                                    <span class="input-group-text border-0" id="search-addon"><i
+                                            class="fas fa-search"></i></span>
+                                </form>
+                            </div>
+                        </li>
+                        <li><a class="nav-link active"
                                href="<%=request.getContextPath()%>/Seguridad?action=inicioSeguridad">Inicio</a>
                         </li>
-                        <li><a class="nav-link scrollto"
+                        <li><a class="nav-link"
                                href="<%=request.getContextPath()%>/Seguridad?action=perfil">Perfil</a></li>
-                        <li><a class="nav-link scrollto"
+                        <li><a class="nav-link"
                                href="<%=request.getContextPath()%>/Seguridad?action=cerrarSesion">Cerrar
                             sesión</a></li>
                     </ul>
