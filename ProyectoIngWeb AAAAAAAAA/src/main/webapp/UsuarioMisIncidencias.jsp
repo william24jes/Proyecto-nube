@@ -7,7 +7,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaIncidenciasDestacadas" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
-<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios" class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
+<jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
+             class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
 <%
     String searchText = (String) request.getAttribute("searchText");
 %>
@@ -23,7 +24,7 @@
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", 0);
-            if(usuarioSession == null){
+            if (usuarioSession == null) {
                 response.sendRedirect(request.getContextPath());
             }
         %>
@@ -135,15 +136,26 @@
                                                 style="width:75%"><%=incidenciasDestacadas.getNombre()%>
                                         </a>
                                         <div style="color:darkgray;display: flex;flex-direction: column">
+                                            <%if (incidenciasDestacadas.getAnonimo() == 0) {%>
                                             <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%>
-                                            </h6><h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
-                                        </h6>
-                                            <%if (incidenciasDestacadas.getUrgencia().equals("Bajo")){%>
-                                            <h6 style="-webkit-text-stroke: 0.4px black;color:dodgerblue"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            </h6>
+                                            <%} else if (incidenciasDestacadas.getAnonimo() == 1 && incidenciasDestacadas.getIdUsuarioQueCreoIncidencia() != usuarioSession.getIdUsuarios()) {%>
+                                            <h6>Anónimo</h6>
+                                            <%} else if (incidenciasDestacadas.getAnonimo() == 1 && incidenciasDestacadas.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()) {%>
+                                            <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%> (Anónimo)
+                                            </h6>
+                                            <%}%>
+                                            <h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
+                                            </h6>
+                                            <%if (incidenciasDestacadas.getUrgencia().equals("Bajo")) {%>
+                                            <h6 style="-webkit-text-stroke: 0.4px black;color:dodgerblue"><%=incidenciasDestacadas.getUrgencia()%>
+                                            </h6>
                                             <%} else if (incidenciasDestacadas.getUrgencia().equals("Medio")) {%>
-                                            <h6 style="-webkit-text-stroke: 0.4px black;color:purple"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <h6 style="-webkit-text-stroke: 0.4px black;color:purple"><%=incidenciasDestacadas.getUrgencia()%>
+                                            </h6>
                                             <%} else if (incidenciasDestacadas.getUrgencia().equals("Urgente")) {%>
-                                            <h6 style="-webkit-text-stroke: 0.4px black;color:red"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <h6 style="-webkit-text-stroke: 0.4px black;color:red"><%=incidenciasDestacadas.getUrgencia()%>
+                                            </h6>
                                             <%}%>
                                         </div>
                                         </h4>
@@ -156,23 +168,29 @@
                                                 <input class="form-control " id="idUsuario" type="hidden"
                                                        name="id" value="<%=usuarioSession.getIdUsuarios()%>">
                                                 <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
-                                                       name="Cantidad_destacados" value="<%=incidenciasDestacadas.getDestacado()%>">
+                                                       name="Cantidad_destacados"
+                                                       value="<%=incidenciasDestacadas.getDestacado()%>">
                                                 <input class="form-control" id="idIncidencia" type="hidden"
-                                                       name="idIncidencia" value="<%=incidenciasDestacadas.getIdIncidencia()%>">
+                                                       name="idIncidencia"
+                                                       value="<%=incidenciasDestacadas.getIdIncidencia()%>">
                                                 <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
                                                 <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
                                                 <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
-                                                <%ArrayList<Usuarios> lista_Usuarios =daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidenciasDestacadas.getIdIncidencia()));%>
-                                                <%Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
-                                                <%boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios,user2);%>
-                                                <%if(validacion) {%>
+                                                <%
+                                                    ArrayList<Usuarios> lista_Usuarios = daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidenciasDestacadas.getIdIncidencia()));%>
+                                                <%
+                                                    Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
+                                                <%
+                                                    boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios, user2);%>
+                                                <%if (validacion) {%>
                                                 <button type="submit" class="btn btn-warning btn-circle">
-                                                    <i class="fas fa-exclamation-triangle"> <%=incidenciasDestacadas.getDestacado()%>
+                                                    <i class="fas fa-exclamation-triangle"><%=incidenciasDestacadas.getDestacado()%>
                                                     </i>
                                                 </button>
                                                 <%} else {%>
-                                                <button type="submit" class="btn btn-warning btn-circle" style="background-color: grey;border-color:grey" >
-                                                    <i class="fas fa-exclamation-triangle"> <%=incidenciasDestacadas.getDestacado()%>
+                                                <button type="submit" class="btn btn-warning btn-circle"
+                                                        style="background-color: grey;border-color:grey">
+                                                    <i class="fas fa-exclamation-triangle"><%=incidenciasDestacadas.getDestacado()%>
                                                     </i>
                                                 </button>
                                                 <%}%>
@@ -195,7 +213,8 @@
                                                 </div>
 
                                                 <div><br>
-                                                    <button type="button" class="btn btn-primary btn-lg disabled"><%=incidenciasDestacadas.getEstadoIncidencia()%>
+                                                    <button type="button"
+                                                            class="btn btn-primary btn-lg disabled"><%=incidenciasDestacadas.getEstadoIncidencia()%>
                                                     </button>
                                                 </div>
                                             </div>

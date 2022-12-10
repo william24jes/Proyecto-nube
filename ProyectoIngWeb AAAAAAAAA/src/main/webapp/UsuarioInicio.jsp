@@ -171,7 +171,7 @@
                                             <%if(incidencias.getAnonimo() == 0){%>
                                             <h6><%=incidencias.getUsuario().getNombres()%> <%=incidencias.getUsuario().getApellidos()%>
                                             </h6>
-                                            <%}else{%>
+                                            <%}else if(incidencias.getAnonimo() == 1){%>
                                             <h6>Anónimo
                                             </h6>
                                             <%}%>
