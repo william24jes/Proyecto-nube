@@ -139,11 +139,11 @@
                                             </h6><h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
                                         </h6>
                                             <%if (incidenciasDestacadas.getUrgencia().equals("Bajo")){%>
-                                            <h6 style="color:dodgerblue"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <h6 style="-webkit-text-stroke: 0.4px black;color:dodgerblue"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
                                             <%} else if (incidenciasDestacadas.getUrgencia().equals("Medio")) {%>
-                                            <h6 style="color:purple"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <h6 style="-webkit-text-stroke: 0.4px black;color:purple"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
                                             <%} else if (incidenciasDestacadas.getUrgencia().equals("Urgente")) {%>
-                                            <h6 style="color:red"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
+                                            <h6 style="-webkit-text-stroke: 0.4px black;color:red"> <%=incidenciasDestacadas.getUrgencia()%> </h6>
                                             <%}%>
                                         </div>
                                         </h4>
