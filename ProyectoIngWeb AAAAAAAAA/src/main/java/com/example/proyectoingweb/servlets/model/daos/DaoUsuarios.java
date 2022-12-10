@@ -9,6 +9,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -470,6 +472,7 @@ public class DaoUsuarios extends DaoBase{
         }
         return listaUsuarios;
     }
+
     public Usuarios validarRegistro(String correoPucp, String codigoPucp){
 
         String sql = "select * from usuarios where correoPucp = ? and codigoPucp = ?";
@@ -589,6 +592,60 @@ public class DaoUsuarios extends DaoBase{
         }catch (Exception e){
             e.getStackTrace();
         }
+
+    }
+
+    public void guardarToken(int idUsuario, String token, String fechaExpiracion){
+
+        String sql = "insert into tokens (idUsuario, token, fechaExpiracion) " +
+                "values (?, ?, ?)";
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setInt(1, idUsuario);
+            pstmt.setString(2, token);
+            pstmt.setString(3, fechaExpiracion);
+            pstmt.executeUpdate();
+
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
+    }
+
+    public int validarToken(String token){
+
+        String sql = "select fechaExpiracion from tokens where token = ?";
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement psmt = conn.prepareStatement(sql)){
+
+            psmt.setString(1, token);
+
+            try(ResultSet rs = psmt.executeQuery()){
+                if (rs.next()){
+
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date fechaExpiracion = df.parse(rs.getString(1));
+                    Date fechaActual = new Date();
+
+                    return fechaActual.compareTo(fechaExpiracion);
+
+                }
+                else {
+                    return 1;
+                }
+            }
+
+
+        }
+        catch (SQLException | ParseException e){
+            e.getStackTrace();
+        }
+        return 0;
+    }
+
+    public void guardarPassword(int idUsuario, String password){
 
     }
 

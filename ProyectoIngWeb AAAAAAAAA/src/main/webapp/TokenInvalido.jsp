@@ -1,12 +1,18 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: noqe2
+  Date: 10/12/2022
+  Time: 13:30
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Confirmaión de registro</title>
+        <title>Crear contraseña</title>
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
@@ -52,10 +58,8 @@
                                     <div class="card-body">
 
                                         <div class="pt-4 pb-2">
-                                            <h5 class="card-title text-center pb-0 fs-4">¡Correo enviado!</h5>
-                                            <p class="text-center small">Se envió un correo de confirmación de registro
-                                                al correo que indicaste, por favor verifica tu bandeja de entrada para
-                                                poder completar tu registro.</p>
+                                            <h5 class="card-title text-center pb-0 fs-4">¡Enlace caducado!</h5>
+                                            <p class="text-center small">El enlace que ha utilizado es inválido o se encuentra caducado.</p>
                                         </div>
 
                                         <div class="col-12">
@@ -77,9 +81,6 @@
             </div>
         </main><!-- End #main -->
 
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
-
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
         <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -92,6 +93,29 @@
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
+
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+        </script>
 
     </body>
 

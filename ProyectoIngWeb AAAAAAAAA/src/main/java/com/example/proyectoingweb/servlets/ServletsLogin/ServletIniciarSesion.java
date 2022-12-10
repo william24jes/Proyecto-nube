@@ -4,20 +4,29 @@ import com.example.proyectoingweb.servlets.model.beans.Credenciales;
 import com.example.proyectoingweb.servlets.model.beans.Usuarios;
 import com.example.proyectoingweb.servlets.model.daos.DaoIncidencias;
 import com.example.proyectoingweb.servlets.model.daos.DaoUsuarios;
+import com.google.common.hash.Hashing;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 @WebServlet(name = "ServletIniciarSesion", value = "/IniciarSesion")
 public class ServletIniciarSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getParameter("action") == null? "iniciarSesion":request.getParameter("action");
+        String action = request.getParameter("action") == null ? "iniciarSesion" : request.getParameter("action");
         RequestDispatcher requestDispatcher;
         HttpSession session = request.getSession();
+
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
 
         switch (action) {
             case "iniciarSesion":
@@ -39,12 +48,12 @@ public class ServletIniciarSesion extends HttpServlet {
                     response.sendRedirect(request.getContextPath()+"/IniciarSesion");
                 }
                 */
-                if(session.getAttribute("usuarioSession") == null){
+                if (session.getAttribute("usuarioSession") == null) {
                     if (session.getAttribute("seguridadSession") == null) {
                         if (session.getAttribute("userAdmin") == null) {
                             requestDispatcher = request.getRequestDispatcher("IniciarSesion.jsp");
                             requestDispatcher.forward(request, response);
-                        }else{
+                        } else {
                             if (session.getAttribute("userAdmin") != null) {
                                 response.sendRedirect(request.getContextPath() + "/Admin");
                             }
@@ -79,10 +88,20 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 break;
 
-            case "crearContrasena":
+            case "crearPassword":
 
-                requestDispatcher = request.getRequestDispatcher("CrearContraseña.jsp");
-                requestDispatcher.forward(request, response);
+                String token = request.getParameter("token");
+
+                // * Validar tiempo de expiracion *
+                if (daoUsuarios.validarToken(token)<0){
+                    requestDispatcher = request.getRequestDispatcher("CrearContraseña.jsp");
+                    requestDispatcher.forward(request, response);
+                }
+                else {
+                    // Vista de Token expirado o invalido
+                    requestDispatcher = request.getRequestDispatcher("TokenInvalido.jsp");
+                    requestDispatcher.forward(request, response);
+                }
 
                 break;
 
@@ -169,31 +188,63 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 usuario = daoUsuarios.validarRegistro(correoPucp, codigoPucp);
 
-                if (usuario != null){
+                if (usuario != null) {
                     // Si existe, enviar correo para crear contraseña
 
-                    String link = "";
-                    String mensaje = "Tu registro está casi completo.\n\nIngresa al siguiente link para crear tu contraseña:\n"+link;
+                    // Crear token con fecha de expiracion y asociarlo con usuario en DB
+                    String[] caracteres = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "!", "#", "$", "%", "&", "/", "(", ")", "="};
+                    Random random = new Random();
+                    String token = Hashing.sha256().hashString(correoPucp + codigoPucp + caracteres[random.nextInt(caracteres.length)], StandardCharsets.UTF_8).toString();
+
+                    /*Calendar fechaActual = Calendar.getInstance();
+                    long fechaActualSegundos = fechaActual.getTimeInMillis();
+                    Date fechaExpiracionDate = new Date(fechaActualSegundos + (5 * 60 * 1000));
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String fechaExpiracion = dateFormat.format(fechaExpiracionDate);*/
+
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                    Date fechaActual = new Date();
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(fechaActual);
+                    cal.add(Calendar.MINUTE, 5);
+
+                    String fechaExpiracion = df.format(cal.getTime());
+
+                    daoUsuarios.guardarToken(usuario.getIdUsuarios(), token, fechaExpiracion);
+
+                    String link = "http://localhost:8080/ProyectoIngWeb_AAAAAAAAA_war_exploded/IniciarSesion?action=crearPassword&token=" + token;
+
                     String asunto = "Crea tu nueva contraseña";
+                    String mensaje = "Tu registro está casi completo.\n\n" +
+                            "Ingresa al siguiente link para crear tu contraseña:\n\n" +
+                            "" + link + "\n\n" +
+                            "El enlace expirará en 5 minutos.";
 
                     daoUsuarios.enviarCorreo(correoPucp, asunto, mensaje);
 
-                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=confirmaRegistro");
-                }
-                else {
+                    response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=confirmaRegistro");
+                } else {
                     // Si no existe, enviar por sesion mensaje de error
                     HttpSession session = request.getSession();
                     session.setAttribute("msg", "Correo o código inválido(s)");
 
-                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=registrarse");
+                    response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=registrarse");
                 }
 
                 break;
 
             case "guardarContrasena":
 
-                password = request.getParameter("password");
-                String passwordConfirmada = request.getParameter("passwordConfirmada");
+                String nuevaPassword1 = request.getParameter("nuevaPassword1");
+                String nuevaPassword2 = request.getParameter("nuevaPassword2");
+
+                if (nuevaPassword1.equals(nuevaPassword2)){
+
+                }
+                else {
+
+                }
 
                 break;
 
