@@ -13,7 +13,7 @@ public class DaoIncidencias extends DaoBase {
 
     public ArrayList<Incidencias> obtenerlistaIncidencias() {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,16";
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,10";
 
         Usuarios seguridad;
         Usuarios usuario;
@@ -99,7 +99,7 @@ public class DaoIncidencias extends DaoBase {
 
     public ArrayList<Incidencias> buscarIncidencias(String incidencia){
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-        String sql = "SELECT * FROM mydb2.incidencias WHERE lower(nombre) like ? or lower(descripcion) like ? limit 0,16";
+        String sql = "SELECT * FROM mydb2.incidencias WHERE lower(nombre) like ? or lower(descripcion) like ? limit 0,10";
 
         Usuarios seguridad;
         Usuarios usuario;
@@ -198,7 +198,7 @@ public class DaoIncidencias extends DaoBase {
     }
     public ArrayList<Incidencias> obtenerlistaIncidenciasPDF() {
         ArrayList<Incidencias> listaIncidenciasPDF = new ArrayList<>();
-        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,16";
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,10";
 
         Usuarios seguridad;
         Usuarios usuario;
@@ -239,13 +239,13 @@ public class DaoIncidencias extends DaoBase {
 
     public ArrayList<Incidencias> paginarIncidencias(int i) {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-        int inicio = 16 * (i - 1);
+        int inicio = 10 * (i - 1);
 
         Usuarios seguridad;
         Usuarios usuario;
         DaoUsuarios daoUsuarios = new DaoUsuarios();
         DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
-        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT " + inicio + "," + "16";
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT " + inicio + "," + "10";
 
         try (Connection connection = this.getConnection();
              Statement stmt = connection.createStatement();
@@ -283,9 +283,9 @@ public class DaoIncidencias extends DaoBase {
 
     public ArrayList<Incidencias> paginarIncidenciasBuscadas(int i, String incidencia){
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-        int inicio=16*(i-1);
+        int inicio=10*(i-1);
 
-        String sql = "SELECT * FROM mydb2.incidencias WHERE lower(nombre) like ? or lower(descripcion) like ? LIMIT "+inicio+","+"16";
+        String sql = "SELECT * FROM mydb2.incidencias WHERE lower(nombre) like ? or lower(descripcion) like ? LIMIT "+inicio+","+"10";
 
         Usuarios seguridad;
         Usuarios usuario;
@@ -335,9 +335,9 @@ public class DaoIncidencias extends DaoBase {
 
     public ArrayList<Incidencias> paginarIncidenciasOrdenadas(int i,String tipo, String orden) {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
-        int inicio=16*(i-1);
+        int inicio=10*(i-1);
 
-        String sql = "SELECT * FROM incidencias ORDER BY "+tipo+" "+orden+" LIMIT "+inicio+","+"16";
+        String sql = "SELECT * FROM incidencias ORDER BY "+tipo+" "+orden+" LIMIT "+inicio+","+"10";
 
         Usuarios seguridad;
         Usuarios usuario;

@@ -235,7 +235,7 @@
                         </div>
                         <nav aria-label="Page navigation example" style="margin-top: 20px;">
                             <ul class="pagination justify-content-center">
-                                <%for (double i = 1; i <= Math.ceil((double) (listaPermanente.size()) / 16.0); i++) {%>
+                                <%for (double i = 1; i <= Math.ceil((double) (listaPermanente.size()) / 10.0); i++) {%>
                                 <li class="page-item"><a class="page-link"
                                                          href="<%=request.getContextPath()%>/Inicio?action=page&id=<%=(int)i%>"><%=(int) i%>
                                 </a></li>

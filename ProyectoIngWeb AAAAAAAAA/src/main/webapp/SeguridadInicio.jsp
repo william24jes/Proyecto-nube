@@ -200,7 +200,7 @@
                         </div>
                         <nav aria-label="Page navigation example" style="margin-top: 20px;">
                             <ul class="pagination justify-content-center">
-                                <%for (double j = 1; j <= Math.ceil((double) (listaPermanente.size()) / 16.0); j++) {%>
+                                <%for (double j = 1; j <= Math.ceil((double) (listaPermanente.size()) / 10.0); j++) {%>
                                 <li class="page-item"><a class="page-link"
                                                          href="<%=request.getContextPath()%>/Seguridad?action=page&id=<%=(int)j%>"><%=(int) j%>
                                 </a></li>
