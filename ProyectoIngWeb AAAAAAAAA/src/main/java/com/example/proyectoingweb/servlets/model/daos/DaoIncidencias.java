@@ -54,6 +54,358 @@ public class DaoIncidencias extends DaoBase {
         return listaIncidencias;
     }
 
+    //LISTAR MIS INCIDENCIAS
+    //***********************************************
+    public ArrayList<Incidencias> incidenciasDestXUser(String idUsuario) {
+        ArrayList<Incidencias> lista = new ArrayList<>();
+        Incidencias incidencias;
+        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ? LIMIT 0,10";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUsuario);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    incidencias = this.buscarPorId(rs.getString(1));
+                    lista.add(incidencias);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+    public ArrayList<Incidencias> incidenciasDestXUserCompleta(String idUsuario) {
+        ArrayList<Incidencias> lista = new ArrayList<>();
+        Incidencias incidencias;
+        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUsuario);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    incidencias = this.buscarPorId(rs.getString(1));
+                    lista.add(incidencias);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+
+
+    //PAGINAR MIS INCIDENCIAS
+    //******************************************
+    public ArrayList<Incidencias> paginarMisIncidencias(String idUsuario,int i) {
+        ArrayList<Incidencias> lista = new ArrayList<>();
+        Incidencias incidencias;
+        int inicio = 10 * (i - 1);
+
+        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ? LIMIT " + inicio + "," + "10";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUsuario);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    incidencias = this.buscarPorId(rs.getString(1));
+                    lista.add(incidencias);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+
+    public Incidencias buscarPorId(String IDincidencias) {
+
+        Incidencias incidencias = new Incidencias();
+        Usuarios usuarios = null;
+        Usuarios seguridad = null;
+
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
+
+        String sql = "SELECT * FROM incidencias where idIncidencia = ?";
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, IDincidencias);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    incidencias = new Incidencias();
+                    incidencias.setIdIncidencia(Integer.parseInt(IDincidencias));
+                    usuarios = daoUsuarios.buscarPorId(rs.getString(2));
+                    incidencias.setUsuario(usuarios);
+                    incidencias.setNombreUsuarioQueDestaco(usuarios.getNombreYApellido());
+                    incidencias.setIdUsuarioQueCreoIncidencia(rs.getInt(2));
+                    seguridad = daoUsuarios.buscarPorId(rs.getString(3));
+                    incidencias.setSeguridad(seguridad);
+                    incidencias.setNombre(rs.getString(4));
+                    incidencias.setDescripcion(rs.getString(5));
+                    ZonaPucp zonaPucp = daoZonaPucp.obtenerXId("" + rs.getInt(6) + "");
+                    incidencias.setZonaPucp(zonaPucp);
+                    incidencias.setTipo(rs.getString(7));
+                    incidencias.setUbicacion(rs.getString(8));
+                    incidencias.setFoto(rs.getString(9));
+                    incidencias.setDestacado(rs.getInt(10));
+                    incidencias.setDatetime(rs.getString(11));
+                    incidencias.setAnonimo(rs.getInt(12));
+                    incidencias.setUrgencia(rs.getString(13));
+                    incidencias.setEstadoIncidencia(rs.getString(14));
+                    incidencias.setNumEstrellas(rs.getInt(15));
+                    incidencias.setLatitud(rs.getString(16));
+                    incidencias.setLongitud(rs.getString(17));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return incidencias;
+    }
+
+    //BUSCAR MIS INCIDENCIAS
+    //***********************************************************
+    public ArrayList<Incidencias> buscarMisIncidenciasCompleto(String palabra,String idUsuario){
+
+        ArrayList<Incidencias> lista = new ArrayList<>();
+        Incidencias incidencias;
+        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUsuario);
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    incidencias = this.buscarPorIdSearchCompleto(rs.getString(1),palabra);
+                    if (incidencias.getNombre()!=null){
+                        lista.add(incidencias);
+                    }
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+    public Incidencias buscarPorIdSearchCompleto(String IDincidencias,String palabra) {
+
+        Incidencias incidencias = new Incidencias();
+        Usuarios usuarios = null;
+        Usuarios seguridad = null;
+
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
+
+        String sql = "SELECT * FROM incidencias where idIncidencia = ? and (nombre like ? or descripcion like ?)";
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, IDincidencias);
+            pstmt.setString(2, "%"+palabra+"%");
+            pstmt.setString(3, "%"+palabra+"%");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    incidencias = new Incidencias();
+                    incidencias.setIdIncidencia(Integer.parseInt(IDincidencias));
+                    usuarios = daoUsuarios.buscarPorId(rs.getString(2));
+                    incidencias.setUsuario(usuarios);
+                    incidencias.setNombreUsuarioQueDestaco(usuarios.getNombreYApellido());
+                    incidencias.setIdUsuarioQueCreoIncidencia(rs.getInt(2));
+                    seguridad = daoUsuarios.buscarPorId(rs.getString(3));
+                    incidencias.setSeguridad(seguridad);
+                    incidencias.setNombre(rs.getString(4));
+                    incidencias.setDescripcion(rs.getString(5));
+                    ZonaPucp zonaPucp = daoZonaPucp.obtenerXId("" + rs.getInt(6) + "");
+                    incidencias.setZonaPucp(zonaPucp);
+                    incidencias.setTipo(rs.getString(7));
+                    incidencias.setUbicacion(rs.getString(8));
+                    incidencias.setFoto(rs.getString(9));
+                    incidencias.setDestacado(rs.getInt(10));
+                    incidencias.setDatetime(rs.getString(11));
+                    incidencias.setAnonimo(rs.getInt(12));
+                    incidencias.setUrgencia(rs.getString(13));
+                    incidencias.setEstadoIncidencia(rs.getString(14));
+                    incidencias.setNumEstrellas(rs.getInt(15));
+                    incidencias.setLatitud(rs.getString(16));
+                    incidencias.setLongitud(rs.getString(17));
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return incidencias;
+    }
+
+    public ArrayList<Incidencias> buscarMisIncidencias(String palabra,String idUsuario){
+
+        ArrayList<Incidencias> lista = new ArrayList<>();
+        Incidencias incidencias;
+        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUsuario);
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                    int i=0;
+                    while (rs.next()) {
+                        incidencias = this.buscarPorIdSearch(rs.getString(1),palabra);
+                        if (incidencias.getNombre()!=null){
+
+                            lista.add(incidencias);
+                            System.out.println(incidencias.getNombre());
+                            i++;
+                        }
+                        if (i==10){
+                            break;
+                        }
+
+                    }
+
+
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+    public Incidencias buscarPorIdSearch(String IDincidencias,String palabra) {
+
+        Incidencias incidencias = new Incidencias();
+        Usuarios usuarios = null;
+        Usuarios seguridad = null;
+
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
+
+        String sql = "SELECT * FROM incidencias where idIncidencia = ? and (nombre like ? or descripcion like ?)";
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, IDincidencias);
+            pstmt.setString(2, "%"+palabra+"%");
+            pstmt.setString(3, "%"+palabra+"%");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    incidencias = new Incidencias();
+                    incidencias.setIdIncidencia(Integer.parseInt(IDincidencias));
+                    usuarios = daoUsuarios.buscarPorId(rs.getString(2));
+                    incidencias.setUsuario(usuarios);
+                    incidencias.setNombreUsuarioQueDestaco(usuarios.getNombreYApellido());
+                    incidencias.setIdUsuarioQueCreoIncidencia(rs.getInt(2));
+                    seguridad = daoUsuarios.buscarPorId(rs.getString(3));
+                    incidencias.setSeguridad(seguridad);
+                    incidencias.setNombre(rs.getString(4));
+                    incidencias.setDescripcion(rs.getString(5));
+                    ZonaPucp zonaPucp = daoZonaPucp.obtenerXId("" + rs.getInt(6) + "");
+                    incidencias.setZonaPucp(zonaPucp);
+                    incidencias.setTipo(rs.getString(7));
+                    incidencias.setUbicacion(rs.getString(8));
+                    incidencias.setFoto(rs.getString(9));
+                    incidencias.setDestacado(rs.getInt(10));
+                    incidencias.setDatetime(rs.getString(11));
+                    incidencias.setAnonimo(rs.getInt(12));
+                    incidencias.setUrgencia(rs.getString(13));
+                    incidencias.setEstadoIncidencia(rs.getString(14));
+                    incidencias.setNumEstrellas(rs.getInt(15));
+                    incidencias.setLatitud(rs.getString(16));
+                    incidencias.setLongitud(rs.getString(17));
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return incidencias;
+    }
+    //PAGINAS MIS INCIDENCIAS BUSCADAS
+    //*********************************************
+    public ArrayList<Incidencias> paginarMisIncidenciasBuscadasidIncidencia(int i,String palabra,String idUsuario){
+
+        ArrayList<Incidencias> lista = new ArrayList<>();
+        Incidencias incidencias;
+        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUsuario);
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    incidencias = this.PaginarbuscarPorIdSearch(i,rs.getString(1),palabra);
+                    if (incidencias.getNombre()!=null){
+                        lista.add(incidencias);
+                    }
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
+
+    public Incidencias PaginarbuscarPorIdSearch(int i,String IDincidencias,String palabra) {
+        int inicio=10*(i-1);
+        Incidencias incidencias = new Incidencias();
+        Usuarios usuarios = null;
+        Usuarios seguridad = null;
+
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
+
+        String sql = "SELECT * FROM incidencias where idIncidencia = ? and (nombre like ? or descripcion like ?) LIMIT "+inicio+","+"10";
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, IDincidencias);
+            pstmt.setString(2, "%"+palabra+"%");
+            pstmt.setString(3, "%"+palabra+"%");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    incidencias = new Incidencias();
+                    incidencias.setIdIncidencia(Integer.parseInt(IDincidencias));
+                    usuarios = daoUsuarios.buscarPorId(rs.getString(2));
+                    incidencias.setUsuario(usuarios);
+                    incidencias.setNombreUsuarioQueDestaco(usuarios.getNombreYApellido());
+                    incidencias.setIdUsuarioQueCreoIncidencia(rs.getInt(2));
+                    seguridad = daoUsuarios.buscarPorId(rs.getString(3));
+                    incidencias.setSeguridad(seguridad);
+                    incidencias.setNombre(rs.getString(4));
+                    incidencias.setDescripcion(rs.getString(5));
+                    ZonaPucp zonaPucp = daoZonaPucp.obtenerXId("" + rs.getInt(6) + "");
+                    incidencias.setZonaPucp(zonaPucp);
+                    incidencias.setTipo(rs.getString(7));
+                    incidencias.setUbicacion(rs.getString(8));
+                    incidencias.setFoto(rs.getString(9));
+                    incidencias.setDestacado(rs.getInt(10));
+                    incidencias.setDatetime(rs.getString(11));
+                    incidencias.setAnonimo(rs.getInt(12));
+                    incidencias.setUrgencia(rs.getString(13));
+                    incidencias.setEstadoIncidencia(rs.getString(14));
+                    incidencias.setNumEstrellas(rs.getInt(15));
+                    incidencias.setLatitud(rs.getString(16));
+                    incidencias.setLongitud(rs.getString(17));
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return incidencias;
+    }
     public ArrayList<Incidencias> obtenerlistaIncidenciasCompletaOrdenada(String tipo,String orden) {
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
         String sql = "SELECT * FROM incidencias ORDER BY "+tipo+" "+orden;
@@ -196,6 +548,8 @@ public class DaoIncidencias extends DaoBase {
 
         return listaIncidencias;
     }
+
+
     public ArrayList<Incidencias> obtenerlistaIncidenciasPDF() {
         ArrayList<Incidencias> listaIncidenciasPDF = new ArrayList<>();
         String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,10";
@@ -281,7 +635,60 @@ public class DaoIncidencias extends DaoBase {
         return listaIncidencias;
     }
 
+
     public ArrayList<Incidencias> paginarIncidenciasBuscadas(int i, String incidencia){
+        ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
+        int inicio=10*(i-1);
+
+        String sql = "SELECT * FROM mydb2.incidencias WHERE lower(nombre) like ? or lower(descripcion) like ? LIMIT "+inicio+","+"10";
+
+        Usuarios seguridad;
+        Usuarios usuario;
+        DaoUsuarios daoUsuarios = new DaoUsuarios();
+        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
+        try(Connection conn = this.getConnection();
+
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "%"+incidencia+"%");
+            pstmt.setString(2, "%"+incidencia+"%");
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                while (rs.next()){
+                    Incidencias incidencias = new Incidencias();
+
+                    incidencias.setIdIncidencia(rs.getInt(1));
+                    usuario = daoUsuarios.buscarPorId(rs.getString(2));
+                    incidencias.setUsuario(usuario);
+                    seguridad = daoUsuarios.buscarPorId(rs.getString(3));
+                    incidencias.setSeguridad(seguridad);
+                    incidencias.setNombre(rs.getString(4));
+                    incidencias.setDescripcion(rs.getString(5));
+                    ZonaPucp zonaPucp = daoZonaPucp.obtenerXId("" + rs.getInt(6) + "");
+                    incidencias.setZonaPucp(zonaPucp);
+                    incidencias.setTipo(rs.getString(7));
+                    incidencias.setUbicacion(rs.getString(8));
+                    incidencias.setFoto(rs.getString(9));
+                    incidencias.setDestacado(rs.getInt(10));
+                    incidencias.setDatetime(rs.getString(11));
+                    incidencias.setAnonimo(rs.getInt(12));
+                    incidencias.setUrgencia(rs.getString(13));
+                    incidencias.setEstadoIncidencia(rs.getString(14));
+                    incidencias.setNumEstrellas(rs.getInt(15));
+
+                    listaIncidencias.add(incidencias);
+
+                }
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+
+        return listaIncidencias;
+    }
+
+    public ArrayList<Incidencias> paginarMisIncidenciasBuscadas(int i, String incidencia){
         ArrayList<Incidencias> listaIncidencias = new ArrayList<>();
         int inicio=10*(i-1);
 
@@ -422,6 +829,26 @@ public class DaoIncidencias extends DaoBase {
         return listaIncidencias;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*
         public ArrayList<Incidencias> obtenerlistaIncidenciasDestacadas() {
             ArrayList<Incidencias> listaIncidenciasDestacadas = new ArrayList<>();
@@ -494,73 +921,10 @@ public class DaoIncidencias extends DaoBase {
 
     }
 
-    public Incidencias buscarPorId(String IDincidencias) {
 
-        Incidencias incidencias = new Incidencias();
-        Usuarios usuarios = null;
-        Usuarios seguridad = null;
 
-        DaoUsuarios daoUsuarios = new DaoUsuarios();
 
-        String sql = "SELECT * FROM incidencias where idIncidencia = ?";
-        DaoZonaPucp daoZonaPucp = new DaoZonaPucp();
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-            pstmt.setString(1, IDincidencias);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    incidencias = new Incidencias();
-                    incidencias.setIdIncidencia(Integer.parseInt(IDincidencias));
-                    usuarios = daoUsuarios.buscarPorId(rs.getString(2));
-                    incidencias.setUsuario(usuarios);
-                    incidencias.setNombreUsuarioQueDestaco(usuarios.getNombreYApellido());
-                    incidencias.setIdUsuarioQueCreoIncidencia(rs.getInt(2));
-                    seguridad = daoUsuarios.buscarPorId(rs.getString(3));
-                    incidencias.setSeguridad(seguridad);
-                    incidencias.setNombre(rs.getString(4));
-                    incidencias.setDescripcion(rs.getString(5));
-                    ZonaPucp zonaPucp = daoZonaPucp.obtenerXId("" + rs.getInt(6) + "");
-                    incidencias.setZonaPucp(zonaPucp);
-                    incidencias.setTipo(rs.getString(7));
-                    incidencias.setUbicacion(rs.getString(8));
-                    incidencias.setFoto(rs.getString(9));
-                    incidencias.setDestacado(rs.getInt(10));
-                    incidencias.setDatetime(rs.getString(11));
-                    incidencias.setAnonimo(rs.getInt(12));
-                    incidencias.setUrgencia(rs.getString(13));
-                    incidencias.setEstadoIncidencia(rs.getString(14));
-                    incidencias.setNumEstrellas(rs.getInt(15));
-                    incidencias.setLatitud(rs.getString(16));
-                    incidencias.setLongitud(rs.getString(17));
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return incidencias;
-    }
-
-    public ArrayList<Incidencias> incidenciasDestXUser(String idUsuario) {
-        ArrayList<Incidencias> lista = new ArrayList<>();
-        Incidencias incidencias;
-        String sql = "SELECT idIncidencia FROM incidencias_destacadas WHERE idUsuario = ?";
-        try (Connection connection = this.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
-            pstmt.setString(1, idUsuario);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    incidencias = this.buscarPorId(rs.getString(1));
-                    lista.add(incidencias);
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return lista;
-    }
 
     public void destacarIncidencia_para_idUsuario(String idUser, String idIncidencia) {
         String sql = "Insert into mydb2.incidencias_destacadas (idUsuario, idIncidencia) Values (?,?)";

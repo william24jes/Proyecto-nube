@@ -29,6 +29,7 @@ public class ServletUsuarioInicio extends HttpServlet {
     private int centinelaSearch;
     private String opcion;
     private String orden;
+    private String usuarioSesion;
 
 
     @Override
@@ -48,6 +49,7 @@ public class ServletUsuarioInicio extends HttpServlet {
         HttpSession session = request.getSession();
         switch (action) {
             case "listar":
+                setCentinelaSearch(0);
                 request.setAttribute("listaIncidenciasPaginada", daoIncidencias.obtenerlistaIncidencias());
                 request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
                 setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompleta());
@@ -60,9 +62,14 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "misIncidencias":
+                setCentinelaSearch(0);
                 HttpSession sessionUsuario = request.getSession();
                 Usuarios user = (Usuarios) sessionUsuario.getAttribute("usuarioSession");
-                request.setAttribute("listaIncidenciasDestacadas", daoIncidencias.incidenciasDestXUser("" + user.getIdUsuarios() + ""));
+                setUsuarioSesion(String.valueOf(user.getIdUsuarios()));
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.incidenciasDestXUser("" + user.getIdUsuarios() + ""));
+                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.incidenciasDestXUserCompleta("" + user.getIdUsuarios() + ""));
+                setListaPermanente(daoIncidencias.incidenciasDestXUserCompleta("" + user.getIdUsuarios() + ""));
+                //request.setAttribute("listaIncidenciasDestacadas", daoIncidencias.incidenciasDestXUser("" + user.getIdUsuarios() + ""));
                 requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
                 requestDispatcher.forward(request, response);
                 break;
@@ -110,7 +117,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 } else if (centinela == 1) {
-                    setListaPaginada(daoIncidencias.paginarIncidenciasBuscadas(idPage, busqueda));
+                    setListaPaginada(daoIncidencias.paginarMisIncidenciasBuscadas(idPage, busqueda));
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 } else if (centinela == 2) {
@@ -119,6 +126,30 @@ public class ServletUsuarioInicio extends HttpServlet {
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 }
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
+                requestDispatcher.forward(request, response);
+
+                break;
+
+            case "pageMisIncidencias":
+                idPage = Integer.parseInt(request.getParameter("id"));
+                String usuarios=getUsuarioSesion();
+                centinela = getCentinelaSearch();
+                busqueda=getSearch();
+
+                if(centinela == 0) {
+                    setListaPaginada(daoIncidencias.paginarMisIncidencias("" + usuarios + "",idPage));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                } else if (centinela == 1) {
+                    setListaPaginada(daoIncidencias.paginarMisIncidenciasBuscadasidIncidencia(idPage, busqueda,"" + usuarios + ""));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                } else if (centinela == 2) {
+                    setListaPaginada(daoIncidencias.paginarIncidenciasOrdenadas(idPage, getOpcion(),getOrden()));
+                    request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
+                    request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
+                }
+                requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
                 requestDispatcher.forward(request, response);
 
                 break;
@@ -346,6 +377,24 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
                 requestDispatcher.forward(request, response);
                 break;
+            case "buscarMisIncidencias":
+                setCentinelaSearch(1);
+                HttpSession sessionUsuario = request.getSession();
+                Usuarios user = (Usuarios) sessionUsuario.getAttribute("usuarioSession");
+                setUsuarioSesion(String.valueOf(user.getIdUsuarios()));
+                String searchText2 = request.getParameter("searchText");
+                setSearch(searchText2);
+                ArrayList<Incidencias> lista2 = daoIncidencias.buscarMisIncidenciasCompleto(searchText2,"" + user.getIdUsuarios() + "");
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.buscarMisIncidencias(searchText2,"" + user.getIdUsuarios() + "")); //editar
+                request.setAttribute("listaIncidenciasPermanente", lista2);
+
+                setListaPermanente(lista2);
+                request.setAttribute("searchText", searchText2);
+
+
+                requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
+                requestDispatcher.forward(request, response);
+                break;
 
             case "order":
                 setCentinelaSearch(2);
@@ -423,6 +472,14 @@ public class ServletUsuarioInicio extends HttpServlet {
 
     public void setOrden(String orden) {
         this.orden = orden;
+    }
+
+    public String getUsuarioSesion() {
+        return usuarioSesion;
+    }
+
+    public void setUsuarioSesion(String usuarioSesion) {
+        this.usuarioSesion = usuarioSesion;
     }
 }
 

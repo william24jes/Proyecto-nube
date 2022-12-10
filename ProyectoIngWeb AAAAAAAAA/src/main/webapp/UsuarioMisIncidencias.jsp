@@ -5,7 +5,9 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaIncidenciasDestacadas" scope="request"
+<jsp:useBean id="listaIncidenciasPaginada" scope="request"
+             type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
+<jsp:useBean id="listaIncidenciasPermanente" scope="request"
              type="java.util.ArrayList<com.example.proyectoingweb.servlets.model.beans.Incidencias>"/>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
@@ -78,11 +80,11 @@
                         <li>
                             <div class="container-fluid">
                                 <form method="post" class="d-flex input-group w-auto"
-                                      action="<%=request.getContextPath()%>/Inicio?action=buscar">
+                                      action="<%=request.getContextPath()%>/Inicio?action=buscarMisIncidencias">
                                     <input type="text"
                                            name="searchText"
                                            class="form-control rounded"
-                                           placeholder="Buscar incidencia"
+                                           placeholder="Buscar mis incidencias"
                                            id="floatingInput" aria-label="Search" aria-describedby="search-addon"
                                            value="<%=searchText != null? searchText:""%>"/>
                                     <span class="input-group-text border-0" id="search-addon"><i
@@ -125,7 +127,7 @@
 
                             <div class="row">
                                 <!-- Dropdown Card Example -->
-                                <% for (Incidencias incidenciasDestacadas : listaIncidenciasDestacadas) { %>
+                                <% for (Incidencias incidenciasDestacadas : listaIncidenciasPaginada) { %>
                                 <div class="card shadow mb-4 ">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -227,17 +229,13 @@
                             </div>
 
                         </div>
-                        <nav aria-label="Page navigation example">
+                        <nav aria-label="Page navigation example" style="margin-top: 20px;">
                             <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
+                                <%for (double i = 1; i <= Math.ceil((double) (listaIncidenciasPermanente.size()) / 10.0); i++) {%>
+                                <li class="page-item"><a class="page-link"
+                                                         href="<%=request.getContextPath()%>/Inicio?action=pageMisIncidencias&id=<%=(int)i%>"><%=(int) i%>
+                                </a></li>
+                                <%}%>
                             </ul>
                         </nav>
                         </nav>
