@@ -1,11 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: noqe2
-  Date: 10/12/2022
-  Time: 13:30
+  Date: 11/12/2022
+  Time: 16:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="token" type="java.lang.String" scope="request"></jsp:useBean>
+<jsp:useBean id="correoPucp" type="java.lang.String" scope="request"></jsp:useBean>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,17 +60,33 @@
                                     <div class="card-body">
 
                                         <div class="pt-4 pb-2">
-                                            <h5 class="card-title text-center pb-0 fs-4">¡Enlace inválido!</h5>
-                                            <p class="text-center small">El enlace que ha utilizado es inválido o se encuentra caducado.</p>
+                                            <h5 class="card-title text-center pb-0 fs-4">¡Correo enviado!</h5>
+                                            <p class="text-center small">Su correo de confirmación ya ha sido enviado.
+                                                ¿Desea recibirlo nuevamente?</p>
                                         </div>
 
-                                        <div class="col-12">
-                                            <a class="nav-link" href="<%=request.getContextPath()%>/IniciarSesion">
-                                                <button type="button" class="btn btn-primary w-100">Volver a la página
-                                                    principal
-                                                </button>
-                                            </a>
-                                        </div>
+                                        <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=enviarCorreo">
+                                            <input type="hidden" name="token" value="<%=token%>">
+                                            <input type="hidden" name="correoPucp" value="<%=correoPucp%>">
+
+                                            <div class="d-grid gap-3">
+                                                <div class="col-12">
+                                                    <a class="nav-link">
+                                                        <button type="submit" class="btn btn-primary w-100">Enviar correo
+                                                        </button>
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <a class="nav-link" href="<%=request.getContextPath()%>/IniciarSesion">
+                                                        <button type="button" class="btn btn-primary w-100">Volver a la página
+                                                            principal
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </form>
 
                                     </div>
                                 </div>

@@ -142,6 +142,42 @@ public class DaoUsuarios extends DaoBase{
         return usuarios;
     }
 
+    public Usuarios buscarPorCorreo(String correoPucp){
+
+        String sql = "SELECT * FROM usuarios WHERE correoPucp = ?";
+        Usuarios usuarios = null;
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, correoPucp);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    usuarios = new Usuarios();
+
+                    usuarios.setIdUsuarios(rs.getInt(1));
+                    usuarios.setNombres(rs.getString(2));
+                    usuarios.setApellidos(rs.getString(3));
+                    usuarios.setDni(rs.getString(4));
+                    usuarios.setCelular(rs.getString(5));
+                    usuarios.setCodigoPucp(rs.getString(6));
+                    usuarios.setCorreoPucp(rs.getString(7));
+                    usuarios.setCategorias(rs.getString(8));
+                    usuarios.setRol(rs.getString(9));
+                    usuarios.setFotoPerfil(rs.getString(10));
+                }
+            }
+
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+
+        return usuarios;
+
+    }
+
     public String obtenerRol(String codigo, String passw, String correo){
 
         String sql = "SELECT * FROM usuarios WHERE codigoPucp = ? and contrasena = ? and correoPucp = ?";
@@ -613,14 +649,14 @@ public class DaoUsuarios extends DaoBase{
         }
     }
 
-    public int validarToken(String token){
+    public int validarToken(int idUsuario){
 
-        String sql = "select fechaExpiracion from tokens where token = ?";
+        String sql = "select fechaExpiracion from tokens where idUsuario = ?";
 
         try(Connection conn = this.getConnection();
             PreparedStatement psmt = conn.prepareStatement(sql)){
 
-            psmt.setString(1, token);
+            psmt.setInt(1, idUsuario);
 
             try(ResultSet rs = psmt.executeQuery()){
                 if (rs.next()){
@@ -633,11 +669,9 @@ public class DaoUsuarios extends DaoBase{
 
                 }
                 else {
-                    return 1;
+                    return 0;
                 }
             }
-
-
         }
         catch (SQLException | ParseException e){
             e.getStackTrace();
@@ -705,18 +739,19 @@ public class DaoUsuarios extends DaoBase{
         return usuarios;
     }
 
-    public void borrarToken(String token){
-        String sql = "delete from tokens where token = ?";
+    public void borrarToken(int idUsuario){
+        String sql = "delete from tokens where idUsuario = ?";
 
         try(Connection conn = this.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setString(1, token);
+            pstmt.setInt(1, idUsuario);
             pstmt.executeUpdate();
 
         }catch (SQLException e){
             e.getStackTrace();
         }
     }
+
 
 }

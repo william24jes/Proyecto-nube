@@ -83,7 +83,7 @@
                                                 <div class="invalid-feedback">Confirma tu contraseña</div>
                                             </div>
                                             <br>
-                                            <p class="text-primary small mb-0">Se ha establecido su contraseña con éxito
+                                            <p class="text-primary small mb-0">Su contraseña se ha esteblecido con éxito
                                             </p>
                                             <div class="col-12">
                                                 <a class="nav-link" href="<%=request.getContextPath()%>/IniciarSesion">
