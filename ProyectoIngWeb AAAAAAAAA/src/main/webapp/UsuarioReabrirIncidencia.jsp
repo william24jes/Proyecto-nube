@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String searchText = (String) request.getAttribute("searchText");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,7 +57,7 @@
                             <div class="container-fluid">
                                 <form method="post" class="d-flex input-group w-auto"
                                       action="<%=request.getContextPath()%>/Inicio?action=buscar">
-                                    <input type="text"
+                                    <input required type="text"
                                            name="searchText"
                                            class="form-control rounded"
                                            placeholder="Buscar incidencia"

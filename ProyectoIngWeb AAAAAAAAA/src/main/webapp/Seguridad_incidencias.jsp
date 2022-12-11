@@ -314,18 +314,18 @@
                                         <%}%>
 
                                         <form method="post">
-                                            <input class="form-control " type="hidden"
+                                            <input  class="form-control " type="hidden"
                                                    name="id_usuario"
                                                    value="<%=incidencia.getUsuario().getIdUsuarios()%>">
-                                            <input class="form-control " type="hidden"
+                                            <input  class="form-control " type="hidden"
                                                    name="id_security" value="<%=seguridadSession.getIdUsuarios()%>">
-                                            <input class="form-control" type="hidden"
+                                            <input  class="form-control" type="hidden"
                                                    name="usuario_quiere_comentar"
                                                    value="<%=comentario2.getValidacion_usuario_comentar()%>">
-                                            <input class="form-control " type="hidden"
+                                            <input  class="form-control " type="hidden"
                                                    name="id_incidencia"
                                                    value="<%=incidencia.getIdIncidencia()%>">
-                                            <input class="form-control " type="hidden"
+                                            <input  class="form-control " type="hidden"
                                                    name="ultima_columna_llena" value="<%=value_enviar%>">
 
 
@@ -333,7 +333,7 @@
                                             <br>
 
                                             <div class="form-group mb-3">
-                                                                    <textarea class="form-control"
+                                                                    <textarea required class="form-control"
                                                                               rows="3"
                                                                               name="mensaje_aceptar"></textarea>
                                             </div>

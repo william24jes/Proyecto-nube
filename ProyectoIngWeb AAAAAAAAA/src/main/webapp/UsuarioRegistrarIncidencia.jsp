@@ -134,22 +134,22 @@
                                             <form method="post" action="<%=request.getContextPath()%>/Inicio?action=guardar" enctype="multipart/form-data">
                                                 <!-- Form Group (username)-->
                                                 <div class="mb-3">
-                                                    <input class="form-control " id="idUsuario" type="hidden"
+                                                    <input required class="form-control " id="idUsuario" type="hidden"
                                                            name="id" value="<%=usuarioSession.getIdUsuarios()%>">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <input class="form-control " id="idIncidencia" type="hidden"
+                                                    <input required class="form-control " id="idIncidencia" type="hidden"
                                                            name="idIncidencia" value="<%=value_num_incidencias%>">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="inputUsername">Nombre de la Incidencia: </label>
-                                                    <input class="form-control " id="inputUsername" type="text"
+                                                    <input required class="form-control " id="inputUsername" type="text"
                                                            name="nombre">
                                                 </div>
 
                                                 <div class="form-group mb-3">
                                                     <label for="exampleFormControlTextarea1">Descripción:</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                    <textarea required class="form-control" id="exampleFormControlTextarea1"
                                                               rows="3" name="descripcion"></textarea>
                                                 </div>
 
@@ -158,9 +158,9 @@
                                                     <label class="col-sm-2 col-form-label"><h5>Tipo de incidencia </h5>
                                                     </label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example"
+                                                        <select required class="form-select" aria-label="Default select example"
                                                                 name="tipo">
-                                                            <option selected>Seleccione...</option>
+                                                            <option value="">Seleccione...</option>
                                                             <option value="Reporte de robos">Reporte de robos</option>
                                                             <option value="Objetos perdidos">Objetos perdidos</option>
                                                             <option value="Infraestructura en mal estado">
@@ -176,9 +176,9 @@
                                                     <label class="col-sm-2 col-form-label"><h5>Nivel de Importancia </h5>
                                                     </label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example"
+                                                        <select required class="form-select" aria-label="Default select example"
                                                                 name="nivel">
-                                                            <option selected>Seleccione...</option>
+                                                            <option value="">Seleccione...</option>
                                                             <option value="Bajo">Bajo</option>
                                                             <option value="Medio">Medio</option>
                                                             <option value="Urgente">Urgente</option>
@@ -189,9 +189,9 @@
                                                 <div class="row mb-3">
                                                     <label class="col-sm-2 col-form-label"><h5>Zona PUCP</h5></label>
                                                     <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example"
+                                                        <select required class="form-select" aria-label="Default select example"
                                                                 name="zona">
-                                                            <option selected>Seleccione...</option>
+                                                            <option value="">Seleccione...</option>
                                                             <% for (ZonaPucp zonas : listaZonasPUCP) { %>
                                                             <option value="<%=zonas.getIdZonaPucp()%>"><%=zonas.getNombreZona()%>
                                                             </option>
