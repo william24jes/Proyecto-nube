@@ -204,9 +204,8 @@
                                                                 <img src="assets/img/fotosPerfil/<%=usuarioSession.getFotoPerfil()%>"
                                                                      height="150" width="150" alt="Profile" id="profileImage">
                                                                 <div class="pt-2">
-                                                                    <a href="#" class="btn btn-primary btn-sm"
-                                                                       title="Upload new profile image"><i
-                                                                            class="bi bi-upload"></i></a>
+                                                                    <input style="display: none;" type="file" id="img" name="img" accept="image/*">
+                                                                    <label for="img" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></label>
                                                                     <a href="#" class="btn btn-danger btn-sm"
                                                                        title="Remove my profile image"><i
                                                                             class="bi bi-trash"></i></a>
