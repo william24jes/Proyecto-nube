@@ -42,6 +42,7 @@
         <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
         <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
         <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
         <script src="https://kit.fontawesome.com/600382161a.js" crossorigin="anonymous"></script>
 
         <!-- Template Main CSS File -->
@@ -140,7 +141,7 @@
                                role="button">Limpiar filtros</a>
 
                             <a class="btn btn-warning" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF"
-                               role="button">Generar Reporte PDF</a>
+                               role="button"><i class="bi bi-file-earmark-pdf-fill"></i></a>
 
                         </div>
                         <br>
