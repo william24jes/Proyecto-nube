@@ -610,7 +610,7 @@ public class DaoIncidencias extends DaoBase {
 
     public ArrayList<Incidencias> obtenerlistaIncidenciasPDF() {
         ArrayList<Incidencias> listaIncidenciasPDF = new ArrayList<>();
-        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,10";
+        String sql = "SELECT * FROM incidencias ORDER BY idIncidencia LIMIT 0,20";
 
         Usuarios seguridad;
         Usuarios usuario;

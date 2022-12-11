@@ -2,6 +2,7 @@ package com.example.proyectoingweb.servlets;
 
 import com.example.proyectoingweb.servlets.model.beans.*;
 import com.example.proyectoingweb.servlets.model.daos.*;
+import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciaTXT;
 import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciasPDF;
 import com.itextpdf.text.DocumentException;
 import jakarta.servlet.*;
@@ -33,6 +34,7 @@ public class ServletSeguridadInicio extends HttpServlet {
         DaoComentarios daoComentarios = new DaoComentarios();
         HttpSession session = request.getSession();
         ReporteIncidenciasPDF reporte = new ReporteIncidenciasPDF();
+        ReporteIncidenciaTXT reporteTXT = new ReporteIncidenciaTXT();
         int idPage;
         switch (action) {
             case "inicioSeguridad":
@@ -74,12 +76,20 @@ public class ServletSeguridadInicio extends HttpServlet {
                     reporte.agregarSaltoLiena();
                     reporte.agregarTablaIncidencias();
                     reporte.cerrarDocumento();
+                    session.setAttribute("msg","El documento se guardo exitosamente en su escritorio");
                     response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
                     System.out.printf("reporte completado");
 
                 } catch (DocumentException e) {
                     throw new RuntimeException(e);
                 }
+
+                break;
+            case "incidenciastxt":
+                reporteTXT.crearDocumento();
+                session.setAttribute("msg","El documento se guardo exitosamente en su escritorio");
+                response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
+                System.out.printf("reporte txt completado");
 
                 break;
 

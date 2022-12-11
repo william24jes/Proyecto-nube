@@ -142,8 +142,13 @@
 
                             <a class="btn btn-warning" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF"
                                role="button"><i class="bi bi-file-earmark-pdf-fill"></i></a>
+                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad?action=incidenciastxt"
+                               role="button"><i class="bi bi-file-earmark-pdf-fill"></i></a>
 
                         </div>
+                        <%if(session.getAttribute("msg") != null){%>
+                        <p class="text-dark"><%=session.getAttribute("msg")%></p>
+                        <%session.removeAttribute("msg");}%>
                         <br>
 
                         <!-- Page Heading -->
