@@ -81,10 +81,10 @@
                                 </form>
                             </div>
                         </li>
-                        <li><a class="nav-link active"
+                        <li><a class="nav-link"
                                href="<%=request.getContextPath()%>/Seguridad?action=inicioSeguridad">Inicio</a>
                         </li>
-                        <li><a class="nav-link"
+                        <li><a class="nav-link active"
                                href="<%=request.getContextPath()%>/Seguridad?action=perfil">Perfil</a></li>
                         <li><a class="nav-link"
                                href="<%=request.getContextPath()%>/Seguridad?action=cerrarSesion">Cerrar

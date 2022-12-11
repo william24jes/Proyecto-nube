@@ -160,50 +160,59 @@ public class AdminServlet extends HttpServlet {
                 break;
 
             case "actualizar":
+                try {
+                    int id = Integer.parseInt(request.getParameter("ID Usuario"));
+                    int dni = Integer.parseInt(request.getParameter("DNI"));
 
-                usuarios.setIdUsuarios(Integer.parseInt(request.getParameter("ID Usuario")));
-                usuarios.setNombres(request.getParameter("Nombres"));
-                usuarios.setApellidos(request.getParameter("Apellidos"));
-                usuarios.setCorreoPucp(request.getParameter("Correo PUCP"));
-                usuarios.setDni(request.getParameter("DNI"));
-                usuarios.setCelular(request.getParameter("Celular"));
-                usuarios.setCategorias(request.getParameter("Categoría"));
-                usuarios.setRol(request.getParameter("Rol"));
-                usuarios.setCodigoPucp(request.getParameter("Codigo"));
+                    usuarios.setIdUsuarios(Integer.parseInt(request.getParameter("ID Usuario")));
+                    usuarios.setNombres(request.getParameter("Nombres"));
+                    usuarios.setApellidos(request.getParameter("Apellidos"));
+                    usuarios.setCorreoPucp(request.getParameter("Correo PUCP"));
+                    usuarios.setDni(request.getParameter("DNI"));
+                    usuarios.setCelular(request.getParameter("Celular"));
+                    usuarios.setCategorias(request.getParameter("Categoría"));
+                    usuarios.setRol(request.getParameter("Rol"));
+                    usuarios.setCodigoPucp(request.getParameter("Codigo"));
+                    if(id>9999999 && id <99999999 && !request.getParameter("Nombres").equals("") &&
+                    !request.getParameter("Apellidos").equals("")){
 
-                if (daoUsuarios.actualizarUsuario(usuarios)){
+                        if (daoUsuarios.actualizarUsuario(usuarios)) {
 
-                    session = request.getSession();
-                    session.setAttribute("usuarioSession", usuarios);
+                            session = request.getSession();
+                            session.setAttribute("usuarioSession", usuarios);
 
-                    session.setAttribute("msg","Usuario editado correctamente");
+                            session.setAttribute("msg", "Usuario editado correctamente");
+                            response.sendRedirect(request.getContextPath() + "/Admin");
+                        } else {
+                            idUsuario = request.getParameter("id");
+                            usuarios = daoUsuarios.buscarPorId(idUsuario);
+
+                            if (usuarios != null) {
+                                ArrayList<String> roles = new ArrayList<>();
+                                roles.add("Usuario PUCP");
+                                roles.add("Seguridad");
+
+                                ArrayList<String> categorias = new ArrayList<>();
+                                categorias.add("Alumno");
+                                categorias.add("Administrativo");
+                                categorias.add("Jefe de practica");
+                                categorias.add("Profesor");
+                                categorias.add("Egresado");
+
+                                request.setAttribute("usuarioEditar", usuarios);
+                                request.setAttribute("roles", roles);
+                                request.setAttribute("categorias", categorias);
+                                requestDispatcher = request.getRequestDispatcher("AdminEditUser.jsp");
+                                requestDispatcher.forward(request, response);
+                            } else {
+                                response.sendRedirect(request.getContextPath() + "/Admin");
+                            }
+                        }
+                    }
+
+                }catch (NumberFormatException e){
+                    session.setAttribute("msg", "No se pudo actualizar los datos del usuario");
                     response.sendRedirect(request.getContextPath() + "/Admin");
-                }
-                else {
-                    idUsuario = request.getParameter("id");
-                    usuarios = daoUsuarios.buscarPorId(idUsuario);
-
-                    if (usuarios != null){
-                        ArrayList<String> roles = new ArrayList<>();
-                        roles.add("Usuario PUCP");
-                        roles.add("Seguridad");
-
-                        ArrayList<String> categorias = new ArrayList<>();
-                        categorias.add("Alumno");
-                        categorias.add("Administrativo");
-                        categorias.add("Jefe de practica");
-                        categorias.add("Profesor");
-                        categorias.add("Egresado");
-
-                        request.setAttribute("usuarioEditar", usuarios);
-                        request.setAttribute("roles", roles);
-                        request.setAttribute("categorias", categorias);
-                        requestDispatcher = request.getRequestDispatcher("AdminEditUser.jsp");
-                        requestDispatcher.forward(request, response);
-                    }
-                    else {
-                        response.sendRedirect(request.getContextPath() + "/Admin");
-                    }
                 }
 
                 break;
@@ -216,7 +225,8 @@ public class AdminServlet extends HttpServlet {
                 Credenciales credenciales = daoUsuarios.validarCambioPassword(usuarios.getIdUsuarios(), password);
 
                 if (credenciales != null){
-                    if (request.getParameter("nuevaPassword1").equals(request.getParameter("nuevaPassword2"))){
+                    if (request.getParameter("nuevaPassword1").equals(request.getParameter("nuevaPassword2")) && !request.getParameter("nuevaPassword1").equals("")
+                    && request.getParameter("nuevaPassword1").length()>=5){
 
                         daoUsuarios.actualizarPassword(Integer.parseInt(credenciales.getIdUsuario()), request.getParameter("nuevaPassword1"));
 
