@@ -172,15 +172,26 @@
                                                 </h4>
 
                                                 <br>
+                                                <%if (i.getAnonimo() == 0) {%>
                                                 <h6><%=i.getUsuario().getNombres()%> <%=i.getUsuario().getApellidos()%>
-                                                </h6><h6>Registrado <%=i.getDatetime()%>
-                                            </h6>
-                                                <%if (i.getUrgencia().equals("Bajo")){%>
-                                                <h6 style="-webkit-text-stroke: 0.4px black;color:dodgerblue"> <%=i.getUrgencia()%> </h6>
+                                                </h6>
+                                                <%} else if (i.getAnonimo() == 1 && i.getIdUsuarioQueCreoIncidencia() != seguridadSession.getIdUsuarios()) {%>
+                                                <h6>Anónimo</h6>
+                                                <%} else if (i.getAnonimo() == 1 && i.getIdUsuarioQueCreoIncidencia() == seguridadSession.getIdUsuarios()) {%>
+                                                <h6><%=i.getUsuario().getNombres()%> <%=i.getUsuario().getApellidos()%> (Anónimo)
+                                                </h6>
+                                                <%}%>
+                                                <h6>Registrado <%=i.getDatetime()%>
+                                                </h6>
+                                                <%if (i.getUrgencia().equals("Bajo")) {%>
+                                                <h6 style="-webkit-text-stroke: 0.4px black;color:dodgerblue"><%=i.getUrgencia()%>
+                                                </h6>
                                                 <%} else if (i.getUrgencia().equals("Medio")) {%>
-                                                <h6 style="-webkit-text-stroke: 0.4px black;color:purple"> <%=i.getUrgencia()%> </h6>
+                                                <h6 style="-webkit-text-stroke: 0.4px black;color:purple"><%=i.getUrgencia()%>
+                                                </h6>
                                                 <%} else if (i.getUrgencia().equals("Urgente")) {%>
-                                                <h6 style="-webkit-text-stroke: 0.4px black;color:red"> <%=i.getUrgencia()%> </h6>
+                                                <h6 style="-webkit-text-stroke: 0.4px black;color:red"><%=i.getUrgencia()%>
+                                                </h6>
                                                 <%}%>
 
                                             </div>
