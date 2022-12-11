@@ -14,6 +14,7 @@ import javax.xml.stream.events.Comment;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -411,10 +412,33 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
                 requestDispatcher.forward(request, response);
                 break;
+
+            /*case "orderMisIncicencias":
+                setCentinelaSearch(3);
+                HttpSession sessionUsuario2 = request.getSession();
+                Usuarios user2 = (Usuarios) sessionUsuario2.getAttribute("usuarioSession");
+                setUsuarioSesion(String.valueOf(user2.getIdUsuarios()));
+                String opcionjsp2 = request.getParameter("tipo");
+                String ordenamiento2= request.getParameter("orden");
+                setOpcion(opcionjsp2);
+                setOrden(ordenamiento2);
+
+
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.paginarMisIncidenciasOrdenadas(1,opcionjsp2,ordenamiento2,"" + user2.getIdUsuarios() + ""));
+
+                request.setAttribute("listaIncidenciasPermanente", daoIncidencias.incidenciasDestXUserCompleta("" + user2.getIdUsuarios() + ""));
+
+                setListaPermanente(daoIncidencias.incidenciasDestXUserCompleta("" + user2.getIdUsuarios() + ""));
+
+                requestDispatcher = request.getRequestDispatcher("UsuarioMisIncidencias.jsp");
+                requestDispatcher.forward(request, response);
+                break;*/
         }
-
-
     }
+
+
+
+
 
     public boolean Usuario_destaco_o_no(ArrayList<Usuarios> lista_users_que_destacan, Usuarios usuario_sesion) {
         for (Usuarios lista_destacaron : lista_users_que_destacan) {

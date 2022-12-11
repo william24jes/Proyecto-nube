@@ -116,9 +116,34 @@
             <!-- ======= Portfolio Details Section ======= -->
             <section id="portfolio-details" class="portfolio-details">
                 <div class="container">
-                    <div class="container-fluid">
+                    <!--<div class="container-fluid">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <form method="post" action="<%=request.getContextPath()%>/Inicio?action=orderMisIncicencias" class="row g-3 needs-validation" >
+                                <div class="col-lg-4">
+                                    <select required class="form-select" id="tipo" placeholder="tipo" name="tipo">
+                                        <option value="fechaHora">Fecha</option>
+                                        <option value="urgencia">Urgencia</option>
+                                        <option value="tipo">Tipo de accidente</option>
+                                        <option value="destacado">Destacado</option>
+                                    </select>
+                                </div>
 
-                        <!-- Page Heading -->
+                                <div class="col-lg-4">
+                                    <select required style="width: fit-content" class="form-select" id="orden" placeholder="orden" name="orden">
+                                        <option value="asc">Ascendente</option>
+                                        <option value="desc">Descendente</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-grid gap-2 col-6 col-lg-4 col-xl-3 mx-auto">
+                                    <button class="btn btn-danger" type="submit">Ordenar</button>
+                                </div>
+                            </form>
+                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Inicio?action=misIncidencias"
+                               role="button">Limpiar filtros</a>
+                        </div>
+                        <br>-->
+
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Mis Incidencias</h1>
                         </div>
