@@ -275,13 +275,14 @@ public class DaoUsuarios extends DaoBase{
 
     public boolean guardarUsuario(Usuarios usuarios){
 
-        String sql = "INSERT INTO usuarios (nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol, fotoPerfil) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios (nombres, apellidos, dni, celular, codigoPucp, correoPucp, categoria, rol, fotoPerfil, idUsuario) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             if (usuarios.getCodigoPucp().length()<=8 && usuarios.getDni().length()<=8 && usuarios.getCelular().length()<=9){
 
+                pstmt.setInt(10, usuarios.getIdUsuarios());
                 pstmt.setString(1,usuarios.getNombres());
                 pstmt.setString(2,usuarios.getApellidos());
                 pstmt.setString(3,usuarios.getDni());

@@ -146,6 +146,12 @@ public class AdminServlet extends HttpServlet {
         switch (action) {
             case "guardar":
 
+                int id = 0;
+                for (Usuarios u: daoUsuarios.obtenerlistaUsuariosCompleta()){
+                    id = u.getIdUsuarios();
+                }
+
+                usuarios.setIdUsuarios(id+1);
                 usuarios.setNombres(request.getParameter("Nombres"));
                 usuarios.setApellidos(request.getParameter("Apellidos"));
                 usuarios.setCorreoPucp(request.getParameter("Correo PUCP"));
@@ -154,6 +160,8 @@ public class AdminServlet extends HttpServlet {
                 usuarios.setCategorias(request.getParameter("Categoría"));
                 usuarios.setRol(request.getParameter("Rol"));
                 usuarios.setCodigoPucp(request.getParameter("Codigo"));
+
+
 
                 if (daoUsuarios.guardarUsuario(usuarios)){
                     session.setAttribute("msg","Usuario creado exitosamente");
