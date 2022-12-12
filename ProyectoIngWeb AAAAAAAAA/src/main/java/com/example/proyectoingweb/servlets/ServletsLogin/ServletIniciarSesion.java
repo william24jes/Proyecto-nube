@@ -131,7 +131,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
             case "pinInvalido":
 
-                requestDispatcher = request.getRequestDispatcher("pinInvalido.jsp");
+                requestDispatcher = request.getRequestDispatcher("PinInvalido.jsp");
                 requestDispatcher.forward(request, response);
 
                 break;
