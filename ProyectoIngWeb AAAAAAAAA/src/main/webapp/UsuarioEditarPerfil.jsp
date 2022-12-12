@@ -234,7 +234,7 @@
                                                                 <div class="pt-2">
                                                                     <input style="display: none;" type="file" id="foto_subida" name="foto_subida" accept="image/*">
                                                                     <label for="foto_subida" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></label>
-                                                                    <button type="submit" class="btn btn-danger btn-sm"                                                                             formaction="<%=request.getContextPath()%>/Inicio?action=Borrar_Foto_Perfil"
+                                                                    <button type="submit" class="btn btn-danger btn-sm"
                                                                             formaction="<%=request.getContextPath()%>/Inicio?action=Borrar_Foto_Perfil"
                                                                             title="Remove my profile image"><i
                                                                             class="bi bi-trash"></i></button>
