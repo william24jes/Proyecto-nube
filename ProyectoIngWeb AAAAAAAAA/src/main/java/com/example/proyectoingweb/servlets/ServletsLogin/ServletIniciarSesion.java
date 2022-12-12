@@ -177,7 +177,6 @@ public class ServletIniciarSesion extends HttpServlet {
                             break;
                         case "Seguridad":
 
-                            request.setAttribute("correo", correo);
 
                             // Generar codigo temporal
 
@@ -194,14 +193,21 @@ public class ServletIniciarSesion extends HttpServlet {
 
                             String fechaExpiracion = df.format(cal.getTime());
 
+                            String link = "http://localhost:8080" + request.getContextPath() +"/IniciarSesion?action=";
+                            String asunto = "PIN de Doble Factor";
+                            String mensaje = "Tu código de verificación es :"+ pin +
+                                    "Este código PIN expirará en 5 minutos.";
+
                             // Enviar codigo mediante correo
+
+
 
                             requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
                             requestDispatcher.forward(request, response);
 
-                            HttpSession sessionSeguridad = request.getSession();
+                            /*HttpSession sessionSeguridad = request.getSession();
                             sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
-                            response.sendRedirect(request.getContextPath() + "/Seguridad");
+                            response.sendRedirect(request.getContextPath() + "/Seguridad");*/
 
                             break;
                         case "Administrador":

@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="correo" scope="request" type="java.lang.String"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,9 +52,6 @@
                     <span class="d-none d-lg-block">INCIDENCIAS PUCP</span>
                   </a>
                 </div><!-- End Logo -->
-
-
-
                 <br>
                 <div class="row g-3">
                   <div class="col-12 mx-auto my-auto">
