@@ -60,19 +60,26 @@
                                                 antes de enviar una nueva solicitud.</p>
                                         </div>
 
-                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            <!--<a class="nav-link  "
+                                        <div class="col-12">
+                                            <a class="nav-link" href="<%=request.getContextPath()%>/IniciarSesion">
+                                                <button type="button" class="btn btn-primary w-100">Volver a la página
+                                                    principal
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <!--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <a class="nav-link  "
                                                href="<%=request.getContextPath()%>/IniciarSesion?action=reenviarCorreo">
                                                 <button type="button" style="margin-right: 10px;"
                                                         class="btn btn-primary">Reenviar correo
                                                 </button>
-                                            </a>-->
+                                            </a>
                                             <a class="nav-link  " href="<%=request.getContextPath()%>/IniciarSesion">
                                                 <button style="margin-left: 10px;" class="btn btn-primary">Volver a
                                                     inicio
                                                 </button>
                                             </a>
-                                        </div>
+                                        </div>-->
 
                                     </div>
                                 </div>
@@ -84,9 +91,6 @@
 
             </div>
         </main><!-- End #main -->
-
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

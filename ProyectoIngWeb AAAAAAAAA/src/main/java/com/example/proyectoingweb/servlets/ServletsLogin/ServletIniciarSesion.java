@@ -33,23 +33,6 @@ public class ServletIniciarSesion extends HttpServlet {
 
         switch (action) {
             case "iniciarSesion":
-                /*
-                if (session.getAttribute("usuario") != null) {
-                    switch (((Usuarios) session.getAttribute("usuario")).getCategorias()) {
-                        case "Administrador":
-                            response.sendRedirect(request.getContextPath() + "/Admin");
-                            break;
-                        case "Seguridad":
-                            response.sendRedirect(request.getContextPath() + "/Seguridad");
-                            break;
-                        case "Usuario Pucp":
-                            response.sendRedirect(request.getContextPath() + "/Inicio");
-                            break;
-                    }
-                }else {
-                    response.sendRedirect(request.getContextPath()+"/IniciarSesion");
-                }
-                */
                 if (session.getAttribute("usuarioSession") == null) {
                     if (session.getAttribute("seguridadSession") == null) {
                         if (session.getAttribute("userAdmin") == null) {
@@ -90,12 +73,11 @@ public class ServletIniciarSesion extends HttpServlet {
                 token = request.getParameter("token");
                 usuario = daoUsuarios.buscarPorToken(token);
 
-                if (usuario != null && daoUsuarios.validarToken(usuario.getIdUsuarios())<0){
+                if (usuario != null && daoUsuarios.validarToken(usuario.getIdUsuarios()) < 0) {
                     request.setAttribute("token", token);
                     requestDispatcher = request.getRequestDispatcher("ReestablecerContraseña.jsp");
                     requestDispatcher.forward(request, response);
-                }
-                else {
+                } else {
                     requestDispatcher = request.getRequestDispatcher("TokenInvalido.jsp");
                     requestDispatcher.forward(request, response);
                 }
@@ -127,13 +109,12 @@ public class ServletIniciarSesion extends HttpServlet {
                 usuario = daoUsuarios.buscarPorToken(token);
 
                 // * Validar tiempo de expiracion *
-                if (usuario != null && daoUsuarios.validarToken(usuario.getIdUsuarios())<0){
+                if (usuario != null && daoUsuarios.validarToken(usuario.getIdUsuarios()) < 0) {
 
                     request.setAttribute("token", token);
                     requestDispatcher = request.getRequestDispatcher("CrearContraseña.jsp");
                     requestDispatcher.forward(request, response);
-                }
-                else {
+                } else {
                     // Vista de Token expirado o invalido
                     requestDispatcher = request.getRequestDispatcher("TokenInvalido.jsp");
                     requestDispatcher.forward(request, response);
@@ -192,11 +173,7 @@ public class ServletIniciarSesion extends HttpServlet {
                             HttpSession sessionUsuario = request.getSession();
                             sessionUsuario.setAttribute("usuarioSession", usuarioValido);
                             response.sendRedirect(request.getContextPath() + "/Inicio");
-                            /*
-                            request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidencias());
-                            requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
-                            requestDispatcher.forward(request,response);
-                            */
+
                             break;
                         case "Seguridad":
                             HttpSession sessionSeguridad = request.getSession();
@@ -247,26 +224,18 @@ public class ServletIniciarSesion extends HttpServlet {
                     String fechaExpiracion = df.format(cal.getTime());
 
                     // Validar si ya ha recibido un correo antes
-                    if (daoUsuarios.validarToken(usuario.getIdUsuarios())<0){
+                    if (daoUsuarios.validarToken(usuario.getIdUsuarios()) < 0) {
                         // No ha expirado: Preguntar si quiere recibir un correo nuevo
-
                         daoUsuarios.borrarToken(usuario.getIdUsuarios());
 
-                        /*request.setAttribute("token", token);
-                        request.setAttribute("fechaExpiracion", fechaExpiracion);
-                        request.setAttribute("correoPucp", correoPucp);
-
-                        requestDispatcher = request.getRequestDispatcher("TokenValidacion.jsp");
-                        requestDispatcher.forward(request, response);*/
-
-                    } else if (daoUsuarios.validarToken(usuario.getIdUsuarios())>0) {
+                    } else if (daoUsuarios.validarToken(usuario.getIdUsuarios()) > 0) {
                         // Ha expirado
                         daoUsuarios.borrarToken(usuario.getIdUsuarios());
                     }
 
                     daoUsuarios.guardarToken(usuario.getIdUsuarios(), token, fechaExpiracion);
 
-                    String link = "http://localhost:8080"+request.getContextPath()+"/IniciarSesion?action=crearPassword&token=" + token;
+                    String link = "http://localhost:8080" + request.getContextPath() + "/IniciarSesion?action=crearPassword&token=" + token;
                     String asunto = "Crea tu nueva contraseña";
                     String mensaje = "Tu registro está casi completo.\n\n" +
                             "Ingresa al siguiente link para crear tu contraseña:\n\n" +
@@ -280,10 +249,9 @@ public class ServletIniciarSesion extends HttpServlet {
                 } else {
                     // Si no existe, enviar por sesion mensaje de error
                     HttpSession session = request.getSession();
-                    if (daoUsuarios.validarUsuarioEnCredenciales(correoPucp, codigoPucp) != null){
+                    if (daoUsuarios.validarUsuarioEnCredenciales(correoPucp, codigoPucp) != null) {
                         session.setAttribute("msg", "El correo y código ya pertenecen a una cuenta");
-                    }
-                    else {
+                    } else {
                         session.setAttribute("msg", "Correo y/o código inválido(s)");
                     }
 
@@ -292,42 +260,40 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 break;
 
-            /*case "enviarCorreo":
-
-                String token1 = request.getParameter("token");
-                String correoPucp1 = request.getParameter("correoPucp");
-                String fechaExpiracion = request.getParameter("fechaExpiracion");
-
-                daoUsuarios.borrarToken(daoUsuarios.buscarPorCorreo(correoPucp1).getIdUsuarios());
-                daoUsuarios.guardarToken(daoUsuarios.buscarPorCorreo(correoPucp1).getIdUsuarios(), token1, fechaExpiracion);
-
-                break;*/
-
             case "guardarPassword":
 
                 String token = request.getParameter("token");
                 String nuevaPassword1 = request.getParameter("nuevaPassword1");
                 String nuevaPassword2 = request.getParameter("nuevaPassword2");
 
-                if (nuevaPassword1.equals(nuevaPassword2)){
+                usuario = daoUsuarios.buscarPorToken(token);
 
-                    usuario = daoUsuarios.buscarPorToken(token);
-                    if (usuario != null){
-                        daoUsuarios.guardarPassword(usuario, nuevaPassword1);
-                        daoUsuarios.borrarToken(usuario.getIdUsuarios());
+                if (usuario != null){
+                    if (daoUsuarios.validarToken(usuario.getIdUsuarios()) < 0) {
+                        if (nuevaPassword1.equals(nuevaPassword2)) {
 
-                        response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=passwordCreada");
+                            usuario = daoUsuarios.buscarPorToken(token);
+
+                            daoUsuarios.guardarPassword(usuario, nuevaPassword1);
+                            daoUsuarios.borrarToken(usuario.getIdUsuarios());
+
+                            response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=passwordCreada");
+                            
+                        } else {
+                            HttpSession session = request.getSession();
+                            session.setAttribute("msgError", "Las contraseñas deben ser iguales");
+
+                            response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=crearPassword&token=" + token);
+                        }
+                    } else if (daoUsuarios.validarToken(usuario.getIdUsuarios()) > 0) {
+                        requestDispatcher = request.getRequestDispatcher("TokenInvalido.jsp");
+                        requestDispatcher.forward(request, response);
                     }
-                    else {
-                        response.sendRedirect(request.getContextPath()+"/Error");
-                    }
-
                 }
                 else {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("msgError", "Las contraseñas deben ser iguales");
 
-                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=crearPassword&token="+token);
+                    response.sendRedirect(request.getContextPath()+"/Error");
+
                 }
 
                 break;
@@ -337,7 +303,7 @@ public class ServletIniciarSesion extends HttpServlet {
                 correoPucp = request.getParameter("correo");
                 usuario = daoUsuarios.validarOlvidoContrasena(correoPucp);
 
-                if (usuario != null){
+                if (usuario != null) {
 
                     Random random = new Random();
                     String token2 = Hashing.sha256().hashString(correoPucp + caracteres[random.nextInt(caracteres.length)] + caracteres[random.nextInt(caracteres.length)] + caracteres[random.nextInt(caracteres.length)], StandardCharsets.UTF_8).toString();
@@ -353,7 +319,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
                     daoUsuarios.guardarToken(daoUsuarios.buscarPorCorreo(correoPucp).getIdUsuarios(), token2, fechaExpiracion);
 
-                    String link = "http://localhost:8080"+request.getContextPath()+"/IniciarSesion?action=reestablecerContraseña&token="+token2;
+                    String link = "http://localhost:8080" + request.getContextPath() + "/IniciarSesion?action=reestablecerContraseña&token=" + token2;
                     String asunto = "Reestablece tu contraseña";
                     String mensaje = "Ingresa al siguiente link para reestablecer tu contraseña:\n\n" +
                             "" + link + "\n\n" +
@@ -361,14 +327,13 @@ public class ServletIniciarSesion extends HttpServlet {
 
                     daoUsuarios.enviarCorreo(correoPucp, asunto, mensaje);
 
-                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=confirmaOlvidoContraseña");
+                    response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=confirmaOlvidoContraseña");
 
-                }
-                else {
+                } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("msg", "El correo ingresado no es válido");
 
-                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=olvidoContraseña");
+                    response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=olvidoContraseña");
                 }
 
                 break;
@@ -379,26 +344,24 @@ public class ServletIniciarSesion extends HttpServlet {
                 String nuevaPassword11 = request.getParameter("nuevaPassword1");
                 String nuevaPassword22 = request.getParameter("nuevaPassword2");
 
-                if (nuevaPassword11.equals(nuevaPassword22)){
+                if (nuevaPassword11.equals(nuevaPassword22)) {
 
                     usuario = daoUsuarios.buscarPorToken(token2);
-                    if (usuario != null){
+                    if (usuario != null) {
 
                         daoUsuarios.actualizarPassword(usuario.getIdUsuarios(), nuevaPassword11);
                         daoUsuarios.borrarToken(usuario.getIdUsuarios());
 
-                        response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=passwordReestablecida");
-                    }
-                    else {
-                        response.sendRedirect(request.getContextPath()+"/Error");
+                        response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=passwordReestablecida");
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/Error");
                     }
 
-                }
-                else {
+                } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("msgError", "Las contraseñas deben ser iguales");
 
-                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=crearPassword&token="+token2);
+                    response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=crearPassword&token=" + token2);
                 }
 
                 break;
