@@ -387,7 +387,7 @@ public class DaoUsuarios extends DaoBase{
     }
 
     public void borrarUsuario(String idUsuario){
-        String sql = "DELETE from usuarios WHERE idUsuario = ?";
+        String sql = "DELETE from credenciales WHERE idUsuario = ?";
 
         try(Connection connection = this.getConnection();
             PreparedStatement pstmt=connection.prepareStatement(sql))
