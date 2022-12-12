@@ -147,12 +147,12 @@
                             <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad"
                                role="button">Limpiar filtros</a>
 
-                            <a class="btn btn-warning" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF"
+                            <a class="btn btn-danger" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF"
                                role="button"><i class="bi bi-file-earmark-pdf-fill"></i></a>
                             <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad?action=incidenciastxt"
                                role="button"><i class="bi bi-filetype-txt"></i></a>
-                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasExcel"
-                               role="button"><i class="bi bi-filetype-txt"></i></a>
+                            <a class="btn btn-success" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasExcel"
+                               role="button"><i class="bi bi-file-earmark-excel-fill"></i></a>
 
                         </div>
 
