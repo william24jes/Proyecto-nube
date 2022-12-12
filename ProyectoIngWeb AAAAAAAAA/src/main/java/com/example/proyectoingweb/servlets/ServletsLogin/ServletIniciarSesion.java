@@ -251,7 +251,7 @@ public class ServletIniciarSesion extends HttpServlet {
                 } else {
                     // Si no existe, enviar por sesion mensaje de error
                     HttpSession session = request.getSession();
-                    if (daoUsuarios.buscarPorCorreo(correoPucp) != null){
+                    if (daoUsuarios.validarUsuarioEnCredenciales(correoPucp, codigoPucp) != null){
                         session.setAttribute("msg", "El correo y código ya pertenecen a una cuenta");
                     }
                     else {
@@ -290,7 +290,7 @@ public class ServletIniciarSesion extends HttpServlet {
                         response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=passwordCreada");
                     }
                     else {
-                        response.sendRedirect(request.getContextPath()+"/IniciarSesión");
+                        response.sendRedirect(request.getContextPath()+"/IniciarSesion");
                     }
 
                 }

@@ -586,8 +586,8 @@ public class DaoUsuarios extends DaoBase{
     public Usuarios validarRegistro(String correoPucp, String codigoPucp){
 
         String sql = "select u.* from usuarios u " +
-                "inner join credenciales c on (u.idUsuiario = c.idUsuario) " +
-                "where u.correoPucp = ? and u.codigoPucp = ? and c.contrasenaHasheada = null";
+                "left join credenciales c on (u.idUsuario = c.idUsuario) " +
+                "where u.correoPucp = ? and u.codigoPucp = ? and c.contrasenaHasheada is null";
         Usuarios usuario = null;
 
         try(Connection conn = this.getConnection();
@@ -673,8 +673,8 @@ public class DaoUsuarios extends DaoBase{
 
     public void enviarCorreo(String correoDestino, String asunto, String mensaje){
 
-        String correoOrigen = "incidencias.pucp@gmail.com";
-        String password = "kfgcgpcesrrsicmt";
+        String correoOrigen = "incidencias.pucp.2022@gmail.com";
+        String password = "nndvyeldcezaukju";
 
         Properties properties = new Properties();
 
@@ -866,6 +866,34 @@ public class DaoUsuarios extends DaoBase{
 
         return usuarios;
 
+    }
+
+    public Credenciales validarUsuarioEnCredenciales(String correoPucp, String codigoPucp){
+
+        String sql = "select * from credenciales where correoPucp = ? and codigoPucp = ?";
+        Credenciales credenciales = null;
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setString(1, correoPucp);
+            pstmt.setString(2, codigoPucp);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    credenciales = new Credenciales();
+
+                    credenciales.setIdUsuario(rs.getString(1));
+                    credenciales.setCorreoPucp(rs.getString(2));
+                    credenciales.setCodigoPucp(rs.getString(3));
+                    credenciales.setContrasenaHasheada(rs.getString(4));
+                }
+            }
+
+        }catch (SQLException e){
+            e.getStackTrace();
+        }
+        return credenciales;
     }
 
 
