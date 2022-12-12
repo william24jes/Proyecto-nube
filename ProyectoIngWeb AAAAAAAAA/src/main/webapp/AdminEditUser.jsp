@@ -124,11 +124,6 @@
                           <h5 class="card-title">Detalles del Perfil</h5>
 
                           <div class="row">
-                            <div class="col-lg-3 col-md-4 label ">ID Usuario</div>
-                            <div class="col-lg-9 col-md-8"><%=usuarios.getIdUsuarios()%></div>
-                          </div>
-
-                          <div class="row">
                             <div class="col-lg-3 col-md-4 label ">Código</div>
                             <div class="col-lg-9 col-md-8"><%=usuarios.getCodigoPucp()%></div>
                           </div>
@@ -166,16 +161,6 @@
 
                           <!-- Profile Edit Form -->
                           <form class="needs-validation" method="post" action="<%=request.getContextPath()%>/Admin?action=actualizar" novalidate>
-                            <div class="row mb-3">
-                              <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
-                              <div class="col-md-8 col-lg-9">
-                                <img id="profileImage" src="assets/img/perfiles/perfil1.svg" height="150" width="150" alt="Profile">
-                                <div class="pt-2">
-                                  <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                  <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                                </div>
-                              </div>
-                            </div>
 
                             <input name="ID Usuario" type="hidden" class="form-control" id="ID Usuario" value="<%=usuarios.getIdUsuarios()%>">
 

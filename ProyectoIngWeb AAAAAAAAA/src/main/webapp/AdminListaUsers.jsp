@@ -153,7 +153,6 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr style="align-content: center">
-                                    <th>ID</th>
                                     <th>Código</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
@@ -170,8 +169,6 @@
                                         if (!usuarios.getNombreYApellido().equals(userAdmin.getNombreYApellido())) {
                                 %>
                                 <tr>
-                                    <td><%=usuarios.getIdUsuarios()%>
-                                    </td>
                                     <td><%=usuarios.getCodigoPucp()%>
                                     </td>
                                     <td><%=usuarios.getNombres()%>
