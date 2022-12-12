@@ -57,7 +57,7 @@
                                                 reestablecer tu contraseña</p>
                                         </div>
 
-                                        <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=olvidoContraseña" class="row g-3 needs-validation" novalidate>
+                                        <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=olvidoPassword" class="row g-3 needs-validation" novalidate>
 
                                             <div class="col-12">
                                                 <label for="yourUsername" class="form-label">Correo</label>

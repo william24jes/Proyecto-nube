@@ -144,128 +144,146 @@
                         </div>
                         <br>-->
 
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Mis Incidencias</h1>
-                        </div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Mis Incidencias</h1>
+                    </div>
 
-                        <div class="container">
+                    <div class="container">
 
-                            <div class="row">
-                                <!-- Dropdown Card Example -->
-                                <% for (Incidencias incidenciasDestacadas : listaIncidenciasPaginada) { %>
-                                <div class="card shadow mb-4 ">
-                                    <!-- Card Header - Dropdown -->
-                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <img src="assets/img/profile_upload.png" height="70px"/>
-                                        <br>
-                                        <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidenciasDestacadas.getIdIncidencia()%>">
-                                            <h4 class="m-0 font-weight-bold text-primary"
-                                                style="width:75%"><%=incidenciasDestacadas.getNombre()%>
-                                        </a>
-                                        <div style="color:darkgray;display: flex;flex-direction: column">
-                                            <%if (incidenciasDestacadas.getAnonimo() == 0) {%>
-                                            <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%>
-                                            </h6>
-                                            <%} else if (incidenciasDestacadas.getAnonimo() == 1 && incidenciasDestacadas.getIdUsuarioQueCreoIncidencia() != usuarioSession.getIdUsuarios()) {%>
-                                            <h6>Anónimo</h6>
-                                            <%} else if (incidenciasDestacadas.getAnonimo() == 1 && incidenciasDestacadas.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()) {%>
-                                            <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%> (Anónimo)
-                                            </h6>
-                                            <%}%>
-                                            <h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
-                                            </h6>
-                                            <%if (incidenciasDestacadas.getUrgencia().equals("Bajo")) {%>
-                                            <h6 style="-webkit-text-stroke: 0.4px black;color:dodgerblue"><%=incidenciasDestacadas.getUrgencia()%>
-                                            </h6>
-                                            <%} else if (incidenciasDestacadas.getUrgencia().equals("Medio")) {%>
-                                            <h6 style="-webkit-text-stroke: 0.4px black;color:purple"><%=incidenciasDestacadas.getUrgencia()%>
-                                            </h6>
-                                            <%} else if (incidenciasDestacadas.getUrgencia().equals("Urgente")) {%>
-                                            <h6 style="-webkit-text-stroke: 0.4px black;color:red"><%=incidenciasDestacadas.getUrgencia()%>
-                                            </h6>
-                                            <%}%>
-                                        </div>
-                                        </h4>
-
-
-                                        <div>
-                                            <form method="post"
-                                                  action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia_MisIncidencias"
-                                            >
-                                                <input class="form-control " id="idUsuario" type="hidden"
-                                                       name="id" value="<%=usuarioSession.getIdUsuarios()%>">
-                                                <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
-                                                       name="Cantidad_destacados"
-                                                       value="<%=incidenciasDestacadas.getDestacado()%>">
-                                                <input class="form-control" id="idIncidencia" type="hidden"
-                                                       name="idIncidencia"
-                                                       value="<%=incidenciasDestacadas.getIdIncidencia()%>">
-                                                <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
-                                                <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
-                                                <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
-                                                <%
-                                                    ArrayList<Usuarios> lista_Usuarios = daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidenciasDestacadas.getIdIncidencia()));%>
-                                                <%
-                                                    Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
-                                                <%
-                                                    boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios, user2);%>
-                                                <%if (validacion) {%>
-                                                <button type="submit" class="btn btn-warning btn-circle">
-                                                    <i class="fas fa-exclamation-triangle"><%=incidenciasDestacadas.getDestacado()%>
-                                                    </i>
-                                                </button>
-                                                <%} else {%>
-                                                <button type="submit" class="btn btn-warning btn-circle"
-                                                        style="background-color: grey;border-color:grey">
-                                                    <i class="fas fa-exclamation-triangle"><%=incidenciasDestacadas.getDestacado()%>
-                                                    </i>
-                                                </button>
-                                                <%}%>
-                                            </form>
-                                        </div>
-
+                        <div class="row">
+                            <!-- Dropdown Card Example -->
+                            <% for (Incidencias incidenciasDestacadas : listaIncidenciasPaginada) { %>
+                            <div class="card shadow mb-4 ">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <div style="display: inline-block; position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
+                                        <% DaoUsuarios daoUsersRegistro2 = new DaoUsuarios();%>
+                                        <%ServletUsuarioInicio serv2 = new ServletUsuarioInicio();%>
+                                        <%
+                                            ArrayList<Usuarios> lista_Usuarios2 = daoUsersRegistro2.obtenerlistaFotoNull();%>
+                                        <%
+                                            boolean validacion2 = serv2.Usuario_tiene_foto_null(lista_Usuarios2, incidenciasDestacadas.getIdUsuarioQueCreoIncidencia());%>
+                                        <%if (validacion2) {%>
+                                        <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                             height="150" width="150" alt="Profile"
+                                             style="width: auto; height: 100%; margin-left: -10px;">
+                                        <%} else {%>
+                                        <img height="150" width="150" alt="Profile" id="profileImage"
+                                             src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=incidenciasDestacadas.getIdUsuarioQueCreoIncidencia()%>"
+                                             style="width: auto; height: 100%; margin-left: -10px;"/>
+                                        <%}%>
                                     </div>
 
+                                    <br>
+                                    <a href="<%=request.getContextPath()%>/Inicio?action=verIncidencia&id=<%=incidenciasDestacadas.getIdIncidencia()%>">
+                                        <h4 class="m-0 font-weight-bold text-primary"
+                                            style="width:75%"><%=incidenciasDestacadas.getNombre()%>
+                                    </a>
+                                    <div style="color:darkgray;display: flex;flex-direction: column">
+                                        <%if (incidenciasDestacadas.getAnonimo() == 0) {%>
+                                        <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%>
+                                        </h6>
+                                        <%} else if (incidenciasDestacadas.getAnonimo() == 1 && incidenciasDestacadas.getIdUsuarioQueCreoIncidencia() != usuarioSession.getIdUsuarios()) {%>
+                                        <h6>Anónimo</h6>
+                                        <%} else if (incidenciasDestacadas.getAnonimo() == 1 && incidenciasDestacadas.getIdUsuarioQueCreoIncidencia() == usuarioSession.getIdUsuarios()) {%>
+                                        <h6><%=incidenciasDestacadas.getUsuario().getNombres()%> <%=incidenciasDestacadas.getUsuario().getApellidos()%>
+                                            (Anónimo)
+                                        </h6>
+                                        <%}%>
+                                        <h6>Registrado <%=incidenciasDestacadas.getDatetime()%>
+                                        </h6>
+                                        <%if (incidenciasDestacadas.getUrgencia().equals("Bajo")) {%>
+                                        <h6 style="-webkit-text-stroke: 0.4px black;color:dodgerblue"><%=incidenciasDestacadas.getUrgencia()%>
+                                        </h6>
+                                        <%} else if (incidenciasDestacadas.getUrgencia().equals("Medio")) {%>
+                                        <h6 style="-webkit-text-stroke: 0.4px black;color:purple"><%=incidenciasDestacadas.getUrgencia()%>
+                                        </h6>
+                                        <%} else if (incidenciasDestacadas.getUrgencia().equals("Urgente")) {%>
+                                        <h6 style="-webkit-text-stroke: 0.4px black;color:red"><%=incidenciasDestacadas.getUrgencia()%>
+                                        </h6>
+                                        <%}%>
+                                    </div>
+                                    </h4>
 
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <%=incidenciasDestacadas.getDescripcion()%>
-                                        <div class="col-12">
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-auto">
-                                                    <img class="crop"
-                                                         src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidenciasDestacadas.getIdIncidencia()%>"
-                                                         style="max-width: 100%;max-height: 100%;border-radius: 1em"/>
-                                                </div>
 
-                                                <div><br>
-                                                    <button type="button"
-                                                            class="btn btn-primary btn-lg disabled"><%=incidenciasDestacadas.getEstadoIncidencia()%>
-                                                    </button>
-                                                </div>
+                                    <div>
+                                        <form method="post"
+                                              action="<%=request.getContextPath()%>/Inicio?action=DestacarIncidencia_MisIncidencias"
+                                        >
+                                            <input class="form-control " id="idUsuario" type="hidden"
+                                                   name="id" value="<%=usuarioSession.getIdUsuarios()%>">
+                                            <input class="form-control" id="Cantidad_de_Destacados" type="hidden"
+                                                   name="Cantidad_destacados"
+                                                   value="<%=incidenciasDestacadas.getDestacado()%>">
+                                            <input class="form-control" id="idIncidencia" type="hidden"
+                                                   name="idIncidencia"
+                                                   value="<%=incidenciasDestacadas.getIdIncidencia()%>">
+                                            <% DaoIncidencias daoincidenciasjsp = new DaoIncidencias();%>
+                                            <% DaoUsuarios daousersjsp = new DaoUsuarios();%>
+                                            <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                                            <%
+                                                ArrayList<Usuarios> lista_Usuarios = daoincidenciasjsp.IdDeUsuariosQueDestacaron(String.valueOf(incidenciasDestacadas.getIdIncidencia()));%>
+                                            <%
+                                                Usuarios user2 = daousersjsp.buscarPorId(String.valueOf(usuarioSession.getIdUsuarios()));%>
+                                            <%
+                                                boolean validacion = serv.Usuario_destaco_o_no(lista_Usuarios, user2);%>
+                                            <%if (validacion) {%>
+                                            <button type="submit" class="btn btn-warning btn-circle">
+                                                <i class="fas fa-exclamation-triangle"><%=incidenciasDestacadas.getDestacado()%>
+                                                </i>
+                                            </button>
+                                            <%} else {%>
+                                            <button type="submit" class="btn btn-warning btn-circle"
+                                                    style="background-color: grey;border-color:grey">
+                                                <i class="fas fa-exclamation-triangle"><%=incidenciasDestacadas.getDestacado()%>
+                                                </i>
+                                            </button>
+                                            <%}%>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <%=incidenciasDestacadas.getDescripcion()%>
+                                    <div class="col-12">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <img class="crop"
+                                                     src="<%=request.getContextPath()%>/Image?action=lista_imagen_sql&id=<%=incidenciasDestacadas.getIdIncidencia()%>"
+                                                     style="max-width: 100%;max-height: 100%;border-radius: 1em"/>
                                             </div>
-                                            <br>
+
+                                            <div><br>
+                                                <button type="button"
+                                                        class="btn btn-primary btn-lg disabled"><%=incidenciasDestacadas.getEstadoIncidencia()%>
+                                                </button>
+                                            </div>
                                         </div>
+                                        <br>
                                     </div>
                                 </div>
-                                <% } %>
-
                             </div>
+                            <% } %>
 
                         </div>
-                        <nav aria-label="Page navigation example" style="margin-top: 20px;">
-                            <ul class="pagination justify-content-center">
-                                <%for (double i = 1; i <= Math.ceil((double) (listaIncidenciasPermanente.size()) / 10.0); i++) {%>
-                                <li class="page-item"><a class="page-link"
-                                                         href="<%=request.getContextPath()%>/Inicio?action=pageMisIncidencias&id=<%=(int)i%>"><%=(int) i%>
-                                </a></li>
-                                <%}%>
-                            </ul>
-                        </nav>
-                        </nav>
 
                     </div>
+                    <nav aria-label="Page navigation example" style="margin-top: 20px;">
+                        <ul class="pagination justify-content-center">
+                            <%for (double i = 1; i <= Math.ceil((double) (listaIncidenciasPermanente.size()) / 10.0); i++) {%>
+                            <li class="page-item"><a class="page-link"
+                                                     href="<%=request.getContextPath()%>/Inicio?action=pageMisIncidencias&id=<%=(int)i%>"><%=(int) i%>
+                            </a></li>
+                            <%}%>
+                        </ul>
+                    </nav>
+                    </nav>
+
+                </div>
 
 
                 </div>

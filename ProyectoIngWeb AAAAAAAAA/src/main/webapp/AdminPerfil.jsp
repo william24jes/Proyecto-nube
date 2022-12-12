@@ -165,11 +165,6 @@
 
                                                     <h5 class="card-title">Detalles del Perfil</h5>
 
-                                                    <div class="row" type="hidden">
-                                                        <div class="col-lg-3 col-md-4 label ">ID Administrador</div>
-                                                        <div class="col-lg-9 col-md-8"><%=userAdmin.getIdUsuarios()%>
-                                                        </div>
-                                                    </div>
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label ">Código</div>

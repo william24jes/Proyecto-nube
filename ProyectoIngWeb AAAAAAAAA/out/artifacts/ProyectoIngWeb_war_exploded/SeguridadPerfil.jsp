@@ -1,3 +1,8 @@
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletSeguridadInicio" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
@@ -113,9 +118,21 @@
                                 <div class="col-xl-4">
                                     <div class="card mb-4 mb-xl-0">
                                         <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
+                                            <div style="display: inline-block; position: relative; width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+                                                <% DaoUsuarios daoUsersRegistro = new DaoUsuarios();%>
+                                                <%ServletSeguridadInicio serv2 = new ServletSeguridadInicio();%>
+                                                <%ArrayList<Usuarios> lista_Usuarios = daoUsersRegistro.obtenerlistaFotoNull();%>
+                                                <%boolean validacion = serv2.Seguridad_tiene_foto_null(lista_Usuarios,seguridadSession.getIdUsuarios());%>
+                                                <%if (validacion) {%>
+                                                <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                     width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                                <%}else{%>
+                                                <img alt="Profile"
+                                                     src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=seguridadSession.getIdUsuarios()%>"
+                                                     width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                                <%}%>
+                                            </div>
 
-                                            <img src="assets/img/fotosPerfil/<%=seguridadSession.getFotoPerfil()%>"
-                                                 width=70% alt="Profile" class="rounded-circle">
                                             <h2><%=seguridadSession.getNombreYApellido()%>
                                             </h2>
                                             <h5>Seguridad PUCP</h5>
@@ -197,25 +214,40 @@
 
                                                     <!-- Profile Edit Form -->
                                                     <form method="post"
-                                                          action="<%=request.getContextPath()%>/Seguridad?action=CambiarTelefono">
+                                                          action="<%=request.getContextPath()%>/Seguridad?action=CambiarTelefono" enctype="multipart/form-data">
+                                                        <input class="form-control " id="idUsuario" type="hidden"
+                                                               name="id" value="<%=seguridadSession.getIdUsuarios()%>">
 
                                                         <div class="row mb-3">
-                                                            <label for="profileImage"
+                                                            <label
                                                                    class="col-md-4 col-lg-3 col-form-label">Imagen de
                                                                 Perfil</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <img src="assets/img/fotosPerfil/<%=seguridadSession.getFotoPerfil()%>"
-                                                                     height="150" width="150" alt="Profile" id="profileImage">
-                                                                <div class="mb-6">
-                                                                    <label for="customFile">Cambiar foto de perfil </label>
-                                                                    <input type="file" class="form-control" style="width: 350px"
-                                                                           id="customFile" name="foto" />
 
-                                                                    <a class="btn btn-danger btn-sm"
-                                                                       title="Quitar nueva foto de perfil"><i
-                                                                            class="bi bi-trash"></i></a>
+                                                                <div style="display: inline-block; position: relative; width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+                                                                    <% DaoUsuarios daoUsersRegistro4 = new DaoUsuarios();%>
+                                                                    <%ServletSeguridadInicio serv4 = new ServletSeguridadInicio();%>
+                                                                    <%ArrayList<Usuarios> lista_Usuarios4 = daoUsersRegistro4.obtenerlistaFotoNull();%>
+                                                                    <%boolean validacion2 = serv4.Seguridad_tiene_foto_null(lista_Usuarios4,seguridadSession.getIdUsuarios());%>
+                                                                    <%if (validacion2) {%>
+                                                                    <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                                         width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                                                    <%}else{%>
+                                                                    <img alt="Profile"
+                                                                         src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=seguridadSession.getIdUsuarios()%>"
+                                                                         width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                                                    <%}%>
                                                                 </div>
 
+
+                                                                <div class="pt-2">
+                                                                    <input style="display: none;" type="file" id="foto" name="foto" accept="image/*">
+                                                                    <label for="foto" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></label>
+                                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                                            formaction="<%=request.getContextPath()%>/Seguridad?action=Borrar_Foto_Perfil"
+                                                                            title="Remove my profile image"><i
+                                                                            class="bi bi-trash"></i></button>
+                                                                </div>
 
 
                                                             </div>
@@ -248,8 +280,7 @@
                                                         </div>
 
                                                         <div class="row mb-3">
-                                                            <input class="form-control " id="idUsuario" type="hidden"
-                                                                   name="id" value="<%=seguridadSession.getIdUsuarios()%>">
+
                                                             <label for="Phone"
                                                                    class="col-md-4 col-lg-3 col-form-label">Telefono</label>
                                                             <div class="col-md-8 col-lg-9">
@@ -261,7 +292,9 @@
 
                                                         <div class="text-center">
                                                             <button type="submit"
-                                                                    class="btn btn-primary">Guardar
+                                                                    class="btn btn-primary"
+                                                                    formaction="<%=request.getContextPath()%>/Seguridad?action=CambiarTelefono"
+                                                            >Guardar
                                                             </button>
                                                         </div>
 

@@ -83,7 +83,7 @@
                                                        id="password" required>
                                                 <div class="invalid-feedback">Ingresa tu contraseña!</div>
                                                 <p class="small mb-0"><a
-                                                        href="<%=request.getContextPath()%>/IniciarSesion?action=olvidoContraseña">¿Olvidaste
+                                                        href="<%=request.getContextPath()%>/IniciarSesion?action=olvidoPassword">¿Olvidaste
                                                     tu contraseña?</a></p>
                                             </div>
                                             <% if (session.getAttribute("error") != null) { %>

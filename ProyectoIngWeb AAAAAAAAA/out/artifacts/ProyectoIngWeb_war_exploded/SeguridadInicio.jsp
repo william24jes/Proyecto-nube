@@ -113,6 +113,11 @@
             </div>
             <%session.removeAttribute("msg");%>
             <%}%>
+            <%if(session.getAttribute("msgExito") !=null){%>
+            <div class="alert alert-success" role="alert"><%=session.getAttribute("msgExito")%>
+            </div>
+            <%session.removeAttribute("msgExito");%>
+            <%}%>
             <!-- ======= Portfolio Details Section ======= -->
             <section id="portfolio-details" class="portfolio-details">
                 <div class="container">
@@ -144,11 +149,11 @@
                                role="button"><i class="bi bi-file-earmark-pdf-fill"></i></a>
                             <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad?action=incidenciastxt"
                                role="button"><i class="bi bi-filetype-txt"></i></a>
+                            <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasExcel"
+                               role="button"><i class="bi bi-filetype-txt"></i></a>
 
                         </div>
-                        <%if(session.getAttribute("msg") != null){%>
-                        <p class="text-dark"><%=session.getAttribute("msg")%></p>
-                        <%session.removeAttribute("msg");}%>
+
                         <br>
 
                         <!-- Page Heading -->

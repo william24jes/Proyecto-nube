@@ -72,7 +72,7 @@
 
                                             <div class="col-12">
                                                 <label for="yourCode" class="form-label">Código PUCP</label>
-                                                <input type="text" name="codigoPucp" class="form-control" id="yourCode"
+                                                <input type="number" name="codigoPucp" class="form-control" id="yourCode"
                                                        required>
                                                 <div class="invalid-feedback">Ingresa tu código!</div>
                                             </div>
