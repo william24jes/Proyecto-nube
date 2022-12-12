@@ -75,6 +75,11 @@ public class ServletIniciarSesion extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
 
+            case "reestablecerContraseña":
+                
+
+                break;
+
             case "registrarse":
                 requestDispatcher = request.getRequestDispatcher("InicioRegistrarse.jsp");
                 requestDispatcher.forward(request, response);
@@ -246,7 +251,12 @@ public class ServletIniciarSesion extends HttpServlet {
                 } else {
                     // Si no existe, enviar por sesion mensaje de error
                     HttpSession session = request.getSession();
-                    session.setAttribute("msg", "Correo o código inválido(s)");
+                    if (daoUsuarios.buscarPorCorreo(correoPucp) != null){
+                        session.setAttribute("msg", "El correo y código ya pertenecen a una cuenta");
+                    }
+                    else {
+                        session.setAttribute("msg", "Correo y/o código inválido(s)");
+                    }
 
                     response.sendRedirect(request.getContextPath() + "/IniciarSesion?action=registrarse");
                 }
@@ -289,6 +299,30 @@ public class ServletIniciarSesion extends HttpServlet {
                     session.setAttribute("msgError", "Las contraseñas deben ser iguales");
 
                     response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=crearPassword&token="+token);
+                }
+
+                break;
+
+            case "olvidoContraseña":
+
+                correoPucp = request.getParameter("correo");
+                usuario = daoUsuarios.validarOlvidoContrasena(correoPucp);
+
+                if (usuario != null){
+
+                    String token2 = "";
+                    String link = "http://localhost:8080"+request.getContextPath()+"/IniciarSesion?action=reestablecerContraseña&token="+token2;
+                    String asunto = "Reestablece tu contraseña";
+                    String mensaje = "";
+
+
+
+                }
+                else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("msg", "El correo ingresado no es válido");
+
+                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=olvidoContraseña");
                 }
 
                 break;
