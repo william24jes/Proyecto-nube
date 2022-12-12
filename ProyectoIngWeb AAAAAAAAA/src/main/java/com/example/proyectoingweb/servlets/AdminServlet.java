@@ -41,6 +41,7 @@ public class AdminServlet extends HttpServlet {
                 setCentinelaSearch(0);
                 request.setAttribute("listaPaginada", daoUsuarios.obtenerlistaUsuarios());
                 request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
+                request.setAttribute("registrado", daoUsuarios.obtenerlistaUsuariosRegistrados());
                 setListaPermanente(daoUsuarios.obtenerlistaUsuariosCompleta());
                 requestDispatcher = request.getRequestDispatcher("AdminListaUsers.jsp");
                 requestDispatcher.forward(request, response);
@@ -96,6 +97,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("registrado", daoUsuarios.obtenerlistaUsuariosRegistrados());
                 centinela = getCentinelaSearch();
                 busqueda = getSearch();
 
@@ -251,6 +253,7 @@ public class AdminServlet extends HttpServlet {
                 setSearch(searchText);
 
                 ArrayList<Usuarios> lista = daoUsuarios.buscarUsuariosCompleto(searchText);
+                request.setAttribute("registrado", daoUsuarios.obtenerlistaUsuariosRegistrados());
                 request.setAttribute("listaPaginada", daoUsuarios.buscarUsuarios(searchText)); //editar
                 request.setAttribute("listaPermanente", lista);
 
@@ -267,7 +270,7 @@ public class AdminServlet extends HttpServlet {
                 String ordenamiento= request.getParameter("orden");
                 setOpcion(opcionjsp);
                 setOrden(ordenamiento);
-
+                request.setAttribute("registrado", daoUsuarios.obtenerlistaUsuariosRegistrados());
                 request.setAttribute("listaPaginada", daoUsuarios.paginarUsuariosOrdenados(1,opcionjsp,ordenamiento));
                 request.setAttribute("listaPermanente", daoUsuarios.obtenerlistaUsuariosCompleta());
 

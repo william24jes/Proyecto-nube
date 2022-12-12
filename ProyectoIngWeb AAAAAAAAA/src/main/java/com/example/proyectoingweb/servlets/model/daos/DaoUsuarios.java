@@ -48,6 +48,28 @@ public class DaoUsuarios extends DaoBase{
         return listaUsuarios;
     }
 
+    public ArrayList<Usuarios> obtenerlistaUsuariosRegistrados(){
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+
+        String sql = "select codigoPucp from mydb2.credenciales";
+
+        try(Connection connection = this.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while(rs.next()){
+                Usuarios usuarios = new Usuarios();
+
+                usuarios.setCodigoPucp(rs.getString(1));
+
+                listaUsuarios.add(usuarios);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+    }
+
     public ArrayList<Usuarios> obtenerlistaUsuariosCompleta(){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
 
