@@ -4,6 +4,7 @@ import com.example.proyectoingweb.servlets.model.beans.*;
 import com.example.proyectoingweb.servlets.model.daos.*;
 import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciaTXT;
 import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciasPDF;
+import com.example.proyectoingweb.servlets.model.dtos.ResporteIncidenciasEXCEL;
 import com.itextpdf.text.DocumentException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -42,6 +43,8 @@ public class ServletSeguridadInicio extends HttpServlet {
         HttpSession session = request.getSession();
         ReporteIncidenciasPDF reporte = new ReporteIncidenciasPDF();
         ReporteIncidenciaTXT reporteTXT = new ReporteIncidenciaTXT();
+        ResporteIncidenciasEXCEL reporteExcel= new ResporteIncidenciasEXCEL();
+
         int idPage;
         switch (action) {
             case "inicioSeguridad":
