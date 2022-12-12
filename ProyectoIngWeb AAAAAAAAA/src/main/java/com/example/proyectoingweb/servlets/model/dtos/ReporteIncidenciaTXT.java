@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ReporteIncidenciaTXT {
 
 
-    public void crearDocumento () throws IOException {
+    public FileWriter crearDocumento () throws IOException {
         DaoIncidencias daoIncidencias = new DaoIncidencias();
         ArrayList<Incidencias> incidencias = daoIncidencias.obtenerlistaIncidenciasPDF();
 
@@ -35,7 +35,7 @@ public class ReporteIncidenciaTXT {
 
         }
         fichero.close();
-
+        return fichero;
     }
 
 

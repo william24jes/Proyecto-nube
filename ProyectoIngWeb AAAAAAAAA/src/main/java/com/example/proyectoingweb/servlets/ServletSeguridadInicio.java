@@ -8,9 +8,10 @@ import com.itextpdf.text.DocumentException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
-import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -82,7 +83,7 @@ public class ServletSeguridadInicio extends HttpServlet {
                     reporte.agregarSaltoLiena();
                     reporte.agregarTablaIncidencias();
                     reporte.cerrarDocumento();
-                    session.setAttribute("msg","El documento se guardo exitosamente en su escritorio");
+                    session.setAttribute("msgExito","El documento se guardo exitosamente en su escritorio");
                     response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
                     System.out.printf("reporte completado");
 
@@ -92,10 +93,20 @@ public class ServletSeguridadInicio extends HttpServlet {
 
                 break;
             case "incidenciastxt":
-                reporteTXT.crearDocumento();
-                session.setAttribute("msg","El documento se guardo exitosamente en su escritorio");
-                response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
+                FileWriter documento = reporteTXT.crearDocumento();
+                request.setAttribute("Doc", documento);
+
+                session.setAttribute("msgExito","El documento se guardo exitosamente en su escritorio");
+                response.sendRedirect(request.getContextPath() + "/Seguridad");
                 System.out.printf("reporte txt completado");
+
+                break;
+
+            case "incidenciasExcel":
+                reporteExcel.crearDocumento();
+                session.setAttribute("msgExito","El documento se guardo exitosamente en su escritorio");
+                response.sendRedirect(request.getContextPath() + "/Seguridad");
+                System.out.printf("reporte Excel completado");
 
                 break;
 
