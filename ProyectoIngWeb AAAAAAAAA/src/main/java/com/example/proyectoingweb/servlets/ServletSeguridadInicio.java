@@ -9,10 +9,15 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 @WebServlet(name = "ServletSeguridadInicio", value = "/Seguridad")
+@MultipartConfig(maxFileSize = 16177215)
 public class ServletSeguridadInicio extends HttpServlet {
 
     private ArrayList<Incidencias> listaPermanente;
@@ -23,6 +28,7 @@ public class ServletSeguridadInicio extends HttpServlet {
     private String orden;
 
     @Override
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         action = (action == null) ? "inicioSeguridad" : action;
@@ -160,21 +166,6 @@ public class ServletSeguridadInicio extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Seguridad?action=detalles&id=" + id_incidencia);
                 break;
             }
-            case "CambiarTelefono": {
-                String idSeguridad = request.getParameter("id");
-                String nuevo_celular = request.getParameter("phone");
-
-                Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idSeguridad);
-                user_a_cambiar.setCelular(nuevo_celular);
-
-                daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
-
-                HttpSession session = request.getSession();
-                session.setAttribute("seguridadSession", user_a_cambiar);
-                session.setAttribute("msg", "Usuario editado correctamente");
-                response.sendRedirect(request.getContextPath() + "/Seguridad?action=perfil");
-                break;
-            }
             case "Seguridad_Responder_Incidencia": {
                 //               String user_validacion = request.getParameter("usuario_quiere_comentar");
                 String id_incidencia = request.getParameter("id_incidencia");
@@ -221,6 +212,46 @@ public class ServletSeguridadInicio extends HttpServlet {
                 }
 
                 break;
+            case "CambiarTelefono": {
+                InputStream inputStream2; // input stream of the upload file
+                Part filePart2 = request.getPart("foto");
+                String idUsuario3 = request.getParameter("id");
+                String nuevo_celular = request.getParameter("phone");
+                Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
+                user_a_cambiar.setCelular(nuevo_celular);
+                // obtains input stream of the upload file
+                System.out.println(filePart2);
+                inputStream2 = filePart2.getInputStream();
+                if(filePart2.getSize() != 0){
+                    daoUsuarios.actualizar_usuario_telefono_fotoPerfil(user_a_cambiar, inputStream2);
+                }else if(filePart2.getSize() == 0){
+                    daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
+                }
+                HttpSession session3 = request.getSession();
+                session3.setAttribute("seguridadSession", user_a_cambiar);
+                session3.setAttribute("msg", "Usuario editado correctamente");
+                response.sendRedirect(request.getContextPath() + "/Seguridad?action=perfil");
+                break;
+            }
+            case "Borrar_Foto_Perfil": {
+                String idUsuario3 = request.getParameter("id");
+                /*String filePath = getServletContext();
+                 */
+                ServletContext context = getServletContext();
+                String fullPath = context.getRealPath("/assets/img/fotosPerfil/perfilDefault.png");
+                System.out.println(fullPath);
+
+                InputStream inputStream3;
+                byte[] bytes = Files.readAllBytes(Paths.get(fullPath));
+                inputStream3 = new ByteArrayInputStream(bytes);
+                Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
+                daoUsuarios.eliminar_fotoPerfil(user_a_cambiar, inputStream3);
+                HttpSession session2 = request.getSession();
+                session2.setAttribute("seguridadSession", user_a_cambiar);
+
+                response.sendRedirect(request.getContextPath() + "/Seguridad?action=perfil");
+                break;
+            }
             case "order":
                 setCentinelaSearch(2);
                 String opcionjsp = request.getParameter("tipo");
@@ -256,6 +287,15 @@ public class ServletSeguridadInicio extends HttpServlet {
         }
     }
 
+    public boolean Seguridad_tiene_foto_null(ArrayList<Usuarios> lista_users_que_destacan, int seguridad_id) {
+        for (Usuarios lista_foto_null : lista_users_que_destacan) {
+            if (lista_foto_null.getIdUsuarios() == seguridad_id) {
+                //significa que el usuario ha destacado, entonces a volver a casa
+                return true;
+            }
+        }
+        return false;
+    }
     public String getSearch() {
         return search;
     }

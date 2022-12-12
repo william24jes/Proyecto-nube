@@ -1,3 +1,7 @@
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="incidencia" scope="request" type="com.example.proyectoingweb.servlets.model.beans.Incidencias"/>
 <jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
@@ -120,9 +124,21 @@
                                 <div class="card shadow mb-4 ">
                                     <!-- Card Header - Dropdown -->
                                     <div class="card-header p-5 d-flex flex-row align-items-center justify-content-between">
-                                        <img class="d-lg-block"
-                                             src="assets/img/fotosPerfil/<%=incidencia.getUsuario().getFotoPerfil()%>"
-                                             width="10%"/>
+
+                                        <div style="display: inline-block; position: relative; width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+                                            <% DaoUsuarios daoUsersRegistro = new DaoUsuarios();%>
+                                            <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                                            <%ArrayList<Usuarios> lista_Usuarios = daoUsersRegistro.obtenerlistaFotoNull();%>
+                                            <%boolean validacion = serv.Usuario_tiene_foto_null(lista_Usuarios,incidencia.getUsuario().getIdUsuarios());%>
+                                            <%if (validacion) {%>
+                                            <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                 width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                            <%}else{%>
+                                            <img alt="Profile"
+                                                 src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=incidencia.getUsuario().getIdUsuarios()%>"
+                                                 width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                            <%}%>
+                                        </div>
                                         <br>
                                         <div></div>
                                         <h4 class="m-0 font-weight-bold text-primary"
