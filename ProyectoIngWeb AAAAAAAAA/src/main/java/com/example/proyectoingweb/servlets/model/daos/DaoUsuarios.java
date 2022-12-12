@@ -290,7 +290,7 @@ public class DaoUsuarios extends DaoBase{
                 pstmt.setString(6,usuarios.getCorreoPucp());
                 pstmt.setString(7,usuarios.getCategorias());
                 pstmt.setString(8,usuarios.getRol());
-                pstmt.setString(9,"perfilDefault.png");
+                pstmt.setString(9,null);
                 //pstmt.setNull(9, Types.VARCHAR);
 
                 pstmt.executeUpdate();
