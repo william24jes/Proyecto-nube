@@ -1,5 +1,7 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   Usuarios usuarios = (Usuarios) request.getAttribute("usuarioEditar");
@@ -96,7 +98,22 @@
                 <div class="col-xl-4">
                   <div class="card mb-4 mb-xl-0">
                     <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
-                      <img src="assets/img/fotosPerfil/<%=usuarios.getFotoPerfil()%>" width=70% alt="Profile" class="rounded-circle">
+                      <div style="display: inline-block; position: relative; width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+
+                        <% DaoUsuarios daoUsersRegistro = new DaoUsuarios();%>
+                        <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                        <%ArrayList<Usuarios> lista_Usuarios = daoUsersRegistro.obtenerlistaFotoNull();%>
+                        <%boolean validacion = serv.Usuario_tiene_foto_null(lista_Usuarios,userAdmin.getIdUsuarios());%>
+                        <%if (validacion) {%>
+                        <img src="assets/img/fotosPerfil/perfilDefault.png"
+                             width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                        <%}else{%>
+                        <img alt="Profile"
+                             src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=userAdmin.getIdUsuarios()%>"
+                             width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                        <%}%>
+                      </div>
+
                       <h2><%=usuarios.getNombres()%></h2>
                       <h5><%=usuarios.getRol()%></h5>
                     </div>

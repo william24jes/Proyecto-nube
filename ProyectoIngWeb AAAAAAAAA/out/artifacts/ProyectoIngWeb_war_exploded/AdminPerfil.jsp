@@ -164,7 +164,7 @@
                                                      id="profile-overview">
 
                                                     <h5 class="card-title">Detalles del Perfil</h5>
-                                                    
+
 
                                                     <div class="row">
                                                         <div class="col-lg-3 col-md-4 label ">Código</div>

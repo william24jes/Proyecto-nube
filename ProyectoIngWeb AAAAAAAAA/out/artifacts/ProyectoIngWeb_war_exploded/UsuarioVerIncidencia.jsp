@@ -129,11 +129,11 @@
                                             <%boolean validacion2 = serv2.Usuario_tiene_foto_null(lista_Usuarios2,incidencia_send_jsp.getIdUsuarioQueCreoIncidencia());%>
                                             <%if (validacion2) {%>
                                             <img src="assets/img/fotosPerfil/perfilDefault.png"
-                                                 height="150" width="150" alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                                 height="150" width="150" alt="Profile" style="width: auto; height: 100%">
                                             <%}else{%>
                                             <img height="150" width="150" alt="Profile" id="profileImage"
-                                                 src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=incidencia_send_jsp.getIdUsuarioQueCreoIncidencia()%>"
-                                                 style="width: auto; height: 100%; margin-left: -10px;"/>
+                                                 src="<%=request.getContextPath()%>/Image?action=lista_ima  gen_perfil_sql&id=<%=incidencia_send_jsp.getIdUsuarioQueCreoIncidencia()%>"
+                                                 style="width: auto; height: 100%"/>
                                             <%}%>
                                         </div>
                                         <br>

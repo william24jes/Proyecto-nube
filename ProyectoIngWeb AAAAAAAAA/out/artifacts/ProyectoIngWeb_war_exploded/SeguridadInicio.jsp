@@ -1,6 +1,8 @@
 <%@ page import="com.example.proyectoingweb.servlets.model.beans.Incidencias" %>
 <%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="seguridadSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
@@ -174,8 +176,21 @@
                                     <div class="card shadow mb-4">
                                         <!-- Card Header - Dropdown -->
                                         <div class="card-header py-3 d-flex flex-row align-items-center ">
-                                            <img src="<%=i.getAnonimo()==1?"assets/img/fotosPerfil/perfilDefault.png":"assets/img/fotosPerfil/"+i.getUsuario().getFotoPerfil()%>"
-                                                 height="70px"/>
+                                            <div style="display: inline-block; position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
+
+                                                <% DaoUsuarios daoUsersRegistro2 = new DaoUsuarios();%>
+                                                <%ServletUsuarioInicio serv2 = new ServletUsuarioInicio();%>
+                                                <%ArrayList<Usuarios> lista_Usuarios2 = daoUsersRegistro2.obtenerlistaFotoNull();%>
+                                                <%boolean validacion2 = serv2.Usuario_tiene_foto_null(lista_Usuarios2,seguridadSession.getIdUsuarios());%>
+                                                <%if (validacion2) {%>
+                                                <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                     height="150" width="150" alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
+                                                <%}else{%>
+                                                <img height="150" width="150" alt="Profile" id="profileImage"
+                                                     src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=seguridadSession.getIdUsuarios()%>"
+                                                     style="width: auto; height: 100%; margin-left: -10px;"/>
+                                                <%}%>
+                                            </div>
 
                                             <div class="col-9" style="color:darkgray;display: flex;flex-direction: column">
 
