@@ -220,7 +220,7 @@
                                                     <label for="customFile">Subir fotos de la
                                                         incidencia: </label>
                                                     <input type="file" class="form-control" style="width: 350px"
-                                                           id="customFile" name="foto1" />
+                                                           id="customFile" name="foto1" accept="image/*"/>
                                                 </div>
                                                 <!-- Form Group (location)-->
                                                 <!-- Form Group (email address)-->
