@@ -11,9 +11,12 @@ import jakarta.servlet.annotation.*;
 
 
 import javax.xml.stream.events.Comment;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -254,14 +257,37 @@ public class ServletUsuarioInicio extends HttpServlet {
                 }
             }
             case "CambiarTelefono": {
+                InputStream inputStream2; // input stream of the upload file
+                Part filePart2 = request.getPart("foto_subida");
                 String idUsuario3 = request.getParameter("id");
                 String nuevo_celular = request.getParameter("phone");
-
                 Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
                 user_a_cambiar.setCelular(nuevo_celular);
+                if (filePart2 != null) {
+                    // obtains input stream of the upload file
+                    inputStream2 = filePart2.getInputStream();
+                    daoUsuarios.actualizar_usuario_telefono_fotoPerfil(user_a_cambiar,inputStream2);
+                }else if(filePart2 == null){
+                    daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("usuarioSession", user_a_cambiar);
+                response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
+                break;
+            }
+            case "Borrar_Foto_Perfil":{
+                String idUsuario3 = request.getParameter("id");
+                /*String filePath = getServletContext();
+                 */
+                ServletContext context = getServletContext();
+                String fullPath = context.getRealPath("/assets/img/fotosPerfil/perfilDefault.png");
+                System.out.println(fullPath);
 
-                daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
-
+                InputStream inputStream3;
+                byte[] bytes = Files.readAllBytes(Paths.get(fullPath));
+                inputStream3 = new ByteArrayInputStream(bytes);
+                Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
+                daoUsuarios.eliminar_fotoPerfil(user_a_cambiar,inputStream3);
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioSession", user_a_cambiar);
 

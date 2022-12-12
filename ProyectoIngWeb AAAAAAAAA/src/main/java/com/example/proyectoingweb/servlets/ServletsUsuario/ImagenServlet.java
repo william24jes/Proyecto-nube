@@ -31,6 +31,20 @@ public class ImagenServlet extends HttpServlet {
                     response.getOutputStream().write(content);
                 }
             }
+            case "lista_imagen_perfil_sql"->{
+                int id_usuario = Integer.parseInt(request.getParameter("id"));
+                byte[] content = null;
+                content = imageDao.obtenerimagenes_perfil(id_usuario);
+                if (content.length == 1 && content[0] == 0) {
+                    System.out.println("Algo falló al nivel de SQL/DB");
+                } else if (content.length == 1 && content[0] == 1) {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                } else {
+                    response.setContentType("image/gif");
+                    response.setContentLength(content.length);
+                    response.getOutputStream().write(content);
+                }
+            }
         }
 
     }
