@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="pin" type="java.lang.String" scope="request"></jsp:useBean>
+<jsp:useBean id="idUsuario" scope="request" type="java.lang.String"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +45,6 @@
                 <img src="assets/img/fondo_inicio_sesion.png" class="img-fluid" alt="Sample image">
 
               </div>
-
-
               <div class=" col-md-10 col-lg-6 col-xl-5 order-1 order-lg-2">
                 <div class="d-flex justify-content-center py-4">
                   <a class="logo d-flex align-items-center w-auto">
@@ -70,13 +70,10 @@
                         <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=dobleFactor" class="needs-validation" novalidate>
                           <p>Ingrese el PIN:</p>
 
+                          <input type="text" name="pin" value="<%=pin%>" disabled>
+                          <input type="text" name="idUsuario" value="<%=idUsuario%>" disabled>
+
                           <div class="row mb-4">
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required>
-                            </div>
                             <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
                               <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required>
                             </div>
@@ -87,7 +84,13 @@
                               <input type="text" name="pin3" class="form-control text-lg text-center" aria-label="2fa" required>
                             </div>
                             <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin3" class="form-control text-lg text-center" aria-label="2fa" required>
+                              <input type="text" name="pin4" class="form-control text-lg text-center" aria-label="2fa" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin5" class="form-control text-lg text-center" aria-label="2fa" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin6" class="form-control text-lg text-center" aria-label="2fa" required>
                             </div>
                           </div>
                           <div class="col-12">

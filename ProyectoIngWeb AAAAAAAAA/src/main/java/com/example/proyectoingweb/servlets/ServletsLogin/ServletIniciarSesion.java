@@ -177,7 +177,6 @@ public class ServletIniciarSesion extends HttpServlet {
                             break;
                         case "Seguridad":
 
-
                             // Generar codigo temporal
 
                             Random rnd = new Random();
@@ -193,15 +192,18 @@ public class ServletIniciarSesion extends HttpServlet {
 
                             String fechaExpiracion = df.format(cal.getTime());
 
-                            String link = "http://localhost:8080" + request.getContextPath() +"/IniciarSesion?action=";
+                            daoUsuarios.guardarToken(usuarioValido.getIdUsuarios(), pin, fechaExpiracion);
+
+                            // Enviar codigo mediante correo
+
                             String asunto = "PIN de Doble Factor";
                             String mensaje = "Tu código de verificación es :"+ pin +
                                     "Este código PIN expirará en 5 minutos.";
 
-                            // Enviar codigo mediante correo
+                            daoUsuarios.enviarCorreo(usuarioValido.getCorreoPucp(), asunto, mensaje);
 
-
-
+                            request.setAttribute("pin", pin);
+                            request.setAttribute("idUsuario", usuarioValido.getIdUsuarios());
                             requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
                             requestDispatcher.forward(request, response);
 
@@ -398,10 +400,31 @@ public class ServletIniciarSesion extends HttpServlet {
 
             case "dobleFactor":
 
-                String pin1 = request.getParameter("pin1");
-                String pin2 = request.getParameter("pin2");
-                String pin3 = request.getParameter("pin3");
-                String pin4 = request.getParameter("pin4");
+                String pin = request.getParameter("pin");
+                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+
+                if (daoUsuarios.validarToken(idUsuario)<0){
+
+                    String pin1 = request.getParameter("pin1");
+                    String pin2 = request.getParameter("pin2");
+                    String pin3 = request.getParameter("pin3");
+                    String pin4 = request.getParameter("pin4");
+                    String pin5 = request.getParameter("pin5");
+                    String pin6 = request.getParameter("pin6");
+
+                    String pinIngresado = pin1+pin2+pin3+pin4+pin5+pin6;
+
+                    if (pinIngresado.equals(pin)){
+
+                    }
+                    else {
+
+                        
+                    }
+
+                } else if (daoUsuarios.validarToken(idUsuario)>0) {
+
+                }
 
                 response.sendRedirect(request.getContextPath() + "/Seguridad");
                 break;
