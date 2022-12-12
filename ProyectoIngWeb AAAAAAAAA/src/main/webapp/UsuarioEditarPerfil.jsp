@@ -222,8 +222,7 @@
                                                                name="id" value="<%=usuarioSession.getIdUsuarios()%>">
                                                         <div class="row mb-3">
                                                             <label for="profileImage"
-                                                                   class="col-md-4 col-lg-3 col-form-label">Imagen de
-                                                                Perfil</label>
+                                                                   class="col-md-4 col-lg-3 col-form-label">Imagen de perfil</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <div style="display: inline-block; position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
 
