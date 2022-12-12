@@ -78,7 +78,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
             case "registrarIncidencia":
-                request.setAttribute("listaIncidencias",daoIncidencias.obtenerlistaIncidenciasCompleta());
+                request.setAttribute("listaIncidencias", daoIncidencias.obtenerlistaIncidenciasCompleta());
                 request.setAttribute("listaZonasPUCP", daoZonaPucp.obtenerListaZonaPucp());
                 requestDispatcher = request.getRequestDispatcher("UsuarioRegistrarIncidencia.jsp");
                 requestDispatcher.forward(request, response);
@@ -114,9 +114,9 @@ public class ServletUsuarioInicio extends HttpServlet {
             case "page":
                 idPage = Integer.parseInt(request.getParameter("id"));
                 centinela = getCentinelaSearch();
-                busqueda=getSearch();
+                busqueda = getSearch();
 
-                if(centinela == 0) {
+                if (centinela == 0) {
                     setListaPaginada(daoIncidencias.paginarIncidencias(idPage));
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
@@ -125,7 +125,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 } else if (centinela == 2) {
-                    setListaPaginada(daoIncidencias.paginarIncidenciasOrdenadas(idPage, getOpcion(),getOrden()));
+                    setListaPaginada(daoIncidencias.paginarIncidenciasOrdenadas(idPage, getOpcion(), getOrden()));
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 }
@@ -136,20 +136,20 @@ public class ServletUsuarioInicio extends HttpServlet {
 
             case "pageMisIncidencias":
                 idPage = Integer.parseInt(request.getParameter("id"));
-                String usuarios=getUsuarioSesion();
+                String usuarios = getUsuarioSesion();
                 centinela = getCentinelaSearch();
-                busqueda=getSearch();
+                busqueda = getSearch();
 
-                if(centinela == 0) {
-                    setListaPaginada(daoIncidencias.paginarMisIncidencias("" + usuarios + "",idPage));
+                if (centinela == 0) {
+                    setListaPaginada(daoIncidencias.paginarMisIncidencias("" + usuarios + "", idPage));
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 } else if (centinela == 1) {
-                    setListaPaginada(daoIncidencias.paginarMisIncidenciasBuscadasidIncidencia(idPage, busqueda,"" + usuarios + ""));
+                    setListaPaginada(daoIncidencias.paginarMisIncidenciasBuscadasidIncidencia(idPage, busqueda, "" + usuarios + ""));
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 } else if (centinela == 2) {
-                    setListaPaginada(daoIncidencias.paginarIncidenciasOrdenadas(idPage, getOpcion(),getOrden()));
+                    setListaPaginada(daoIncidencias.paginarIncidenciasOrdenadas(idPage, getOpcion(), getOrden()));
                     request.setAttribute("listaIncidenciasPermanente", getListaPermanente());
                     request.setAttribute("listaIncidenciasPaginada", getListaPaginada());
                 }
@@ -190,11 +190,11 @@ public class ServletUsuarioInicio extends HttpServlet {
                 String longitud = request.getParameter("longitud");
                 String value_incidencia = request.getParameter("idIncidencia");
                 String anonimo = request.getParameter("anonimo");
-                if(anonimo==null){
-                    anonimo="0";
+                if (anonimo == null) {
+                    anonimo = "0";
                     incidencias.setAnonimo(Integer.parseInt(anonimo));
                 }
-                if(anonimo!=null){
+                if (anonimo != null) {
                     incidencias.setAnonimo(Integer.parseInt(anonimo));
                 }
 
@@ -207,7 +207,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                     inputStream = filePart.getInputStream();
                 }
                 usuario = daoUsuarios.buscarPorId(idusuario);
-                incidencias.setIdIncidencia(Integer.parseInt(value_incidencia)+1);
+                incidencias.setIdIncidencia(Integer.parseInt(value_incidencia) + 1);
                 incidencias.setUsuario(usuario);
                 incidencias.setLatitud(latitud);
                 incidencias.setLongitud(longitud);
@@ -224,16 +224,16 @@ public class ServletUsuarioInicio extends HttpServlet {
                 incidencias.setDatetime(formattedDate);
                 incidencias.setEstadoIncidencia("Registrado");
                 daoIncidencias.guardarIncidencias(incidencias, inputStream);
-                daoIncidencias.destacarIncidencia_para_idUsuario(idusuario,String.valueOf(Integer.parseInt(value_incidencia)+1));
+                daoIncidencias.destacarIncidencia_para_idUsuario(idusuario, String.valueOf(Integer.parseInt(value_incidencia) + 1));
 
 
-                lista_comentarios =daoComentarios.obtenerListaComentarios();
+                lista_comentarios = daoComentarios.obtenerListaComentarios();
                 int value_id_Incidencia = 0;
-                for(Comentarios lista: lista_comentarios){
+                for (Comentarios lista : lista_comentarios) {
                     value_id_Incidencia = lista.getIdIncidencia();
                 }
-                String id_incidencia_nuevo = String.valueOf(value_id_Incidencia+ 1);
-                daoComentarios.guardarComentario(id_incidencia_nuevo,idusuario);
+                String id_incidencia_nuevo = String.valueOf(value_id_Incidencia + 1);
+                daoComentarios.guardarComentario(id_incidencia_nuevo, idusuario);
 
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=misIncidencias");
                 break;
@@ -263,11 +263,12 @@ public class ServletUsuarioInicio extends HttpServlet {
                 String nuevo_celular = request.getParameter("phone");
                 Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
                 user_a_cambiar.setCelular(nuevo_celular);
-                if (filePart2 != null) {
-                    // obtains input stream of the upload file
-                    inputStream2 = filePart2.getInputStream();
-                    daoUsuarios.actualizar_usuario_telefono_fotoPerfil(user_a_cambiar,inputStream2);
-                }else if(filePart2 == null){
+                // obtains input stream of the upload file
+                System.out.println(filePart2);
+                inputStream2 = filePart2.getInputStream();
+                if(filePart2.getSize() != 0){
+                    daoUsuarios.actualizar_usuario_telefono_fotoPerfil(user_a_cambiar, inputStream2);
+                }else if(filePart2.getSize() == 0){
                     daoUsuarios.actualizar_usuario_telefono(user_a_cambiar);
                 }
                 HttpSession session = request.getSession();
@@ -275,7 +276,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
                 break;
             }
-            case "Borrar_Foto_Perfil":{
+            case "Borrar_Foto_Perfil": {
                 String idUsuario3 = request.getParameter("id");
                 /*String filePath = getServletContext();
                  */
@@ -287,7 +288,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 byte[] bytes = Files.readAllBytes(Paths.get(fullPath));
                 inputStream3 = new ByteArrayInputStream(bytes);
                 Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
-                daoUsuarios.eliminar_fotoPerfil(user_a_cambiar,inputStream3);
+                daoUsuarios.eliminar_fotoPerfil(user_a_cambiar, inputStream3);
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioSession", user_a_cambiar);
 
@@ -368,22 +369,20 @@ public class ServletUsuarioInicio extends HttpServlet {
 
                 Credenciales credenciales = daoUsuarios.validarCambioPassword(usuarios.getIdUsuarios(), password);
 
-                if (credenciales != null){
-                    if (request.getParameter("nuevaPassword1").equals(request.getParameter("nuevaPassword2"))){
+                if (credenciales != null) {
+                    if (request.getParameter("nuevaPassword1").equals(request.getParameter("nuevaPassword2"))) {
 
                         daoUsuarios.actualizarPassword(Integer.parseInt(credenciales.getIdUsuario()), request.getParameter("nuevaPassword1"));
 
-                        session.setAttribute("msg","Contraseña cambiada correctamente");
+                        session.setAttribute("msg", "Contraseña cambiada correctamente");
                         response.sendRedirect(request.getContextPath() + "/Inicio");
-                    }
-                    else {
+                    } else {
                         session.setAttribute("msgError", "Las contraseñas deben ser iguales");
-                        response.sendRedirect(request.getContextPath()+"/Inicio?action=perfil");
+                        response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
                     }
-                }
-                else {
+                } else {
                     session.setAttribute("msgError", "La contraseña actual es incorrecta");
-                    response.sendRedirect(request.getContextPath()+"/Inicio?action=perfil");
+                    response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
                 }
 
                 break;
@@ -411,8 +410,8 @@ public class ServletUsuarioInicio extends HttpServlet {
                 setUsuarioSesion(String.valueOf(user.getIdUsuarios()));
                 String searchText2 = request.getParameter("searchText");
                 setSearch(searchText2);
-                ArrayList<Incidencias> lista2 = daoIncidencias.buscarMisIncidenciasCompleto(searchText2,"" + user.getIdUsuarios() + "");
-                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.buscarMisIncidencias(searchText2,"" + user.getIdUsuarios() + "")); //editar
+                ArrayList<Incidencias> lista2 = daoIncidencias.buscarMisIncidenciasCompleto(searchText2, "" + user.getIdUsuarios() + "");
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.buscarMisIncidencias(searchText2, "" + user.getIdUsuarios() + "")); //editar
                 request.setAttribute("listaIncidenciasPermanente", lista2);
 
                 setListaPermanente(lista2);
@@ -426,14 +425,14 @@ public class ServletUsuarioInicio extends HttpServlet {
             case "order":
                 setCentinelaSearch(2);
                 String opcionjsp = request.getParameter("tipo");
-                String ordenamiento= request.getParameter("orden");
+                String ordenamiento = request.getParameter("orden");
                 setOpcion(opcionjsp);
                 setOrden(ordenamiento);
 
-                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.paginarIncidenciasOrdenadas(1,opcionjsp,ordenamiento));
+                request.setAttribute("listaIncidenciasPaginada", daoIncidencias.paginarIncidenciasOrdenadas(1, opcionjsp, ordenamiento));
                 request.setAttribute("listaIncidenciasPermanente", daoIncidencias.obtenerlistaIncidenciasCompleta());
 
-                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompletaOrdenada(opcionjsp,ordenamiento));
+                setListaPermanente(daoIncidencias.obtenerlistaIncidenciasCompletaOrdenada(opcionjsp, ordenamiento));
 
                 requestDispatcher = request.getRequestDispatcher("UsuarioInicio.jsp");
                 requestDispatcher.forward(request, response);
@@ -461,9 +460,6 @@ public class ServletUsuarioInicio extends HttpServlet {
                 break;*/
         }
     }
-
-
-
 
 
     public boolean Usuario_destaco_o_no(ArrayList<Usuarios> lista_users_que_destacan, Usuarios usuario_sesion) {
