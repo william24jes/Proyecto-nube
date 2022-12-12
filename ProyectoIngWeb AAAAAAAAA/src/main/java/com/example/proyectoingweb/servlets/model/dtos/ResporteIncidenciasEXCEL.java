@@ -47,8 +47,7 @@ public class ResporteIncidenciasEXCEL {
         String ruta = System.getProperty("user.home");
 
         File directorioActual = new File(ruta + "/Desktop/ReporteIncidencias.xlsx");
-        //String ubicacion = directorioActual.getAbsolutePath();
-        //String ubicacionArchivoSalida = ubicacion.substring(0,ubicacion.length()-1) + nombreArchivo;
+
         FileOutputStream outputStream;
         try {
             outputStream = new FileOutputStream(directorioActual);
