@@ -7,6 +7,7 @@
 <%
     ArrayList<Usuarios> listaPermanente = (ArrayList<Usuarios>) request.getAttribute("listaPermanente");
     ArrayList<Usuarios> listaPaginada = (ArrayList<Usuarios>) request.getAttribute("listaPaginada");
+    ArrayList<Usuarios> listaRegistrados = (ArrayList<Usuarios>) request.getAttribute("registrado");
     String searchText = (String) request.getAttribute("searchText");
 %>
 <!DOCTYPE html>
@@ -159,6 +160,7 @@
                                     <th>Correo</th>
                                     <th>DNI</th>
                                     <th>Rol</th>
+                                    <th>Estado</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -181,6 +183,19 @@
                                     </td>
                                     <td><%=usuarios.getRol()%>
                                     </td>
+
+                                    <%int centinela=0; for(Usuarios usuarios2: listaRegistrados){
+                                        if (usuarios2.getCodigoPucp().equals(usuarios.getCodigoPucp())){
+                                            centinela=1;
+                                        }
+                                    }%>
+
+                                    <%if (centinela==1){%>
+                                        <td>Registrado</td>
+                                    <%}else{%>
+                                        <td>No registrado</td>
+                                    <%}%>
+
                                     <td>
 
                                         <a type="button" class="btn btn-primary"
