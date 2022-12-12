@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="pin" type="java.lang.String" scope="request"></jsp:useBean>
-<jsp:useBean id="idUsuario" scope="request" type="java.lang.String"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,41 +59,40 @@
                         <div class="pt-4 pb-2">
                           <h5 class="card-title text-center pb-0 fs-4">Autenticación de doble factor</h5>
                           <br>
-                          <div class="col-12 " >
+                          <div class="col-12" >
                             <p>Se necesitará un paso extra para confirmar su identidad.</p>
-                            <br>
-                            <p>Se acaba de enviar un correo con un PIN de verificación de 4 dígitos al correo ingresado</p>
-
+                            <br><p>Se acaba de enviar un correo con un PIN de verificación de 6 dígitos al correo ingresado</p>
                           </div>
                         </div>
                         <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=dobleFactor" class="needs-validation" novalidate>
                           <p>Ingrese el PIN:</p>
 
-                          <input type="text" name="pin" value="<%=pin%>" disabled>
-                          <input type="text" name="idUsuario" value="<%=idUsuario%>" disabled>
+                          <input type="hidden" name="pin" value="<%=pin%>">
 
-                          <div class="row mb-4">
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required>
+                          <div class="d-grid gap-3">
+                            <div class="row mb-4">
+                              <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                                <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required maxlength="1">
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                                <input type="text" name="pin2" class="form-control text-lg text-center" aria-label="2fa" required maxlength="1">
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                                <input type="text" name="pin3" class="form-control text-lg text-center" aria-label="2fa" required maxlength="1">
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                                <input type="text" name="pin4" class="form-control text-lg text-center" aria-label="2fa" required maxlength="1">
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                                <input type="text" name="pin5" class="form-control text-lg text-center" aria-label="2fa" required maxlength="1">
+                              </div>
+                              <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                                <input type="text" name="pin6" class="form-control text-lg text-center" aria-label="2fa" required maxlength="1">
+                              </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin2" class="form-control text-lg text-center" aria-label="2fa" required>
+                            <div class="col-12">
+                              <button class="btn btn-primary w-100" type="submit">Continuar</button>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin3" class="form-control text-lg text-center" aria-label="2fa" required>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin4" class="form-control text-lg text-center" aria-label="2fa" required>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin5" class="form-control text-lg text-center" aria-label="2fa" required>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
-                              <input type="text" name="pin6" class="form-control text-lg text-center" aria-label="2fa" required>
-                            </div>
-                          </div>
-                          <div class="col-12">
-                            <button class="btn btn-primary w-100" type="submit">Continuar</button>
                           </div>
                         </form>
                       </div>
@@ -110,8 +108,6 @@
 
       </div>
     </main><!-- End #main -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -151,3 +147,4 @@
   </body>
 
 </html>
+

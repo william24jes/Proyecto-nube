@@ -129,6 +129,13 @@ public class ServletIniciarSesion extends HttpServlet {
 
                 break;
 
+            case "pinInvalido":
+
+                requestDispatcher = request.getRequestDispatcher("pinInvalido.jsp");
+                requestDispatcher.forward(request, response);
+
+                break;
+
         }
     }
 
@@ -179,7 +186,9 @@ public class ServletIniciarSesion extends HttpServlet {
 
                             // Generar codigo temporal
 
-                            /*Random rnd = new Random();
+                            daoUsuarios.borrarToken(usuarioValido.getIdUsuarios());
+
+                            Random rnd = new Random();
                             int number = rnd.nextInt(999999);
                             String pin = String.format("%06d", number);
 
@@ -197,19 +206,18 @@ public class ServletIniciarSesion extends HttpServlet {
                             // Enviar codigo mediante correo
 
                             String asunto = "PIN de Doble Factor";
-                            String mensaje = "Tu código de verificación es :"+ pin +
-                                    "Este código PIN expirará en 5 minutos.";
+                            String mensaje = "Tu código PIN de verificación es : "+ pin + "\n\n" +
+                                    "Este código expirará en 5 minutos.";
 
                             daoUsuarios.enviarCorreo(usuarioValido.getCorreoPucp(), asunto, mensaje);
 
                             request.setAttribute("pin", pin);
-                            request.setAttribute("idUsuario", usuarioValido.getIdUsuarios());
                             requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
-                            requestDispatcher.forward(request, response);*/
+                            requestDispatcher.forward(request, response);
 
-                            HttpSession sessionSeguridad = request.getSession();
+                           /* HttpSession sessionSeguridad = request.getSession();
                             sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
-                            response.sendRedirect(request.getContextPath() + "/Seguridad");
+                            response.sendRedirect(request.getContextPath() + "/Seguridad");*/
 
                             break;
                         case "Administrador":
@@ -401,9 +409,9 @@ public class ServletIniciarSesion extends HttpServlet {
             case "dobleFactor":
 
                 String pin = request.getParameter("pin");
-                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                usuario = daoUsuarios.buscarPorToken(pin);
 
-                if (daoUsuarios.validarToken(idUsuario)<0){
+                if (usuario != null && daoUsuarios.validarToken(usuario.getIdUsuarios())<0){
 
                     String pin1 = request.getParameter("pin1");
                     String pin2 = request.getParameter("pin2");
@@ -412,21 +420,26 @@ public class ServletIniciarSesion extends HttpServlet {
                     String pin5 = request.getParameter("pin5");
                     String pin6 = request.getParameter("pin6");
 
+
                     String pinIngresado = pin1+pin2+pin3+pin4+pin5+pin6;
 
                     if (pinIngresado.equals(pin)){
 
+                        daoUsuarios.borrarToken(usuario.getIdUsuarios());
+
+                        HttpSession sessionSeguridad = request.getSession();
+                        sessionSeguridad.setAttribute("seguridadSession", usuario);
+                        response.sendRedirect(request.getContextPath() + "/Seguridad");
                     }
                     else {
-
-                        
+                        daoUsuarios.borrarToken(usuario.getIdUsuarios());
+                        response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=pinInvalido");
                     }
 
-                } else if (daoUsuarios.validarToken(idUsuario)>0) {
-
+                } else {
+                    response.sendRedirect(request.getContextPath()+"/IniciarSesion?action=pinInvalido");
                 }
 
-                response.sendRedirect(request.getContextPath() + "/Seguridad");
                 break;
         }
     }
