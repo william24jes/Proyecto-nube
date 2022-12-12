@@ -273,6 +273,7 @@ public class ServletUsuarioInicio extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioSession", user_a_cambiar);
+                session.setAttribute("msg", "Usuario editado correctamente");
                 response.sendRedirect(request.getContextPath() + "/Inicio?action=perfil");
                 break;
             }

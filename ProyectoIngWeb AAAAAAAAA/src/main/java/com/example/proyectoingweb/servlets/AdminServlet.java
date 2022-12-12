@@ -175,13 +175,13 @@ public class AdminServlet extends HttpServlet {
                     usuarios.setCategorias(request.getParameter("Categoría"));
                     usuarios.setRol(request.getParameter("Rol"));
                     usuarios.setCodigoPucp(request.getParameter("Codigo"));
-                    if(id>9999999 && id <99999999 && !request.getParameter("Nombres").equals("") &&
+                    if(dni>9999999 && dni <99999999 && !request.getParameter("Nombres").equals("") &&
                     !request.getParameter("Apellidos").equals("")){
 
                         if (daoUsuarios.actualizarUsuario(usuarios)) {
 
                             session = request.getSession();
-                            session.setAttribute("usuarioSession", usuarios);
+                            session.setAttribute("userAdmin", usuarios);
 
                             session.setAttribute("msg", "Usuario editado correctamente");
                             response.sendRedirect(request.getContextPath() + "/Admin");

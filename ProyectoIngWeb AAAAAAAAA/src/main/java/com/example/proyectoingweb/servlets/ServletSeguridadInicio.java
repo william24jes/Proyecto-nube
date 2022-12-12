@@ -171,7 +171,7 @@ public class ServletSeguridadInicio extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("seguridadSession", user_a_cambiar);
-
+                session.setAttribute("msg", "Usuario editado correctamente");
                 response.sendRedirect(request.getContextPath() + "/Seguridad?action=perfil");
                 break;
             }
