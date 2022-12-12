@@ -271,6 +271,9 @@ public class AdminServlet extends HttpServlet {
                                 response.sendRedirect(request.getContextPath() + "/Admin");
                             }
                         }
+                    }else{
+                        session.setAttribute("msg", "No se pudo actualizar los datos del usuario");
+                        response.sendRedirect(request.getContextPath() + "/Admin");
                     }
 
                 }catch (NumberFormatException e){
