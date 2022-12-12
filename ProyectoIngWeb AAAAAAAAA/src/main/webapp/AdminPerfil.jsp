@@ -1,4 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="com.example.proyectoingweb.servlets.AdminServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="userAdmin" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
@@ -30,7 +34,7 @@
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
             response.setDateHeader("Expires", 0);
-            if(userAdmin == null){
+            if (userAdmin == null) {
                 response.sendRedirect(request.getContextPath());
             }
         %>
@@ -104,8 +108,23 @@
                                     <div class="card mb-4 mb-xl-0">
                                         <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
 
-                                            <img src="assets/img/perfiles/perfil1.svg" width=70% alt="Profile"
-                                                 class="rounded-circle">
+
+                                            <div style="display: inline-block; position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
+                                                <% DaoUsuarios daoUsersRegistro1 = new DaoUsuarios();%>
+                                                <%AdminServlet serv1 = new AdminServlet();%>
+                                                <%ArrayList<Usuarios> lista_Usuarios1 = daoUsersRegistro1.obtenerlistaFotoNull();%>
+                                                <%boolean validacion1 = serv1.Admin_tiene_foto_null(lista_Usuarios1, userAdmin.getIdUsuarios());%>
+                                                <%if (validacion1) {%>
+                                                <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                     height="150" width="150" alt="Profile"
+                                                     style="width: auto; height: 100%; margin-left: -10px;">
+                                                <%} else {%>
+                                                <img height="150" width="150" alt="Profile"
+                                                     id="profileImage"
+                                                     src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=userAdmin.getIdUsuarios()%>"
+                                                     style="width: auto; height: 100%; margin-left: -10px;"/>
+                                                <%}%>
+                                            </div>
                                             <h2><%=userAdmin.getNombreYApellido()%>
                                             </h2>
                                             <h5>Administrador</h5>
@@ -200,124 +219,158 @@
 
                                                     <!-- Profile Edit Form -->
                                                     <form class="needs-validation" method="post"
-                                                          action="<%=request.getContextPath()%>/Admin?action=actualizar"
-                                                          novalidate>
-                                                    <div class="row mb-3">
-                                                        <label for="profileImage"
-                                                               class="col-md-4 col-lg-3 col-form-label">Imagen de
-                                                            Perfil</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <img src="assets/img/perfiles/perfil1.svg" height="150"
-                                                                 width="150" alt="Profile" id="profileImage">
-                                                            <div class="pt-2">
-                                                                <a href="#" class="btn btn-primary btn-sm"
-                                                                   title="Upload new profile image"><i
-                                                                        class="bi bi-upload"></i></a>
-                                                                <a href="#" class="btn btn-danger btn-sm"
-                                                                   title="Remove my profile image"><i
-                                                                        class="bi bi-trash"></i></a>
+                                                          action="<%=request.getContextPath()%>/Admin?action=CambiarDatos"
+                                                          novalidate enctype="multipart/form-data">
+                                                        <input class="form-control" id="idUsuario" type="hidden"
+                                                               name="id" value="<%=userAdmin.getIdUsuarios()%>">
+
+                                                        <div class="row mb-3">
+                                                            <label for="profileImage"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Imagen de
+                                                                Perfil</label>
+                                                            <div class="col-md-8 col-lg-9">
+
+                                                                <div style="display: inline-block; position: relative; width: 150px; height: 150px; overflow: hidden; border-radius: 50%;">
+                                                                    <% DaoUsuarios daoUsersRegistro2 = new DaoUsuarios();%>
+                                                                    <%AdminServlet serv2 = new AdminServlet();%>
+                                                                    <%ArrayList<Usuarios> lista_Usuarios2 = daoUsersRegistro2.obtenerlistaFotoNull();%>
+                                                                    <%boolean validacion2 = serv2.Admin_tiene_foto_null(lista_Usuarios2, userAdmin.getIdUsuarios());%>
+                                                                    <%if (validacion2) {%>
+                                                                    <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                                         height="150" width="150" alt="Profile"
+                                                                         style="width: auto; height: 100%; margin-left: -10px;">
+                                                                    <%} else {%>
+                                                                    <img height="150" width="150" alt="Profile"
+                                                                         id="profileImage"
+                                                                         src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=userAdmin.getIdUsuarios()%>"
+                                                                         style="width: auto; height: 100%; margin-left: -10px;"/>
+                                                                    <%}%>
+                                                                </div>
+                                                                <div class="pt-2">
+                                                                    <input style="display: none;" type="file"
+                                                                           id="foto_subida" name="foto_subida"
+                                                                           accept="image/*">
+                                                                    <label for="foto_subida"
+                                                                           class="btn btn-primary btn-sm"><i
+                                                                            class="bi bi-upload"></i></label>
+                                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                                            formaction="<%=request.getContextPath()%>/Admin?action=Borrar_Foto_Perfil"
+                                                                            title="Remove my profile image"><i
+                                                                            class="bi bi-trash"></i></button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <input name="ID Usuario" type="hidden" class="form-control"
-                                                           id="ID Usuario" value="<%=userAdmin.getIdUsuarios()%>">
+                                                        <input name="ID Usuario" type="hidden" class="form-control"
+                                                               id="ID Usuario" value="<%=userAdmin.getIdUsuarios()%>">
 
-                                                    <div class="row mb-3">
-                                                        <label for="Codigo" class="col-md-4 col-lg-3 col-form-label">Código</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <input minlength="8" maxlength="8" required name="Codigo"
-                                                                   type="number" class="form-control" id="Codigo"
-                                                                   value="<%=userAdmin.getCodigoPucp()%>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <label for="Nombres" class="col-md-4 col-lg-3 col-form-label">Nombres</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <input required name="Nombres" type="text"
-                                                                   class="form-control" id="Nombres"
-                                                                   value="<%=userAdmin.getNombres()%>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <label for="Apellidos" class="col-md-4 col-lg-3 col-form-label">Apellidos</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <input required name="Apellidos" type="text"
-                                                                   class="form-control" id="Apellidos"
-                                                                   value="<%=userAdmin.getApellidos()%>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <label for="Correo" class="col-md-4 col-lg-3 col-form-label">Correo</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <input required name="Correo PUCP" type="text"
-                                                                   class="form-control" id="Correo"
-                                                                   value="<%=userAdmin.getCorreoPucp()%>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <label for="DNI"
-                                                               class="col-md-4 col-lg-3 col-form-label">DNI</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <input required name="DNI" type="number"
-                                                                   class="form-control" id="DNI"
-                                                                   value="<%=userAdmin.getDni()%>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <label for="Celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <input required min="1" max="999999999999" name="Celular"
-                                                                   type="number" class="form-control" id="Celular"
-                                                                   value="<%=userAdmin.getCelular()%>">
-                                                        </div>
-                                                    </div>
-
-                                                    <input name="Rol" type="hidden" class="form-control" id="Rol"
-                                                           value="<%=userAdmin.getRol()%>">
-
-                                                    <div class="row mb-3">
-                                                        <label for="Categoría" class="col-md-4 col-lg-3 col-form-label">Categoría</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <select disabled class="form-select"
-                                                                    name="Categoría">
-                                                                <%for (String categoria : categorias) {%>
-                                                                <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
-                                                                </option>
-                                                                <%}%>
-                                                            </select>
+                                                        <div class="row mb-3">
+                                                            <label for="Codigo"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Código</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <input minlength="8" maxlength="8" required
+                                                                       name="Codigo"
+                                                                       type="number" class="form-control" id="Codigo"
+                                                                       value="<%=userAdmin.getCodigoPucp()%>">
+                                                            </div>
                                                         </div>
 
-                                                        <%//NO BORRAR, NO ES DUPLICADO%>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <select hidden class="form-select" id="Categoría"
-                                                                    name="Categoría">
-                                                                <%for (String categoria : categorias) {%>
-                                                                <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
-                                                                </option>
-                                                                <%}%>
-                                                            </select>
+                                                        <div class="row mb-3">
+                                                            <label for="Nombres"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Nombres</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <input required name="Nombres" type="text"
+                                                                       class="form-control" id="Nombres"
+                                                                       value="<%=userAdmin.getNombres()%>">
+                                                            </div>
                                                         </div>
 
-                                                    </div>
+                                                        <div class="row mb-3">
+                                                            <label for="Apellidos"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Apellidos</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <input required name="Apellidos" type="text"
+                                                                       class="form-control" id="Apellidos"
+                                                                       value="<%=userAdmin.getApellidos()%>">
+                                                            </div>
+                                                        </div>
 
-                                                    <div class="text-center">
-                                                        <button href="Admin_perfil.html" type="submit"
-                                                                class="btn btn-primary">Guardar
-                                                        </button>
-                                                    </div>
+                                                        <div class="row mb-3">
+                                                            <label for="Correo"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Correo</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <input required name="Correo PUCP" type="text"
+                                                                       class="form-control" id="Correo"
+                                                                       value="<%=userAdmin.getCorreoPucp()%>">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <label for="DNI"
+                                                                   class="col-md-4 col-lg-3 col-form-label">DNI</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <input required name="DNI" type="number"
+                                                                       class="form-control" id="DNI"
+                                                                       value="<%=userAdmin.getDni()%>">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <label for="Celular"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Celular</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <input required min="1" max="999999999999"
+                                                                       name="Celular"
+                                                                       type="number" class="form-control" id="Celular"
+                                                                       value="<%=userAdmin.getCelular()%>">
+                                                            </div>
+                                                        </div>
+
+                                                        <input name="Rol" type="hidden" class="form-control" id="Rol"
+                                                               value="<%=userAdmin.getRol()%>">
+
+                                                        <div class="row mb-3">
+                                                            <label for="Categoría"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Categoría</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <select disabled class="form-select"
+                                                                        name="Categoría">
+                                                                    <%for (String categoria : categorias) {%>
+                                                                    <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
+                                                                    </option>
+                                                                    <%}%>
+                                                                </select>
+                                                            </div>
+
+                                                            <%//NO BORRAR, NO ES DUPLICADO%>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <select hidden class="form-select" id="Categoría"
+                                                                        name="Categoría">
+                                                                    <%for (String categoria : categorias) {%>
+                                                                    <option value="<%=categoria%>" <%=categoria.equals(userAdmin.getCategorias()) ? "selected" : ""%>><%=categoria%>
+                                                                    </option>
+                                                                    <%}%>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="text-center">
+                                                            <button type="submit"
+                                                                    class="btn btn-primary"
+                                                                    formaction="<%=request.getContextPath()%>/Admin?action=CambiarDatos"
+                                                            >Guardar
+                                                            </button>
+                                                        </div>
                                                     </form><!-- End Profile Edit Form -->
                                                 </div>
 
                                                 <div class="tab-pane fade pt-3" id="profile-change-password">
                                                     <!-- Change Password Form -->
 
-                                                    <form class="needs-validation" method="post" action="<%=request.getContextPath()%>/Admin?action=actualizarPassword" novalidate>
+                                                    <form class="needs-validation" method="post"
+                                                          action="<%=request.getContextPath()%>/Admin?action=actualizarPassword"
+                                                          novalidate>
 
                                                         <div class="row mb-3">
                                                             <label for="currentPassword"
@@ -349,9 +402,13 @@
                                                             </div>
                                                         </div>
 
-                                                        <%if(session.getAttribute("msgError") != null){%>
-                                                        <p class="text-danger"><%=session.getAttribute("msgError")%></p>
-                                                        <%session.removeAttribute("msgError");}%>
+                                                        <%if (session.getAttribute("msgError") != null) {%>
+                                                        <p class="text-danger"><%=session.getAttribute("msgError")%>
+                                                        </p>
+                                                        <%
+                                                                session.removeAttribute("msgError");
+                                                            }
+                                                        %>
 
                                                         <div class="text-center">
                                                             <button type="submit" class="btn btn-primary">Cambiar

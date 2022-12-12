@@ -7,10 +7,15 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 @WebServlet(name = "AdminServlet", value = "/Admin")
+@MultipartConfig(maxFileSize = 16177215)
 public class AdminServlet extends HttpServlet {
 
     private ArrayList<Usuarios> listaPermanente; //Lista de todos los usuarios
@@ -160,6 +165,58 @@ public class AdminServlet extends HttpServlet {
                 }
 
                 break;
+            case "CambiarDatos": {
+                InputStream inputStream2; // input stream of the upload file
+                Part filePart2 = request.getPart("foto_subida");
+                String idUsuario3 = request.getParameter("id");
+                String nuevo_codigo = request.getParameter("Codigo");
+                String nuevo_Nombre = request.getParameter("Nombres");
+                String nuevo_Apellido = request.getParameter("Apellidos");
+                String nuevo_Correo = request.getParameter("Correo PUCP");
+                String nuevo_DNI =request.getParameter("DNI");
+                String nuevo_celular = request.getParameter("Celular");
+
+
+                Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
+                user_a_cambiar.setCodigoPucp(nuevo_codigo);
+                user_a_cambiar.setNombres(nuevo_Nombre);
+                user_a_cambiar.setApellidos(nuevo_Apellido);
+                user_a_cambiar.setCorreoPucp(nuevo_Correo);
+                user_a_cambiar.setDni(nuevo_DNI);
+                user_a_cambiar.setCelular(nuevo_celular);
+
+                // obtains input stream of the upload file
+                System.out.println(filePart2);
+                inputStream2 = filePart2.getInputStream();
+                if(filePart2.getSize() != 0){
+                    daoUsuarios.actualizar_userAdmin_datos_foto(user_a_cambiar, inputStream2);
+                }else if(filePart2.getSize() == 0){
+                    daoUsuarios.actualizar_userAdmin_datos(user_a_cambiar);
+                }
+                HttpSession session2 = request.getSession();
+                session2.setAttribute("userAdmin", user_a_cambiar);
+                session2.setAttribute("msg", "Usuario editado correctamente");
+                response.sendRedirect(request.getContextPath() + "/Admin?action=perfil");
+                break;
+            }
+            case "Borrar_Foto_Perfil": {
+                String idUsuario3 = request.getParameter("id");
+                /*String filePath = getServletContext();
+                 */
+                ServletContext context = getServletContext();
+                String fullPath = context.getRealPath("/assets/img/fotosPerfil/perfilDefault.png");
+                System.out.println(fullPath);
+
+                InputStream inputStream3;
+                byte[] bytes = Files.readAllBytes(Paths.get(fullPath));
+                inputStream3 = new ByteArrayInputStream(bytes);
+                Usuarios user_a_cambiar = daoUsuarios.buscarPorId(idUsuario3);
+                daoUsuarios.eliminar_fotoPerfil(user_a_cambiar, inputStream3);
+                HttpSession session3 = request.getSession();
+                session3.setAttribute("userAdmin", user_a_cambiar);
+                response.sendRedirect(request.getContextPath() + "/Admin?action=perfil");
+                break;
+            }
 
             case "actualizar":
                 try {
@@ -280,6 +337,15 @@ public class AdminServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
                 break;
         }
+    }
+    public boolean Admin_tiene_foto_null(ArrayList<Usuarios> lista_users_que_destacan, int usuario_sesion_id) {
+        for (Usuarios lista_foto_null : lista_users_que_destacan) {
+            if (lista_foto_null.getIdUsuarios() == usuario_sesion_id) {
+                //significa que el usuario ha destacado, entonces a volver a casa
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Usuarios> getListaPermanente() {

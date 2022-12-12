@@ -370,6 +370,48 @@ public class DaoUsuarios extends DaoBase{
         }
     }
 
+    public void actualizar_userAdmin_datos_foto(Usuarios idUser, InputStream file) {
+        String sql = "UPDATE usuarios SET  codigoPucp = ?, nombres = ?, apellidos = ?,correoPucp = ?, dni = ?, celular = ?, fotoPerfil = ? WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUser.getCodigoPucp());
+            pstmt.setString(2, idUser.getNombres());
+            pstmt.setString(3, idUser.getApellidos());
+            pstmt.setString(4, idUser.getCorreoPucp());
+            pstmt.setString(5, idUser.getDni());
+            pstmt.setString(6, idUser.getCelular());
+            if (file != null) {
+                pstmt.setBlob(7, file);
+            }
+            pstmt.setString(8, String.valueOf(idUser.getIdUsuarios()));
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void actualizar_userAdmin_datos(Usuarios idUser) {
+        String sql = "UPDATE usuarios SET  codigoPucp = ?, nombres = ?, apellidos = ?,correoPucp = ?, dni = ?, celular = ? WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUser.getCodigoPucp());
+            pstmt.setString(2, idUser.getNombres());
+            pstmt.setString(3, idUser.getApellidos());
+            pstmt.setString(4, idUser.getCorreoPucp());
+            pstmt.setString(5, idUser.getDni());
+            pstmt.setString(6, idUser.getCelular());
+            pstmt.setString(7, String.valueOf(idUser.getIdUsuarios()));
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void eliminar_fotoPerfil(Usuarios idUser, InputStream file) {
         String sql = "UPDATE usuarios SET fotoPerfil = ? WHERE idUsuario = ?";
         try (Connection connection = this.getConnection();
