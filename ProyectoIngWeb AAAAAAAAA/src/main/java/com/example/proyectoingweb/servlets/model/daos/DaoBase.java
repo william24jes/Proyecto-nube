@@ -13,7 +13,7 @@ public abstract class DaoBase {
             e.printStackTrace();
         }
 
-        String host = "34.162.216.123";
+        String host = "localhost";
         String db = "mydb2";
         String user = "root";
         String pass = "root";

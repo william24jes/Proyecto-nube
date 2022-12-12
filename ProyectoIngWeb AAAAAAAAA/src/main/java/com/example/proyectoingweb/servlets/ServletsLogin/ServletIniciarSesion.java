@@ -179,7 +179,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
                             // Generar codigo temporal
 
-                            Random rnd = new Random();
+                            /*Random rnd = new Random();
                             int number = rnd.nextInt(999999);
                             String pin = String.format("%06d", number);
 
@@ -205,11 +205,11 @@ public class ServletIniciarSesion extends HttpServlet {
                             request.setAttribute("pin", pin);
                             request.setAttribute("idUsuario", usuarioValido.getIdUsuarios());
                             requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
-                            requestDispatcher.forward(request, response);
+                            requestDispatcher.forward(request, response);*/
 
-                            /*HttpSession sessionSeguridad = request.getSession();
+                            HttpSession sessionSeguridad = request.getSession();
                             sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
-                            response.sendRedirect(request.getContextPath() + "/Seguridad");*/
+                            response.sendRedirect(request.getContextPath() + "/Seguridad");
 
                             break;
                         case "Administrador":
