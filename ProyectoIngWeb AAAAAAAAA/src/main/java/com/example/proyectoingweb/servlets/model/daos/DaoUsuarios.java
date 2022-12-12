@@ -77,6 +77,25 @@ public class DaoUsuarios extends DaoBase{
         }
         return listaUsuarios;
     }
+    public ArrayList<Usuarios> obtenerlistaFotoNull(){
+        ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+
+        String sql = "SELECT * FROM mydb2.usuarios where fotoPerfil Is NULL";
+
+        try(Connection connection = this.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)){
+
+            while(rs.next()){
+                Usuarios usuarios = new Usuarios();
+                usuarios.setIdUsuarios(rs.getInt(1));
+                listaUsuarios.add(usuarios);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+    }
 
     public ArrayList<Usuarios> obtenerlistaUsuariosCompletaOrdenada(String tipo,String orden){
         ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
@@ -328,6 +347,7 @@ public class DaoUsuarios extends DaoBase{
             throw new RuntimeException(e);
         }
     }
+
     public void eliminar_fotoPerfil(Usuarios idUser, InputStream file) {
         String sql = "UPDATE usuarios SET fotoPerfil = ? WHERE idUsuario = ?";
         try (Connection connection = this.getConnection();

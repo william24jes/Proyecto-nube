@@ -471,6 +471,15 @@ public class ServletUsuarioInicio extends HttpServlet {
         }
         return false;
     }
+    public boolean Usuario_tiene_foto_null(ArrayList<Usuarios> lista_users_que_destacan, int usuario_sesion_id) {
+        for (Usuarios lista_foto_null : lista_users_que_destacan) {
+            if (lista_foto_null.getIdUsuarios() == usuario_sesion_id) {
+                //significa que el usuario ha destacado, entonces a volver a casa
+                return true;
+            }
+        }
+        return false;
+    }
 
     public ArrayList<Incidencias> getListaPermanente() {
         return listaPermanente;
