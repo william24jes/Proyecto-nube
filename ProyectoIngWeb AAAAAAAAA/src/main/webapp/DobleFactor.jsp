@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean scope="request" id="correo" type="java.lang.String"/>
+<jsp:useBean id="correo" scope="request" type="java.lang.String"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+    <title>Doble Factor</title>
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
@@ -48,9 +48,9 @@
 
               <div class=" col-md-10 col-lg-6 col-xl-5 order-1 order-lg-2">
                 <div class="d-flex justify-content-center py-4">
-                  <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <a class="logo d-flex align-items-center w-auto">
                     <img src="assets/img/telepucp.png" alt="">
-                    <span class="d-none d-lg-block">Incidencias PUCP</span>
+                    <span class="d-none d-lg-block">INCIDENCIAS PUCP</span>
                   </a>
                 </div><!-- End Logo -->
 
@@ -67,25 +67,31 @@
                           <div class="col-12 " >
                             <p>Se necesitará un paso extra para confirmar su identidad.</p>
                             <br>
-                            <p>Se acaba de enviar un correo con un PIN de verificación de 4 dígitos al <%=correo%></p>
+                            <p>Se acaba de enviar un correo con un PIN de verificación de 4 dígitos al correo ingresado</p>
 
                           </div>
                         </div>
-                        <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=doblef">
+                        <form method="post" action="<%=request.getContextPath()%>/IniciarSesion?post=dobleFactor" class="needs-validation" novalidate>
                           <p>Ingrese el PIN:</p>
 
                           <div class="row mb-4">
-                            <div class="col-lg-3 col-md-3 col-3 ps-0 pe-md-3">
-                              <input type="text" class="form-control text-lg text-center" placeholder="_" aria-label="2fa">
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-3 ps-0 pe-md-3">
-                              <input type="text" class="form-control text-lg text-center" placeholder="_" aria-label="2fa">
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-3 ps-0 pe-md-3">
-                              <input type="text" class="form-control text-lg text-center" placeholder="_" aria-label="2fa">
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin1" class="form-control text-lg text-center" aria-label="2fa" required>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-3 ps-0 pe-md-3">
-                              <input type="text" class="form-control text-lg text-center" placeholder="_" aria-label="2fa">
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin2" class="form-control text-lg text-center" aria-label="2fa" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin3" class="form-control text-lg text-center" aria-label="2fa" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 pe-md-2">
+                              <input type="text" name="pin3" class="form-control text-lg text-center" aria-label="2fa" required>
                             </div>
                           </div>
                           <div class="col-12">
@@ -120,6 +126,28 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                  form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                  }, false)
+                })
+      })()
+    </script>
 
   </body>
 

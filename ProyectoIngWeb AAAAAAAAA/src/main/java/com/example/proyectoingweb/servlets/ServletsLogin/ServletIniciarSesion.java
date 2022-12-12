@@ -176,15 +176,33 @@ public class ServletIniciarSesion extends HttpServlet {
 
                             break;
                         case "Seguridad":
+
+                            request.setAttribute("correo", correo);
+
+                            // Generar codigo temporal
+
+                            Random rnd = new Random();
+                            int number = rnd.nextInt(999999);
+                            String pin = String.format("%06d", number);
+
+                            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                            Date fechaActual = new Date();
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(fechaActual);
+                            cal.add(Calendar.MINUTE, 5);
+
+                            String fechaExpiracion = df.format(cal.getTime());
+
+                            // Enviar codigo mediante correo
+
+                            requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
+                            requestDispatcher.forward(request, response);
+
                             HttpSession sessionSeguridad = request.getSession();
                             sessionSeguridad.setAttribute("seguridadSession", usuarioValido);
                             response.sendRedirect(request.getContextPath() + "/Seguridad");
 
-                            /*
-                            request.setAttribute("correo", correo);
-                            requestDispatcher = request.getRequestDispatcher("DobleFactor.jsp");
-                            requestDispatcher.forward(request,response);
-                             */
                             break;
                         case "Administrador":
                             HttpSession sessionAdmin = request.getSession();
@@ -373,6 +391,12 @@ public class ServletIniciarSesion extends HttpServlet {
                 break;
 
             case "dobleFactor":
+
+                String pin1 = request.getParameter("pin1");
+                String pin2 = request.getParameter("pin2");
+                String pin3 = request.getParameter("pin3");
+                String pin4 = request.getParameter("pin4");
+
                 response.sendRedirect(request.getContextPath() + "/Seguridad");
                 break;
         }
