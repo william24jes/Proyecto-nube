@@ -511,7 +511,9 @@ public class DaoUsuarios extends DaoBase{
 
     public Usuarios validarRegistro(String correoPucp, String codigoPucp){
 
-        String sql = "select * from usuarios where correoPucp = ? and codigoPucp = ?";
+        String sql = "select u.* from usuarios u " +
+                "inner join credenciales c on (u.idUsuiario = c.idUsuario) " +
+                "where u.correoPucp = ? and u.codigoPucp = ? and c.contrasenaHasheada = null";
         Usuarios usuario = null;
 
         try(Connection conn = this.getConnection();
@@ -751,6 +753,45 @@ public class DaoUsuarios extends DaoBase{
         }catch (SQLException e){
             e.getStackTrace();
         }
+    }
+
+    public Usuarios validarOlvidoContrasena(String correoPucp){
+
+        String sql = "select u.* from usuarios u " +
+                "inner join credenciales c on (u.idUsuario = c.idUsuario) " +
+                "where c.correoPucp = ?";
+
+        Usuarios usuarios = null;
+
+        try(Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, correoPucp);
+
+            try (ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()){
+                    usuarios = new Usuarios();
+
+                    usuarios.setIdUsuarios(rs.getInt(1));
+                    usuarios.setNombres(rs.getString(2));
+                    usuarios.setApellidos(rs.getString(3));
+                    usuarios.setDni(rs.getString(4));
+                    usuarios.setCelular(rs.getString(5));
+                    usuarios.setCodigoPucp(rs.getString(6));
+                    usuarios.setCorreoPucp(rs.getString(7));
+                    usuarios.setCategorias(rs.getString(8));
+                    usuarios.setRol(rs.getString(9));
+                    usuarios.setFotoPerfil(rs.getString(10));
+                }
+            }
+
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+
+        return usuarios;
+
     }
 
 
