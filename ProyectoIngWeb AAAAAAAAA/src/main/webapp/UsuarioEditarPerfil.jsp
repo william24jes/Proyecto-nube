@@ -1,5 +1,9 @@
 <%@ page import="java.io.File" %>
 <%@ page import="java.nio.file.Path" %>
+<%@ page import="com.example.proyectoingweb.servlets.ServletsUsuario.ServletUsuarioInicio" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.beans.Usuarios" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.proyectoingweb.servlets.model.daos.DaoUsuarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
@@ -112,9 +116,19 @@
                                 <div class="col-xl-4">
                                     <div class="card mb-4 mb-xl-0">
                                         <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
+                                            <% DaoUsuarios daoUsersRegistro = new DaoUsuarios();%>
+                                            <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
+                                            <%ArrayList<Usuarios> lista_Usuarios = daoUsersRegistro.obtenerlistaFotoNull();%>
+                                            <%boolean validacion = serv.Usuario_tiene_foto_null(lista_Usuarios,usuarioSession.getIdUsuarios());%>
+                                            <%if (validacion) {%>
+                                            <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                 width=70% alt="Profile" class="rounded-circle">
+                                            <%}else{%>
                                             <img alt="Profile"
                                                  src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=usuarioSession.getIdUsuarios()%>"
                                                  width=70% alt="Profile" class="rounded-circle">
+                                            <%}%>
+
                                             <h2><%=usuarioSession.getNombreYApellido()%>
                                             </h2>
                                             <h5>Usuario PUCP</h5>
@@ -204,9 +218,18 @@
                                                                    class="col-md-4 col-lg-3 col-form-label">Imagen de
                                                                 Perfil</label>
                                                             <div class="col-md-8 col-lg-9">
+                                                                <% DaoUsuarios daoUsersRegistro2 = new DaoUsuarios();%>
+                                                                <%ServletUsuarioInicio serv2 = new ServletUsuarioInicio();%>
+                                                                <%ArrayList<Usuarios> lista_Usuarios2 = daoUsersRegistro2.obtenerlistaFotoNull();%>
+                                                                <%boolean validacion2 = serv2.Usuario_tiene_foto_null(lista_Usuarios2,usuarioSession.getIdUsuarios());%>
+                                                                <%if (validacion2) {%>
+                                                                <img src="assets/img/fotosPerfil/perfilDefault.png"
+                                                                     height="150" width="150" alt="Profile" class="rounded-circle">
+                                                                <%}else{%>
                                                                 <img height="150" width="150" alt="Profile" id="profileImage"
                                                                      src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=usuarioSession.getIdUsuarios()%>"
                                                                      class="rounded-circle"/>
+                                                                <%}%>
 
                                                                 <div class="pt-2">
                                                                     <input style="display: none;" type="file" id="foto_subida" name="foto_subida" accept="image/*">
