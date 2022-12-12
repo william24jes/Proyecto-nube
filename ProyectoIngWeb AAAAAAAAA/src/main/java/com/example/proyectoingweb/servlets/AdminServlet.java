@@ -163,7 +163,6 @@ public class AdminServlet extends HttpServlet {
 
             case "actualizar":
                 try {
-                    int id = Integer.parseInt(request.getParameter("ID Usuario"));
                     int dni = Integer.parseInt(request.getParameter("DNI"));
 
                     usuarios.setIdUsuarios(Integer.parseInt(request.getParameter("ID Usuario")));
@@ -179,9 +178,6 @@ public class AdminServlet extends HttpServlet {
                     !request.getParameter("Apellidos").equals("")){
 
                         if (daoUsuarios.actualizarUsuario(usuarios)) {
-
-                            session = request.getSession();
-                            session.setAttribute("userAdmin", usuarios);
 
                             session.setAttribute("msg", "Usuario editado correctamente");
                             response.sendRedirect(request.getContextPath() + "/Admin");

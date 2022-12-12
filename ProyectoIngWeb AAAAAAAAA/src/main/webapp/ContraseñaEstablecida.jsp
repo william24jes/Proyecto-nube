@@ -63,7 +63,7 @@
 
                                         <form method="post"
                                               action="<%=request.getContextPath()%>/IniciarSesion?post=guardarPassword"
-                                              class="row g-3 needs-validation">
+                                              class="row g-3 needs-validation" >
 
                                             <div class="col-12 ">
                                                 <label for="yourUsername" class="form-label">Contraseña:</label>

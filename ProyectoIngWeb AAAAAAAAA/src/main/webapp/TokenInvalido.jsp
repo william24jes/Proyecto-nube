@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Crear contraseña</title>
+        <title>Enlace inválido</title>
 
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
