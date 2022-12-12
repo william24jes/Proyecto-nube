@@ -93,13 +93,6 @@
                                             } %>
 
                                             <div class="col-12">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="remember"
-                                                           value="true" id="rememberMe">
-                                                    <label class="form-label" for="rememberMe">Recordame</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
                                                 <a class="nav-link  ">
                                                     <button type="submit" class="btn btn-primary w-100" type="submit">
                                                         Iniciar Sesión
