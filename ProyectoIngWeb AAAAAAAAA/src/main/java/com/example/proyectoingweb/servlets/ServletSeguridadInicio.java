@@ -4,13 +4,15 @@ import com.example.proyectoingweb.servlets.model.beans.*;
 import com.example.proyectoingweb.servlets.model.daos.*;
 import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciaTXT;
 import com.example.proyectoingweb.servlets.model.dtos.ReporteIncidenciasPDF;
+import com.example.proyectoingweb.servlets.model.dtos.ResporteIncidenciasEXCEL;
 import com.itextpdf.text.DocumentException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
-import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -41,6 +43,8 @@ public class ServletSeguridadInicio extends HttpServlet {
         HttpSession session = request.getSession();
         ReporteIncidenciasPDF reporte = new ReporteIncidenciasPDF();
         ReporteIncidenciaTXT reporteTXT = new ReporteIncidenciaTXT();
+        ResporteIncidenciasEXCEL reporteExcel= new ResporteIncidenciasEXCEL();
+
         int idPage;
         switch (action) {
             case "inicioSeguridad":
@@ -82,9 +86,9 @@ public class ServletSeguridadInicio extends HttpServlet {
                     reporte.agregarSaltoLiena();
                     reporte.agregarTablaIncidencias();
                     reporte.cerrarDocumento();
-                    session.setAttribute("msg","El documento se guardo exitosamente en su escritorio");
-                    response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
-                    System.out.printf("reporte completado");
+                    session.setAttribute("msgExito","El documento se guardó exitosamente en su escritorio");
+                    response.sendRedirect(request.getContextPath() + "/Seguridad");
+
 
                 } catch (DocumentException e) {
                     throw new RuntimeException(e);
@@ -92,10 +96,20 @@ public class ServletSeguridadInicio extends HttpServlet {
 
                 break;
             case "incidenciastxt":
-                reporteTXT.crearDocumento();
-                session.setAttribute("msg","El documento se guardo exitosamente en su escritorio");
-                response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
-                System.out.printf("reporte txt completado");
+                FileWriter documento = reporteTXT.crearDocumento();
+                request.setAttribute("Doc", documento);
+
+                session.setAttribute("msgExito","El documento se guardó exitosamente en su escritorio");
+                response.sendRedirect(request.getContextPath() + "/Seguridad");
+
+
+                break;
+
+            case "incidenciasExcel":
+                reporteExcel.crearDocumento();
+                session.setAttribute("msgExito","El documento se guardó exitosamente en su escritorio");
+                response.sendRedirect(request.getContextPath() + "/Seguridad");
+
 
                 break;
 

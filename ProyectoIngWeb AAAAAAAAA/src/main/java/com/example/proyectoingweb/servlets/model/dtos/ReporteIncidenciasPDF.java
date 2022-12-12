@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class ReporteIncidenciasPDF {
     Document documento;
+
     FileOutputStream fileOutputStream;
 
     //Fuente de titutlo y parrafo
