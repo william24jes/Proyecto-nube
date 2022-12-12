@@ -1,3 +1,5 @@
+<%@ page import="java.io.File" %>
+<%@ page import="java.nio.file.Path" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" scope="session" type="com.example.proyectoingweb.servlets.model.beans.Usuarios"
              class="com.example.proyectoingweb.servlets.model.beans.Usuarios"/>
@@ -110,8 +112,8 @@
                                 <div class="col-xl-4">
                                     <div class="card mb-4 mb-xl-0">
                                         <div class="card-body profile-card pt-3 d-flex flex-column align-items-center">
-
-                                            <img src="assets/img/fotosPerfil/<%=usuarioSession.getFotoPerfil()%>"
+                                            <img alt="Profile"
+                                                 src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=usuarioSession.getIdUsuarios()%>"
                                                  width=70% alt="Profile" class="rounded-circle">
                                             <h2><%=usuarioSession.getNombreYApellido()%>
                                             </h2>
@@ -194,22 +196,27 @@
 
                                                     <!-- Profile Edit Form -->
                                                     <form method="post"
-                                                          action="<%=request.getContextPath()%>/Inicio?action=CambiarTelefono">
-
+                                                          action="<%=request.getContextPath()%>/Inicio?action=CambiarTelefono" enctype="multipart/form-data">
+                                                        <input class="form-control" id="idUsuario" type="hidden"
+                                                               name="id" value="<%=usuarioSession.getIdUsuarios()%>">
                                                         <div class="row mb-3">
                                                             <label for="profileImage"
                                                                    class="col-md-4 col-lg-3 col-form-label">Imagen de
                                                                 Perfil</label>
                                                             <div class="col-md-8 col-lg-9">
-                                                                <img src="assets/img/fotosPerfil/<%=usuarioSession.getFotoPerfil()%>"
-                                                                     height="150" width="150" alt="Profile" id="profileImage">
+                                                                <img height="150" width="150" alt="Profile" id="profileImage"
+                                                                     src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=usuarioSession.getIdUsuarios()%>"
+                                                                     class="rounded-circle"/>
+
                                                                 <div class="pt-2">
-                                                                    <input style="display: none;" type="file" id="img" name="img" accept="image/*">
-                                                                    <label for="img" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></label>
-                                                                    <a href="#" class="btn btn-danger btn-sm"
-                                                                       title="Remove my profile image"><i
-                                                                            class="bi bi-trash"></i></a>
+                                                                    <input style="display: none;" type="file" id="foto_subida" name="foto_subida" accept="image/*">
+                                                                    <label for="foto_subida" class="btn btn-primary btn-sm"><i class="bi bi-upload"></i></label>
+                                                                    <button type="submit" class="btn btn-danger btn-sm"                                                                             formaction="<%=request.getContextPath()%>/Inicio?action=Borrar_Foto_Perfil"
+                                                                            formaction="<%=request.getContextPath()%>/Inicio?action=Borrar_Foto_Perfil"
+                                                                            title="Remove my profile image"><i
+                                                                            class="bi bi-trash"></i></button>
                                                                 </div>
+
                                                             </div>
                                                         </div>
 
@@ -236,23 +243,24 @@
                                                             </div>
                                                         </div>
 
-                                                            <div class="row mb-3">
-                                                                <input class="form-control " id="idUsuario" type="hidden"
-                                                                       name="id" value="<%=usuarioSession.getIdUsuarios()%>">
-                                                                <label for="Phone"
-                                                                       class="col-md-4 col-lg-3 col-form-label">Telefono</label>
-                                                                <div class="col-md-8 col-lg-9">
-                                                                    <input name="phone" type="text" class="form-control"
-                                                                           id="Phone"
-                                                                           value="<%=usuarioSession.getCelular()%>">
-                                                                </div>
-                                                            </div>
+                                                        <div class="row mb-3">
 
-                                                            <div class="text-center">
-                                                                <button type="submit"
-                                                                        class="btn btn-primary">Guardar
-                                                                </button>
+                                                            <label for="Phone"
+                                                                   class="col-md-4 col-lg-3 col-form-label">Telefono</label>
+                                                            <div class="col-md-8 col-lg-9">
+                                                                <input name="phone" type="text" class="form-control"
+                                                                       id="Phone"
+                                                                       value="<%=usuarioSession.getCelular()%>">
                                                             </div>
+                                                        </div>
+
+                                                        <div class="text-center">
+                                                            <button type="submit"
+                                                                    class="btn btn-primary"
+                                                                    formaction="<%=request.getContextPath()%>/Inicio?action=CambiarTelefono"
+                                                            >Guardar
+                                                            </button>
+                                                        </div>
 
                                                     </form><!-- End Profile Edit Form -->
 

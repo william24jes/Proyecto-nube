@@ -32,24 +32,27 @@
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center justify-content-between">
 
-                <h1 class="logo" style="color: #ffffff">Incidencias PUCP</h1>
+                <h1 class="logo" style="color:#ffffff">Incidencias PUCP</h1>
             </div>
         </header>
 
         <section id="hero" class="d-flex align-items-center">
             <div class="container" data-aos="zoom-out" data-aos-delay="100">
                 <div class="text-center">
-                    <h1 >Error 404<br></h1></div><br><br>
-                <div class="row d-flex align-items-center">
-                    <div class="col-lg-2 col-md-3 col-sm-3">
-                        <img class="col-4" src="assets/img/quilla.png" alt="quilla" style="width: 350px">
-                    </div>
+                    <h1 >¡Error 404!<br></h1></div><br><br>
+                <div class="row d-flex justify-content-center">
+
+                    <img class="col-4" src="assets/img/quilla.png" alt="quilla" style="width: 350px">
+
                 </div>
-                <h1>¡Página no encontrada!<br><span>La página que estabas buscando no existe o no se
+                <h1>¡Página no encontrada!<br><span>La página que estabas buscando no se
                                 encuentra disponible.</span></h1>
-                <h2>Prueba a regresar a nuestra
-                    página principal o no dudes en contactarnos si no
-                    encuentras lo que buscas.</h2>
+                <br>
+                <a class="nav-link  ">
+                    <div class="d-flex">
+                        <a href="<%=request.getContextPath()%>/" class="btn-get-started scrollto">Volver</a>
+                    </div>
+                </a>
             </div>
 
 

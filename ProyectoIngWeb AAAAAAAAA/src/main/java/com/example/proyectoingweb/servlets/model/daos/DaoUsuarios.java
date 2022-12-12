@@ -8,6 +8,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.InputStream;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -304,6 +305,37 @@ public class DaoUsuarios extends DaoBase{
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, idUser.getCelular());
+            pstmt.setInt(2, idUser.getIdUsuarios());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void actualizar_usuario_telefono_fotoPerfil(Usuarios idUser, InputStream file) {
+        String sql = "UPDATE usuarios SET celular = ?,fotoPerfil = ? WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, idUser.getCelular());
+            if (file != null) {
+                pstmt.setBlob(2, file);
+            }
+            pstmt.setInt(3, idUser.getIdUsuarios());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void eliminar_fotoPerfil(Usuarios idUser, InputStream file) {
+        String sql = "UPDATE usuarios SET fotoPerfil = ? WHERE idUsuario = ?";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            if (file != null) {
+                pstmt.setBlob(1, file);
+            }
             pstmt.setInt(2, idUser.getIdUsuarios());
             pstmt.executeUpdate();
 
