@@ -143,7 +143,7 @@
                             <a class="btn btn-warning" href="<%=request.getContextPath()%>/Seguridad?action=incidenciasPDF"
                                role="button"><i class="bi bi-file-earmark-pdf-fill"></i></a>
                             <a class="btn btn-primary" href="<%=request.getContextPath()%>/Seguridad?action=incidenciastxt"
-                               role="button"><i class="bi bi-file-earmark-pdf-fill"></i></a>
+                               role="button"><i class="bi bi-filetype-txt"></i></a>
 
                         </div>
                         <%if(session.getAttribute("msg") != null){%>
