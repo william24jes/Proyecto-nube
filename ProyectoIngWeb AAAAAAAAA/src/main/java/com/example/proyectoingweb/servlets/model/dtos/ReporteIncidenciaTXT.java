@@ -14,7 +14,7 @@ public class ReporteIncidenciaTXT {
         ArrayList<Incidencias> incidencias = daoIncidencias.obtenerlistaIncidenciasPDF();
 
         String ruta = System.getProperty("user.home");
-        FileWriter fichero = new FileWriter(ruta + "/Downloads/ReporteIncidencias.txt");
+        FileWriter fichero = new FileWriter(ruta + "/Desktop/ReporteIncidencias.txt");
         fichero.write("===================================================================\n");
         fichero.write("############### REPORTE DE INCIDENCIAS PUCP #######################\n\n");
 

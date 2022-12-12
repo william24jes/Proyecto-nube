@@ -86,9 +86,9 @@ public class ServletSeguridadInicio extends HttpServlet {
                     reporte.agregarSaltoLiena();
                     reporte.agregarTablaIncidencias();
                     reporte.cerrarDocumento();
-                    session.setAttribute("msgExito","El documento se guardo exitosamente en su escritorio");
-                    response.sendRedirect(request.getContextPath() + "/Seguridad?action=inicioSeguridad");
-                    System.out.printf("reporte completado");
+                    session.setAttribute("msgExito","El documento se guardó exitosamente en su escritorio");
+                    response.sendRedirect(request.getContextPath() + "/Seguridad");
+
 
                 } catch (DocumentException e) {
                     throw new RuntimeException(e);
@@ -99,17 +99,17 @@ public class ServletSeguridadInicio extends HttpServlet {
                 FileWriter documento = reporteTXT.crearDocumento();
                 request.setAttribute("Doc", documento);
 
-                session.setAttribute("msgExito","El documento se guardo exitosamente en su escritorio");
+                session.setAttribute("msgExito","El documento se guardó exitosamente en su escritorio");
                 response.sendRedirect(request.getContextPath() + "/Seguridad");
-                System.out.printf("reporte txt completado");
+
 
                 break;
 
             case "incidenciasExcel":
                 reporteExcel.crearDocumento();
-                session.setAttribute("msgExito","El documento se guardo exitosamente en su escritorio");
+                session.setAttribute("msgExito","El documento se guardó exitosamente en su escritorio");
                 response.sendRedirect(request.getContextPath() + "/Seguridad");
-                System.out.printf("reporte Excel completado");
+
 
                 break;
 

@@ -53,9 +53,7 @@ public class ResporteIncidenciasEXCEL {
             outputStream = new FileOutputStream(directorioActual);
             libro.write(outputStream);
             libro.close();
-            System.out.printf("Libro Guardado Exitosamente");
-
-
+            
         }catch (FileNotFoundException ex){
             System.out.printf("Error de FileNotFoundException");
         }catch (IOException ex){
