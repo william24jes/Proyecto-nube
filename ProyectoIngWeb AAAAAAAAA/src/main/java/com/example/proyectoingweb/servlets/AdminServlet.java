@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class AdminServlet extends HttpServlet {
 
     private ArrayList<Usuarios> listaPermanente; //Lista de todos los usuarios
+
     private ArrayList<Usuarios> listaPaginada; //Lista de 15 usuarios
     private int centinelaSearch;
     private String search;
