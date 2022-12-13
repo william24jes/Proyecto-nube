@@ -241,7 +241,8 @@ public class AdminServlet extends HttpServlet {
                     usuarios.setRol(request.getParameter("Rol"));
                     usuarios.setCodigoPucp(request.getParameter("Codigo"));
                     if(dni>9999999 && dni <99999999 && !request.getParameter("Nombres").equals("") &&
-                    !request.getParameter("Apellidos").equals("")){
+                    !request.getParameter("Apellidos").equals("") && (request.getParameter("Rol").equals("Seguridad")||request.getParameter("Rol").equals("Usuario PUCP"))
+                    && request.getParameter("Celular").length()==9 && request.getParameter("Codigo").length()==8){
 
                         if (daoUsuarios.actualizarUsuario(usuarios)) {
 
