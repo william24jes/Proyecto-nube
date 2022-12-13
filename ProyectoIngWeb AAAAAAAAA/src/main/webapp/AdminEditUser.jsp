@@ -103,7 +103,7 @@
                         <% DaoUsuarios daoUsersRegistro = new DaoUsuarios();%>
                         <%ServletUsuarioInicio serv = new ServletUsuarioInicio();%>
                         <%ArrayList<Usuarios> lista_Usuarios = daoUsersRegistro.obtenerlistaFotoNull();%>
-                        <%boolean validacion = serv.Usuario_tiene_foto_null(lista_Usuarios,userAdmin.getIdUsuarios());%>
+                        <%boolean validacion = serv.Usuario_tiene_foto_null(lista_Usuarios,usuarios.getIdUsuarios());%>
                         <%if (validacion) {%>
                         <img src="assets/img/fotosPerfil/perfilDefault.png"
                              width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
