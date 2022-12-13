@@ -269,7 +269,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
                     daoUsuarios.guardarToken(usuario.getIdUsuarios(), token, fechaExpiracion);
 
-                    String link = "http://localhost:8080" + request.getContextPath() + "/IniciarSesion?action=crearPassword&token=" + token;
+                    String link = "http://34.162.36.24:8080" + request.getContextPath() + "/IniciarSesion?action=crearPassword&token=" + token;
                     String asunto = "Crea tu nueva contraseña";
                     String mensaje = "Tu registro está casi completo.\n\n" +
                             "Ingresa al siguiente link para crear tu contraseña:\n\n" +
@@ -353,7 +353,7 @@ public class ServletIniciarSesion extends HttpServlet {
 
                     daoUsuarios.guardarToken(daoUsuarios.buscarPorCorreo(correoPucp).getIdUsuarios(), token2, fechaExpiracion);
 
-                    String link = "http://localhost:8080" + request.getContextPath() + "/IniciarSesion?action=reestablecerPassword&token=" + token2;
+                    String link = "http://34.162.36.24:8080" + request.getContextPath() + "/IniciarSesion?action=reestablecerPassword&token=" + token2;
                     String asunto = "Reestablece tu contraseña";
                     String mensaje = "Ingresa al siguiente link para reestablecer tu contraseña:\n\n" +
                             "" + link + "\n\n" +
