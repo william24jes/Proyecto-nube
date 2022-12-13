@@ -109,7 +109,7 @@
                              width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
                         <%}else{%>
                         <img alt="Profile"
-                             src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=userAdmin.getIdUsuarios()%>"
+                             src="<%=request.getContextPath()%>/Image?action=lista_imagen_perfil_sql&id=<%=usuarios.getIdUsuarios()%>"
                              width=70% alt="Profile" style="width: auto; height: 100%; margin-left: -10px;">
                         <%}%>
                       </div>
